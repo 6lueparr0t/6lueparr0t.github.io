@@ -9,4 +9,12 @@ const { frontmatter } = Astro.props;
   <p>Written by: {frontmatter.author}</p>
   <img src={frontmatter.image.url} width="300" alt={frontmatter.image.alt} />
   <slot />
+  <script
+    src="https://utteranc.es/client.js"
+    repo="6lueparr0t/6lueparr0t.github.io"
+    issue-term="pathname"
+    label="[post]"
+    theme="preferred-color-scheme"
+    crossorigin="anonymous"
+    async></script>
 </BaseLayout>
