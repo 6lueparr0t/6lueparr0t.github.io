@@ -74,4 +74,8 @@ module.exports = {
     },
   },
   plugins: [require("tailwindcss-animate")],
+  // disable tailwind preflight: https://tailwindcss.com/docs/preflight
+  // corePlugins: {
+  //   preflight: false,
+  // }
 }

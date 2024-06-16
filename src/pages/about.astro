@@ -1,8 +1,7 @@
 ---
-import "@/_globals.scss";
-import Layout from "../layouts/Layout.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
 
-const pageTitle = "change pageTitle";
+const pageTitle = "About Me";
 
 const identity = {
   firstName: "Sarah",
@@ -12,15 +11,26 @@ const identity = {
 };
 
 const skills = ["HTML", "CSS", "JavaScript", "React", "Astro", "Writing Docs"];
+
+const happy = true;
+const finished = false;
+const goal = 3;
+
+const skillColor = "navy";
 ---
 
-<Layout title={pageTitle}>
-  <main>
-    <a href="/">Home</a>
-    <a href="/about/">About</a>
-    <a href="/blog/">Blog</a>
-
-    <h1>About Me</h1>
+<BaseLayout title={pageTitle}>
+  <style define:vars={{skillColor}}>
+    h1 {
+      color: purple;
+      font-size: 4rem;
+    }
+    .skill {
+      color: var(--skillColor);
+      font-weight: bold;
+    }
+  </style>
+  <main class="test">
     <h1>{pageTitle}</h1>
     <h2>... and my new Astro site!</h2>
 
@@ -48,7 +58,13 @@ const skills = ["HTML", "CSS", "JavaScript", "React", "Astro", "Writing Docs"];
     </ul>
     <p>My skills are:</p>
     <ul>
-      {skills.map((skill) => <li>{skill}</li>)}
+      {skills.map((skill) => <li class="skill">{skill}</li>)}
     </ul>
+
+    {happy && <p>I am happy to be learning Astro!</p>}
+
+    {finished && <p>I finished this tutorial!</p>}
+
+    {goal === 3 ? <p>My goal is to finish in 3 days.</p> : <p>My goal is not 3 days.</p>}
   </main>
-</Layout>
+</BaseLayout>
