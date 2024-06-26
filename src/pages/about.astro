@@ -1,0 +1,11 @@
+---
+import '@/style/gameboy.scss';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import GameboyComponent from '@/components/About/Gameboy';
+---
+
+<BaseLayout title="Welcome to Astro.">
+	<main>
+	  <GameboyComponent client:load />
+	</main>
+</BaseLayout>
