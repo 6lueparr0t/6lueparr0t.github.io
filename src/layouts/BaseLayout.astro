@@ -20,12 +20,22 @@ const { title } = Astro.props;
   </head>
   <body>
     <ThemeProvider client:only="react" defaultTheme="dark" storageKey="vite-ui-theme">
-      <div class="flex flex-col w-full">
-        <div class="w-full">
-          <div class="pt-4 pr-4 text-right">
+        <div class="flex w-full justify-end p-4">
+            <div class="self-center px-4">
+              {import.meta.env.NODE_ENV === "development" && (
+                <div class="self-center">
+                <a
+                    href="/admin/index.html"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="underline"
+                  >
+                    Admin
+                  </a>
+                </div>
+              )}
+            </div>
             <ModeToggle client:load />
-          </div>
-        </div>
       </div>
       <slot />
     </ThemeProvider>
