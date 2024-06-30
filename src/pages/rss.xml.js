@@ -5,7 +5,7 @@ export async function GET(context) {
     title: "개발자 발가락",
     description: "개발자 발가락",
     site: context.site,
-    items: await pagesGlobToRssItems(import.meta.glob("./post/**/*.md")),
+    items: await pagesGlobToRssItems(import.meta.glob("./posts/**/*.md")),
     customData: `<language>ko-kr</language>`,
   });
 }

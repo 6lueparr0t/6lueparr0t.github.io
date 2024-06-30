@@ -1,9 +1,11 @@
 ---
-title: 'Hello, World!!!!!'
-posted: 2024-06-26T15:00:00.000Z
+title: 'Hello, World'
+author: 발가락
+pubDate: 2024-07-01T00:00:00.000Z
+tags: 'tag1,tag2,tag3'
 ---
 
-## Hello World!!!!
+## Hello World
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut non lorem diam. Quisque vulputate nibh sodales eros pretium tincidunt. Aenean porttitor efficitur convallis. Nulla sagittis finibus convallis. Phasellus in fermentum quam, eu egestas tortor. Maecenas ac mollis leo. Integer maximus eu nisl vel sagittis.
 

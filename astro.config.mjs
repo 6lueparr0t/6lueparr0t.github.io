@@ -5,6 +5,7 @@ import mdx from '@astrojs/mdx';
 import basicSsl from "@vitejs/plugin-basic-ssl";
 
 export default defineConfig({
+  site: "https://6lueparr0t.github.io",
   integrations: [
     react(),
     tailwind({

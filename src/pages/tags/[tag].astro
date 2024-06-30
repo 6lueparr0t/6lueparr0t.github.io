@@ -2,11 +2,11 @@
 import BaseLayout from "@/layouts/BaseLayout.astro";
 
 export async function getStaticPaths() {
-  const allPosts: Array<object> = await Astro.glob("../post/**/*.md");
-  const uniqueTags = [...new Set(allPosts.map((post: any) => post.frontmatter.tags).flat())];
+  const allPosts: Array<object> = await Astro.glob("../posts/**/*.md");
+  const uniqueTags = [...new Set(allPosts.map((post: any) => (post.frontmatter.tags).split(",").map((tag:string)=>tag.trim())).flat())];
 
   return uniqueTags.map((tag) => {
-    const filteredPosts = allPosts.filter((post: any) => post.frontmatter.tags.includes(tag));
+    const filteredPosts = allPosts.filter((post: any) => (post.frontmatter.tags).split(",").map((item:string)=>item.trim()).includes(tag));
     return {
       params: { tag: tag },
       props: { posts: filteredPosts },
