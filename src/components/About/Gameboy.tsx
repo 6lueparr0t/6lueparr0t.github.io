@@ -86,7 +86,7 @@ function Gameboy() {
                     <audio className="hidden" ref={sfxRef} src={sfx} />
                     <ReactTyped
                       strings={[
-                        'NickName : 임대현^1000\n\nBirth : 1991 / 12 / 30^1000\n\nGender : 남자^1000\n\nJob : 모험을 좋아하는 방구석 웹 개발자..^1000 `\n\n\n<div class="close"><a href="/"" >[ Back ]</a></div>\n\n`',
+                        'Name : Daehyun Lim^1000\n\nBirth : 1991 / 12 / 30^1000\n\nGender : Male^1000\n\nJob : Web Developer (FE)^1000 `\n\n\n<div class="close"><a href="/"" >[ Back ]</a></div>\n\n`',
                       ]}
                       startDelay={2000}
                       backSpeed={100}
