@@ -29,7 +29,7 @@ function Gameboy() {
       sfxRef.current.currentTime = 0;
       var playPromise = sfxRef.current.play();
       if (playPromise !== undefined) {
-        playPromise.then((_) => {}).catch((error) => {});
+        playPromise.then((_) => {}).catch(() => {});
       }
     }
   };
