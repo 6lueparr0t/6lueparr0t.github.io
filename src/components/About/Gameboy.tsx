@@ -16,6 +16,7 @@ function Gameboy() {
 
   const handleBgmPlay = (onOff: boolean) => {
     if (audioRef.current && onOff === true) {
+      audioRef.current.volume = 0.1;
       audioRef.current.play();
     } else if (audioRef.current && onOff === false) {
       audioRef.current.pause();
