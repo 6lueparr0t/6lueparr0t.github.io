@@ -49,7 +49,7 @@ function Gameboy() {
       if (typingStart) {
         timer = setInterval(() => {
           handleSfxPlay();
-        }, 40);
+        }, 100);
       }
     } else {
       handleBgmPlay(false);
