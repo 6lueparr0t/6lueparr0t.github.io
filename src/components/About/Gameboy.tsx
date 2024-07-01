@@ -24,7 +24,12 @@ function Gameboy() {
 
   const handleSfxPlay = () => {
     if (sfxRef.current) {
-      sfxRef.current.play();
+      sfxRef.current.volume = 0.1;
+      sfxRef.current.currentTime = 0;
+      var playPromise = sfxRef.current.play();
+      if (playPromise !== undefined) {
+        playPromise.then((_) => {}).catch((error) => {});
+      }
     }
   };
 
