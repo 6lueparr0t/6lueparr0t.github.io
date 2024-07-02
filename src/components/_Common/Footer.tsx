@@ -36,7 +36,7 @@ const Footer: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    const top = 240 + Math.floor(scrollY * 2);
+    const top = 240 + Math.floor(scrollY * 1.8);
     const fontSize = Math.floor(scrollY * 0.2);
 
     if (infoRef.current) {
