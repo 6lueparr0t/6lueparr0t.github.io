@@ -2,7 +2,7 @@ $on-laptop: 800px !default;
 
 @font-face {
   font-family: 'DungGeunMo';
-  src: url("../../public/font/NeoDunggeunmoPro-Regular.woff") format('woff'), url("../../public/font/NeoDunggeunmoPro-Regular.woff2") format('woff');
+  src: url("/font/NeoDunggeunmoPro-Regular.woff") format('woff'), url("/font/NeoDunggeunmoPro-Regular.woff2") format('woff');
 }
 
 @mixin media-query($device) {
