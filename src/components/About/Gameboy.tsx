@@ -1,7 +1,6 @@
 import "@/style/gameboy.scss";
 import { useState, useEffect, useRef } from "react";
 import { ReactTyped } from "react-typed";
-import loading from "@/assets/loading.gif";
 import ash from "@/assets/ash.gif";
 import sfx from "@/assets/sound/sfx_sounds_Blip7.wav";
 import bgm from "@/assets/sound/bgm_25_Route_30.mp3";
@@ -12,12 +11,15 @@ function Gameboy() {
 
   const [typingStart, setTypingStart] = useState(false);
   const [sound, setSound] = useState(true);
+  const [start, setStart] = useState(false);
   const [loaded, setLoaded] = useState(false);
 
   const handleBgmPlay = (onOff: boolean) => {
     if (audioRef.current && onOff === true) {
       audioRef.current.volume = 0.1;
-      audioRef.current.play();
+      try{
+        audioRef.current.play();
+      } catch(e) {}
     } else if (audioRef.current && onOff === false) {
       audioRef.current.pause();
     }
@@ -72,16 +74,16 @@ function Gameboy() {
               style={{ display: "none" }}
               onClick={() => setSound((prev) => !prev)}
             />
-            <audio className="hidden" ref={audioRef} src={bgm} loop />
+            {start && <audio className="hidden" ref={audioRef} src={bgm} loop />}
           </label>
           <div className="header">DOT MATRIX WITH STEREO SOUND</div>
           <div className="main">
-            {loaded ? (
+            {loaded && start ? (
               <>
                 <div className="ash">
                   <img src={ash.src} alt="ash" />
                 </div>
-                <div className="text" style={{ whiteSpace: "break-spaces" }}>
+                <div className="text whitespace-break-spaces">
                   <div>
                     <audio className="hidden" ref={sfxRef} src={sfx} />
                     <ReactTyped
@@ -111,9 +113,9 @@ function Gameboy() {
                 </div>
               </>
             ) : (
-              <div className="loading">
-                <img src={loading.src} alt="loading" className="object-cover w-[250px] h-[85px]" />
-              </div>
+            <div className="text text-4xl whitespace-break-spaces flex h-[calc(100%-2rem)] justify-center items-center cursor-pointer" onClick={()=>setStart(true)}>
+              {loaded ? "Click to Start":"Loading ..."}
+            </div>
             )}
           </div>
         </div>
