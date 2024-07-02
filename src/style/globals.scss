@@ -3,6 +3,11 @@
 @tailwind utilities;
 
 @layer base {
+  @font-face {
+    font-family: 'DungGeunMo';
+    src: url("/font/NeoDunggeunmoPro-Regular.woff") format('woff'), url("/font/NeoDunggeunmoPro-Regular.woff2") format('woff');
+  }
+
   :root {
     --main: 241, 245, 249;
     /* #f1f5f9, slate100 */
@@ -44,9 +49,6 @@
     --ring: 222.2 84% 4.9%;
 
     --radius: 0.5rem;
-
-    html {
-    }
 
     code {
       font-family:

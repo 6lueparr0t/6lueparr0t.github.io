@@ -1,6 +1,9 @@
 ---
-import Theme from "@/components/Theme.astro";
 import '@/style/globals.scss'
+import Theme from "@/components/Theme.astro";
+import Header from "@/components/_Common/Header";
+import Footer from "@/components/_Common/Footer";
+
 interface Props {
   title: string;
 }
@@ -18,24 +21,11 @@ const { title } = Astro.props;
     <title>{title}</title>
   </head>
   <body>
-    <div class="flex w-full justify-end p-4">
-        <div class="self-center px-4">
-          {import.meta.env.NODE_ENV === "development" && (
-            <div class="self-center">
-            <a
-                href="/admin/index.html"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="underline"
-              >
-                Admin
-              </a>
-            </div>
-          )}
-        </div>
-        <Theme />
-      </div>
-      <slot />
+    <Header>
+      <Theme />
+    </Header>
+    <slot />
+    <Footer client:only="react"/>
   </body>
 </html>
 

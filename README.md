@@ -44,3 +44,4 @@ All commands are run from the root of the project, from a terminal:
 - https://zustand-demo.pmnd.rs
 - https://tina.io
 - https://www.npmjs.com/package/react-typed
+- https://www.npmjs.com/package/notistack
