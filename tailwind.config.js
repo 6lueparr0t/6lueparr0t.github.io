@@ -2,10 +2,10 @@
 module.exports = {
   darkMode: ["class"],
   content: [
-    './pages/**/*.{ts,tsx,astro}',
-    './components/**/*.{ts,tsx,astro}',
-    './app/**/*.{ts,tsx,astro}',
-    './src/**/*.{ts,tsx,astro}',
+    "./pages/**/*.{ts,tsx,astro}",
+    "./components/**/*.{ts,tsx,astro}",
+    "./app/**/*.{ts,tsx,astro}",
+    "./src/**/*.{ts,tsx,astro}",
   ],
   prefix: "",
   theme: {
@@ -17,8 +17,11 @@ module.exports = {
       },
     },
     extend: {
+      wordBreak: {
+        "keep-all": "keep-all",
+      },
       spacing: {
-        'calc-half': 'calc(50% - 2rem)',
+        "calc-half": "calc(50% - 2rem)",
       },
       colors: {
         border: "hsl(var(--border))",
@@ -76,10 +79,10 @@ module.exports = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate"), require('@tailwindcss/aspect-ratio'),],
+  plugins: [require("tailwindcss-animate"), require("@tailwindcss/aspect-ratio")],
   // disable tailwind preflight: https://tailwindcss.com/docs/preflight
   corePlugins: {
     // preflight: false,
     aspectRatio: false,
-  }
-}
+  },
+};
