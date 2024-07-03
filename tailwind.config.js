@@ -17,6 +17,9 @@ module.exports = {
       },
     },
     extend: {
+      spacing: {
+        'calc-half': 'calc(50% - 2rem)',
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
