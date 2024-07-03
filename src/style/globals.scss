@@ -8,6 +8,44 @@
     src: url("/font/NeoDunggeunmoPro-Regular.woff") format('woff'), url("/font/NeoDunggeunmoPro-Regular.woff2") format('woff');
   }
 
+  $on-laptop: 768px !default;
+
+  @mixin media-query($device) {
+    @media screen and (max-width: $device) {
+      @content;
+    }
+  }
+
+  @mixin keyframes($animation-name) {
+    @-webkit-keyframes #{$animation-name} {
+      @content;
+    }
+
+    @-moz-keyframes #{$animation-name} {
+      @content;
+    }
+
+    @-ms-keyframes #{$animation-name} {
+      @content;
+    }
+
+    @-o-keyframes #{$animation-name} {
+      @content;
+    }
+
+    @keyframes #{$animation-name} {
+      @content;
+    }
+  }
+
+  @mixin animation($str) {
+    -webkit-animation: #{$str};
+    -moz-animation: #{$str};
+    -ms-animation: #{$str};
+    -o-animation: #{$str};
+    animation: #{$str};
+  }
+
   :root {
     --main: 241, 245, 249;
     /* #f1f5f9, slate100 */
@@ -20,8 +58,9 @@
     --foreground: var(--main-dark);
 
     --main-gradient: linear-gradient(90deg,
-        rgb(var(--foreground)),
-        rgb(var(--background)) 40%);
+        rgb(var(--foreground)) 0%,
+        rgb(var(--foreground)) 40%,
+        rgb(var(--background)) 80%);
 
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
@@ -67,8 +106,11 @@
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
-      background-size: 400%;
-      background-position: 0%;
+      background-size: $on-laptop;
+
+      @include media-query($on-laptop) {
+        background-size: 100%;
+      }
     }
   }
 
@@ -115,3 +157,5 @@
     @apply bg-background text-foreground;
   }
 }
+
+// @import "gameboy.scss"
