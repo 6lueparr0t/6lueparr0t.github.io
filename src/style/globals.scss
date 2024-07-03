@@ -10,8 +10,8 @@
 
   $on-laptop: 768px !default;
 
-  @mixin media-query($device) {
-    @media screen and (max-width: $device) {
+  @mixin mobile() {
+    @media only screen and (hover: none) and (pointer: coarse){
       @content;
     }
   }
@@ -60,7 +60,8 @@
     --main-gradient: linear-gradient(90deg,
         rgb(var(--foreground)) 0%,
         rgb(var(--foreground)) 40%,
-        rgb(var(--background)) 80%);
+        rgb(var(--background)) 80%,
+        rgb(var(--background)) 100%);
 
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
@@ -108,8 +109,8 @@
       -webkit-text-fill-color: transparent;
       background-size: $on-laptop;
 
-      @include media-query($on-laptop) {
-        background-size: 100%;
+      @include mobile() {
+        background-size: $on-laptop * 0.6;
       }
     }
   }
@@ -158,4 +159,4 @@
   }
 }
 
-// @import "gameboy.scss"
+@import "gameboy.scss"
