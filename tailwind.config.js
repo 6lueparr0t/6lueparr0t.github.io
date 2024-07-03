@@ -17,9 +17,6 @@ module.exports = {
       },
     },
     extend: {
-      wordBreak: {
-        "keep-all": "keep-all",
-      },
       spacing: {
         "calc-half": "calc(50% - 2rem)",
       },
