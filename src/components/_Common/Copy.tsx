@@ -1,10 +1,10 @@
-import React, { useEffect, useState, type PropsWithChildren } from "react";
-import { ClipboardIcon } from '@heroicons/react/24/outline'
+import { useEffect, useState, type PropsWithChildren } from "react";
+import { ClipboardIcon } from "@heroicons/react/24/outline";
 import { SnackbarProvider, enqueueSnackbar } from "notistack";
 
 function Copy({ children }: PropsWithChildren<{ children: string }>) {
   const [loaded, setLoaded] = useState(false);
-  const copyToClipboard = (event: React.MouseEvent<HTMLDivElement>) => {
+  const copyToClipboard = (/*event: React.MouseEvent<HTMLDivElement>*/) => {
     navigator.clipboard
       .writeText(children)
       .then(() => {
@@ -26,7 +26,7 @@ function Copy({ children }: PropsWithChildren<{ children: string }>) {
     <div className="flex items-center gap-2" onClick={copyToClipboard}>
       <SnackbarProvider />
       {children}
-      <ClipboardIcon className="w-[24px] h-[24px]"/>
+      <ClipboardIcon className="w-[24px] h-[24px]" />
     </div>
   ) : (
     <>{children}</>
