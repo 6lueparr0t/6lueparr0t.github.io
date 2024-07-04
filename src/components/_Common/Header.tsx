@@ -1,25 +1,23 @@
 import React, { type PropsWithChildren } from "react";
+import { ModeToggle } from "@/components/mode-toggle";
 
 const Header: React.FC<PropsWithChildren> = ({ children }) => {
   return (
     <header>
-      <div className="flex w-full justify-end p-4">
-        <div className="self-center px-4">
-          {import.meta.env.NODE_ENV === "development" && (
-            <div className="self-center">
-              <a
-                href="/admin/index.html"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="underline"
-              >
-                Admin
-              </a>
-            </div>
-          )}
-        </div>
-        {children}
+      <div className="flex justify-end items-center w-full gap-4 p-4">
+        {process.env.NODE_ENV === "development" && (
+          <a
+            href="/admin/index.html"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline"
+          >
+            Admin
+          </a>
+        )}
+        <ModeToggle />
       </div>
+      {children}
     </header>
   );
 };

@@ -5,7 +5,7 @@ import ash from "@/assets/ash.gif";
 import sfx from "@/assets/sound/sfx_sounds_Blip7.wav";
 import bgm from "@/assets/sound/bgm_25_Route_30.mp3";
 
-function Gameboy() {
+const About = () => {
   const sfxRef = useRef<HTMLAudioElement>(null);
   const audioRef = useRef<HTMLAudioElement>(null);
 
@@ -16,10 +16,10 @@ function Gameboy() {
 
   const handleBgmPlay = (onOff: boolean) => {
     if (audioRef.current && onOff === true) {
-      audioRef.current.volume = 0.1;
+      audioRef.current.volume = 0.8;
       try{
         audioRef.current.play();
-      } catch(e) {}
+      } catch(e) { /* empty */ }
     } else if (audioRef.current && onOff === false) {
       audioRef.current.pause();
     }
@@ -27,9 +27,9 @@ function Gameboy() {
 
   const handleSfxPlay = () => {
     if (sfxRef.current) {
-      sfxRef.current.volume = 0.1;
+      sfxRef.current.volume = 0.8;
       sfxRef.current.currentTime = 0;
-      var playPromise = sfxRef.current.play();
+      const playPromise = sfxRef.current.play();
       if (playPromise !== undefined) {
         playPromise.then((_) => {}).catch(() => {});
       }
@@ -81,14 +81,14 @@ function Gameboy() {
             {loaded && start ? (
               <>
                 <div className="ash">
-                  <img src={ash.src} alt="ash" />
+                  <img src={ash} alt="ash" />
                 </div>
                 <div className="text whitespace-break-spaces">
                   <div>
                     <audio className="hidden" ref={sfxRef} src={sfx} />
                     <ReactTyped
                       strings={[
-                        'Name : Daehyun Lim^1000\n\nBirth : 1991 / 12 / 30^1000\n\nGender : Male^1000\n\nJob : Web Developer (FE)^1000 `\n\n\n<div class="close"><a href="/"" >[ Back ]</a></div>\n\n`',
+                        'Name : Daehyun Lim^1000\n\nBirth : 1991 / 12 / 30^1000\n\nGender : Male^1000\n\nJob : Web Developer (Front-End)^1000 `\n\n\n<div class="close"><a href="/"" >[ Back ]</a></div>\n\n`',
                       ]}
                       startDelay={2000}
                       backSpeed={100}
@@ -124,4 +124,4 @@ function Gameboy() {
   );
 }
 
-export default Gameboy;
+export default About;

@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import type { Modal } from "@/components/components.d";
+import { Modal } from "@/components/components.d";
 
 type Store = {
   modals: Modal[];

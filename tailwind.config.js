@@ -76,10 +76,9 @@ module.exports = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate"), require("@tailwindcss/aspect-ratio")],
+  plugins: [require("tailwindcss-animate")],
   // disable tailwind preflight: https://tailwindcss.com/docs/preflight
-  corePlugins: {
+  // corePlugins: {
     // preflight: false,
-    aspectRatio: false,
-  },
+  // },
 };
