@@ -1,7 +1,7 @@
-import "@/style/gameboy.scss";
 import { useState, useEffect, useRef } from "react";
+import { useKey } from "react-use";
 import { ReactTyped } from "react-typed";
-import ash from "@/assets/ash.gif";
+import ash1 from "@/assets/ash1.gif";
 import sfx from "@/assets/sound/sfx_sounds_Blip7.wav";
 import bgm from "@/assets/sound/bgm_25_Route_30.mp3";
 
@@ -13,13 +13,16 @@ const About = () => {
   const [sound, setSound] = useState(true);
   const [start, setStart] = useState(false);
   const [loaded, setLoaded] = useState(false);
+  const loadedRef = useRef(loaded);
 
   const handleBgmPlay = (onOff: boolean) => {
     if (audioRef.current && onOff === true) {
       audioRef.current.volume = 0.8;
-      try{
+      try {
         audioRef.current.play();
-      } catch(e) { /* empty */ }
+      } catch (e) {
+        /* empty */
+      }
     } else if (audioRef.current && onOff === false) {
       audioRef.current.pause();
     }
@@ -31,16 +34,10 @@ const About = () => {
       sfxRef.current.currentTime = 0;
       const playPromise = sfxRef.current.play();
       if (playPromise !== undefined) {
-        playPromise.then((_) => {}).catch(() => {});
+        playPromise.then(() => {}).catch(() => {});
       }
     }
   };
-
-  useEffect(() => {
-    setTimeout(() => {
-      setLoaded(true);
-    }, 1000);
-  }, []);
 
   useEffect(() => {
     let timer: NodeJS.Timeout;
@@ -62,6 +59,23 @@ const About = () => {
     };
   }, [sound, typingStart]);
 
+  useEffect(() => {
+    setTimeout(() => {
+      setLoaded(true);
+    }, 1000);
+    loadedRef.current = loaded;
+  }, [loaded, loadedRef]);
+
+  const handlePlay = () => {
+    if (loadedRef.current) {
+      setStart(true);
+    }
+  };
+
+  useKey("Enter", () => {
+    handlePlay();
+  });
+
   return (
     <div className="gameboy">
       <div className="gameboy-screen-cont">
@@ -81,7 +95,7 @@ const About = () => {
             {loaded && start ? (
               <>
                 <div className="ash">
-                  <img src={ash} alt="ash" />
+                  <img src={ash1} alt="ash1" />
                 </div>
                 <div className="text whitespace-break-spaces">
                   <div>
@@ -113,15 +127,18 @@ const About = () => {
                 </div>
               </>
             ) : (
-            <div className="text text-4xl whitespace-break-spaces flex h-[calc(100%-2rem)] justify-center items-center cursor-pointer" onClick={()=>setStart(true)}>
-              {loaded ? "Click to Start":"Loading ..."}
-            </div>
+              <div
+                className="text text-4xl whitespace-break-spaces flex h-[calc(100%-2rem)] justify-center items-center cursor-pointer"
+                onClick={() => handlePlay()}
+              >
+                {loaded ? "Click to Start" : "Loading ..."}
+              </div>
             )}
           </div>
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default About;

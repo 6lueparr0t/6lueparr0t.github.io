@@ -11,7 +11,7 @@
   $on-laptop: 768px !default;
 
   @mixin mobile() {
-    @media only screen and (hover: none) and (pointer: coarse){
+    @media only screen and (hover: none) and (pointer: coarse) {
       @content;
     }
   }
@@ -58,10 +58,8 @@
     --foreground: var(--main-dark);
 
     --main-gradient: linear-gradient(90deg,
-        rgb(var(--foreground)) 0%,
-        rgb(var(--foreground)) 40%,
-        rgb(var(--background)) 80%,
-        rgb(var(--background)) 100%);
+        rgba(var(--background)) 0%,
+        rgba(var(--foreground)) 60%);
 
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
@@ -110,7 +108,7 @@
       background-size: $on-laptop;
 
       @include mobile() {
-        background-size: $on-laptop * 0.6;
+        background-size: 140%;
       }
     }
   }

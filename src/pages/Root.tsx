@@ -1,15 +1,19 @@
 import { PropsWithChildren, useEffect } from "react";
-import { useLocation, Outlet } from "react-router-dom";
+import { useLocation, Outlet, useNavigate } from "react-router-dom";
+import { useKey } from "react-use";
 import Header from "@/components/_Common/Header";
 import Footer from "@/components/_Common/Footer";
 import Modal from "@/components/_Common/Modal";
-import { ThemeProvider } from "@/components/theme-provider"
+import { ThemeProvider } from "@/components/theme-provider";
 
 import modalStore from "@/store/modal";
 
-const Root : React.FC<PropsWithChildren> = () => {
+const Root: React.FC<PropsWithChildren> = () => {
+  const navigate = useNavigate();
   const location = useLocation();
   const { modals, clearModals } = modalStore();
+
+  useKey("/", () => navigate("/"));
 
   useEffect(() => {
     if (modals.length > 0) {
@@ -26,7 +30,7 @@ const Root : React.FC<PropsWithChildren> = () => {
 
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-      <Header/>
+      <Header />
       <main>
         <Outlet />
         {modals.map((modal, index) => (
@@ -35,7 +39,7 @@ const Root : React.FC<PropsWithChildren> = () => {
           </div>
         ))}
       </main>
-      <Footer/>
+      <Footer />
     </ThemeProvider>
   );
 };
