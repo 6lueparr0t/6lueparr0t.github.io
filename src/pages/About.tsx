@@ -102,7 +102,7 @@ const About = () => {
                     <audio className="hidden" ref={sfxRef} src={sfx} />
                     <ReactTyped
                       strings={[
-                        'Name : Daehyun Lim^1000\n\nBirth : 1991 / 12 / 30^1000\n\nGender : Male^1000\n\nJob : Web Developer (Front-End)^1000 `\n\n\n<div class="close"><a href="/"" >[ Back ]</a></div>\n\n`',
+                        'Name : Daehyun Lim^1000\n\nBirth : 1991 / 12 / 30^1000\n\nGender : Only Man^1000\n\nJob : Web Developer (Front-End)^1000 `\n\n\n<div class="close"><a href="/"" >[ Back ]</a></div>\n\n`',
                       ]}
                       startDelay={2000}
                       backSpeed={100}
