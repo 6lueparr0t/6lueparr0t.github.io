@@ -27,7 +27,7 @@ const ErrorPage: React.FC = () => {
       <p className="text-slate-400">
         <i>{message}</i>
       </p>
-      <Link to={"/home"}>
+      <Link to={"/"}>
         <Button>go to home</Button>
       </Link>
     </div>
