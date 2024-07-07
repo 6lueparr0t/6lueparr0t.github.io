@@ -1,5 +1,5 @@
 import { PropsWithChildren, useEffect } from "react";
-import { useLocation, Outlet, useNavigate } from "react-router-dom";
+import { useLocation, Outlet, useNavigate, useSearchParams } from "react-router-dom";
 import { useKey } from "react-use";
 import Header from "@/components/_Common/Header";
 import Footer from "@/components/_Common/Footer";
@@ -9,6 +9,9 @@ import { ThemeProvider } from "@/components/theme-provider";
 import modalStore from "@/store/modal";
 
 const Root: React.FC<PropsWithChildren> = () => {
+  const [searchParams] = useSearchParams();
+  const redirect = searchParams.get('redirect');
+
   const navigate = useNavigate();
   const location = useLocation();
   const { modals, clearModals } = modalStore();
@@ -27,6 +30,13 @@ const Root: React.FC<PropsWithChildren> = () => {
     clearModals();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location]);
+
+  // github pages 404 redirect
+  useEffect(() => {
+    if (redirect) {
+      navigate(redirect);
+    }
+  }, [redirect, navigate]);
 
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
