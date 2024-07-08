@@ -11,20 +11,18 @@ $on-laptop: 768px !default;
   position: relative;
   display: block;
   font-size: 1.5rem;
-  margin: 20px auto;
+  margin: 4rem auto;
   width: 100%;
-  height:  60vh;
+  height: 85vh;
   background: #eee;
   border-radius: 10px 10px 60px 10px;
   box-shadow: 5px 5px rgba(0, 0, 0, 0.1);
-  padding-bottom: 20px;
 
   @include media-query($on-laptop) {
-    top: 4rem;
-    min-height: 0;
     font-size: 0.8rem;
     padding: 0;
     margin: 0;
+    height: 52vh;
     border-radius: 0;
     box-shadow: none;
     background-color: unset;
@@ -74,7 +72,6 @@ $on-laptop: 768px !default;
     @include media-query($on-laptop) {
       content: none;
       width: 100%;
-      min-height: 0;
       height: 400px;
       top: 0;
       left: 0;
@@ -166,8 +163,7 @@ $on-laptop: 768px !default;
       .main {
         overflow: hidden;
 
-        @include media-query($on-laptop) {
-        }
+        @include media-query($on-laptop) {}
 
         & .ash {
           display: flex;
@@ -191,7 +187,7 @@ $on-laptop: 768px !default;
         }
 
         & .text {
-          margin-top:1rem;
+          margin-top: 1rem;
           color: white;
           font-family: 'DungGeunMo';
           white-space: break-spaces;
@@ -215,6 +211,7 @@ $on-laptop: 768px !default;
       width: 10px;
       height: 10px;
       top: 220px;
+      margin-top: -2.8rem;
       margin-left: -2.8rem;
       border-radius: 100%;
       background-color: #b98181;
@@ -251,6 +248,7 @@ $on-laptop: 768px !default;
           height: 0;
           border: none;
           box-shadow: none;
+          margin-top: 0;
         }
       }
     }

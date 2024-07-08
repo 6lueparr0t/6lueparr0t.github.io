@@ -128,7 +128,7 @@ const About = () => {
               </>
             ) : (
                 <div
-                  className="text text-4xl whitespace-break-spaces flex justify-center items-center cursor-pointer h-72"
+                  className="text text-4xl whitespace-break-spaces flex justify-center items-center cursor-pointer sm:h-[calc(20rem)] md:h-[calc(28rem)]"
                   onClick={() => handlePlay()}
                 >
                   {loaded ? "Click to Start" : "Loading ..."}
