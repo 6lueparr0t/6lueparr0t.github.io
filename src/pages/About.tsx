@@ -97,12 +97,12 @@ const About = () => {
                 <div className="ash">
                   <img src={ash1} alt="ash1" />
                 </div>
-                <div className="text whitespace-break-spaces">
+                <div className="text">
                   <div>
                     <audio className="hidden" ref={sfxRef} src={sfx} />
                     <ReactTyped
                       strings={[
-                        'Name : Daehyun Lim^1000\n\nBirth : 1991 / 12 / 30^1000\n\nGender : Man^1000\n\nJob : Web Developer (Front-End)^1000 `\n\n\n<div class="close"><a href="/"" >[ Back ]</a></div>\n\n`',
+                        'Name : Daehyun Lim^1000\n\nBirth : 1991 / 12 / 30^1000\n\nGender : Man^1000\n\nJob : Web Developer (Front-End)^1000 `\n\n\n<div class="close"><a href="/"" >[ Back ]</a></div>`',
                       ]}
                       startDelay={2000}
                       backSpeed={100}
@@ -127,7 +127,7 @@ const About = () => {
                 </div>
               </>
             ) : (
-              <div className="flex justify-center items-center h-[500px]">
+              <div className="flex justify-center items-center h-[300px] md:h-[500px]">
                 <div
                   className="text text-4xl whitespace-break-spaces flex justify-center items-center cursor-pointer"
                   onClick={() => handlePlay()}
