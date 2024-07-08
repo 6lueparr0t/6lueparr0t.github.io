@@ -127,14 +127,12 @@ const About = () => {
                 </div>
               </>
             ) : (
-              <div className="flex justify-center items-center h-[300px] md:h-[500px]">
                 <div
-                  className="text text-4xl whitespace-break-spaces flex justify-center items-center cursor-pointer"
+                  className="text text-4xl whitespace-break-spaces flex justify-center items-center cursor-pointer h-72"
                   onClick={() => handlePlay()}
                 >
                   {loaded ? "Click to Start" : "Loading ..."}
                 </div>
-              </div>
             )}
           </div>
         </div>

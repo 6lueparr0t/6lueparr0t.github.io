@@ -8,8 +8,6 @@
     src: url("/font/NeoDunggeunmoPro-Regular.woff") format('woff'), url("/font/NeoDunggeunmoPro-Regular.woff2") format('woff');
   }
 
-  $on-laptop: 768px !default;
-
   @mixin mobile() {
     @media only screen and (hover: none) and (pointer: coarse) {
       @content;
@@ -105,8 +103,7 @@
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
-      background-size: $on-laptop;
-      // background-size: 100%;
+      background-size: 100%;
 
       // @include mobile() {
       //   background-size: 100%;

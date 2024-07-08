@@ -13,8 +13,7 @@ $on-laptop: 768px !default;
   font-size: 1.5rem;
   margin: 20px auto;
   width: 100%;
-  min-height: 780px;
-  height:  calc(100vh - 14.4rem);
+  height:  60vh;
   background: #eee;
   border-radius: 10px 10px 60px 10px;
   box-shadow: 5px 5px rgba(0, 0, 0, 0.1);
@@ -23,7 +22,6 @@ $on-laptop: 768px !default;
   @include media-query($on-laptop) {
     top: 4rem;
     min-height: 0;
-    height:  calc(100vh - 10rem);
     font-size: 0.8rem;
     padding: 0;
     margin: 0;
