@@ -1,9 +1,12 @@
+import Page1 from "@/components/Home/Page1";
+import Page2 from "@/components/Home/Page2";
+
 function Home() {
   return (
-    <div className="font-['DungGeunMo'] mx-auto p-4 w-[768px] max-w-[calc(100%-2rem)] text-center">
-    <h1 className="text-6xl break-keep m-4 text-gradient">Hello, World!</h1>
-    <h2 className="text-4xl break-keep text-gradient">One for a line, a line for all.</h2>
-  </div>
+    <div className="font-['DungGeunMo']">
+      <Page1/>
+      <Page2/>
+    </div>
   );
 }
 

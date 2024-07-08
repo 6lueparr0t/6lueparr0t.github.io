@@ -106,10 +106,11 @@
       background-clip: text;
       -webkit-text-fill-color: transparent;
       background-size: $on-laptop;
+      // background-size: 100%;
 
-      @include mobile() {
-        background-size: 140%;
-      }
+      // @include mobile() {
+      //   background-size: 100%;
+      // }
     }
   }
 

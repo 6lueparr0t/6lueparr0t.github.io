@@ -102,7 +102,7 @@ const About = () => {
                     <audio className="hidden" ref={sfxRef} src={sfx} />
                     <ReactTyped
                       strings={[
-                        'Name : Daehyun Lim^1000\n\nBirth : 1991 / 12 / 30^1000\n\nGender : Only Man^1000\n\nJob : Web Developer (Front-End)^1000 `\n\n\n<div class="close"><a href="/"" >[ Back ]</a></div>\n\n`',
+                        'Name : Daehyun Lim^1000\n\nBirth : 1991 / 12 / 30^1000\n\nGender : Man^1000\n\nJob : Web Developer (Front-End)^1000 `\n\n\n<div class="close"><a href="/"" >[ Back ]</a></div>\n\n`',
                       ]}
                       startDelay={2000}
                       backSpeed={100}
@@ -127,11 +127,13 @@ const About = () => {
                 </div>
               </>
             ) : (
-              <div
-                className="text text-4xl whitespace-break-spaces flex h-[calc(100%-2rem)] justify-center items-center cursor-pointer"
-                onClick={() => handlePlay()}
-              >
-                {loaded ? "Click to Start" : "Loading ..."}
+              <div className="flex justify-center items-center h-[500px]">
+                <div
+                  className="text text-4xl whitespace-break-spaces flex justify-center items-center cursor-pointer"
+                  onClick={() => handlePlay()}
+                >
+                  {loaded ? "Click to Start" : "Loading ..."}
+                </div>
               </div>
             )}
           </div>

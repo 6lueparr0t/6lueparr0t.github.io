@@ -13,18 +13,19 @@ $on-laptop: 768px !default;
   font-size: 1.5rem;
   margin: 20px auto;
   width: 100%;
-  min-height: 200px;
-  height: 100%;
+  min-height: 680px;
+  height:  calc(100vh - 14.4rem);
   background: #eee;
   border-radius: 10px 10px 60px 10px;
   box-shadow: 5px 5px rgba(0, 0, 0, 0.1);
   padding-bottom: 20px;
 
   @include media-query($on-laptop) {
+    top: 4rem;
+    height:  calc(100vh - 10rem);
     font-size: 0.8rem;
     padding: 0;
     margin: 0;
-    min-height: 0;
     border-radius: 0;
     box-shadow: none;
     background-color: unset;
@@ -66,17 +67,14 @@ $on-laptop: 768px !default;
     top: 60px;
     left: 20px;
     width: calc(100% - 40px);
-    min-height: 120px;
     height: calc(100% - 80px);
     margin-bottom: 58px;
     background-color: #777;
     border-radius: 13px 13px 50px 13px;
-    padding-bottom: 60px;
 
     @include media-query($on-laptop) {
       content: none;
       width: 100%;
-      height: 100%;
       min-height: 0;
       top: 0;
       left: 0;
@@ -94,19 +92,16 @@ $on-laptop: 768px !default;
       margin-right: auto;
       background: #202428;
       width: calc(100% - 140px);
-      min-height: 80px;
       height: calc(100% - 80px);
       box-shadow: inset 3px 3px rgba(0, 0, 0, 0.15);
       padding: 0 10px;
 
       @include media-query($on-laptop) {
         content: none;
-        width: 100%;
-        height: 100%;
+        width: calc(100%);
         top: 0;
         left: 0;
         margin: 0;
-        padding: 10px;
         border: none;
         border-radius: 0;
       }
@@ -168,14 +163,9 @@ $on-laptop: 768px !default;
       }
 
       .main {
-        position: relative;
-        top: -20px;
-        height: 480px;
         overflow: hidden;
 
         @include media-query($on-laptop) {
-          top: -10px;
-          height: 300px;
         }
 
         & .ash {
@@ -197,7 +187,6 @@ $on-laptop: 768px !default;
           display: flex;
           justify-content: center;
           align-items: center;
-          height: 100%;
         }
 
         & .text {
@@ -270,7 +259,7 @@ $on-laptop: 768px !default;
       width: 10px;
       height: 10px;
       top: 220px;
-      left: 100%;
+      left: calc(100% - 2rem);
       transform: scale(2.0);
       margin-right: -2.8rem;
       cursor: pointer;
@@ -282,8 +271,10 @@ $on-laptop: 768px !default;
 
       @include media-query($on-laptop) {
         content: url("data:image/svg+xml,%3Csvg aria-hidden='true' focusable='false' data-prefix='fas' data-icon='music' role='img' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' class='svg-inline--fa fa-music fa-w-16'%3E%3Cpath fill='%23585858' d='M511.99 32.01c0-21.71-21.1-37.01-41.6-30.51L150.4 96c-13.3 4.2-22.4 16.5-22.4 30.5v261.42c-10.05-2.38-20.72-3.92-32-3.92-53.02 0-96 28.65-96 64s42.98 64 96 64 96-28.65 96-64V214.31l256-75.02v184.63c-10.05-2.38-20.72-3.92-32-3.92-53.02 0-96 28.65-96 64s42.98 64 96 64 96-28.65 96-64l-.01-351.99z' class=''%3E%3C/path%3E%3C/svg%3E") !important;
-        top: 100px;
-        margin-right: .6rem;
+        top: 20px;
+        right: 0;
+        margin-top: 2rem;
+        margin-right: 1rem;
         border: none;
         z-index: 1;
 
