@@ -1,9 +1,11 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 import Root from "@/pages/Root";
+import ErrorPage from "@/pages/Error";
+
 import HomePage from "@/pages/Home";
 import AboutPage from "@/pages/About";
-import ErrorPage from "@/pages/Error";
+import SpacePage from "@/pages/Space";
 
 const router = createBrowserRouter([
   {
@@ -16,6 +18,11 @@ const router = createBrowserRouter([
         path: "about",
         id: "about",
         element: <AboutPage />,
+      },
+      {
+        path: ":category",
+        id: "space",
+        element: <SpacePage />,
       },
     ],
   },
