@@ -15,9 +15,9 @@ const MENU: { path: string; title: string }[] = [
 
 const Header: React.FC<PropsWithChildren> = ({ children }) => {
   return (
-    <header>
-      <div className="flex justify-between items-center w-full gap-4 p-4">
-        <ul className="flex gap-6">
+    <header className="font-['DungGeunMo'] sticky top-0">
+      <div className="flex pt-4 justify-between items-center w-full gap-4 p-4">
+        <ul className="flex gap-10">
           {MENU.map((menu) => {
             return (
               <li key={menu.path}>

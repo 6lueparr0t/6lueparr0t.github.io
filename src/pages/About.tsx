@@ -60,6 +60,7 @@ const About = () => {
   }, [sound, typingStart]);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     setTimeout(() => {
       setLoaded(true);
     }, 1000);
