@@ -19,7 +19,7 @@ import { Link } from "react-router-dom";
 export const IssueTable: React.FC<SpaceProps> = ({ list }) => {
   return (
     <Table>
-      <TableHeader className="text-lg">
+      <TableHeader>
         <TableRow>
           <TableHead className="w-1/12 min-w-4">번호</TableHead>
           <TableHead className="w-8/12 text-center">제목</TableHead>
@@ -27,7 +27,7 @@ export const IssueTable: React.FC<SpaceProps> = ({ list }) => {
           <TableHead className="w-2/12 min-w-24 text-center">작성일</TableHead>
         </TableRow>
       </TableHeader>
-      <TableBody className="text-base">
+      <TableBody>
         {fp.map((row: Issue) => {
           return (
             <TableRow key={`space-${row.number}`}>
