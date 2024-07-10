@@ -64,6 +64,10 @@ jobs:
       run: |
         ${{ steps.detect-package-manager.outputs.runner }} run build
       working-directory: ${{ env.BUILD_PATH }}
+      env:
+        VITE_APP_GIT_REPO: ${{ vars.VITE_APP_GIT_REPO }}
+        VITE_APP_GIT_OWNER: ${{ vars.VITE_APP_GIT_OWNER }}
+        VITE_APP_GIT_TOKEN: ${{ vars.VITE_APP_GIT_TOKEN }}
 
 
     - name: Upload artifact
