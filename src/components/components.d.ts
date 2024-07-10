@@ -26,9 +26,10 @@ export type PaginationProps = {
 };
 
 export type Modal = {
-  message: string;
+  message: string | React.ReactElement | JSX.Element;
+  confirmMessage?: string;
   type: string;
   prevRef?: React.RefObject<HTMLInputElement> | null;
-  optionComponent?: React.ReactElement | null;
+  optionComponent?: React.ReactElement | JSX.Element | null;
   handler?: () => void;
 };
