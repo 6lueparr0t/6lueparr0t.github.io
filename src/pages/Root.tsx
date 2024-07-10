@@ -10,7 +10,7 @@ import modalStore from "@/store/modal";
 
 const Root: React.FC<PropsWithChildren> = () => {
   const [searchParams] = useSearchParams();
-  const redirect = searchParams.get('redirect');
+  const redirect = searchParams.get("redirect");
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -43,13 +43,13 @@ const Root: React.FC<PropsWithChildren> = () => {
       <Header />
       <main>
         <Outlet />
-        {modals.map((modal, index) => (
-          <div key={`modal-${index}`} className="h-0">
-            <Modal modal={modal} index={index} />
-          </div>
-        ))}
       </main>
       <Footer />
+      {modals.map((modal, index) => (
+        <div key={`modal-${index}`} className="h-0">
+          <Modal modal={modal} index={index} />
+        </div>
+      ))}
     </ThemeProvider>
   );
 };

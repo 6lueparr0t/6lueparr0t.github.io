@@ -34,10 +34,14 @@ const Footer: React.FC = () => {
             </a>
           </div>
           <div className="flex justify-center">
-            <span>mail : </span>
             <div className="underline cursor-pointer px-2">
               <Copy>{MAIL}</Copy>
             </div>
+          </div>
+          <div className="flex justify-center">
+            <a href="https://blog.rgbplace.com" target="_blank" rel="noopener noreferrer">
+              Tistory
+            </a>
           </div>
         </div>
       </div>

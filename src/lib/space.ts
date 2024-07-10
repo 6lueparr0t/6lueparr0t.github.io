@@ -1,6 +1,15 @@
 import fp from "lodash/fp";
 import { Octokit } from "octokit";
 import { PER_PAGE } from "@/lib/constants";
+import { Issue } from "@/components/components";
+
+const repo = import.meta.env.VITE_APP_GIT_REPO;
+const owner = import.meta.env.VITE_APP_GIT_OWNER;
+const auth = import.meta.env.VITE_APP_GIT_TOKEN;
+
+const octokit = new Octokit({
+  auth: auth,
+});
 
 export const makeQuery = (query: object) =>
   "&" +
@@ -10,20 +19,91 @@ export const makeQuery = (query: object) =>
     fp.join("&")
   )(query);
 
-const repo = "6lueparr0t.github.io";
-const owner = process.env.GIT_OWNER;
-const auth = process.env.GIT_TOKEN;
+export const getList = async (
+  query: { keyword: string; in: string } = { keyword: "", in: "title" },
+  option: { page?: number; per_page?: number } = {}
+): Promise<{
+  list: Issue[];
+  last: number;
+  status?: number;
+  message?: object;
+}> => {
+  let list;
 
-const octokit = new Octokit({
-  auth: auth,
-});
+  let last: number = 0;
+
+  try {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let response : any;
+
+    if (fp.get("keyword", query) !== "") {
+      response = await search(query, option);
+
+      if (response.status === 200) {
+        last = parseLastPage(response);
+        list = response.data.items.map((item: object) => parseData(item));
+      }
+    } else {
+      response = await getGithubIssue(option);
+
+      if (response.status === 200) {
+        last = parseLastPage(response);
+        list = response.data.map((item: object) => parseData(item));
+      }
+    }
+
+    if (response.status !== 200) throw new Error("Could not fetch details for selected event.");
+  } catch (error) {
+    return {
+      list: [],
+      last: 0,
+      status: 500,
+      message: error ?? "",
+    };
+  }
+
+  return { list: list, last: last };
+};
+
+export const getIssue = async (
+  option: { page?: number; per_page?: number } = {},
+  issueNumber: number
+): Promise<{
+  issue: Issue;
+  status?: number;
+  message?: object;
+}> => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  let issue: any = {};
+
+  try {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let response : any;
+    // eslint-disable-next-line prefer-const
+    response = await getGithubIssue(option, issueNumber);
+
+    if (response.status === 200) {
+      issue = parseData(response.data);
+    } else {
+      throw new Error("Could not fetch details for selected event.");
+    }
+  } catch (error) {
+    return {
+      issue: issue,
+      status: 500,
+      message: error ?? "",
+    };
+  }
+
+  return { issue: issue };
+};
 
 // Octokit.js
 // https://github.com/octokit/core.js#readme
-export const requestList = async (
+export const getGithubIssue = async (
   option: { per_page?: number } = { per_page: PER_PAGE },
   issueNumber: number = 0
-) => {
+): Promise<unknown> => {
   const issuePath: string = issueNumber ? "/" + String(issueNumber) : "";
 
   let optionQuery: string = "";
@@ -55,7 +135,7 @@ export const requestList = async (
 export const search = async (
   query: { keyword: string; in: string },
   option: object = {}
-) => {
+): Promise<unknown> => {
   let qQuery: string = "q=";
   if (!fp.isEqual(query, {})) {
     qQuery += encodeURIComponent(`${query.keyword} in:${query.in} repo:${owner}/${repo}`);
@@ -67,47 +147,6 @@ export const search = async (
   }
 
   const response = await octokit.request(`GET /search/issues?${qQuery ?? ""}${optionQuery ?? ""}`, {
-    headers: {
-      "X-GitHub-Api-Version": "2022-11-28",
-    },
-  });
-
-  return response;
-};
-
-export const requestCreate = async (
-  issue: {
-    title: string;
-    body: string;
-  }
-) => {
-  const response = await octokit.request(`POST /repos/${owner}/${repo}/issues`, {
-    owner: owner,
-    repo: repo,
-    title: issue.title,
-    body: issue.body,
-    headers: {
-      "X-GitHub-Api-Version": "2022-11-28",
-    },
-  });
-
-  return response;
-};
-
-export const requestPatch = async (
-  issue: {
-    title: string;
-    body: string;
-  },
-  issueNumber: number = 0
-) => {
-  const issuePath: string = issueNumber ? "/" + String(issueNumber) : "";
-
-  const response = await octokit.request(`PATCH /repos/${owner}/${repo}/issues${issuePath}`, {
-    owner: owner,
-    repo: repo,
-    title: issue.title,
-    body: issue.body,
     headers: {
       "X-GitHub-Api-Version": "2022-11-28",
     },

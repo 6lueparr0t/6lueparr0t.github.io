@@ -5,7 +5,8 @@ import ErrorPage from "@/pages/Error";
 
 import HomePage from "@/pages/Home";
 import AboutPage from "@/pages/About";
-import SpacePage from "@/pages/Space";
+import SpacePage, { loader as SpaceLoader } from "@/pages/Space";
+import SpaceViewPage, { loader as SpaceViewLoader } from "@/pages/SpaceView";
 
 const router = createBrowserRouter([
   {
@@ -20,9 +21,16 @@ const router = createBrowserRouter([
         element: <AboutPage />,
       },
       {
-        path: ":category",
+        path: "space",
         id: "space",
         element: <SpacePage />,
+        loader: SpaceLoader,
+      },
+      {
+        path: "space/:issueNumber",
+        id: "space-view",
+        element: <SpaceViewPage />,
+        loader: SpaceViewLoader,
       },
     ],
   },
@@ -31,7 +39,7 @@ const router = createBrowserRouter([
 function App() {
   return (
     <>
-      <RouterProvider router={router}></RouterProvider>
+      <RouterProvider router={router} />
     </>
   );
 }

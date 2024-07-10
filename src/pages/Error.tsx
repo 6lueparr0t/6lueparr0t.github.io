@@ -1,12 +1,14 @@
 import { Button } from "@/components/ui/button";
 import React from "react";
 import { useRouteError, isRouteErrorResponse } from "react-router-dom";
-
 import { Link } from "react-router-dom";
 
+function isErrorWithStatus(error: unknown): error is { status: number } {
+  return typeof error === "object" && error !== null && "status" in error;
+}
+
 const ErrorPage: React.FC = () => {
-  // you don't need to explicitly set error to `unknown`
-  const error = useRouteError();
+  const error: unknown = useRouteError();
   let message: string;
 
   if (isRouteErrorResponse(error)) {
@@ -20,9 +22,14 @@ const ErrorPage: React.FC = () => {
     message = "Unknown error";
   }
 
+  const errorStatus: number = isErrorWithStatus(error) ? error.status : 500;
+
   return (
     <div id="error-page" className="flex flex-col gap-8 justify-center items-center h-screen">
       <h1 className="text-4xl font-bold">Oops!</h1>
+      <div className="w-[600px]">
+        <img src={`https://http.cat/${errorStatus}`} alt="error cat" />
+      </div>
       <p>Sorry, an unexpected error has occurred.</p>
       <p className="text-slate-400">
         <i>{message}</i>

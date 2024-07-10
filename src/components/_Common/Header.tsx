@@ -11,6 +11,10 @@ const MENU: { path: string; title: string }[] = [
     path: "/about",
     title: "about",
   },
+  {
+    path: "/space",
+    title: "space",
+  },
 ];
 
 const Header: React.FC<PropsWithChildren> = ({ children }) => {
