@@ -60,7 +60,7 @@ const About = () => {
   }, [sound, typingStart]);
 
   useEffect(() => {
-    window.scrollTo({top:0, behavior: 'instant'});
+    window.scrollTo({ top: 0, behavior: "instant" });
     setTimeout(() => {
       setLoaded(true);
     }, 1000);
@@ -78,63 +78,65 @@ const About = () => {
   });
 
   return (
-    <div className="gameboy">
-      <div className="gameboy-screen-cont">
-        <div className="gameboy-screen">
-          <div className="power power-on"></div>
-          <label id="mute-toggle" className={`sound ${sound ? "sound-on" : "sound-off"}`}>
-            <input
-              id="mute"
-              type="checkbox"
-              style={{ display: "none" }}
-              onClick={() => setSound((prev) => !prev)}
-            />
-            {start && <audio className="hidden" ref={audioRef} src={bgm} loop />}
-          </label>
-          <div className="header">DOT MATRIX WITH STEREO SOUND</div>
-          <div className="main">
-            {loaded && start ? (
-              <>
-                <div className="ash">
-                  <img src={ash1} alt="ash1" />
-                </div>
-                <div className="text">
-                  <div>
-                    <audio className="hidden" ref={sfxRef} src={sfx} />
-                    <ReactTyped
-                      strings={[
-                        'Name : Daehyun Lim^1000\n\nBirth : 1991 / 12 / 30^1000\n\nGender : Man^1000\n\nJob : Web Developer (Front-End)^1000 `\n\n\n<div class="close"><a href="/"" >[ Back ]</a></div>`',
-                      ]}
-                      startDelay={2000}
-                      backSpeed={100}
-                      typeSpeed={100}
-                      preStringTyped={() => {
-                        setTypingStart(true);
-                      }}
-                      onTypingPaused={() => {
-                        setTypingStart(false);
-                      }}
-                      onTypingResumed={() => {
-                        setTypingStart(true);
-                      }}
-                      onStringTyped={() => {
-                        setTypingStart(false);
-                      }}
-                      onComplete={() => {
-                        setTypingStart(false);
-                      }}
-                    />
+    <div className="min-h-[60lvh] md:min-h-[80lvh]">
+      <div className="gameboy">
+        <div className="gameboy-screen-cont">
+          <div className="gameboy-screen">
+            <div className="power power-on"></div>
+            <label id="mute-toggle" className={`sound ${sound ? "sound-on" : "sound-off"}`}>
+              <input
+                id="mute"
+                type="checkbox"
+                style={{ display: "none" }}
+                onClick={() => setSound((prev) => !prev)}
+              />
+              {start && <audio className="hidden" ref={audioRef} src={bgm} loop />}
+            </label>
+            <div className="header">DOT MATRIX WITH STEREO SOUND</div>
+            <div className="main">
+              {loaded && start ? (
+                <>
+                  <div className="ash">
+                    <img src={ash1} alt="ash1" />
                   </div>
-                </div>
-              </>
-            ) : (
+                  <div className="text">
+                    <div>
+                      <audio className="hidden" ref={sfxRef} src={sfx} />
+                      <ReactTyped
+                        strings={[
+                          'Name : Daehyun Lim^1000\n\nBirth : 1991 / 12 / 30^1000\n\nGender : Man^1000\n\nJob : Web Developer (Front-End)^1000 `\n\n\n<div class="close"><a href="/"" >[ Back ]</a></div>`',
+                        ]}
+                        startDelay={2000}
+                        backSpeed={100}
+                        typeSpeed={100}
+                        preStringTyped={() => {
+                          setTypingStart(true);
+                        }}
+                        onTypingPaused={() => {
+                          setTypingStart(false);
+                        }}
+                        onTypingResumed={() => {
+                          setTypingStart(true);
+                        }}
+                        onStringTyped={() => {
+                          setTypingStart(false);
+                        }}
+                        onComplete={() => {
+                          setTypingStart(false);
+                        }}
+                      />
+                    </div>
+                  </div>
+                </>
+              ) : (
                 <div
                   className="text text-4xl whitespace-break-spaces flex justify-center items-center cursor-pointer h-[calc(18rem)] sm:h-[calc(20rem)] md:h-[calc(28rem)]"
                   onClick={() => handlePlay()}
                 >
                   {loaded ? "Click to Start" : "Loading ..."}
                 </div>
-            )}
+              )}
+            </div>
           </div>
         </div>
       </div>
