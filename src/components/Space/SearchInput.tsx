@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { Form, redirect } from "react-router-dom";
+import { Form, useNavigate } from "react-router-dom";
 import { SpaceProps } from "@/components/components.d";
 
 import {
@@ -13,12 +13,15 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
-import modalStore from "@/store/modal";
+// import modalStore from "@/store/modal";
 
 export const SearchInput: React.FC<SpaceProps> = () => {
+  const navigate = useNavigate();
+
   const [searchType, setSearchType] = useState("title");
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [inputValue, setInputValue] = useState("");
-  const { pushModals } = modalStore();
+  // const { pushModals } = modalStore();
 
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -31,19 +34,12 @@ export const SearchInput: React.FC<SpaceProps> = () => {
   ) => {
     if (event.key === "Enter" || event.type === "click") {
       if (!inputRef?.current?.value) {
-        // 모달 스택 확인 : 아래 pushModals 복제하여 테스트
-        // pushModals({message : "검색어를 입력하세요.", type:"alert", prevRef:inputRef});
-        pushModals({ message: "검색어를 입력하세요.", type: "alert", prevRef: inputRef });
+        navigate("/space");
         event.preventDefault();
       }
+      // 모달 스택 확인 : 아래 pushModals 복제하여 테스트
+      // pushModals({ message: "검색어를 입력하세요.", type: "alert", prevRef: inputRef });
     }
-  };
-
-  const resetHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
-    inputRef.current!.value = "";
-    setInputValue("");
-    redirect("/space");
-    event.preventDefault();
   };
 
   return (
@@ -73,11 +69,6 @@ export const SearchInput: React.FC<SpaceProps> = () => {
           >
             검색
           </Button>
-          {inputValue.length > 0 && (
-            <Button className="w-14 text-xs sm:w-20 sm:text-sm" onClick={resetHandler}>
-              검색 취소
-            </Button>
-          )}
         </Form>
       </div>
       <div>

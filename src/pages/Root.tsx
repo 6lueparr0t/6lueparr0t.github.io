@@ -46,7 +46,7 @@ const Root: React.FC<PropsWithChildren> = () => {
       </main>
       <Footer />
       {modals.map((modal, index) => (
-        <div key={`modal-${index}`} className="h-0">
+        <div key={`modal-${index}`} className="font-['DungGeunMo'] h-0">
           <Modal modal={modal} index={index} />
         </div>
       ))}
