@@ -19,7 +19,6 @@ export const SearchInput: React.FC<SpaceProps> = () => {
   const navigate = useNavigate();
 
   const [searchType, setSearchType] = useState("title");
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [inputValue, setInputValue] = useState("");
   // const { pushModals } = modalStore();
 
@@ -33,7 +32,7 @@ export const SearchInput: React.FC<SpaceProps> = () => {
     event: React.MouseEvent<HTMLButtonElement> & React.KeyboardEvent<HTMLInputElement>
   ) => {
     if (event.key === "Enter" || event.type === "click") {
-      if (!inputRef?.current?.value) {
+      if (!inputRef?.current?.value && inputValue === "") {
         navigate("/space");
         event.preventDefault();
       }
