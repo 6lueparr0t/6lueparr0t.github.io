@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React, { useEffect, Suspense } from "react";
 import {
   Await,
   defer,
@@ -19,6 +19,10 @@ const SpacePage: React.FC = () => {
   const { list, query, last, page } = useRouteLoaderData(
     "space"
   ) as RouteLoaderData;
+
+  useEffect(() => {
+    window.scrollTo({top:0, behavior: 'instant'});
+  }, []);
 
   return (
     <div className="font-['DungGeunMo'] p-8">

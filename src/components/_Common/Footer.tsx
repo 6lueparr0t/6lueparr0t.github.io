@@ -29,6 +29,10 @@ const Footer: React.FC = () => {
               Youtube
             </a>
             <span className="px-2">/</span>
+            <a href="https://blog.rgbplace.com" target="_blank" rel="noopener noreferrer">
+              Tistory
+            </a>
+            <span className="px-2">/</span>
             <a href="https://hanjulcoding.com" target="_blank" rel="noopener noreferrer">
               한줄코딩
             </a>
@@ -37,11 +41,6 @@ const Footer: React.FC = () => {
             <div className="underline cursor-pointer px-2">
               <Copy>{MAIL}</Copy>
             </div>
-          </div>
-          <div className="flex justify-center">
-            <a href="https://blog.rgbplace.com" target="_blank" rel="noopener noreferrer">
-              Tistory
-            </a>
           </div>
         </div>
       </div>
