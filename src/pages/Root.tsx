@@ -14,7 +14,7 @@ const Root: React.FC<PropsWithChildren> = () => {
 
   const navigate = useNavigate();
   const location = useLocation();
-  const { modals, clearModals } = modalStore();
+  const { pushModals, modals, clearModals } = modalStore();
 
   useKey("/", () => navigate("/"));
 
@@ -34,6 +34,7 @@ const Root: React.FC<PropsWithChildren> = () => {
   // github pages 404 redirect
   useEffect(() => {
     if (redirect) {
+      pushModals({ message: "now loading ...", type: "loading" });
       navigate(redirect);
     }
   }, [redirect, navigate]);

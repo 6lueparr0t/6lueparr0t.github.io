@@ -1,9 +1,5 @@
 import React, { useEffect, Suspense } from "react";
-import {
-  Await,
-  defer,
-  useRouteLoaderData,
-} from "react-router-dom";
+import { Await, defer, useRouteLoaderData } from "react-router-dom";
 import type { LoaderFunction } from "react-router";
 
 import { RouteLoaderData } from "@/pages/pages.d";
@@ -16,17 +12,24 @@ import { IssueTable } from "@/components/Space/IssueTable";
 import { IssuePagination } from "@/components/Space/IssuePagination";
 
 const SpacePage: React.FC = () => {
-  const { list, query, last, page } = useRouteLoaderData(
-    "space"
-  ) as RouteLoaderData;
+  const { list, query, last, page } = useRouteLoaderData("space") as RouteLoaderData;
 
   useEffect(() => {
-    window.scrollTo({top:0, behavior: 'instant'});
+    window.scrollTo({ top: 0, behavior: "instant" });
   }, []);
 
   return (
-    <div className="font-['DungGeunMo'] p-8">
+    <div className="font-['DungGeunMo'] p-8 h-lvh">
       <div className="text-2xl text-left">Space</div>
+      <div className="text-base text-left">
+        <a
+          href="https://github.com/6lueparr0t/6lueparr0t.github.io/issues"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Github Issues{" "}
+        </a>
+      </div>
       <div className="my-4 flex flex-row justify-between">
         <SearchInput />
       </div>
@@ -62,8 +65,7 @@ const SpacePage: React.FC = () => {
 
 export default SpacePage;
 
-
-export const loader : LoaderFunction = async ({request}) => {
+export const loader: LoaderFunction = async ({ request }) => {
   await sleep();
 
   const searchParams = new URL(request.url).searchParams;
@@ -74,7 +76,6 @@ export const loader : LoaderFunction = async ({request}) => {
   };
   const page: number = Number(searchParams.get("page") ?? 1);
 
-
   const { list, last } = await getList(query, { page: page, per_page: PER_PAGE });
 
   return defer({
@@ -83,4 +84,4 @@ export const loader : LoaderFunction = async ({request}) => {
     last: last ? last : page, // last 가 없는 경우, 현재 페이지가 last
     page: page,
   });
-}
+};

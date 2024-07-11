@@ -1,6 +1,5 @@
 import React from "react";
 import { SpaceProps, Issue } from "@/components/components.d";
-import fp from "lodash/fp";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
@@ -28,7 +27,7 @@ export const IssueTable: React.FC<SpaceProps> = ({ list }) => {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {fp.map((row: Issue) => {
+        {list && list.map((row: Issue) => {
           return (
             <TableRow key={`space-${row.number}`}>
               <TableCell className="font-medium min-w-16 sm:min-w-4">{row.number}</TableCell>
@@ -49,7 +48,7 @@ export const IssueTable: React.FC<SpaceProps> = ({ list }) => {
               </TableCell>
             </TableRow>
           );
-        }, list)}
+        })}
       </TableBody>
     </Table>
   );

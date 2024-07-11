@@ -3,6 +3,9 @@ import modalStore from "@/store/modal";
 import type { Modal } from "@/components/components.d";
 
 import { Button } from "@/components/ui/button";
+import cat1 from '@/assets/loading/cat1.webp';
+import cat2 from '@/assets/loading/cat2.webp';
+import dog from '@/assets/loading/dog.webp';
 
 interface ModalProps extends React.PropsWithChildren {
   modal: Modal;
@@ -12,6 +15,15 @@ interface ModalProps extends React.PropsWithChildren {
 const Modal: React.FC<ModalProps> = ({ modal, index }) => {
   const { popModals } = modalStore();
   const modalRef = useRef<HTMLDivElement>(null);
+
+  // 이미지 소스 배열의 타입을 지정
+  const images: string[] = [cat1, cat2, dog];
+
+  const loadingImg = (): string => {
+    // 0부터 images 배열의 길이까지 랜덤 인덱스를 생성
+    const randomIndex = Math.floor(Math.random() * images.length);
+    return images[randomIndex];
+  };
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -53,9 +65,16 @@ const Modal: React.FC<ModalProps> = ({ modal, index }) => {
 
           <div className="inline-block align-middle bg-white dark:bg-slate-950 rounded-lg text-left overflow-hidden shadow-xl transform transition-all my-8 max-w-lg w-full">
             <div className="bg-white dark:bg-slate-950 mt-8">
-              <div className="text-xl font-bold text-center">{modal.message}</div>
+              <div className="text-xl font-bold text-center">
+                {modal.message} {modal.type === "loading" && <div className="animate-spin rounded-full absolute inline mx-4">|</div>}
+              </div>
             </div>
             <div className="bg-white dark:bg-slate-950 py-4 justify-around px-6 flex">
+              {modal.type === "loading" && (
+                <div className="flex justify-center items-center">
+                  <img src={loadingImg()}/>
+                </div>
+              )}
               {modal.type === "alert" && (
                 <Button
                   // text-black bg-white hover:bg-slate-50 dark:bg-slate-950 dark:text-white dark:hover:bg-slate-900

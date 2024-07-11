@@ -2,48 +2,48 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'DungGeunMo';
+  src: url("/font/NeoDunggeunmoPro-Regular.woff") format('woff'), url("/font/NeoDunggeunmoPro-Regular.woff2") format('woff');
+}
+
+@mixin mobile() {
+  @media only screen and (hover: none) and (pointer: coarse) {
+    @content;
+  }
+}
+
+@mixin keyframes($animation-name) {
+  @-webkit-keyframes #{$animation-name} {
+    @content;
+  }
+
+  @-moz-keyframes #{$animation-name} {
+    @content;
+  }
+
+  @-ms-keyframes #{$animation-name} {
+    @content;
+  }
+
+  @-o-keyframes #{$animation-name} {
+    @content;
+  }
+
+  @keyframes #{$animation-name} {
+    @content;
+  }
+}
+
+@mixin animation($str) {
+  -webkit-animation: #{$str};
+  -moz-animation: #{$str};
+  -ms-animation: #{$str};
+  -o-animation: #{$str};
+  animation: #{$str};
+}
+
 @layer base {
-  @font-face {
-    font-family: 'DungGeunMo';
-    src: url("/font/NeoDunggeunmoPro-Regular.woff") format('woff'), url("/font/NeoDunggeunmoPro-Regular.woff2") format('woff');
-  }
-
-  @mixin mobile() {
-    @media only screen and (hover: none) and (pointer: coarse) {
-      @content;
-    }
-  }
-
-  @mixin keyframes($animation-name) {
-    @-webkit-keyframes #{$animation-name} {
-      @content;
-    }
-
-    @-moz-keyframes #{$animation-name} {
-      @content;
-    }
-
-    @-ms-keyframes #{$animation-name} {
-      @content;
-    }
-
-    @-o-keyframes #{$animation-name} {
-      @content;
-    }
-
-    @keyframes #{$animation-name} {
-      @content;
-    }
-  }
-
-  @mixin animation($str) {
-    -webkit-animation: #{$str};
-    -moz-animation: #{$str};
-    -ms-animation: #{$str};
-    -o-animation: #{$str};
-    animation: #{$str};
-  }
-
   :root {
     --main: 241, 245, 249;
     /* #f1f5f9, slate100 */
@@ -109,6 +109,14 @@
       //   background-size: 100%;
       // }
     }
+
+    .home .typed-cursor--blink {
+      background-color: rgba(var(--foreground));
+      width:7px;
+      height:83%;
+      display: inline-block;
+      transform: translateY(3px);
+    }
   }
 
   .dark {
@@ -155,4 +163,4 @@
   }
 }
 
-@import "gameboy.scss"
+@import "gameboy.scss";
