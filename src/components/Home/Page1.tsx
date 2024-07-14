@@ -41,7 +41,7 @@ function Page1() {
           nodeRef={bird2Ref}
         >
           <div
-            className="absolute top-0 h-full w-2 bg-gray-950 cursor-pointer"
+            className="absolute top-0 h-full w-2 opacity-40 bg-gray-950 cursor-pointer"
             onDoubleClick={() => {
               setClipPathValue(`inset(0 50% 0 0)`);
             }}
