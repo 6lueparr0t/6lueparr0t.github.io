@@ -30,7 +30,7 @@ function Page1() {
 
   return (
     <div className="mx-auto p-4 text-center max-w-[calc(100%)] h-[calc(100lvh-4.4rem)] flex flex-col justify-center">
-      <div className="relative w-64 h-64 mx-auto my-8">
+      <div className="relative w-64 min-h-64 mx-auto my-8">
         <img className="absolute w-64 h-64 " src={bird2} alt="logo" />
         <img className="absolute w-64 h-64 " src={bird1} alt="logo" ref={bird2Ref} />
         <Draggable

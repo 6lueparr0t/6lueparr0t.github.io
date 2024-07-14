@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useKey } from "react-use";
 import { ReactTyped } from "react-typed";
-import ash1 from "@/assets/ash1.gif";
+import ash1 from "@/assets/about/ash1.gif";
 import sfx from "@/assets/sound/sfx_sounds_Blip7.wav";
 import bgm from "@/assets/sound/bgm_25_Route_30.mp3";
 
