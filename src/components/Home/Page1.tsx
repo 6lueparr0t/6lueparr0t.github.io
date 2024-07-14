@@ -16,7 +16,7 @@ function Page1() {
     }
   }, []);
 
-  const handleDrag = (e: DraggableEvent, ui: { x: number }) => {
+  const handleDrag = (_: DraggableEvent, ui: { x: number }) => {
     const { x } = ui;
     const percent = (x / bounds.right) * 100; // 이미지 너비에 따라 조정
     setClipPathValue(`inset(0 ${100 - percent}% 0 0)`);
@@ -31,8 +31,8 @@ function Page1() {
   return (
     <div className="mx-auto p-4 text-center max-w-[calc(100%)] h-[calc(100lvh-4.4rem)] flex flex-col justify-center">
       <div className="relative w-64 h-64 mx-auto">
-        <img className="absolute w-64 h-64 " src={bird2} alt="logo"/>
-        <img className="absolute w-64 h-64 " src={bird1} alt="logo" ref={bird2Ref}/>
+        <img className="absolute w-64 h-64 " src={bird2} alt="logo" />
+        <img className="absolute w-64 h-64 " src={bird1} alt="logo" ref={bird2Ref} />
         <Draggable
           axis="x"
           bounds={bounds} // 동적으로 계산된 bounds 적용
@@ -40,9 +40,12 @@ function Page1() {
           onDrag={handleDrag}
           nodeRef={bird2Ref}
         >
-          <div className="absolute top-0 h-full w-2 bg-gray-950 cursor-pointer" onDoubleClick={()=>{
-            setClipPathValue(`inset(0 50% 0 0)`);
-          }} />
+          <div
+            className="absolute top-0 h-full w-2 bg-gray-950 cursor-pointer"
+            onDoubleClick={() => {
+              setClipPathValue(`inset(0 50% 0 0)`);
+            }}
+          />
         </Draggable>
       </div>
       <h1 className="text-6xl break-keep m-4 text-gradient">
