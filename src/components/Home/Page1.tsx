@@ -7,12 +7,12 @@ import bird2 from "/public/bird2.webp";
 function Page1() {
   const bird2Ref = useRef<HTMLImageElement>(null);
   const [clipPathValue, setClipPathValue] = useState("inset(0 50% 0 0)");
-  const [bounds, setBounds] = useState<{ left: number; right: number }>({ left: 4, right: 256 });
+  const [bounds, setBounds] = useState<{ left: number; right: number }>({ left: 6, right: 256 });
 
   useEffect(() => {
     if (bird2Ref.current) {
       const bird2Width = bird2Ref.current.offsetWidth;
-      setBounds({ left: 4, right: bird2Width });
+      setBounds({ left: 6, right: bird2Width });
     }
   }, []);
 
@@ -30,7 +30,7 @@ function Page1() {
 
   return (
     <div className="mx-auto p-4 text-center max-w-[calc(100%)] h-[calc(100lvh-4.4rem)] flex flex-col justify-center">
-      <div className="relative w-64 h-64 mx-auto">
+      <div className="relative w-64 h-64 mx-auto my-8">
         <img className="absolute w-64 h-64 " src={bird2} alt="logo" />
         <img className="absolute w-64 h-64 " src={bird1} alt="logo" ref={bird2Ref} />
         <Draggable

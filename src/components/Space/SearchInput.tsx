@@ -49,11 +49,13 @@ export const SearchInput: React.FC<SpaceProps> = () => {
   }, [location.key]);
 
   return (
-    <>
-      <div className="flex flex-row gap-4">
-        <div className="w-20">
+    <div className="my-4 flex flex-col md:flex-row justify-between gap-4">
+      <div className="flex flex-col md:flex-row gap-4 w-full">
+        {/* method 가 GET 이므로 Submit 후 url params 로 검색 */}
+        <Form className="flex w-full md:max-w-md gap-2 md:gap-4" method={"GET"}>
+          <input type="hidden" name="in" value={searchType} />
           <Select onValueChange={(value) => setSearchType(value)} defaultValue={searchType}>
-            <SelectTrigger className="w-20">
+            <SelectTrigger className="w-28">
               <SelectValue placeholder="" />
             </SelectTrigger>
             <SelectContent>
@@ -63,16 +65,14 @@ export const SearchInput: React.FC<SpaceProps> = () => {
               </SelectGroup>
             </SelectContent>
           </Select>
-        </div>
-        {/* method 가 GET 이므로 Submit 후 url params 로 검색 */}
-        <Form className="flex w-full max-w-sm gap-2 sm:gap-4" method={"GET"}>
-          <input type="hidden" name="in" value={searchType} />
-          <Input type="text" name="keyword" ref={inputRef} onChange={changeEventHandler} />
-          <Button
-            className="w-14 text-xs sm:w-20 sm:text-sm"
-            type="submit"
-            onClick={keywordEventHandler}
-          >
+          <Input
+            className="w-full"
+            type="text"
+            name="keyword"
+            ref={inputRef}
+            onChange={changeEventHandler}
+          />
+          <Button className="w-20 text-xs md:text-sm" type="submit" onClick={keywordEventHandler}>
             {isSearching ? (
               <div className="animate-spin rounded-full absolute inline mx-4">|</div>
             ) : (
@@ -81,11 +81,11 @@ export const SearchInput: React.FC<SpaceProps> = () => {
           </Button>
         </Form>
       </div>
-      <div>
+      <Button className="w-full md:w-20 text-xs md:text-sm">
         <a href={`https://github.com/6lueparr0t/6lueparr0t.github.io/issues/new`} target="_blank">
-          <Button className="w-14 text-xs sm:w-20 sm:text-sm">글쓰기</Button>
+          글쓰기
         </a>
-      </div>
-    </>
+      </Button>
+    </div>
   );
 };

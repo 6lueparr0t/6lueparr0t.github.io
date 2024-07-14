@@ -10,6 +10,7 @@ import { getList, makeQuery } from "@/lib/space";
 import { SearchInput } from "@/components/Space/SearchInput";
 import { IssueTable } from "@/components/Space/IssueTable";
 import { IssuePagination } from "@/components/Space/IssuePagination";
+import { NavLink } from "react-router-dom";
 
 const SpacePage: React.FC = () => {
   const { list, query, last, page } = useRouteLoaderData("space") as RouteLoaderData;
@@ -19,8 +20,10 @@ const SpacePage: React.FC = () => {
   }, []);
 
   return (
-    <div className="font-['DungGeunMo'] p-8 h-lvh">
-      <div className="text-2xl text-left">Space</div>
+    <div className="font-['DungGeunMo'] p-8 h-[calc(100lvh-4.2rem)]">
+      <div className="text-2xl text-left">
+        <NavLink to={"/space"}>Space</NavLink>
+      </div>
       <div className="text-base text-left">
         <a
           href="https://github.com/6lueparr0t/6lueparr0t.github.io/issues"
@@ -30,9 +33,7 @@ const SpacePage: React.FC = () => {
           Github Issues{" "}
         </a>
       </div>
-      <div className="my-4 flex flex-row justify-between">
-        <SearchInput />
-      </div>
+      <SearchInput />
       <div className="flex flex-col justify-center items-center">
         <Suspense fallback={<div className="text-center">Loading...</div>}>
           <Await resolve={list}>

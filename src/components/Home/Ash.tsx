@@ -44,7 +44,6 @@ function Ash() {
       <NavLink
         to={"/about"}
         className={"text-gray-800 hover:text-gray-400  dark:text-gray-100 dark:hover:text-gray-500"}
-        end
       >
         <img className="sm:w-[20px] sm:h-[20px] w-[16px] h-[16px]" src={ash2} alt="ash-going" />
       </NavLink>

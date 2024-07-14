@@ -33,16 +33,13 @@ const Menu: React.FC<MenuProps> = ({ menuList }) => {
         <div className="text-xl grid gap-4">
           {menuList.map((menu) => {
             return (
-              <NavLink
-                key={menu.path}
-                to={menu.path}
-                className={"text-gray-800 dark:text-gray-100"}
-                end
-              >
-                <div className="grid items-center justify-center md:justify-start gap-4 p-2 dark:hover:bg-gray-900 hover:bg-gray-200">
-                  {menu.title}
-                </div>
-              </NavLink>
+              <SheetClose key={menu.path} asChild>
+                <NavLink to={menu.path} className={"text-gray-800 dark:text-gray-100"}>
+                  <div className="grid items-center justify-center md:justify-start gap-4 p-2 dark:hover:bg-gray-900 hover:bg-gray-200">
+                    {menu.title}
+                  </div>
+                </NavLink>
+              </SheetClose>
             );
           })}
         </div>
