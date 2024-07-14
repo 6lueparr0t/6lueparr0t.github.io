@@ -1,26 +1,26 @@
 import { useState, useEffect, useRef } from "react";
 import Draggable, { DraggableEvent } from "react-draggable";
 import { ReactTyped } from "react-typed";
-import bird1 from "/public/bird1.webp";
-import bird2 from "/public/bird2.webp";
+import bird1 from "/bird1.webp";
+import bird2 from "/bird2.webp";
 
 function Page1() {
   const bird2Ref = useRef<HTMLImageElement>(null);
   const [clipPathValue, setClipPathValue] = useState("inset(0 50% 0 0)");
-  const [bounds, setBounds] = useState<{ left: number; right: number }>({ left: 6, right: 256 });
-
-  useEffect(() => {
-    if (bird2Ref.current) {
-      const bird2Width = bird2Ref.current.offsetWidth;
-      setBounds({ left: 6, right: bird2Width });
-    }
-  }, []);
+  const [bounds, setBounds] = useState<{ left: number; right: number }>({ left: 16, right: 256 });
 
   const handleDrag = (_: DraggableEvent, ui: { x: number }) => {
     const { x } = ui;
     const percent = (x / bounds.right) * 100; // 이미지 너비에 따라 조정
     setClipPathValue(`inset(0 ${100 - percent}% 0 0)`);
   };
+
+  useEffect(() => {
+    if (bird2Ref.current) {
+      const bird2Width = bird2Ref.current.offsetWidth;
+      setBounds({ left: 16, right: bird2Width });
+    }
+  }, []);
 
   useEffect(() => {
     if (clipPathValue && bird2Ref.current) {
@@ -40,12 +40,7 @@ function Page1() {
           onDrag={handleDrag}
           nodeRef={bird2Ref}
         >
-          <div
-            className="absolute top-0 h-full w-2 opacity-40 bg-gray-950 cursor-pointer"
-            onDoubleClick={() => {
-              setClipPathValue(`inset(0 50% 0 0)`);
-            }}
-          />
+          <div className="top-0 h-full w-4 bg-[hsla(0,0%,100%,.2)] cursor-pointer" />
         </Draggable>
       </div>
       <h1 className="text-6xl break-keep m-4 text-gradient">
