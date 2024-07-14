@@ -12,3 +12,33 @@ export function sleep(n: number = 500) {
 export const isEqual = <T extends Record<string, unknown>>(option: T, emptyObject: T): boolean => {
   return Object.keys(option).length === 0 && Object.keys(emptyObject).length === 0;
 };
+
+export const get = <T extends object, K extends keyof T>(obj: T, path: K | string, defaultValue?: object): unknown|string => {
+  const keys = (typeof path === 'string' ? path.split('.') : [path]) as Array<keyof T>;
+  let result: unknown = obj;
+
+  for (const key of keys) {
+    result = (result as T)[key];
+    if (result === undefined) {
+      return defaultValue;
+    }
+  }
+
+  return result;
+}
+
+export const isEmptyObject = (obj: object): boolean => {
+  return Object.keys(obj).length === 0;
+};
+
+// 객체에서 특정 속성을 선택하는 함수
+export const pick = <T, K extends keyof T>(keys: K[], object: T): Pick<T, K> => {
+  return Object.assign(
+    {},
+    ...keys.map(key => {
+      if (object && Object.prototype.hasOwnProperty.call(object, key)) {
+        return { [key]: object[key] };
+      }
+    })
+  );
+};

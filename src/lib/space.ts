@@ -1,6 +1,6 @@
-import fp from "lodash/fp";
 import { Octokit } from "octokit";
 import { PER_PAGE } from "@/lib/constants";
+import { get, isEmptyObject, pick} from "@/lib/utils";
 import { Issue } from "@/components/components";
 
 const repo = import.meta.env.VITE_APP_GIT_REPO;
@@ -11,13 +11,15 @@ const octokit = new Octokit({
   auth: auth,
 });
 
-export const makeQuery = (query: object) =>
-  "&" +
-  fp.pipe(
-    fp.toPairs, // 입력 : { name: 'John', age: 30 }; // 출력: [['name', 'John'], ['age', 30]]
-    fp.map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`),
-    fp.join("&")
-  )(query);
+export const makeQuery = (query: object, char:string = "&"): string => {
+  // 입력 : { name: 'John', age: 30 }; // 출력: [['name', 'John'], ['age', 30]]
+  return (
+    char +
+    Object.entries(query)
+      .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
+      .join("&")
+  );
+};
 
 export const getList = async (
   query: { keyword: string; in: string } = { keyword: "", in: "title" },
@@ -36,7 +38,7 @@ export const getList = async (
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let response : any;
 
-    if (fp.get("keyword", query) !== "") {
+    if (get(query, "keyword") !== "") {
       response = await search(query, option);
 
       if (response.status === 200) {
@@ -107,14 +109,8 @@ export const getGithubIssue = async (
   const issuePath: string = issueNumber ? "/" + String(issueNumber) : "";
 
   let optionQuery: string = "";
-  if (!fp.isEqual(option, {})) {
-    optionQuery =
-      "?" +
-      fp.pipe(
-        fp.toPairs, // 입력 : { name: 'John', age: 30 }; // 출력: [['name', 'John'], ['age', 30]]
-        fp.map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`),
-        fp.join("&")
-      )(option);
+  if (!isEmptyObject(option)) {
+    optionQuery = makeQuery(option, "?");
   }
 
   const response = await octokit.request(
@@ -137,12 +133,12 @@ export const search = async (
   option: object = {}
 ): Promise<unknown> => {
   let qQuery: string = "q=";
-  if (!fp.isEqual(query, {})) {
+  if (!isEmptyObject(query)) {
     qQuery += encodeURIComponent(`${query.keyword} in:${query.in} repo:${owner}/${repo}`);
   }
 
   let optionQuery: string = "";
-  if (!fp.isEqual(option, {})) {
+  if (!isEmptyObject(option)) {
     optionQuery = makeQuery(option);
   }
 
@@ -156,18 +152,22 @@ export const search = async (
 };
 
 export const parseData = (item: object) => ({
-  ...fp.pick(["number", "title", "body", "created_at", "updated_at", "node_id"], item),
-  user: fp.pick(["avatar_url", "login"], fp.get("user", item)),
+  ...pick(["number", "title", "body", "created_at", "updated_at", "node_id"], item as Issue),
+  user: pick(["avatar_url", "login"], get(item, "user", {}) as { avatar_url: string; login: string }),
 });
 
-export const parseLastPage = (props: {
-  data: { total_count?: number };
-  headers: { link?: string };
-}): number =>
-  Number(
-    fp.pipe(
-      fp.find((link: string) => link.includes('rel="last"')),
-      fp.replace(/.*[?&]page=(\d+).*/, "$1"),
-      (result: number) => result || 0
-    )(fp.split(",", props.headers.link))
-  );
+export const parseLastPage = (props: { data: { total_count?: number }; headers: { link?: string } }): number => {
+  if (!props.headers.link) {
+    return 0;
+  }
+
+  const links = props.headers.link.split(',');
+
+  const lastLink = links.find(link => link.includes('rel="last"'));
+  if (!lastLink) {
+    return 0;
+  }
+
+  const match = lastLink.match(/.*[?&]page=(\d+).*/);
+  return match ? Number(match[1]) : 0;
+};

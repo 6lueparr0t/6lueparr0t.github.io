@@ -1,15 +1,13 @@
 import React, { type PropsWithChildren } from "react";
 import { NavLink } from "react-router-dom";
+
+import Menu from "@/components/_Common/Menu";
 import { ModeToggle } from "@/components/mode-toggle";
 
 const MENU: { path: string; title: string }[] = [
   {
     path: "/",
     title: "/",
-  },
-  {
-    path: "/about",
-    title: "about",
   },
   {
     path: "/space",
@@ -19,9 +17,9 @@ const MENU: { path: string; title: string }[] = [
 
 const Header: React.FC<PropsWithChildren> = ({ children }) => {
   return (
-    <header className="font-['DungGeunMo'] sticky top-0">
-      <div className="flex pt-4 justify-between items-center w-full gap-4 p-4">
-        <ul className="flex gap-10">
+    <header className="font-['DungGeunMo'] sticky top-0 backdrop-blur-[20px] z-10">
+      <div className="flex justify-between items-center pt-4 w-full gap-4 p-4">
+        <ul className="hidden md:flex gap-10">
           {MENU.map((menu) => {
             return (
               <li key={menu.path}>
@@ -32,6 +30,9 @@ const Header: React.FC<PropsWithChildren> = ({ children }) => {
             );
           })}
         </ul>
+        <div className="flex md:hidden">
+          <Menu menuList={MENU} />
+        </div>
         <div className="flex">
           <ModeToggle />
         </div>

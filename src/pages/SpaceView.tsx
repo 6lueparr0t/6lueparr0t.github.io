@@ -1,17 +1,9 @@
 import React, { Suspense, useEffect } from "react";
-import {
-  json,
-  Await,
-  defer,
-  useNavigate,
-  useRouteLoaderData,
-} from "react-router-dom";
+import { json, Await, defer, useNavigate, useRouteLoaderData } from "react-router-dom";
 import type { LoaderFunction } from "react-router";
 
-import fp from "lodash/fp";
-
 import { RouteLoaderData } from "@/pages/pages.d";
-import { sleep } from "@/lib/utils";
+import { sleep, get } from "@/lib/utils";
 import { getIssue } from "@/lib/space";
 
 import { IssueViewer } from "@/components/Space/View/IssueViewer";
@@ -27,7 +19,7 @@ const SpaceViewPage: React.FC = () => {
   }, [navigate, title]);
 
   return (
-    <div className="p-8 w-full sm:w-1/2 m-auto">
+    <div className="p-8 w-full sm:w-3/4 lg:w-1/2 m-auto">
       <div className="text-2xl text-left my-8">{title}</div>
       <div className="flex flex-col">
         <Suspense fallback={<div className="text-center">Loading...</div>}>
@@ -47,14 +39,14 @@ const SpaceViewPage: React.FC = () => {
 
 export default SpaceViewPage;
 
-export const loader : LoaderFunction = async ({params}) => {
+export const loader: LoaderFunction = async ({ params }) => {
   await sleep();
 
   const issueNumber: number = Number(params?.issueNumber ?? 0);
 
   try {
     const { issue } = await getIssue({}, issueNumber);
-    const title = fp.get(`title`, issue);
+    const title = get(issue, "title");
 
     return defer({
       title: title,
@@ -63,4 +55,4 @@ export const loader : LoaderFunction = async ({params}) => {
   } catch (error) {
     throw json({ message: error }, { status: 500 });
   }
-}
+};

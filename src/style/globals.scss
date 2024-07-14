@@ -13,6 +13,12 @@
   }
 }
 
+@mixin media-query($device) {
+  @media screen and (max-width: $device) {
+    @content;
+  }
+}
+
 @mixin keyframes($animation-name) {
   @-webkit-keyframes #{$animation-name} {
     @content;
@@ -116,6 +122,10 @@
       height:83%;
       display: inline-block;
       transform: translateY(3px);
+
+      @include mobile() {
+        height:50px;
+      }
     }
   }
 
@@ -159,7 +169,7 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    // @apply bg-background text-foreground;
   }
 }
 

@@ -12,6 +12,10 @@ export type Issue = {
   };
 };
 
+export type MenuProps = {
+  menuList: { path: string; title: string }[];
+};
+
 export type SpaceProps = {
   method?: "POST" | "GET" | "PATCH" | "DELETE";
   issue?: Issue;

@@ -37,7 +37,7 @@ const Root: React.FC<PropsWithChildren> = () => {
       pushModals({ message: "now loading ...", type: "loading" });
       navigate(redirect);
     }
-  }, [redirect, navigate]);
+  }, [redirect, navigate, pushModals]);
 
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">

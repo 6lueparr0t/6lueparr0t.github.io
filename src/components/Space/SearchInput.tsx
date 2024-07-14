@@ -1,5 +1,5 @@
-import React, { useState, useRef } from "react";
-import { Form, useNavigate } from "react-router-dom";
+import React, { useState, useRef, useEffect } from "react";
+import { Form, useNavigate, useLocation } from "react-router-dom";
 import { SpaceProps } from "@/components/components.d";
 
 import {
@@ -16,8 +16,10 @@ import { Button } from "@/components/ui/button";
 // import modalStore from "@/store/modal";
 
 export const SearchInput: React.FC<SpaceProps> = () => {
+  const location = useLocation();
   const navigate = useNavigate();
 
+  const [isSearching, setIsSearching] = useState(false);
   const [searchType, setSearchType] = useState("title");
   const [inputValue, setInputValue] = useState("");
   // const { pushModals } = modalStore();
@@ -31,6 +33,7 @@ export const SearchInput: React.FC<SpaceProps> = () => {
   const keywordEventHandler = (
     event: React.MouseEvent<HTMLButtonElement> & React.KeyboardEvent<HTMLInputElement>
   ) => {
+    setIsSearching(true);
     if (event.key === "Enter" || event.type === "click") {
       if (!inputRef?.current?.value && inputValue === "") {
         navigate("/space");
@@ -40,6 +43,10 @@ export const SearchInput: React.FC<SpaceProps> = () => {
       // pushModals({ message: "검색어를 입력하세요.", type: "alert", prevRef: inputRef });
     }
   };
+
+  useEffect(() => {
+    setIsSearching(false);
+  }, [location.key]);
 
   return (
     <>
@@ -66,7 +73,11 @@ export const SearchInput: React.FC<SpaceProps> = () => {
             type="submit"
             onClick={keywordEventHandler}
           >
-            검색
+            {isSearching ? (
+              <div className="animate-spin rounded-full absolute inline mx-4">|</div>
+            ) : (
+              "검색"
+            )}
           </Button>
         </Form>
       </div>
