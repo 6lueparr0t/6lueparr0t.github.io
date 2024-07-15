@@ -1,17 +1,42 @@
+import { useState, useEffect } from 'react';
+import dayjs from 'dayjs';
+
 import Ash from "./Ash";
-import profile from "/bird1.webp";
+import { ImageCarousel } from "./ImageCarousel";
 
 function Page2() {
+  const [years, setYears] = useState(0);
+
+  useEffect(() => {
+    const startDate = dayjs('2017-10-01'); // 2017년 10월 1일을 기준으로 설정
+    const currentDate = dayjs();
+    const diffYears = currentDate.diff(startDate, 'year', true); // 소수점 첫째 자리까지 계산
+    setYears(parseFloat(diffYears.toFixed(2))); // 소수점 첫째 자리까지 표시
+  }, []);
   return (
     <>
       <Ash />
-      <div className="mx-auto text-center h-[calc(100lvh)] bg-stone-100 dark:bg-slate-900">
+      <div className="mx-auto text-center bg-stone-100 dark:bg-slate-900">
         <div className="text-xl md:text-2xl top-[0.4rem] md:top-[0.2rem] inline-block sticky justify-center py-4 z-10">
           about me
         </div>
-        <div className="flex justify-center items-center w-full">
-          <div className="flex justify-center items-center p-4 bg-white shadow-2xl">
-            <img src={profile} alt="profile" className="w-72 md:w-[330px] h-72 md:h-[330px]" />
+        <div className="flex flex-col justify-center items-center w-full">
+          <div className="flex justify-center items-center p-4 bg-white shadow-2xl w-72 md:w-[400px] h-[400px] md:h-[550px]">
+            <ImageCarousel />
+          </div>
+          <div className="font-noto my-8 w-3/4 text-xl text-left break-keep">
+            <p className="mb-8">안녕하세요. 저는 {years}년차 웹 개발자 임대현 입니다.</p>
+
+            <p className="mb-8">
+              PHP 웹 개발을 시작하여 BE(Java, Node.js), DevOps(Jenkins, Kubernetes, AWS),
+              FE(Javascript, React.js & Next.js) 등 다양한 영역에 대한 개발 경험을 가지고 있는
+              개발자 입니다.
+            </p>
+
+            <p className="">
+              연구실, 호스팅 서비스, 코인 거래소, 숏폼 서비스 등의 도메인에서 업무를 해왔고, 현재는
+              프론트엔드 개발에 주로 참여하고 있습니다.
+            </p>
           </div>
         </div>
       </div>

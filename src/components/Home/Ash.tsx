@@ -46,7 +46,7 @@ function Ash() {
         to={"/about"}
         className={"text-gray-800 hover:text-gray-400  dark:text-gray-100 dark:hover:text-gray-500"}
       >
-        <img className="w-[18px] h-[18px] sm:w-[36px] sm:h-[36px]" src={ash2} alt="ash-going" />
+        <img className="w-[12px] h-[12px] sm:w-[20px] sm:h-[20px]" src={ash2} alt="ash-going" />
       </NavLink>
     </div>
   );
