@@ -20,11 +20,11 @@ function Page2() {
         <div className="text-xl md:text-2xl top-[0.4rem] md:top-[0.2rem] inline-block sticky justify-center py-4 z-10">
           about me
         </div>
-        <div className="flex flex-col justify-center items-center w-full">
-          <div className="flex justify-center items-center p-4 bg-white shadow-2xl w-72 md:w-[400px] h-[400px] md:h-[550px]">
+        <div className="flex flex-col  justify-center items-center w-full">
+          <div className="flex justify-center items-center p-4 my-16 bg-white shadow-2xl w-72 md:w-[400px] h-[400px] md:h-[550px]">
             <ImageCarousel />
           </div>
-          <div className="font-noto my-8 w-3/4 text-xl text-left break-keep">
+          <div className="font-noto mb-16 w-3/4 text-xl text-left break-keep">
             <p className="mb-8">안녕하세요. 저는 {years}년차 웹 개발자 임대현 입니다.</p>
 
             <p className="mb-8">
