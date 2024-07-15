@@ -41,12 +41,12 @@ function Ash() {
   }, [scrollPercentage]);
 
   return (
-    <div ref={ashRef} className="fixed m-0 sm:m-4 bottom-0">
+    <div ref={ashRef} className="fixed my-2 bottom-0">
       <NavLink
         to={"/about"}
         className={"text-gray-800 hover:text-gray-400  dark:text-gray-100 dark:hover:text-gray-500"}
       >
-        <img className="w-[16px] h-[16px] sm:w-[20px] sm:h-[20px]" src={ash2} alt="ash-going" />
+        <img className="w-[18px] h-[18px] sm:w-[36px] sm:h-[36px]" src={ash2} alt="ash-going" />
       </NavLink>
     </div>
   );
