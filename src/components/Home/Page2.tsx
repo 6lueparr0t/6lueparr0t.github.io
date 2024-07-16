@@ -28,7 +28,7 @@ function Page2() {
           </div>
           <div className="font-noto mb-16 w-3/4 sm:w-1/2 text-left break-keep">
             <p>안녕하세요.</p>
-            <p className="mb-8">
+            <div className="mb-8">
               저는 {years}년차 웹 개발자
               <TooltipProvider delayDuration={0}>
                 <Tooltip>
@@ -41,7 +41,7 @@ function Page2() {
                 </Tooltip>
               </TooltipProvider>
               입니다.
-            </p>
+            </div>
 
             <p className="mb-8">{startDate.format("YYYY년 MM월 DD일")},</p>
             <p>
