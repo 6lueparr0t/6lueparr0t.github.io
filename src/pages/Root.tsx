@@ -4,7 +4,7 @@ import { useKey } from "react-use";
 import Header from "@/components/_Common/Header";
 import Footer from "@/components/_Common/Footer";
 import Modal from "@/components/_Common/Modal";
-import { ThemeProvider } from "@/components/theme-provider";
+import { ThemeProvider } from "@/components/custom/theme-provider";
 
 import modalStore from "@/store/modal";
 
