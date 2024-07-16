@@ -1,16 +1,17 @@
-import { useState, useEffect } from 'react';
-import dayjs from 'dayjs';
+import { useState, useEffect } from "react";
+import dayjs from "dayjs";
 
 import Ash from "./Ash";
-import { ImageCarousel } from "./ImageCarousel";
+import { Gallery } from "./Gallery";
+
+const startDate = dayjs("2017-10-30"); // 2017년 10월 1일을 기준으로 설정
+const currentDate = dayjs();
 
 function Page2() {
   const [years, setYears] = useState(0);
 
   useEffect(() => {
-    const startDate = dayjs('2017-10-01'); // 2017년 10월 1일을 기준으로 설정
-    const currentDate = dayjs();
-    const diffYears = currentDate.diff(startDate, 'year', true); // 소수점 첫째 자리까지 계산
+    const diffYears = currentDate.diff(startDate, "year", true); // 소수점 첫째 자리까지 계산
     setYears(parseFloat(diffYears.toFixed(2))); // 소수점 첫째 자리까지 표시
   }, []);
   return (
@@ -22,18 +23,19 @@ function Page2() {
         </div>
         <div className="flex flex-col  justify-center items-center w-full">
           <div className="flex justify-center items-center p-4 my-16 bg-white shadow-2xl w-72 md:w-[400px] h-[400px] md:h-[550px]">
-            <ImageCarousel />
+            <Gallery />
           </div>
-          <div className="font-noto mb-16 w-3/4 text-xl text-left break-keep">
-            <p className="mb-8">안녕하세요. 저는 {years}년차 웹 개발자 임대현 입니다.</p>
+          <div className="font-noto mb-16 w-1/2 text-left break-keep">
+            <p className="mb-8">안녕하세요.</p>
+            <p>저는 {years}년차 웹 개발자 임대현 입니다.</p>
 
-            <p className="mb-8">
-              PHP 웹 개발을 시작하여 BE(Java, Node.js), DevOps(Jenkins, Kubernetes, AWS),
-              FE(Javascript, React.js & Next.js) 등 다양한 영역에 대한 개발 경험을 가지고 있는
-              개발자 입니다.
+            <p>{startDate.format("YYYY년 MM월 DD일")},</p>
+            <p>
+              PHP 웹 개발을 시작으로 BE(Java, Node.js), DevOps(Jenkins, Kubernetes), FE(Javascript, React.js & Next.js) 등등
             </p>
+            <p className="mb-8">다양한 개발 경험을 가지고 있는 웹 개발자 입니다.</p>
 
-            <p className="">
+            <p>
               연구실, 호스팅 서비스, 코인 거래소, 숏폼 서비스 등의 도메인에서 업무를 해왔고, 현재는
               프론트엔드 개발에 주로 참여하고 있습니다.
             </p>

@@ -75,7 +75,7 @@ module.exports = {
         "accordion-up": "accordion-up 0.2s ease-out",
       },
       fontFamily: {
-        noto: ['Source Han Sans KR', 'sans-serif'],
+        noto: ['Noto Sans KR', 'sans-serif'],
       },
     },
   },

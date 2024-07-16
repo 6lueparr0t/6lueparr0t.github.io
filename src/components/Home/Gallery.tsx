@@ -5,7 +5,7 @@ import {
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel";
-import Autoplay from "embla-carousel-autoplay";
+// import Autoplay from "embla-carousel-autoplay";
 
 import profile1 from "@/assets/home/profile1.webp";
 import profile2 from "@/assets/home/profile2.webp";
@@ -19,7 +19,7 @@ const IMAGES:string[] = [
   profile4,
 ]
 
-export const ImageCarousel: React.FC = () => {
+export const Gallery: React.FC = () => {
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
 
@@ -39,11 +39,11 @@ export const ImageCarousel: React.FC = () => {
         loop: true,
       }}
       plugins={[
-        Autoplay({
-          delay: 2000,
-          stopOnInteraction: false,
-          stopOnMouseEnter: true,
-        }),
+        // Autoplay({
+        //   delay: 5000,
+        //   stopOnInteraction: false,
+        //   stopOnMouseEnter: true,
+        // }),
       ]}
     >
       <CarouselContent>
