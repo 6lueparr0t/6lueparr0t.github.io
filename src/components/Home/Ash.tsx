@@ -22,7 +22,6 @@ function Ash() {
 
   useEffect(() => {
     handleScroll();
-
     window.addEventListener("scroll", handleScroll);
 
     // Cleanup 이벤트 리스너
@@ -33,20 +32,22 @@ function Ash() {
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      const left = Math.min(((Math.floor(scrollPercentage * 10)) / 10) * 1.25, 95);
-      ashRef.current?.style.setProperty("left", `${left}%`);
+      const left = Math.min((Math.floor(scrollPercentage * 10) / 10) * 1.25, 96);
+      ashRef.current?.style.setProperty("left", `calc(${left}%)`);
     });
 
     return () => clearTimeout(timeout);
   }, [scrollPercentage]);
 
   return (
-    <div ref={ashRef} className="fixed my-2 bottom-0">
+    <div ref={ashRef} className="fixed my-2 sm:mx-8 bottom-0 z-10">
       <NavLink
         to={"/about"}
-        className={"text-gray-800 hover:text-gray-400  dark:text-gray-100 dark:hover:text-gray-500"}
+        className={
+          "text-gray-800 hover:text-gray-400  dark:text-gray-100 dark:hover:text-gray-500"
+        }
       >
-        <img className="w-[12px] h-[12px] sm:w-[20px] sm:h-[20px]" src={ash2} alt="ash-going" />
+        <img className="w-[12px] min-w-[12px] h-[12px] min-h-[12px] sm:w-[20px] sm:h-[20px] sm:min-w-[20px] sm:min-h-[20px]" src={ash2} alt="ash-going" />
       </NavLink>
     </div>
   );
