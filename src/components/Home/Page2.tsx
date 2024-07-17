@@ -23,7 +23,7 @@ function Page2() {
           about me
         </div>
         <div className="flex flex-col  justify-center items-center w-full">
-          <div className="flex justify-center items-center p-4 my-16 bg-white shadow-2xl w-72 md:w-[400px] h-[400px] md:h-[550px]">
+          <div className="flex justify-center items-center p-4 my-16 bg-white shadow-2xl dark:shadow-white-2xl w-72 md:w-[400px] h-[400px] md:h-[550px]">
             <Gallery />
           </div>
           <div className="font-noto mb-16 w-3/4 sm:w-1/2 text-left break-keep">
