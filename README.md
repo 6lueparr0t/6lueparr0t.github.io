@@ -1,6 +1,6 @@
 # 6lueparr0t.github.io
 
-개발자 발가락 입니다.
+웹 개발자 임대현 입니다.
 
 ## 🧞 Commands
 
