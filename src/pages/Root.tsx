@@ -27,6 +27,7 @@ const Root: React.FC<PropsWithChildren> = () => {
   }, [modals]);
 
   useEffect(() => {
+    document.title = "6lueparr0t's Home";
     clearModals();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location]);
