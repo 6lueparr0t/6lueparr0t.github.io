@@ -88,7 +88,7 @@ export const Gallery: React.FC = () => {
           <span
             key={num}
             className={`cursor-pointer inline-block w-3 h-3 rounded-full mx-2 ${
-              num + 1 === current ? "bg-gray-200" : "bg-slate-900"
+              num + 1 === current ? "bg-gray-200" : "bg-zinc-900"
             }`}
             onClick={() => api && api.scrollTo(num)}
           />

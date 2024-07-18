@@ -54,11 +54,11 @@
 @layer base {
   :root {
     --main: 241, 245, 249;
-    /* #f1f5f9, slate100 */
-    --main-light: 248, 250, 252;
-    /* #f8fafc, slate50*/
-    --main-dark: 2, 6, 23;
-    /* #020617, slate950*/
+    /* #f1f5f9, zinc100 */
+    --main-light: 250, 250, 250;
+    /* #fafafa, zinc50*/
+    --main-dark: 9, 9, 11;
+    /* #09090B, zinc950*/
 
     --background: var(--main-light);
     --foreground: var(--main-dark);

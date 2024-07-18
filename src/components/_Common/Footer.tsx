@@ -5,7 +5,7 @@ const MAIL = "6lueparr0t@gmail.com";
 
 const Footer: React.FC = () => {
   return (
-    <footer className="font-['DungGeunMo'] sm:text-xl md:text-2xl bg-slate-50 dark:bg-slate-950	h-lvh">
+    <footer className="font-['DungGeunMo'] sm:text-xl md:text-2xl bg-zinc-50 dark:bg-zinc-950	h-lvh">
       <div className={`flex w-full justify-center sticky pt-4 top-calc-half`}>
         <div className="flex flex-col center gap-2">
           <div className="flex justify-center">

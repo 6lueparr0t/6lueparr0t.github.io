@@ -31,7 +31,7 @@ const ErrorPage: React.FC = () => {
         <img src={`https://http.cat/${errorStatus}`} alt="error cat" />
       </div>
       <p>Sorry, an unexpected error has occurred.</p>
-      <p className="text-slate-400">
+      <p className="text-zinc-400">
         <i>{message}</i>
       </p>
       <Link to={"/"}>

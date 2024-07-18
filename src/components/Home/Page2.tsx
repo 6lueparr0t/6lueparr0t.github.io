@@ -18,7 +18,7 @@ function Page2() {
   }, []);
   return (
     <>
-      <div className="mx-auto text-center bg-stone-100 dark:bg-slate-900">
+      <div className="mx-auto text-center bg-stone-100 dark:bg-zinc-900">
         <div className="text-xl md:text-2xl top-[0.4rem] md:top-[0.2rem] inline-block sticky justify-center py-4 z-10">
           about me
         </div>

@@ -63,13 +63,13 @@ const Modal: React.FC<ModalProps> = ({ modal, index }) => {
 
           <span className="hidden align-middle h-screen" aria-hidden="true"></span>
 
-          <div className="inline-block align-middle bg-white dark:bg-slate-950 rounded-lg text-left overflow-hidden shadow-xl transform transition-all my-8 max-w-lg w-full">
-            <div className="bg-white dark:bg-slate-950 mt-8">
+          <div className="inline-block align-middle bg-white dark:bg-zinc-950 rounded-lg text-left overflow-hidden shadow-xl transform transition-all my-8 max-w-lg w-full">
+            <div className="bg-white dark:bg-zinc-950 mt-8">
               <div className="text-xl font-bold text-center">
                 {modal.message} {modal.type === "loading" && <div className="animate-spin rounded-full absolute inline mx-4">|</div>}
               </div>
             </div>
-            <div className="bg-white dark:bg-slate-950 py-4 justify-around px-6 flex">
+            <div className="bg-white dark:bg-zinc-950 py-4 justify-around px-6 flex">
               {modal.type === "loading" && (
                 <div className="flex justify-center items-center">
                   <img src={loadingImg()}/>
@@ -77,7 +77,7 @@ const Modal: React.FC<ModalProps> = ({ modal, index }) => {
               )}
               {modal.type === "alert" && (
                 <Button
-                  // text-black bg-white hover:bg-slate-50 dark:bg-slate-950 dark:text-white dark:hover:bg-slate-900
+                  // text-black bg-white hover:bg-zinc-50 dark:bg-zinc-950 dark:text-white dark:hover:bg-zinc-900
                   variant={'default'}
                   onClick={closeModal}
                 >
