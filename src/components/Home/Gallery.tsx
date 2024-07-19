@@ -25,7 +25,6 @@ export const Gallery: React.FC = () => {
     const observer = new IntersectionObserver(([entry]) => {
       if (entry.isIntersecting && componentRef.current) {
         componentRef.current.focus({ preventScroll: true });
-        console.log("Gallery is in view");
       }
     });
 
