@@ -6,8 +6,8 @@ import { RouteLoaderData } from "@/pages/pages.d";
 import { sleep, get } from "@/lib/utils";
 import { getIssue } from "@/lib/space";
 
-import { IssueViewer } from "@/components/Space/View/IssueViewer";
-import { IssueViewerButtonGroup } from "@/components/Space/View/IssueViewerButtonGroup";
+import { IssueViewer } from "@/components/space/view/IssueViewer";
+import { IssueViewerButtonGroup } from "@/components/space/view/IssueViewerButtonGroup";
 
 const SpaceViewPage: React.FC = () => {
   const navigate = useNavigate();

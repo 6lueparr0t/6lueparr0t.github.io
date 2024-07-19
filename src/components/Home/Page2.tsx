@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import AnimatedNumbers from "react-animated-numbers";
 import dayjs from "dayjs";
 
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
@@ -28,8 +29,19 @@ function Page2() {
           </div>
           <div className="font-noto mb-16 w-3/4 sm:w-1/2 text-left break-keep">
             <p>안녕하세요.</p>
-            <div className="mb-8">
-              저는 {years}년차 웹 개발자
+            <div className="flex mb-8">
+              저는
+              <Button className="px-2 h-6 mx-2">
+                <AnimatedNumbers
+                  includeComma
+                  transitions={(index) => ({
+                    type: "spring",
+                    duration: index + 0.2,
+                  })}
+                  animateToNumber={years}
+                />
+              </Button>
+              년차 웹 개발자
               <TooltipProvider delayDuration={0}>
                 <Tooltip>
                   <TooltipTrigger asChild>

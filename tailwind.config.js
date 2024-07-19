@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: ["class"],
@@ -80,6 +81,11 @@ module.exports = {
       boxShadow: {
         'white-2xl': '0 25px 50px -12px rgb(255 255 255 / 0.25);'
       }
+    },
+  },
+  variants: {
+    extend: {
+      filter: ['responsive', 'hover', 'focus'],
     },
   },
   plugins: [require("tailwindcss-animate")],

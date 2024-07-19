@@ -7,9 +7,9 @@ import { PER_PAGE } from "@/lib/constants";
 import { sleep } from "@/lib/utils";
 import { getList, makeQuery } from "@/lib/space";
 
-import { SearchInput } from "@/components/Space/SearchInput";
-import { IssueTable } from "@/components/Space/IssueTable";
-import { IssuePagination } from "@/components/Space/IssuePagination";
+import { SearchInput } from "@/components/space/SearchInput";
+import { IssueTable } from "@/components/space/IssueTable";
+import { IssuePagination } from "@/components/space/IssuePagination";
 import { NavLink } from "react-router-dom";
 
 const SpacePage: React.FC = () => {

@@ -1,7 +1,7 @@
 import React, { type PropsWithChildren } from "react";
 import { NavLink } from "react-router-dom";
 
-import Menu from "@/components/_Common/Menu";
+import Menu from "@/components/_common/Menu";
 import { ModeToggle } from "@/components/custom/mode-toggle";
 
 const MENU: { path: string; title: string }[] = [

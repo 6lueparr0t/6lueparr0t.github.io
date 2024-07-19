@@ -6,7 +6,9 @@
 
 @font-face {
   font-family: 'DungGeunMo';
-  src: url("/font/NeoDunggeunmoPro-Regular.woff") format('woff'), url("/font/NeoDunggeunmoPro-Regular.woff2") format('woff');
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/NeoDunggeunmoPro-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
 }
 
 @mixin mobile() {

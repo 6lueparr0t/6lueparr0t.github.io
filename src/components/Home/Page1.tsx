@@ -28,11 +28,24 @@ function Page1() {
     }
   }, [clipPathValue]);
 
+  const [bird1loaded, setBird1Loaded] = useState(false);
+  const [bird2loaded, setBird2Loaded] = useState(false);
+
+  useEffect(() => {
+    const img1 = new Image();
+    img1.src = bird1;
+    img1.onload = () => setBird1Loaded(true);
+
+    const img2 = new Image();
+    img2.src = bird2;
+    img2.onload = () => setBird2Loaded(true);
+  }, []);
+
   return (
     <div className="mx-auto p-4 text-center max-w-[calc(100%)] h-[calc(100lvh-4.4rem)] flex flex-col justify-center">
       <div className="relative w-64 min-h-64 mx-auto my-8">
-        <img className="absolute w-64 h-64 " src={bird2} alt="logo" />
-        <img className="absolute w-64 h-64 " src={bird1} alt="logo" ref={bird2Ref} />
+        <img className={`absolute w-64 h-64 transition-filter duration-300 ${bird1loaded ? 'filter-none' : 'filter blur-xl'}`} src={bird2} alt="logo" />
+        <img className={`absolute w-64 h-64 transition-filter duration-300 ${bird2loaded ? 'filter-none' : 'filter blur-xl'}`} src={bird1} alt="logo" ref={bird2Ref} />
         <Draggable
           axis="x"
           bounds={bounds} // 동적으로 계산된 bounds 적용
