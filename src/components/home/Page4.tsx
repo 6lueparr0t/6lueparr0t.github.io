@@ -29,7 +29,7 @@ function Page4() {
               </svg>
             </div>
             <div
-              className={`font-['Tossface'] z-10 text-7xl sm:text-8xl text-center my-8 cursor-pointer ${
+              className={`font-['Tossface'] inline-block text-7xl sm:text-8xl text-center my-8 cursor-pointer ${
                 isWobbling ? "animate-ship" : ""
               }`}
               onClick={handleClick}
