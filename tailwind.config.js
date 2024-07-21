@@ -70,10 +70,33 @@ module.exports = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+        ship: {
+          '0%': { opacity: '1', transform: 'translateY(5%) translateX(-50%) rotate(2deg)' },
+          '10%': { opacity: '1', transform: 'translateY(-5%) translateX(-40%) rotate(-2deg)' },
+          '20%': { opacity: '1', transform: 'translateY(5%) translateX(-30%) rotate(2deg)' },
+          '30%': { opacity: '1', transform: 'translateY(-5%) translateX(-20%) rotate(-2deg)' },
+          '40%': { opacity: '1', transform: 'translateY(5%) translateX(-10%) rotate(2deg)' },
+          '50%': { opacity: '1', transform: 'translateY(-5%) translateX(0%) rotate(-2deg)' },
+          '60%': { opacity: '1', transform: 'translateY(5%) translateX(10%) rotate(2deg)' },
+          '70%': { opacity: '1', transform: 'translateY(-5%) translateX(20%) rotate(-2deg)' },
+          '80%': { opacity: '1', transform: 'translateY(5%) translateX(30%) rotate(2deg)' },
+          '90%': { opacity: '1', transform: 'translateY(-5%) translateX(40%) rotate(-2deg)' },
+          '100%': { opacity: '1', transform: 'translateY(5%) translateX(50%) rotate(2deg)' },
+        },
+        wave: {
+          '0%': { transform: 'translateX(0) translateY(0) rotate(0deg)' },
+          '50%': { transform: 'translateX(-50%) translateY(20px) rotate(10deg)' },
+          '100%': { transform: 'translateX(-100%) translateY(0) rotate(0deg)' },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        ship: 'ship 10s linear infinite',
+        wave: 'wave 6s linear infinite',
+      },
+      backgroundImage: {
+        'wave-pattern': 'repeating-linear-gradient(45deg, rgba(0, 0, 255, 0.5), rgba(0, 0, 255, 0.5) 20px, rgba(0, 0, 255, 0.3) 20px, rgba(0, 0, 255, 0.3) 40px)',
       },
       fontFamily: {
         noto: ['Noto Sans KR', 'sans-serif'],

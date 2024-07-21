@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+@import url('https://cdn.jsdelivr.net/gh/toss/tossface/dist/tossface.css');
 
 @tailwind base;
 @tailwind components;
@@ -55,19 +56,19 @@
 
 @layer base {
   :root {
-    --main: 241, 245, 249;
-    /* #f1f5f9, zinc100 */
-    --main-light: 250, 250, 250;
-    /* #fafafa, zinc50*/
+    --main: 248, 250, 252;
+    /* #f8fafc, slate50 */
+    --main-light: 248, 250, 252;
+    /* #f8fafc, zinc50*/
     --main-dark: 9, 9, 11;
     /* #09090B, zinc950*/
 
-    --background: var(--main-light);
-    --foreground: var(--main-dark);
+    --background: rgba(var(--main-light));
+    --foreground: rgba(var(--main-dark));
 
     --main-gradient: linear-gradient(90deg,
-        rgba(var(--background)) 0%,
-        rgba(var(--foreground)) 60%);
+        rgba(var(--main-light)) 0%,
+        rgba(var(--main-dark)) 60%);
 
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
@@ -122,20 +123,27 @@
 
     .home .typed-cursor--blink {
       background-color: rgba(var(--foreground));
-      width:7px;
-      height:83%;
+      width: 7px;
+      height: 83%;
       display: inline-block;
       transform: translateY(3px);
 
       @include mobile() {
-        height:50px;
+        height: 50px;
       }
     }
+
+    background-color: rgba(var(--main-light));
+    color: rgb(var(--main-dark));
   }
 
   .dark {
-    --background: var(--main-dark);
-    --foreground: var(--main-light);
+    --background: rgba(var(--main-light));
+    --foreground: rgba(var(--main-dark));
+
+    --main-gradient: linear-gradient(90deg,
+        rgba(var(--main-dark)) 0%,
+        rgba(var(--main-light)) 60%);
 
     --card: 222.2 84% 4.9%;
     --card-foreground: 210 40% 98%;
@@ -162,8 +170,8 @@
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
 
-    background-color: rgb(var(--background));
-    color: rgb(var(--foreground));
+    background-color: rgba(var(--main-dark));
+    color: rgb(var(--main-light));
   }
 }
 

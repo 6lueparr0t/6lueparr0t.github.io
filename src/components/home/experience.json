@@ -1,0 +1,103 @@
+[
+  {
+    "company": "카테노이드 주식회사",
+    "period": "2022.09 ~ 현재",
+    "details": [
+      {
+        "project": "Kollus 플레이어 SDK 를 사용한 샘플페이지 구성",
+        "link": "https://github.com/6lueparr0t/kollus-player-generator",
+        "tasks": ["신규 고객사들의 사용방법 안내에 따른 업무 효율 증대"]
+      },
+      {
+        "project": "'찰나' 서비스 개발",
+        "link": "https://charlla.io/about",
+        "tasks": [
+          "Video API 를 사용한 B2B 숏폼 서비스 개발 (ex: youtube 'shorts')",
+          "TOSS 결제 SDK, Cafe 24 API 및 OAuth 연동",
+          "글로벌 (유럽, 일본) 서비스 지원에 따른 i18n 도입",
+          "단순 비디오 플레이어 부터 상품 연동이 가능한 커머스형 플레이어 서비스 제공",
+          "2023년 6월 서비스 오픈 이후 고객 사례 지속적으로 증가 중"
+        ]
+      }
+    ],
+    "techStack": {
+      "languages": "JavaScript(React.js, Next.js), TypeScript, Node.js",
+      "scm": "Git (Github)",
+      "cicd": "k8s, Jenkins"
+    }
+  },
+  {
+    "company": "빗썸코리아",
+    "period": "2020.03 ~ 2022.03",
+    "details": [
+      {
+        "project": "빗썸어드민 기능 추가",
+        "tasks": [
+          "내부망을 통해 외부망에서 사용 가능한 메일 이미지 템플릿 생성 서비스 개발",
+          "내부 보안 절차 단축으로 인해 기존 대비 업무 효율 50% 증가"
+        ]
+      },
+      {
+        "project": "ATS (Asyncronous Trading System) 배포 모니터링 페이지 개발",
+        "tasks": [
+          "서버 직접 배포 방식에서 웹사이트를 통해 Kafka 모니터링",
+          "기존 대비 배포 시간 40% 단축 및 Human Error 감소",
+          "DarkMode 추가에 따른 UI/UX 개선"
+        ]
+      },
+      {
+        "project": "빗썸공식사이트, 빗썸카페",
+        "tasks": ["ISMS-P 인증 심사 통과를 위한 XSS 취약점 보완"]
+      },
+      {
+        "project": "Git 가이드 및 Git Flow 도입",
+        "tasks": [
+          "배포 주기 단축 및 브랜치 충돌 감소",
+          "Squash 사용법 가이드를 통해 history 간소화",
+          "Git Flow 도입을 통한 branch 배포를 통해 QA 기간 30% 단축"
+        ]
+      },
+      {
+        "project": "CI&CD Script 및 Pipeline 개선",
+        "tasks": [
+          "Bamboo Scripting 에서 Jenkins Pipeline 으로 변경",
+          "Git 을 통한 변경 history 관리",
+          "기존 대비 배포 프로세스 30 ~ 40% 배포 속도 향상"
+        ]
+      }
+    ],
+    "techStack": {
+      "languages": "JavaScript(Vanilla.js, ES5), CSS",
+      "scm": "Git (Bitbucket, Gitlab)",
+      "cicd": "Bamboo, Jenkins"
+    }
+  },
+  {
+    "company": "엔에이치엔커머스(주)",
+    "period": "2017.10 ~ 2020.02",
+    "details": [
+      {
+        "project": "호스팅 (리눅스, 윈도우, 도메인 등) 서비스 리뉴얼 작업 및 유지보수",
+        "tasks": [
+          "크로스브라우징 (IE, FireFox, Chrome, Safari 등) 동작 여부 확인",
+          "기존 UI/UX 를 개선하여 기존 대비 사이트 방문자 수 20~30% 증가 및 VoC 감소"
+        ]
+      },
+      {
+        "project": "고도클라우드 서비스 개발 및 유지보수",
+        "tasks": [
+          "랜딩 페이지 개선 및 NHN Cloud API 연동",
+          "기존 서비스 개편을 통해 기존 대비 10~20% 사용 문의 고객 증가"
+        ]
+      },
+      {
+        "project": "관리자(Admin) 서비스 개발 및 수정",
+        "tasks": ["UI/UX 개선 및 사내 요청 사항에 대한 시스템 그룹웨어 성능 개선"]
+      }
+    ],
+    "techStack": {
+      "languages": "HTML5, CSS, JavaScript(Vanilla.js, Jquery)",
+      "scm": "SVN, Git (Gitlab)"
+    }
+  }
+]

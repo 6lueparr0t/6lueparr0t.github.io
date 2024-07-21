@@ -2,9 +2,8 @@ import { useState, useEffect } from "react";
 import AnimatedNumbers from "react-animated-numbers";
 import dayjs from "dayjs";
 
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
-// import { Badge } from "@/components/ui/badge";
 import { Gallery } from "./Gallery";
 
 const startDate = dayjs("2017-10-30"); // 2017년 10월 1일을 기준으로 설정
@@ -42,16 +41,14 @@ function Page2() {
                 />
               </Button>
               년차 웹 개발자
-              <TooltipProvider delayDuration={0}>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Button className="px-2 h-6 mx-2">임대현</Button>
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    <p>Daehyun Lim</p>
-                  </TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button className="px-2 h-6 mx-2">임대현</Button>
+                </PopoverTrigger>
+                <PopoverContent>
+                  <p>Daehyun Lim</p>
+                </PopoverContent>
+              </Popover>
               입니다.
             </div>
 
