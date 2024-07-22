@@ -9,7 +9,7 @@ function Page3() {
         </div>
 
         <div className="flex flex-col justify-center items-center w-full">
-          <div className="font-noto w-full sm:w-full md:w-1/2 text-left break-keep">
+          <div className="font-noto w-full lg:w-1/2 text-left break-keep">
             {experience.map((job) => (
               <div
                 key={job.company}
