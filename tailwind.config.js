@@ -83,17 +83,11 @@ module.exports = {
           '90%': { opacity: '1', transform: 'translateY(-5%) translateX(120%) rotate(-2deg)' },
           '100%': { opacity: '1', transform: 'translateY(5%) translateX(150%) rotate(2deg)' },
         },
-        wave: {
-          '0%': { transform: 'translateX(0) translateY(0) rotate(0deg)' },
-          '50%': { transform: 'translateX(-50%) translateY(20px) rotate(10deg)' },
-          '100%': { transform: 'translateX(-100%) translateY(0) rotate(0deg)' },
-        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        ship: 'ship 10s linear infinite',
-        wave: 'wave 6s linear infinite',
+        ship: 'ship 4s linear infinite',
       },
       backgroundImage: {
         'wave-pattern': 'repeating-linear-gradient(45deg, rgba(0, 0, 255, 0.5), rgba(0, 0, 255, 0.5) 20px, rgba(0, 0, 255, 0.3) 20px, rgba(0, 0, 255, 0.3) 40px)',
