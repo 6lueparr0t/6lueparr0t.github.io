@@ -15,10 +15,11 @@ function Page3() {
                 key={job.company}
                 className="mx-8 mt-8 mb-16 p-4 rounded-lg ring-zinc-300 dark:ring-zinc-800 ring-8"
               >
+                <div className="text-lg font-bold">{job.company}</div>
                 <div className="flex justify-between">
-                  <div className="text-lg font-bold">{job.company}</div>
+                  <div className="text-zinc-700 dark:text-zinc-400 text-left">{job.role}</div>
+                  <div className="text-zinc-700 dark:text-zinc-400 text-right">{job.period}</div>
                 </div>
-                <div className="text-gray-600 text-right">{job.period}</div>
                 <ul className="list-disc list-inside py-4">
                   {job.details.map(
                     (detail: { project: string; link?: string; tasks: string[] }, idx) => (
