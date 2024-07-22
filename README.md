@@ -24,8 +24,11 @@ All commands are run from the root of the project, from a terminal:
 - https://www.npmjs.com/package/notistack
 - https://github.com/streamich/react-use
 - https://http.cat
+- https://toss.im/tossface
 - react-markdown, remark-gfm, rehype-highlight, rehype-raw ...
 
-## ✔️ Todo
+## ✔️ Next Todo
 
-- [ ] : test
+- [ ] : now, 표지판 추가
+- [ ] : 몬티홀 퀴즈, 정지문제, 거짓말쟁이 역설 활용한 기능 추가
+- [ ] : confetti.ts / tsparticles 추가

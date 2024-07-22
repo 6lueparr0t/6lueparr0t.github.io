@@ -1,6 +1,7 @@
 [
   {
     "company": "카테노이드 주식회사",
+    "role": "manager (FE)",
     "period": "2022.09 ~ 현재",
     "details": [
       {
@@ -99,5 +100,32 @@
       "languages": "HTML5, CSS, JavaScript(Vanilla.js, Jquery)",
       "scm": "SVN, Git (Gitlab)"
     }
+  },
+  {
+    "company": "숙명여자대학교 화학과 연구실 BK21 사업팀",
+    "period": "2015.10 ~ 2017.08",
+    "details": [
+      {
+        "project": "ProWaVE 웹사이트 개발",
+        "tasks": [
+          "연구실 GPU 서버를 이용한 PDB(Protein Data Bank) 시뮬레이션을 제공하는 웹 서비스 제공",
+          "WebGL 기반 protein viewer(biasmv/pv) 와 Dygraphs Chart library 를 활용"
+        ]
+      }
+    ],
+    "link": [
+      {
+        "title": "ProWaVE 관련 사이트",
+        "url": "http://ham.sookmyung.ac.kr/software"
+      },
+      {
+        "title": "링크1 (뉴스기사)",
+        "url": "https://www.enewstoday.co.kr/news/articleView.html?idxno=1303909"
+      },
+      {
+        "title": "링크2 (Youtube)",
+        "url": "https://youtu.be/ekrUg1E20Y8?si=G3S7tWC5u8igdZ-X&t=346"
+      }
+    ]
   }
 ]
