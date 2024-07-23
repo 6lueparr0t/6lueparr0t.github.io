@@ -57,7 +57,7 @@ function Page2() {
               PHP 웹 개발을 시작으로 BE(Java, Node.js), DevOps(Jenkins, Kubernetes), FE(Javascript,
               React.js & Next.js) 등등
             </p>
-            <p className="mb-8">다양한 개발 경험을 가지고 있는 웹 개발자 입니다.</p>
+            <p className="mb-8">다양한 웹 개발 경험을 가지고 있습니다.</p>
 
             <p>
               연구실 / 호스팅 서비스 / 코인 거래소 / 숏폼 서비스 등의 도메인에서 업무를 해왔고,
