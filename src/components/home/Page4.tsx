@@ -7,8 +7,8 @@ function Page4() {
         </div>
 
         <div className="flex flex-col justify-center items-center mx-8">
-          <div className="mb-16 text-center break-keep">
-            정리 예정
+          <div className="m-16 text-center break-keep">
+            Comming soon ..
             <p> (개인프로젝트, 대학원 등등..)</p>
           </div>
         </div>

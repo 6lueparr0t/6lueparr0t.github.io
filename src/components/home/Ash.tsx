@@ -7,7 +7,7 @@ import ash2 from "@/assets/home/ash2.gif";
 const message: (string | JSX.Element)[] = [
   "안녕하세요?",
   "아직 작업 해야될게 더 남았는데..",
-  "[tip] ' / ' 키를 누르면 메인으로 갑니다.",
+  "[tip] / 키를 누르면 메인으로 갑니다.",
   <NavLink
     to={"/about"}
     className={"text-gray-800 hover:text-gray-400  dark:text-gray-100 dark:hover:text-gray-500"}
