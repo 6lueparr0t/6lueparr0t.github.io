@@ -52,9 +52,9 @@ const Footer: React.FC = () => {
           </div>
         </div>
       </div>
-      <div className="flex justify-center items-end h-2/3">
+      <div className="flex justify-center items-end h-5/6">
         <div
-          className="underline cursor-pointer px-2"
+          className="cursor-pointer px-2"
           onClick={() => window.scrollTo({ top: 0, behavior: "instant" })}
         >
           <ArrowLongUpIcon className="animate-bounce w-[24px] h-[24px]" />
