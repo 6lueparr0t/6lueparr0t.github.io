@@ -101,4 +101,5 @@ jobs:
 
       - name: Remove workspace files
         run: |
+          #!/bin/sh
           rm -rf $GITHUB_WORKSPACE/*
