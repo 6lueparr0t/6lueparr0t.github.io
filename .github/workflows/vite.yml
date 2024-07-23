@@ -88,6 +88,7 @@ jobs:
       uses: actions/deploy-pages@v4
 
   cleanup:
+    name: Clean Up History
     runs-on: ubuntu-latest
     permissions: write-all
     steps:
