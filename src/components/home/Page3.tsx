@@ -13,17 +13,17 @@ function Page3() {
             {experience.map((job) => (
               <div
                 key={job.company}
-                className="mx-8 mt-8 mb-16 p-4 rounded-lg ring-zinc-300 dark:ring-zinc-800 ring-8"
+                className="mx-8 my-16 p-4 rounded-lg ring-zinc-300 dark:ring-zinc-800 ring-8"
               >
                 <div className="text-lg font-bold">{job.company}</div>
                 <div className="flex justify-between">
                   <div className="text-zinc-700 dark:text-zinc-400 text-left">{job.role}</div>
                   <div className="text-zinc-700 dark:text-zinc-400 text-right">{job.period}</div>
                 </div>
-                <ul className="list-disc list-inside py-4">
+                <ul className="py-4">
                   {job.details.map(
                     (detail: { project: string; link?: string; tasks: string[] }, idx) => (
-                      <li key={detail.project} className="mt-4">
+                      <li key={detail.project} className="mt-4 text-xl text-gray-950 dark:text-gray-50">
                         {detail.project}{" "}
                         {detail?.link && (
                           <a
@@ -34,7 +34,7 @@ function Page3() {
                             #{idx + 1}
                           </a>
                         )}
-                        <ul className="list-decimal list-inside">
+                        <ul className="list-decimal list-inside text-sm text-gray-600 dark:text-gray-300">
                           {detail.tasks.map((task, taskIdx) => (
                             <li key={taskIdx}>{task}</li>
                           ))}

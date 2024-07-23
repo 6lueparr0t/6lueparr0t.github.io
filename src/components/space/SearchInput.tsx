@@ -71,6 +71,7 @@ export const SearchInput: React.FC<SpaceProps> = () => {
             name="keyword"
             ref={inputRef}
             onChange={changeEventHandler}
+            placeholder="단어로만 검색 가능"
           />
           <Button className="w-20 text-xs md:text-sm" type="submit" onClick={keywordEventHandler}>
             {isSearching ? (

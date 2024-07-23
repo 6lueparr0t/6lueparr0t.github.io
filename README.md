@@ -30,6 +30,6 @@ All commands are run from the root of the project, from a terminal:
 ## ✔️ Next Todo
 
 - [ ] : now, 표지판 추가
-- [ ] : 대학원, 몬티홀 퀴즈 / 정지문제 / 거짓말쟁이 역설 활용한 기능 추가
-- [ ] : 자격증, aws & k8s & 정처기 등 추가
-- [ ] : confetti.ts / tsparticles 추가
+- [ ] : 프로젝트, rgbplace 정리 / 대학원 추가
+  - 몬티홀 퀴즈 / 정지 문제 활용한 기능
+- [ ] : confetti.ts / tsparticles 활용

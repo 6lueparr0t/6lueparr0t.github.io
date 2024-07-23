@@ -1,11 +1,13 @@
 import React from "react";
 import Copy from "./Copy";
 
+import { ArrowLongUpIcon } from "@heroicons/react/24/outline";
+
 const MAIL = "6lueparr0t@gmail.com";
 
 const Footer: React.FC = () => {
   return (
-    <footer className="font-['DungGeunMo'] sm:text-xl md:text-2xl	h-lvh">
+    <footer className="font-['DungGeunMo'] sm:text-xl md:text-2xl	h-lvh bg-stone-100 dark:bg-zinc-900">
       <div className={`flex w-full justify-center sticky pt-4 top-calc-half`}>
         <div className="flex flex-col center gap-2">
           <div className="flex justify-center">
@@ -18,7 +20,11 @@ const Footer: React.FC = () => {
                   ></path>
                 </svg>
               </a>
-              <a href="https://github.com/6lueparr0t/6lueparr0t.github.io" target="_blank" rel="noopener noreferrer">
+              <a
+                href="https://github.com/6lueparr0t/6lueparr0t.github.io"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <span>Github</span>
               </a>
             </div>
@@ -39,11 +45,19 @@ const Footer: React.FC = () => {
               한줄코딩
             </a>
           </div>
-          <div className="flex justify-center">
+          <div className="flex justify-center items-end">
             <div className="underline cursor-pointer px-2">
               <Copy>{MAIL}</Copy>
             </div>
           </div>
+        </div>
+      </div>
+      <div className="flex justify-center items-end h-2/3">
+        <div
+          className="underline cursor-pointer px-2"
+          onClick={() => window.scrollTo({ top: 0, behavior: "instant" })}
+        >
+          <ArrowLongUpIcon className="animate-bounce w-[24px] h-[24px]" />
         </div>
       </div>
     </footer>
