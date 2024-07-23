@@ -92,9 +92,13 @@ jobs:
     runs-on: ubuntu-latest
     permissions: write-all
     steps:
-      - name: 🗑 Delete deployment
+      - name: Delete deployment
         uses: strumwolf/delete-deployment-environment@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           environment: github-pages
           onlyRemoveDeployments: true
+
+      - name: Remove workspace files
+        run: |
+          rm -rf $GITHUB_WORKSPACE/*
