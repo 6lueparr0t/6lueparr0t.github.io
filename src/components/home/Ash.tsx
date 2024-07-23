@@ -20,7 +20,7 @@ const RESPONSIVE_SIZE = 640;
 
 function Ash() {
   const [scrollPercentage, setScrollPercentage] = useState(0);
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(message.length - 1);
 
   const ashRef = useRef<HTMLImageElement>(null);
 
