@@ -78,7 +78,7 @@ const About = () => {
   });
 
   return (
-    <div className="min-h-[60lvh] md:min-h-[80lvh]">
+    <div className="md:min-h-[80lvh]">
       <div className="gameboy">
         <div className="gameboy-screen-cont">
           <div className="gameboy-screen">
