@@ -52,7 +52,7 @@ function Ash() {
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      const left = Math.min((Math.floor(scrollPercentage * 10) / 10) * 1.25, 96);
+      const left = Math.min((Math.floor(scrollPercentage * 10) / 10) * 1.25, 96.8);
       ashRef.current?.style.setProperty("left", `calc(${left}%)`);
     });
 
@@ -60,7 +60,7 @@ function Ash() {
   }, [scrollPercentage]);
 
   return (
-    <div ref={ashRef} className="fixed my-2 mx-0 xs:mx-2 md:mx-4 lg:mx-8 bottom-0 z-10 cursor-pointer">
+    <div ref={ashRef} className="fixed my-2 mx-0 sm:mx-2 md:mx-2 lg:mx-4 bottom-0 z-10 cursor-pointer">
       <Popover onOpenChange={handlePopoverOpenChange}>
         <PopoverTrigger asChild>
           <img
