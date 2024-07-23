@@ -16,6 +16,8 @@ const message: (string | JSX.Element)[] = [
   </NavLink>,
 ];
 
+const RESPONSIVE_SIZE = 640;
+
 function Ash() {
   const [scrollPercentage, setScrollPercentage] = useState(0);
   const [count, setCount] = useState(0);
@@ -51,20 +53,24 @@ function Ash() {
   }, []);
 
   useEffect(() => {
+    let ashSize = 20;
+    if(window) {
+      ashSize = window.innerWidth < RESPONSIVE_SIZE ? 20 : 32;
+    }
     const timeout = setTimeout(() => {
-      const left = Math.min((Math.floor(scrollPercentage * 10) / 10) * 1.25, 96.8);
-      ashRef.current?.style.setProperty("left", `calc(${left}%)`);
+      const left = Math.min(((Math.floor(scrollPercentage * 10) / 10) * 1), 98);
+      ashRef.current?.style.setProperty("left", `calc(${left}% - ${ashSize}px)`);
     });
 
     return () => clearTimeout(timeout);
   }, [scrollPercentage]);
 
   return (
-    <div ref={ashRef} className="fixed my-2 mx-0 sm:mx-2 md:mx-2 lg:mx-4 bottom-0 z-10 cursor-pointer">
+    <div ref={ashRef} className="fixed my-2 mx-0 bottom-0 z-10 cursor-pointer">
       <Popover onOpenChange={handlePopoverOpenChange}>
         <PopoverTrigger asChild>
           <img
-            className="w-[12px] min-w-[12px] h-[12px] min-h-[12px] sm:w-[20px] sm:h-[20px] sm:min-w-[20px] sm:min-h-[20px]"
+            className="w-[20px] min-w-[20px] h-[20px] min-h-[20px] sm:w-[32px] sm:h-[32px] sm:min-w-[32px] sm:min-h-[32px]"
             src={ash2}
             alt="ash-going"
           />
