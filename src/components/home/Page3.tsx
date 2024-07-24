@@ -22,8 +22,11 @@ function Page3() {
                 </div>
                 <ul className="py-4">
                   {job.details.map(
-                    (detail: { project: string; link?: string; tasks: string[] }, idx) => (
-                      <li key={detail.project} className="mt-4 text-xl text-gray-950 dark:text-gray-50">
+                    (detail: { project: string; link?: string; tasks: string[] }) => (
+                      <li
+                        key={detail.project}
+                        className="mt-4 font-semibold text-gray-950 dark:text-gray-50"
+                      >
                         {detail.project}{" "}
                         {detail?.link && (
                           <a
@@ -31,7 +34,7 @@ function Page3() {
                             href={detail.link}
                             target="_blank"
                           >
-                            #{idx + 1}
+                            #
                           </a>
                         )}
                         <ul className="list-decimal list-inside text-sm text-gray-600 dark:text-gray-300">

@@ -1,13 +1,19 @@
 import { useState, useEffect, useRef } from "react";
 import { useKey } from "react-use";
 import { ReactTyped } from "react-typed";
+
+import modalStore from "@/store/modal";
+
 import ash1 from "@/assets/about/ash1.gif";
+import boy from "@/assets/about/boy.webp";
 import sfx from "@/assets/sound/sfx_sounds_Blip7.wav";
 import bgm from "@/assets/sound/bgm_25_Route_30.mp3";
 
 const About = () => {
   const sfxRef = useRef<HTMLAudioElement>(null);
   const audioRef = useRef<HTMLAudioElement>(null);
+
+  const { pushModals } = modalStore();
 
   const [typingStart, setTypingStart] = useState(false);
   const [sound, setSound] = useState(true);
@@ -37,6 +43,18 @@ const About = () => {
         playPromise.then(() => {}).catch(() => {});
       }
     }
+  };
+
+  const ashClick = () => {
+    pushModals({
+      message: (
+        <div className="">
+          <img src={boy} alt="boy" />
+        </div>
+      ),
+      type: "alert",
+      confirmMessage: "닫기",
+    });
   };
 
   useEffect(() => {
@@ -96,8 +114,8 @@ const About = () => {
             <div className="main">
               {loaded && start ? (
                 <>
-                  <div className="ash">
-                    <img src={ash1} alt="ash1" />
+                  <div className="ash cursor-pointer">
+                    <img src={ash1} alt="ash1" onClick={ashClick} />
                   </div>
                   <div className="text">
                     <div>

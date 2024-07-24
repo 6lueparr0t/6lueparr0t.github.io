@@ -49,6 +49,7 @@
       },
       {
         "project": "빗썸공식사이트, 빗썸카페",
+        "link": "https://bithumbcorp.com/ko/",
         "tasks": ["ISMS-P 인증 심사 통과를 위한 XSS 취약점 보완"]
       },
       {
