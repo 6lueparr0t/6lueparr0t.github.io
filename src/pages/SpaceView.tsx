@@ -19,7 +19,7 @@ const SpaceViewPage: React.FC = () => {
   }, [navigate, title]);
 
   return (
-    <div className="p-8 w-full sm:w-3/4 lg:w-1/2 m-auto">
+    <div className="p-8 w-full md:w-3/4 lg:w-1/2 m-auto">
       <div className="text-2xl text-left my-8">{title}</div>
       <div className="flex flex-col">
         <Suspense fallback={<div className="text-center">Loading...</div>}>

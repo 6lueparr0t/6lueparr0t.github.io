@@ -5,7 +5,7 @@ import type { LoaderFunction } from "react-router";
 import { RouteLoaderData } from "@/pages/pages.d";
 import { PER_PAGE } from "@/lib/constants";
 import { sleep } from "@/lib/utils";
-import { getList, makeQuery } from "@/lib/space";
+import { getList } from "@/lib/space";
 
 import { SearchInput } from "@/components/space/SearchInput";
 import { IssueTable } from "@/components/space/IssueTable";
@@ -33,7 +33,7 @@ const SpacePage: React.FC = () => {
           Github Issues{" "}
         </a>
       </div>
-      <SearchInput />
+      <SearchInput query={query} />
       <div className="flex flex-col justify-center items-center">
         <Suspense fallback={<div className="text-center">Loading...</div>}>
           <Await resolve={list}>
@@ -52,7 +52,11 @@ const SpacePage: React.FC = () => {
                   {list && list?.length === 0 ? (
                     <>등록된 게시글이 없습니다.</>
                   ) : (
-                    <IssuePagination last={last} page={page ?? 1} query={query} />
+                    <IssuePagination
+                      last={last}
+                      page={page ?? 1}
+                      query={query || { in: "title" }}
+                    />
                   )}
                 </div>
               </>
@@ -81,7 +85,7 @@ export const loader: LoaderFunction = async ({ request }) => {
 
   return defer({
     list: list,
-    query: query.keyword === "" ? "" : makeQuery(query),
+    query: query,
     last: last ? last : page, // last 가 없는 경우, 현재 페이지가 last
     page: page,
   });

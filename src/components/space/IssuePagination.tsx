@@ -11,6 +11,7 @@ import {
   PaginationLast,
 } from "@/components/ui/pagination";
 
+import { makeQuery } from "@/lib/space";
 import { PAGE_LENGTH } from "@/lib/constants";
 
 export const IssuePagination: React.FC<PaginationProps> = ({ last, page, query }) => {
@@ -26,15 +27,16 @@ export const IssuePagination: React.FC<PaginationProps> = ({ last, page, query }
   const prev = Math.max(1, start);
 
   const next = Math.min(last, Math.ceil(page / PAGE_LENGTH) * PAGE_LENGTH + 1);
+  const queryString = makeQuery(query);
 
   return (
     <Pagination>
       <PaginationContent>
         <PaginationItem className="rounded-md border-solid border-2 border-gray-400">
-          <PaginationFirst to={`/space?page=1${query}`} />
+          <PaginationFirst to={`/space?page=1${queryString}`} />
         </PaginationItem>
         <PaginationItem className="rounded-md border-solid border-2 border-gray-400">
-          <PaginationPrevious to={`/space?page=${prev}${query}`} />
+          <PaginationPrevious to={`/space?page=${prev}${queryString}`} />
         </PaginationItem>
         {Array.from({ length: PAGE_LENGTH }).map((_, index) => {
           const num = index + start + 1;
@@ -42,7 +44,7 @@ export const IssuePagination: React.FC<PaginationProps> = ({ last, page, query }
           return (
             <PaginationItem key={index}>
               <PaginationLink
-                to={`/space?page=${num}${query}`}
+                to={`/space?page=${num}${queryString}`}
                 {...(num === page ? { isActive: true } : {})}
               >
                 {num}
@@ -51,10 +53,10 @@ export const IssuePagination: React.FC<PaginationProps> = ({ last, page, query }
           );
         })}
         <PaginationItem className="rounded-md border-solid border-2 border-gray-400">
-          <PaginationNext to={`/space?page=${next}${query}`} />
+          <PaginationNext to={`/space?page=${next}${queryString}`} />
         </PaginationItem>
         <PaginationItem className="rounded-md border-solid border-2 border-gray-400">
-          <PaginationLast to={`/space?page=${last}${query}`} />
+          <PaginationLast to={`/space?page=${last}${queryString}`} />
         </PaginationItem>
       </PaginationContent>
     </Pagination>

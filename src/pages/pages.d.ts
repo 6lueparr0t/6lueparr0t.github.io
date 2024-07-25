@@ -7,7 +7,7 @@ export type RouteLoaderData = {
   title?: string;
   issue: Issue;
   list: Issue[];
-  query: string;
+  query?: Query;
   last?: number; // 마지막 페이지 번호
   page?: number; // 현재 페이지 번호
 };

@@ -15,12 +15,12 @@ import { Button } from "@/components/ui/button";
 
 // import modalStore from "@/store/modal";
 
-export const SearchInput: React.FC<SpaceProps> = () => {
+export const SearchInput: React.FC<SpaceProps> = ({query}) => {
   const location = useLocation();
   const navigate = useNavigate();
 
   const [isSearching, setIsSearching] = useState(false);
-  const [searchType, setSearchType] = useState("title");
+  const [searchType, setSearchType] = useState(query?.in ?? "title");
   const [inputValue, setInputValue] = useState("");
   // const { pushModals } = modalStore();
 
@@ -47,6 +47,12 @@ export const SearchInput: React.FC<SpaceProps> = () => {
   useEffect(() => {
     setIsSearching(false);
   }, [location.key]);
+
+  useEffect(() => {
+      if(inputRef.current && query?.keyword) {
+        inputRef.current.value = query?.keyword ?? "";
+      }
+  }, [query?.keyword]);
 
   return (
     <div className="my-4 flex flex-col md:flex-row justify-between gap-4">

@@ -12,6 +12,11 @@ export type Issue = {
   };
 };
 
+export type Query = {
+  keyword?: string;
+  in: string
+};
+
 export type MenuProps = {
   menuList: { path: string; title: string }[];
 };
@@ -21,12 +26,13 @@ export type SpaceProps = {
   issue?: Issue;
   list?: Issue[] | undefined;
   title?: string;
+  query?: Query;
 };
 
 export type PaginationProps = {
   last: number;
   page: number;
-  query: string;
+  query: Query;
 };
 
 export type Modal = {
