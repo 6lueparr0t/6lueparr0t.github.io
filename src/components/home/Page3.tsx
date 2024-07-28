@@ -3,7 +3,7 @@ import experience from "./experience.json";
 function Page3() {
   return (
     <>
-      <div className="mx-auto text-center bg-zinc-50 dark:bg-zinc-950">
+      <div id="experience" className="mx-auto text-center bg-zinc-50 dark:bg-zinc-950">
         <div className="text-xl md:text-2xl top-[0.4rem] md:top-[0.2rem] inline-block sticky justify-center py-4 z-10">
           experience
         </div>
@@ -15,7 +15,14 @@ function Page3() {
                 key={job.company}
                 className="mx-8 my-16 p-4 rounded-lg ring-zinc-300 dark:ring-zinc-800 ring-8"
               >
-                <div className="text-lg font-bold">{job.company}</div>
+                <div className="text-lg font-bold">
+                  {job.company}&nbsp;
+                  {job?.url && (
+                    <a className="text-blue-600 dark:text-blue-400" href={job.url} target="_blank">
+                      #
+                    </a>
+                  )}
+                </div>
                 <div className="flex justify-between">
                   <div className="text-zinc-700 dark:text-zinc-400 text-left">{job.role}</div>
                   <div className="text-zinc-700 dark:text-zinc-400 text-right">{job.period}</div>
@@ -76,6 +83,7 @@ function Page3() {
           </div>
         </div>
       </div>
+      <div></div>
     </>
   );
 }

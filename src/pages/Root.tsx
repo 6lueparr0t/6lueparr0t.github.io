@@ -1,6 +1,5 @@
 import { PropsWithChildren, useEffect } from "react";
 import { useLocation, Outlet, useNavigate, useSearchParams } from "react-router-dom";
-import { useKey } from "react-use";
 import Header from "@/components/_common/Header";
 import Footer from "@/components/_common/Footer";
 import Modal from "@/components/_common/Modal";
@@ -16,7 +15,19 @@ const Root: React.FC<PropsWithChildren> = () => {
   const location = useLocation();
   const { pushModals, modals, clearModals } = modalStore();
 
-  useKey("/", () => navigate("/"));
+  useEffect(() => {
+    const handleKeyDown = (event: { key: string }) => {
+      if (event.key === "/") {
+        navigate("/");
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
 
   useEffect(() => {
     if (modals.length > 0) {

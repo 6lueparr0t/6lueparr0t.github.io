@@ -131,5 +131,68 @@
         "url": "https://youtu.be/ekrUg1E20Y8?si=G3S7tWC5u8igdZ-X&t=346"
       }
     ]
+  },
+  {
+    "type": "project",
+    "company": "RGB place",
+    "url": "https://github.com/6lueparr0t/rgbplace",
+    "role": "지역 기반 커뮤니티 서비스",
+    "period": "2015.10 ~ 2020.02",
+    "details": [
+      {
+        "project": "백엔드 (PHP (CodeIgniter), MariaDB)",
+        "tasks": [
+          "사용자 인증 및 권한 관리",
+          "커뮤니티 게시물 CRUD",
+          "위치 기반 데이터 관리"
+        ]
+      },
+      {
+        "project": "프론트엔드 (Vanilla JS, Scss, GulpJS)",
+        "tasks": [
+          "Vanilla JS와 Scss 사용: 초기에는 React를 고려했으나, 프로젝트 규모 및 복잡성으로 인해 필요성이 낮다고 판단하여 Vanilla JS와 Scss로 설계",
+          "빌드 툴: GulpJS를 사용하여 빌드 및 배포 프로세스 자동화"
+        ]
+      },
+      {
+        "project": "OAuth 2.0 로그인",
+        "tasks": [
+          "네이버, 카카오, 구글",
+          "사용자들이 각자의 소셜 계정을 사용하여 로그인할 수 있도록 OAuth 2.0 인증 구현"
+        ]
+      },
+      {
+        "project": "구글 맵 API",
+        "tasks": [
+          "사용자 위치 기반 서비스 제공",
+          "과금 이슈로 인해 제한적 사용"
+        ]
+      },
+      {
+        "project": "실시간 기능 (Golang, WebSocket)",
+        "tasks": [
+          "실시간 접속: 사용자 간 실시간 접속 상태 구현",
+          "실시간 알림: 부분적으로 구현되어 있으며, 중요한 알림을 실시간으로 전송"
+        ]
+      },
+      {
+        "project": "Markdown 에디터 (CodeMirror)",
+        "tasks": [
+           "velog를 참고하여 Markdown 에디터를 직접 구현하여 사용자들이 포맷된 글을 작성할 수 있도록 구현"
+        ]
+      },
+      {
+        "project": "Push State",
+        "tasks": [
+           "브라우저 히스토리 관리에 Push State를 부분적으로 적용하여 사용자 경험 개선"
+        ]
+      }
+    ],
+    "link": [
+      {
+        "title": "Codigniter 한국 사용자 포럼",
+        "url": "https://www.cikorea.net/bbs/view/ci_make?idx=20775&page=1&view_category=&lists_style="
+      }
+    ]
   }
 ]

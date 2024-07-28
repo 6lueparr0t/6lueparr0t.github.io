@@ -8,17 +8,33 @@ import { useEffect } from "react";
 
 function Home() {
   useEffect(() => {
-    window.scrollTo({top:0, behavior: 'smooth'});
+    const scrollToHash = () => {
+      if (window.location.hash) {
+        const element = document.querySelector(window.location.hash);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      } else {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    };
+
+    scrollToHash();
+    window.addEventListener("hashchange", scrollToHash);
+
+    return () => {
+      window.removeEventListener("hashchange", scrollToHash);
+    };
   }, []);
 
   return (
     <div className="font-['DungGeunMo']">
       <Ash />
-      <Page1/>
-      <Page2/>
-      <Page3/>
-      <Page4/>
-      <Now/>
+      <Page1 />
+      <Page2 />
+      <Page3 />
+      <Page4 />
+      <Now />
     </div>
   );
 }

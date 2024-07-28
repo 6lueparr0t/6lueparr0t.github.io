@@ -2,7 +2,7 @@ import { useEffect, useState, type PropsWithChildren } from "react";
 import { ClipboardIcon } from "@heroicons/react/24/outline";
 import { SnackbarProvider, enqueueSnackbar } from "notistack";
 
-function Copy({ children }: PropsWithChildren<{ children: string }>) {
+const Copy = ({ children }: PropsWithChildren<{ children: string }>) => {
   const [loaded, setLoaded] = useState(false);
   const copyToClipboard = (/*event: React.MouseEvent<HTMLDivElement>*/) => {
     navigator.clipboard
@@ -31,6 +31,6 @@ function Copy({ children }: PropsWithChildren<{ children: string }>) {
   ) : (
     <>{children}</>
   );
-}
+};
 
 export default Copy;

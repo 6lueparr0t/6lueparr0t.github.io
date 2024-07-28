@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from "react";
-import { useKey } from "react-use";
 import { ReactTyped } from "react-typed";
 
 import modalStore from "@/store/modal";
@@ -8,6 +7,8 @@ import ash1 from "@/assets/about/ash1.gif";
 import boy from "@/assets/about/boy.webp";
 import sfx from "@/assets/sound/sfx_sounds_Blip7.wav";
 import bgm from "@/assets/sound/bgm_25_Route_30.mp3";
+
+import "@/style/about.scss";
 
 const About = () => {
   const sfxRef = useRef<HTMLAudioElement>(null);
@@ -91,9 +92,19 @@ const About = () => {
     }
   };
 
-  useKey("Enter", () => {
-    handlePlay();
-  });
+  useEffect(() => {
+    const handleKeyDown = (event: { key: string }) => {
+      if (event.key === "Enter") {
+        handlePlay();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
 
   return (
     <div className="md:min-h-[80lvh]">

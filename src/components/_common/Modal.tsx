@@ -9,10 +9,10 @@ import dog from '@/assets/loading/dog.webp';
 
 interface ModalProps extends React.PropsWithChildren {
   modal: Modal;
-  index: number;
+  index?: number;
 }
 
-const Modal: React.FC<ModalProps> = ({ modal, index }) => {
+const Modal: React.FC<ModalProps> = ({ modal }) => {
   const { popModals } = modalStore();
   const modalRef = useRef<HTMLDivElement>(null);
 
@@ -53,7 +53,7 @@ const Modal: React.FC<ModalProps> = ({ modal, index }) => {
       <div
         ref={modalRef}
         tabIndex={0}
-        className={`fixed z-${Number(10000 + index)} inset-0 overflow-y-auto`}
+        className={`fixed z-50 inset-0 overflow-y-auto`}
         onKeyDown={keyDownLockHandler}
       >
         <div className="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center">
@@ -63,9 +63,9 @@ const Modal: React.FC<ModalProps> = ({ modal, index }) => {
 
           <span className="hidden align-middle h-screen" aria-hidden="true"></span>
 
-          <div className="inline-block align-middle bg-white dark:bg-zinc-950 rounded-lg text-left overflow-hidden shadow-xl transform transition-all my-8 max-w-lg w-full">
+          <div className={`flex flex-col justify-center items-center bg-white dark:bg-zinc-950 rounded-lg text-left overflow-hidden shadow-xl transform transition-all my-8 max-w-4xl w-full z-50`}>
             <div className="bg-white dark:bg-zinc-950 mt-8">
-              <div className="text-xl font-bold text-center">
+              <div className="flex flex-col text-xl font-bold text-center">
                 {modal.message} {modal.type === "loading" && <div className="animate-spin rounded-full absolute inline mx-4">|</div>}
               </div>
             </div>
