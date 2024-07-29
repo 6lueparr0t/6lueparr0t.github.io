@@ -47,8 +47,11 @@ function Page4() {
 
   useEffect(() => {
     const handleKeyDown = (event: { key: string }) => {
-      if (event.key === "r" || event.key === "R" || event.key === "ㄱ") {
+      if (event.key === "r" || event.key === "ㄱ") {
         rerollHandler();
+      }
+      if (event.key === "R" || event.key === "ㄲ") {
+        initializeHandler();
       }
     };
 
@@ -78,7 +81,6 @@ function Page4() {
           </a>
         </AlertTitle>
         <AlertDescription className="mt-4 leading-relaxed">
-          <p className="font-bold text-xs mb-4">* 현재 PC 에 최적화 되어있습니다. * </p>
           1. 문제를 풀기 전에 먼저 문을 선택합니다. <br />
           2. 문을 선택한 후, 진행자는 다른 문 중 하나를 열어서 상품이 없다는 것을 보여줍니다. <br />
           3. 선택을 바꾸는 것이 유리할까요?
@@ -109,10 +111,10 @@ function Page4() {
           현재 성공 확률 : {(Math.floor(rewardCount/(reloadCount+1) * 100*100)/100).toFixed(2)}%
           </div>
           <Button className="mx-2" onClick={rerollHandler}>
-            다시하기{reloadCount > 0 && `(${reloadCount})`} (R)
+            다시하기{reloadCount > 0 && `(${reloadCount})`} (r)
           </Button>
           <Button className="mx-2" onClick={initializeHandler}>
-            초기화
+            초기화 (R)
           </Button>
         </div>
 
