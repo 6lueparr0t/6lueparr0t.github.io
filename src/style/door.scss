@@ -1,3 +1,5 @@
+$on-small-screen: 768px !default;
+
 .door {
   position: relative;
   width: 100px;
@@ -30,15 +32,6 @@
 
   .close {
     transition: 0s;
-  }
-
-  @include media-query($on-laptop) {
-    width: 85px;
-    height: 125px;
-    .door-front {
-      width: 85px;
-      height: 125px;
-    }
   }
 
   @include media-query($on-small-screen) {
@@ -79,26 +72,6 @@
     height: 10px;
     left: 1px;
     box-shadow: 2px 2px rgba(0, 0, 0, 0.2);
-  }
-
-  @include media-query($on-laptop) {
-    width: 10px;
-    height: 15px;
-    top: 50px;
-    left: 70px;
-
-    &:after {
-      width: 2px;
-      height: 4px;
-      top: 8px;
-      left: 4px;
-    }
-
-    &:before {
-      width: 9px;
-      height: 9px;
-      left: 0px;
-    }
   }
 
   @include media-query($on-small-screen) {
