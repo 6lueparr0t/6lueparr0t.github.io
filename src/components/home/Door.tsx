@@ -23,8 +23,9 @@ const Door: React.FC<DoorProps> = ({ id, gift, setGifts, count, setCount, setRew
   const [open, setOpen] = useState(false);
 
   const openHandler = useCallback(() => {
+    setCount((prev) => prev + 1);
+
     if (count === 0) {
-      setCount((prev) => prev + 1);
       const otherStatus = gift.status === "poop" ? "bomb" : "poop";
       setGifts((prev) => {
         const loseOpen = prev.map((gift) => {
@@ -36,11 +37,9 @@ const Door: React.FC<DoorProps> = ({ id, gift, setGifts, count, setCount, setRew
         return [...loseOpen];
       });
       return;
-    } else {
-      setCount((prev) => prev + 1);
     }
 
-    if (gift.status === "win") {
+    if (count === 1 && gift.status === "win") {
       setRewarddCount((prev) => prev + 1);
     }
 
