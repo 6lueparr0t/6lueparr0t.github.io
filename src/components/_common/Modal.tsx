@@ -3,9 +3,9 @@ import modalStore from "@/store/modal";
 import type { Modal } from "@/components/components.d";
 
 import { Button } from "@/components/ui/button";
-import cat1 from '@/assets/loading/cat1.webp';
-import cat2 from '@/assets/loading/cat2.webp';
-import dog from '@/assets/loading/dog.webp';
+import cat1 from "@/assets/loading/cat1.webp";
+import cat2 from "@/assets/loading/cat2.webp";
+import dog from "@/assets/loading/dog.webp";
 
 interface ModalProps extends React.PropsWithChildren {
   modal: Modal;
@@ -63,22 +63,31 @@ const Modal: React.FC<ModalProps> = ({ modal }) => {
 
           <span className="hidden align-middle h-screen" aria-hidden="true"></span>
 
-          <div className={`flex flex-col justify-center items-center bg-white dark:bg-zinc-950 rounded-lg text-left overflow-hidden shadow-xl transform transition-all my-8 max-w-4xl w-full z-50`}>
+          <div
+            className={`flex flex-col justify-center items-center bg-white dark:bg-zinc-950 rounded-lg text-left overflow-hidden shadow-xl transform transition-all my-8 max-w-4xl w-full z-50`}
+          >
             <div className="bg-white dark:bg-zinc-950 mt-8">
-              <div className="flex flex-col text-xl font-bold text-center">
-                {modal.message} {modal.type === "loading" && <div className="animate-spin rounded-full absolute inline mx-4">|</div>}
+              <div
+                className={`flex ${
+                  modal.type !== "loading" ? "flex-col" : "flex-row"
+                } text-xl font-bold text-center`}
+              >
+                {modal.message}{" "}
+                {modal.type === "loading" && (
+                  <span className="animate-spin rounded-full relative mx-4">|</span>
+                )}
               </div>
             </div>
             <div className="bg-white dark:bg-zinc-950 py-4 justify-around px-6 flex">
               {modal.type === "loading" && (
                 <div className="flex justify-center items-center">
-                  <img src={loadingImg()}/>
+                  <img src={loadingImg()} />
                 </div>
               )}
               {modal.type === "alert" && (
                 <Button
                   // text-black bg-white hover:bg-zinc-50 dark:bg-zinc-950 dark:text-white dark:hover:bg-zinc-900
-                  variant={'default'}
+                  variant={"default"}
                   onClick={closeModal}
                 >
                   {modal.confirmMessage || "확인"}
