@@ -87,7 +87,7 @@ function Page4() {
         </AlertDescription>
       </Alert>
       <div className="p-16">
-        <div className="flex flex-col justify-center overflow-x-scroll">
+        <div className="flex flex-col justify-center overflow-x-auto">
           <div className="flex flex-row m-auto gap-10 md:gap-20 lg:gap-44 ">
             {gifts.map((gift, i) => (
               <Door
