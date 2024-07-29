@@ -18,6 +18,9 @@
   }
 }
 
+$on-laptop: 768px !default;
+$on-small-screen: 360px !default;
+
 @mixin media-query($device) {
   @media screen and (max-width: $device) {
     @content;

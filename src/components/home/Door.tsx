@@ -71,11 +71,11 @@ const Door: React.FC<DoorProps> = ({ id, gift, setGifts, count, setCount, setRew
 
   return (
     <div className="door">
-      <div className={`door-front text-7xl ${gift.open ? "open" : "close"}`} onClick={openHandler}>
+      <div className={`door-front text-xl md:text-4xl lg:text-7xl ${gift.open ? "open" : "close"}`} onClick={openHandler}>
         <div className="content">{id+1}</div>
         <div className="knob"></div>
       </div>
-      <div className="door-back font-['Tossface'] text-7xl" onClick={openHandler}>
+      <div className="door-back font-['Tossface'] text-xl md:text-4xl lg:text-7xl" onClick={openHandler}>
         {children}
       </div>
     </div>
