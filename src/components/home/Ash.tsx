@@ -10,7 +10,7 @@ const message: (string | JSX.Element)[] = [
   "[tip] 모바일에만 있는 메뉴가 있어요.",
   "[tip] / 키를 누르면 메인으로 갑니다.",
   "[tip] 몬티 홀 문제에서 1, 2, 3번 키를 눌러보세요.",
-  "[tip] 몬티 홀 문제에서 소문자 r 은 다시 하기, 대문자 R 은 초기화 입니다.",
+  "[tip] 몬티 홀 문제에서 r 은 다시 하기, R 은 초기화 입니다.",
   <NavLink
     to={"/about"}
     className={"text-gray-800 hover:text-gray-400  dark:text-gray-100 dark:hover:text-gray-500"}
