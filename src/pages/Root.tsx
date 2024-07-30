@@ -40,7 +40,7 @@ const Root: React.FC<PropsWithChildren> = () => {
 
   useEffect(() => {
     document.title = "6lueparr0t's Home";
-    ReactGA.send("pageview");
+    ReactGA.send({ hitType: 'pageview', page: location.pathname });
     clearModals();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location]);
