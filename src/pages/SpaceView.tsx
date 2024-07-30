@@ -1,5 +1,5 @@
 import React, { Suspense, useEffect } from "react";
-import { json, Await, defer, useNavigate, useRouteLoaderData } from "react-router-dom";
+import { json, Await, defer, useRouteLoaderData } from "react-router-dom";
 import type { LoaderFunction } from "react-router";
 
 import { RouteLoaderData } from "@/pages/pages.d";
@@ -10,13 +10,11 @@ import { IssueViewer } from "@/components/space/view/IssueViewer";
 import { IssueViewerButtonGroup } from "@/components/space/view/IssueViewerButtonGroup";
 
 const SpaceViewPage: React.FC = () => {
-  const navigate = useNavigate();
   const { title, issue } = useRouteLoaderData("space-view") as RouteLoaderData;
 
   useEffect(() => {
-    // if(isUndefined(title)) navigate(`/space`);
-    document.title = title ?? "";
-  }, [navigate, title]);
+    document.title = title || "6lueparr0t's Home";
+  }, [title]);
 
   return (
     <div className="p-8 w-full md:w-3/4 lg:w-1/2 m-auto">

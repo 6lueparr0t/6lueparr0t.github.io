@@ -29,7 +29,7 @@ const Root: React.FC<PropsWithChildren> = () => {
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, []);
+  }, [navigate]);
 
   useEffect(() => {
     if (modals.length > 0) {
@@ -40,7 +40,9 @@ const Root: React.FC<PropsWithChildren> = () => {
   }, [modals]);
 
   useEffect(() => {
-    document.title = "6lueparr0t's Home";
+    if(location.pathname === "/") {
+      document.title = "6lueparr0t's Home";
+    }
     ReactGA.send({ hitType: 'pageview', page: location.pathname });
     clearModals();
     // eslint-disable-next-line react-hooks/exhaustive-deps
