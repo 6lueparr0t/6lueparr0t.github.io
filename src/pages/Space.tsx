@@ -16,8 +16,15 @@ const SpacePage: React.FC = () => {
   const { list, query, last, page } = useRouteLoaderData("space") as RouteLoaderData;
 
   useEffect(() => {
+    document.title = "space";
     window.scrollTo({ top: 0, behavior: "instant" });
   }, []);
+
+  useEffect(() => {
+    if(query.in && query.keyword) {
+      document.title = `${query.in}:${query.keyword}`;
+    }
+  }, [query.in, query.keyword]);
 
   return (
     <div className="font-['DungGeunMo'] p-8 h-[calc(100lvh-4.2rem)]">
