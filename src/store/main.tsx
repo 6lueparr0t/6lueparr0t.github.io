@@ -12,8 +12,7 @@ const mainStore = create<MainStoreState>()(
     (set) => ({
       aboutLink: false,
       enableAboutLink: () =>
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        set((prevState) => {
+        set(() => {
           return {
             aboutLink: true,
           };
