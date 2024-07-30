@@ -5,13 +5,14 @@
   <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BlueParr0t:404</title>
+  <title>404</title>
 </head>
 
 <body>
   <div id="root"></div>
   <script>
     if (location.pathname !== "/404.html") {
+      document.title = "redirecting...";
       location.replace("/?redirect="+location.pathname);
     }
   </script>

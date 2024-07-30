@@ -96,6 +96,8 @@ const About = () => {
   };
 
   useEffect(() => {
+    document.title = "about";
+
     const handleKeyDown = (event: { key: string }) => {
       if (event.key === "Enter") {
         handlePlay();

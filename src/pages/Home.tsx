@@ -8,6 +8,8 @@ import { useEffect } from "react";
 
 function Home() {
   useEffect(() => {
+    document.title = "6lueparr0t's Home";
+
     const scrollToHash = () => {
       if (window.location.hash) {
         const element = document.querySelector(window.location.hash);
