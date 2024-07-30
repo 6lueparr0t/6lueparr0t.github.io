@@ -50,6 +50,10 @@ export const IssueViewer: React.FC<SpaceProps> = ({ issue }) => {
                       </SyntaxHighlighter>
                   );
                 },
+                // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                blockquote: ({ node, ...props }) => <blockquote {...props} className="p-4 italic border-l-4 border-gray-500 quote" />,
+                // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                ol: ({ node, ...props }) => <ol {...props} className="list-decimal px-4" />,
               }}
             >
               {issue?.body}
