@@ -12,6 +12,8 @@ const Cookie: React.FC = () => {
     // 사용자가 쿠키를 수락했을 때 실행할 코드
     window.gtag('consent', 'update', {
       ad_storage: 'granted',
+      ad_user_data: 'granted',
+      ad_personalization: 'granted',
       analytics_storage: 'granted'
     });
   };
@@ -20,6 +22,8 @@ const Cookie: React.FC = () => {
     // 사용자가 쿠키를 거부했을 때 실행할 코드
     window.gtag('consent', 'update', {
       ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
       analytics_storage: 'denied'
     });
   };
@@ -31,7 +35,7 @@ const Cookie: React.FC = () => {
         onDecline={handleDecline}
         enableDeclineButton
       >
-        이 사이트는 쿠키를 사용합니다. 계속 사용하려면 쿠키 사용에 동의해주세요.
+        이 사이트는 Google Analytics 분석을 위해 쿠키를 사용합니다. 쿠키 수집에 동의하시나요?
       </CookieConsent>
     </div>
   );
