@@ -7,6 +7,7 @@ import Modal from "@/components/_common/Modal";
 import { ThemeProvider } from "@/components/custom/theme-provider";
 
 import modalStore from "@/store/modal";
+import Cookie from "@/components/_common/Cookie";
 
 const Root: React.FC<PropsWithChildren> = () => {
   const [searchParams] = useSearchParams();
@@ -59,6 +60,7 @@ const Root: React.FC<PropsWithChildren> = () => {
       <main>
         <Outlet />
       </main>
+      <Cookie />
       <Footer />
       {modals.map((modal, index) => (
         <div key={`modal-${index}`} className="font-['DungGeunMo'] h-0">
