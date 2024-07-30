@@ -1,4 +1,5 @@
 import { PropsWithChildren, useEffect } from "react";
+import ReactGA from 'react-ga4';
 import { useLocation, Outlet, useNavigate, useSearchParams } from "react-router-dom";
 import Header from "@/components/_common/Header";
 import Footer from "@/components/_common/Footer";
@@ -39,6 +40,7 @@ const Root: React.FC<PropsWithChildren> = () => {
 
   useEffect(() => {
     document.title = "6lueparr0t's Home";
+    ReactGA.send("pageview");
     clearModals();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location]);
