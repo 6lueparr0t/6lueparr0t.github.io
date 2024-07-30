@@ -4,18 +4,23 @@ import { NavLink } from "react-router-dom";
 import Menu from "@/components/_common/Menu";
 import { ModeToggle } from "@/components/custom/mode-toggle";
 
-const MENU: { path: string; title: string }[] = [
-  {
-    path: "/",
-    title: "/",
-  },
-  {
-    path: "/space",
-    title: "space",
-  },
-];
+import mainStore from "@/store/main";
 
 const Header: React.FC<PropsWithChildren> = ({ children }) => {
+  const { aboutLink } = mainStore();
+
+  const MENU: { path: string; title: string }[] = [
+    {
+      path: "/",
+      title: "/",
+    },
+    ...(aboutLink ? [{ path: "/about", title: "about" }] : []),
+    {
+      path: "/space",
+      title: "space",
+    },
+  ];
+
   return (
     <header className="font-['DungGeunMo'] sticky top-0 backdrop-blur-[20px] z-10">
       <div className="flex justify-between items-center pt-4 w-full gap-4 p-4">

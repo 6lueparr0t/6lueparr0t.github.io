@@ -8,12 +8,14 @@ import boy from "@/assets/about/boy.webp";
 import sfx from "@/assets/sound/sfx_sounds_Blip7.wav";
 import bgm from "@/assets/sound/bgm_25_Route_30.mp3";
 
+import mainStore from "@/store/main";
 import "@/style/about.scss";
 
 const About = () => {
   const sfxRef = useRef<HTMLAudioElement>(null);
   const audioRef = useRef<HTMLAudioElement>(null);
 
+  const { enableAboutLink } = mainStore();
   const { pushModals } = modalStore();
 
   const [typingStart, setTypingStart] = useState(false);
@@ -79,12 +81,13 @@ const About = () => {
   }, [sound, typingStart]);
 
   useEffect(() => {
+    enableAboutLink();
     window.scrollTo({ top: 0, behavior: "instant" });
     setTimeout(() => {
       setLoaded(true);
     }, 1000);
     loadedRef.current = loaded;
-  }, [loaded, loadedRef]);
+  }, [enableAboutLink, loaded, loadedRef]);
 
   const handlePlay = () => {
     if (loadedRef.current) {
