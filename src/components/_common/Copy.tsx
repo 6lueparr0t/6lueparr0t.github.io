@@ -15,7 +15,7 @@ const Copy = ({ children }: PropsWithChildren<{ children: string }>) => {
         });
 
         ReactGA.event({
-          category: 'user',
+          category: 'copy',
           action: `Copied to clipboard: ${children}`,
           label: 'Copy Text',
           value: 1
