@@ -1,4 +1,5 @@
 import { PropsWithChildren, useEffect } from "react";
+import ReactGA from 'react-ga4';
 import { useLocation, Outlet, useNavigate, useSearchParams } from "react-router-dom";
 import Header from "@/components/_common/Header";
 import Footer from "@/components/_common/Footer";
@@ -6,6 +7,7 @@ import Modal from "@/components/_common/Modal";
 import { ThemeProvider } from "@/components/custom/theme-provider";
 
 import modalStore from "@/store/modal";
+import Cookie from "@/components/_common/Cookie";
 
 const Root: React.FC<PropsWithChildren> = () => {
   const [searchParams] = useSearchParams();
@@ -27,7 +29,7 @@ const Root: React.FC<PropsWithChildren> = () => {
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, []);
+  }, [navigate]);
 
   useEffect(() => {
     if (modals.length > 0) {
@@ -38,7 +40,7 @@ const Root: React.FC<PropsWithChildren> = () => {
   }, [modals]);
 
   useEffect(() => {
-    document.title = "6lueparr0t's Home";
+    ReactGA.send({ hitType: 'pageview', page: location.pathname });
     clearModals();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location]);
@@ -57,6 +59,7 @@ const Root: React.FC<PropsWithChildren> = () => {
       <main>
         <Outlet />
       </main>
+      <Cookie />
       <Footer />
       {modals.map((modal, index) => (
         <div key={`modal-${index}`} className="font-['DungGeunMo'] h-0">

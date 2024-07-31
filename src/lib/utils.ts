@@ -42,3 +42,19 @@ export const pick = <T, K extends keyof T>(keys: K[], object: T): Pick<T, K> => 
     })
   );
 };
+
+export const deepClone = (data: string | number | boolean | object): string | number | boolean | object => {
+  if (["string", "number", "boolean"].includes(typeof data)) {
+    return data;
+  } else {
+    if (Array.isArray(data)) {
+      return data.map((item) => deepClone(item));
+    } else {
+      const obj: Record<string, unknown> = {};
+      for (const key of Object.keys(data)) {
+        obj[key] = deepClone((data as Record<string, object>)[key]);
+      }
+      return obj;
+    }
+  }
+}

@@ -35,6 +35,12 @@ export const IssueViewer: React.FC<SpaceProps> = ({ issue }) => {
                 h2: ({ node, ...props }) => <h2 {...props} className="text-2xl font-bold" />,
                 // eslint-disable-next-line @typescript-eslint/no-unused-vars
                 h3: ({ node, ...props }) => <h3 {...props} className="text-xl font-bold" />,
+                // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                a: ({ node, ...props }) => <a {...props} className="underline decoration-blue-600 dark:decoration-blue-400" />,
+                // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                blockquote: ({ node, ...props }) => <blockquote {...props} className="p-4 italic border-l-4 border-gray-500 quote" />,
+                // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                ol: ({ node, ...props }) => <ol {...props} className="list-decimal px-4" />,
                 code({ className, children }) {
                   const match = /language-(\w+)/.exec(className || "");
                   const language = match ? match[1] : 'bash';

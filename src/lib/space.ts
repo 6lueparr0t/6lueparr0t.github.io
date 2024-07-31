@@ -21,6 +21,7 @@ export const makeQuery = (query: object, char:string = "&"): string => {
   );
 };
 
+// Github API 를 사용하여 목록을 가져옴
 export const getList = async (
   query: { keyword: string; in: string } = { keyword: "", in: "title" },
   option: { page?: number; per_page?: number } = {}
@@ -67,16 +68,29 @@ export const getList = async (
   return { list: list, last: last };
 };
 
+// Github API 를 사용하여 이슈를 가져옴
 export const getIssue = async (
   option: { page?: number; per_page?: number } = {},
   issueNumber: number
 ): Promise<{
   issue: Issue;
+  comments?: Issue[];
   status?: number;
   message?: object;
 }> => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  let issue: any = {};
+  let issue: Issue = {
+    number: 0,
+    title: "",
+    body: "",
+    created_at: "",
+    updated_at: "",
+    node_id: "",
+    user: {
+      avatar_url: "",
+      login: ""
+    }
+  };
+  let comments: Issue[] = [];
 
   try {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -92,12 +106,33 @@ export const getIssue = async (
   } catch (error) {
     return {
       issue: issue,
+      comments: [],
       status: 500,
       message: error ?? "",
     };
   }
 
-  return { issue: issue };
+  try {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let response : any;
+    // eslint-disable-next-line prefer-const
+    response = await getGithubIssueComment(issueNumber);
+
+    if (response.status === 200) {
+      comments = parseDataForComments(response.data);
+    } else {
+      throw new Error("Could not fetch details for selected event.");
+    }
+  } catch (error) {
+    return {
+      issue: issue,
+      comments: comments,
+      status: 500,
+      message: error ?? "",
+    };
+  }
+
+  return { issue: issue, comments: comments };
 };
 
 // Octokit.js
@@ -119,6 +154,28 @@ export const getGithubIssue = async (
       owner: owner,
       repo: repo,
       per_page: option.per_page,
+      headers: {
+        "X-GitHub-Api-Version": "2022-11-28",
+      },
+    }
+  );
+
+  return response;
+};
+
+
+// https://docs.github.com/en/rest/issues/comments?apiVersion=2022-11-28#list-issue-comments
+export const getGithubIssueComment = async (
+  issueNumber: number = 0
+): Promise<unknown> => {
+  const issuePath: string = issueNumber ? "/" + String(issueNumber) : "";
+
+  const response = await octokit.request(
+    `GET /repos/${owner}/${repo}/issues${issuePath}/comments`,
+    {
+      owner: owner,
+      repo: repo,
+      issue_number: issueNumber,
       headers: {
         "X-GitHub-Api-Version": "2022-11-28",
       },
@@ -153,8 +210,17 @@ export const search = async (
 
 export const parseData = (item: object) => ({
   ...pick(["number", "title", "body", "created_at", "updated_at", "node_id"], item as Issue),
-  user: pick(["avatar_url", "login"], get(item, "user", {}) as { avatar_url: string; login: string }),
+  user: pick(["avatar_url", "login", "site_admin"], get(item, "user", {}) as { avatar_url: string; login: string, site_admin: boolean }),
 });
+
+export const parseDataForComments = (item: object[]) => {
+  return item.map((comment) => {
+    return {
+      ...pick(["number", "title", "body", "created_at", "updated_at", "node_id"], comment as Issue),
+      user: pick(["avatar_url", "login", "site_admin"], get(comment, "user", {}) as { avatar_url: string; login: string, site_admin: boolean }),
+    };
+  });
+};
 
 export const parseLastPage = (props: { data: { total_count?: number }; headers: { link?: string } }): number => {
   if (!props.headers.link) {

@@ -1,5 +1,5 @@
 import React, { Suspense, useEffect } from "react";
-import { json, Await, defer, useNavigate, useRouteLoaderData } from "react-router-dom";
+import { json, Await, defer, useRouteLoaderData } from "react-router-dom";
 import type { LoaderFunction } from "react-router";
 
 import { RouteLoaderData } from "@/pages/pages.d";
@@ -8,15 +8,14 @@ import { getIssue } from "@/lib/space";
 
 import { IssueViewer } from "@/components/space/view/IssueViewer";
 import { IssueViewerButtonGroup } from "@/components/space/view/IssueViewerButtonGroup";
+import { IssueComments } from "@/components/space/view/IssueComments";
 
 const SpaceViewPage: React.FC = () => {
-  const navigate = useNavigate();
-  const { title, issue } = useRouteLoaderData("space-view") as RouteLoaderData;
+  const { title, issue, comments } = useRouteLoaderData("space-view") as RouteLoaderData;
 
   useEffect(() => {
-    // if(isUndefined(title)) navigate(`/space`);
-    document.title = title ?? "";
-  }, [navigate, title]);
+    document.title = title || "6lueparr0t's Home";
+  }, [title]);
 
   return (
     <div className="p-8 w-full md:w-3/4 lg:w-1/2 m-auto">
@@ -28,6 +27,7 @@ const SpaceViewPage: React.FC = () => {
               <>
                 <IssueViewer issue={issue} />
                 <IssueViewerButtonGroup issue={issue} />
+                <IssueComments comments={comments} />
               </>
             )}
           </Await>
@@ -46,12 +46,13 @@ export const loader: LoaderFunction = async ({ params }) => {
   const issueNumber: number = Number(params?.issueNumber ?? 0);
 
   try {
-    const { issue } = await getIssue({}, issueNumber);
+    const { issue, comments } = await getIssue({}, issueNumber);
     const title = get(issue, "title");
 
     return defer({
       title: title,
       issue: issue,
+      comments: comments,
     });
   } catch (error) {
     throw json({ message: error }, { status: 500 });

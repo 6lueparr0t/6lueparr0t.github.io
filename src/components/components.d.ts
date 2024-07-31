@@ -1,6 +1,6 @@
 export type Issue = {
   number: number;
-  title: string;
+  title?: string;
   body: string;
   created_at: string;
   updated_at: string;
@@ -9,6 +9,7 @@ export type Issue = {
   user: {
     avatar_url: string;
     login: string;
+    site_admin?: boolean;
   };
 };
 
@@ -24,6 +25,7 @@ export type MenuProps = {
 export type SpaceProps = {
   method?: "POST" | "GET" | "PATCH" | "DELETE";
   issue?: Issue;
+  comments?: Issue[];
   list?: Issue[] | undefined;
   title?: string;
   query?: Query;

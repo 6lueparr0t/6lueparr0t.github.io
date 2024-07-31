@@ -8,6 +8,7 @@ import AboutPage from "@/pages/About";
 import SpacePage, { loader as SpaceLoader } from "@/pages/Space";
 import SpaceViewPage, { loader as SpaceViewLoader } from "@/pages/SpaceView";
 
+
 const router = createBrowserRouter([
   {
     path: "/",
