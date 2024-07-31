@@ -78,6 +78,9 @@ const Footer: React.FC = () => {
             <ArrowLongUpIcon className="animate-bounce w-[24px] h-[24px]" />
           </div>
           <div className="text-base">
+            In Seoul, Republic of Korea
+          </div>
+          <div className="text-base">
             {currentTime}
           </div>
           {/* <span className="font-['Tossface'] text-4xl">🇰🇷</span>
