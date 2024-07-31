@@ -10,8 +10,8 @@ export const IssueViewerButtonGroup: React.FC<SpaceProps> = ({ issue }) => {
       <div className="my-4 flex flex-row gap-4 justify-between">
         <div className="flex flex-row gap-4">
           <div className="flex w-full max-w-sm space-x-2">
-            <a href={`https://github.com/${import.meta.env.VITE_APP_GIT_OWNER}/${import.meta.env.VITE_APP_GIT_REPO}/issues/${issue?.number}`} target="_blank">
-              <Button>수정</Button>
+            <a href={`https://github.com/${import.meta.env.VITE_APP_GIT_OWNER}/${import.meta.env.VITE_APP_GIT_REPO}/issues/${issue?.number}#new_comment_form`} target="_blank">
+              <Button>댓글쓰기</Button>
             </a>
           </div>
         </div>

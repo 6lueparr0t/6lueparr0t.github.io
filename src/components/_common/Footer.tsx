@@ -1,12 +1,28 @@
-import React from "react";
-
+import React, { useState, useEffect } from "react";
 import Copy from "./Copy";
-
 import { ArrowLongUpIcon } from "@heroicons/react/24/outline";
+
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone";
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 const MAIL = "6lueparr0t@gmail.com";
 
 const Footer: React.FC = () => {
+  const [currentTime, setCurrentTime] = useState(
+    dayjs().tz("Asia/Seoul").format("YYYY-MM-DD ddd HH:mm:ss")
+  );
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentTime(dayjs().tz("Asia/Seoul").format("YYYY-MM-DD ddd HH:mm:ss"));
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <footer className="font-['DungGeunMo'] sm:text-xl md:text-2xl	h-lvh bg-stone-100 dark:bg-zinc-900">
       <div className={`flex w-full justify-center sticky pt-4 top-calc-half`}>
@@ -54,11 +70,18 @@ const Footer: React.FC = () => {
         </div>
       </div>
       <div className="flex justify-center items-end h-5/6">
-        <div
-          className="cursor-pointer px-2"
-          onClick={() => window.scrollTo({ top: 0, behavior: "instant" })}
-        >
-          <ArrowLongUpIcon className="animate-bounce w-[24px] h-[24px]" />
+        <div className="flex flex-col justify-center items-center">
+          <div
+            className="cursor-pointer py-4"
+            onClick={() => window.scrollTo({ top: 0, behavior: "instant" })}
+          >
+            <ArrowLongUpIcon className="animate-bounce w-[24px] h-[24px]" />
+          </div>
+          <div className="text-base">
+            {currentTime}
+          </div>
+          {/* <span className="font-['Tossface'] text-4xl">🇰🇷</span>
+          <span className="text-base">Republic of Korea</span> */}
         </div>
       </div>
     </footer>

@@ -6,6 +6,7 @@ export interface LayoutProps extends PropsWithChildren {}
 export type RouteLoaderData = {
   title?: string;
   issue: Issue;
+  comments: Issue[];
   list: Issue[];
   query?: Query;
   last?: number; // 마지막 페이지 번호

@@ -32,7 +32,6 @@ All commands are run from the root of the project, from a terminal:
 - [ ] 게시판 추가 작업
   - 내 글, 다른 사람 글 분류하기
   - 작성자 검색 기능 추가
-  - 댓글 보기 추가
 - [ ] now, 표지판 추가
 - [ ] confetti.ts 추가 (상자 누르면 돈 나오게)
 - [ ] 몬티 홀 문제 이미지 교체

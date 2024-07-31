@@ -8,9 +8,10 @@ import { getIssue } from "@/lib/space";
 
 import { IssueViewer } from "@/components/space/view/IssueViewer";
 import { IssueViewerButtonGroup } from "@/components/space/view/IssueViewerButtonGroup";
+import { IssueComments } from "@/components/space/view/IssueComments";
 
 const SpaceViewPage: React.FC = () => {
-  const { title, issue } = useRouteLoaderData("space-view") as RouteLoaderData;
+  const { title, issue, comments } = useRouteLoaderData("space-view") as RouteLoaderData;
 
   useEffect(() => {
     document.title = title || "6lueparr0t's Home";
@@ -26,6 +27,7 @@ const SpaceViewPage: React.FC = () => {
               <>
                 <IssueViewer issue={issue} />
                 <IssueViewerButtonGroup issue={issue} />
+                <IssueComments comments={comments} />
               </>
             )}
           </Await>
@@ -44,12 +46,13 @@ export const loader: LoaderFunction = async ({ params }) => {
   const issueNumber: number = Number(params?.issueNumber ?? 0);
 
   try {
-    const { issue } = await getIssue({}, issueNumber);
+    const { issue, comments } = await getIssue({}, issueNumber);
     const title = get(issue, "title");
 
     return defer({
       title: title,
       issue: issue,
+      comments: comments,
     });
   } catch (error) {
     throw json({ message: error }, { status: 500 });
