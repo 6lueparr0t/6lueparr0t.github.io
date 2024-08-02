@@ -31,7 +31,7 @@ export const IssueTable: React.FC<SpaceProps> = ({ list }) => {
           return (
             <TableRow key={`space-${row.number}`}>
               <TableCell className="font-medium min-w-16 sm:min-w-4">{row.number}</TableCell>
-              <TableCell className="block truncate mt-2 w-60 sm:w-80 md:w-[500px] xl:w-8/12">
+              <TableCell className="block truncate mt-2 w-60 sm:w-80 md:w-[500px] lg:w-8/12">
                 <Link to={`/space/${row.number}`}>{row.title}</Link>
               </TableCell>
               <TableCell>
@@ -43,7 +43,7 @@ export const IssueTable: React.FC<SpaceProps> = ({ list }) => {
                   {row.user.login}
                 </div>
               </TableCell>
-              <TableCell className="text-right">
+              <TableCell className="text-right lg:text-center">
                 {dayjs(row.created_at).format("YYYY-MM-DD HH:mm")}
               </TableCell>
             </TableRow>

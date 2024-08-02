@@ -1,4 +1,6 @@
 import experience from "./experience.json";
+import ExperienceList from "./ExperienceList";
+import { Job } from "@/components/components.d";
 
 function Page3() {
   return (
@@ -11,74 +13,7 @@ function Page3() {
         <div className="flex flex-col justify-center items-center w-full">
           <div className="font-noto w-full sm:w-full md:w-full lg:w-2/3 xl:w-1/2 text-left break-keep">
             {experience.map((job) => (
-              <div
-                key={job.company}
-                className="mx-8 my-16 p-4 rounded-lg ring-zinc-300 dark:ring-zinc-800 ring-8"
-              >
-                <div className="text-lg font-bold">
-                  {job.company}&nbsp;
-                  {job?.url && (
-                    <a className="text-blue-600 dark:text-blue-400" href={job.url} target="_blank">
-                      #
-                    </a>
-                  )}
-                </div>
-                <div className="flex justify-between">
-                  <div className="text-zinc-700 dark:text-zinc-400 text-left">{job.role}</div>
-                  <div className="text-zinc-700 dark:text-zinc-400 text-right">{job.period}</div>
-                </div>
-                <ul className="py-4">
-                  {job.details.map(
-                    (detail: { project: string; link?: string; tasks: string[] }) => (
-                      <li
-                        key={detail.project}
-                        className="mt-4 font-semibold text-gray-950 dark:text-gray-50"
-                      >
-                        {detail.project}{" "}
-                        {detail?.link && (
-                          <a
-                            className="text-blue-600 dark:text-blue-400"
-                            href={detail.link}
-                            target="_blank"
-                          >
-                            #
-                          </a>
-                        )}
-                        <ul className="list-decimal list-inside text-sm text-gray-600 dark:text-gray-300">
-                          {detail.tasks.map((task, taskIdx) => (
-                            <li key={taskIdx}>{task}</li>
-                          ))}
-                        </ul>
-                      </li>
-                    )
-                  )}
-                </ul>
-                <div className="mt-4">
-                  {job?.techStack?.languages ? (
-                    <div>Tech Stack: {job?.techStack?.languages}</div>
-                  ) : null}
-                  {job?.techStack?.scm ? <div>SCM: {job?.techStack?.scm}</div> : null}
-                  {job?.techStack?.cicd ? <div>CI/CD : {job?.techStack?.cicd}</div> : null}
-                </div>
-                {job?.link?.length && (
-                  <div className="mt-4">
-                    관련 링크 : &nbsp;
-                    {job.link.map((link, linkIdx) => (
-                      <span key={link.title}>
-                        <a
-                          className="text-blue-600 dark:text-blue-400"
-                          href={link.url}
-                          target="_blank"
-                          rel="noreferrer"
-                        >
-                          {link.title}
-                        </a>
-                        {linkIdx < job.link.length - 1 && " / "}
-                      </span>
-                    ))}
-                  </div>
-                )}
-              </div>
+              <ExperienceList key={job.title} job={job as Job} />
             ))}
           </div>
         </div>
