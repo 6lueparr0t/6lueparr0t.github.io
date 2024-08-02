@@ -180,9 +180,9 @@
         ]
       },
       {
-        "project": "Markdown 에디터 (CodeMirror)",
+        "project": "Markdown 에디터",
         "tasks": [
-           "velog를 참고하여 Markdown 에디터를 직접 구현하여 사용자들이 포맷된 글을 작성할 수 있도록 구현"
+           "CodeMirror 라이브러리를 활용한 Markdown 에디터를 구현"
         ]
       },
       {
