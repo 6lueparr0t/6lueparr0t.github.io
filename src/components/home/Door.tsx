@@ -10,6 +10,7 @@ interface Gift {
 interface DoorProps extends PropsWithChildren {
   id: number;
   status: string;
+  gifts: Gift[];
   gift: Gift;
   setGifts: React.Dispatch<
     React.SetStateAction<Gift[]>
@@ -17,13 +18,23 @@ interface DoorProps extends PropsWithChildren {
   count: number;
   setCount: React.Dispatch<React.SetStateAction<number>>;
   setRewarddCount: React.Dispatch<React.SetStateAction<number>>;
+  doorOpenCheck: string[];
+  setDoorOpenCheck: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
-const Door: React.FC<DoorProps> = ({ id, gift, setGifts, count, setCount, setRewarddCount, children }) => {
+const Door: React.FC<DoorProps> = ({ id, gifts, gift, setGifts, count, setCount, setRewarddCount, doorOpenCheck, setDoorOpenCheck, children }) => {
   const [open, setOpen] = useState(false);
 
+  const updateOpenDoor = useCallback((status: string) => {
+    gifts.map((item) => {
+      if (item.status === status) {
+        setDoorOpenCheck((prev) => Array.from(new Set([...(prev), item.status])));
+      }
+    });
+  }, [gifts, setDoorOpenCheck]);
+
   const openHandler = useCallback(() => {
-    setCount((prev) => prev + 1);
+    if (open === false && !doorOpenCheck.includes(gift.status)) setCount((prev) => prev + 1);
 
     if (count === 0) {
       const otherStatus = gift.status === "poop" ? "bomb" : "poop";
@@ -36,7 +47,11 @@ const Door: React.FC<DoorProps> = ({ id, gift, setGifts, count, setCount, setRew
         });
         return [...loseOpen];
       });
+
+      updateOpenDoor(otherStatus);
       return;
+    } else {
+      updateOpenDoor(gift.status);
     }
 
     if (count === 1 && gift.status === "win") {
@@ -48,7 +63,7 @@ const Door: React.FC<DoorProps> = ({ id, gift, setGifts, count, setCount, setRew
       prev[id].open = !open;
       return [...prev];
     });
-  }, [count, gift.status, id, open, setCount, setGifts, setRewarddCount]);
+  }, [count, gift.status, id, open, doorOpenCheck, setCount, setGifts, setRewarddCount, updateOpenDoor]);
 
   useEffect(() => {
     setOpen(gift.open);

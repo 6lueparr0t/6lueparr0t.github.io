@@ -12,6 +12,7 @@ function Page4() {
   const [count, setCount] = useState(0);
   const [rewardCount, setRewarddCount] = useState(0);
   const [reloadCount, setReloadCount] = useState(0);
+  const [doorOpenCheck, setDoorOpenCheck] = useState<string[]>([]);
   const [gifts, setGifts] = useState([
     { id: 0, status: "win", open: false, reward: "🎁" },
     { id: 1, status: "bomb", open: false, reward: "💣" },
@@ -19,6 +20,7 @@ function Page4() {
   ]);
 
   const rerollHandler = () => {
+    setDoorOpenCheck([]);
     setCount(0);
     setReloadCount((prev) => prev + 1);
     setGifts((prev) => {
@@ -37,6 +39,7 @@ function Page4() {
   };
 
   const initializeHandler = () => {
+    setDoorOpenCheck([]);
     setCount(0);
     setRewarddCount(0);
     setReloadCount(0);
@@ -95,10 +98,13 @@ function Page4() {
                 id={i}
                 status={gift.status}
                 gift={gift}
+                gifts={gifts}
                 setGifts={setGifts}
                 count={count}
                 setCount={setCount}
                 setRewarddCount={setRewarddCount}
+                doorOpenCheck={doorOpenCheck}
+                setDoorOpenCheck={setDoorOpenCheck}
               >
                 {gift.reward}
               </Door>

@@ -27,7 +27,7 @@ const SpacePage: React.FC = () => {
   }, [query.in, query.keyword]);
 
   return (
-    <div className="font-['DungGeunMo'] p-8 h-[calc(100lvh-4.2rem)]">
+    <div className="p-8 h-[calc(100lvh-4.2rem)]">
       <div className="text-2xl text-left">
         <NavLink to={"/space"}>Space</NavLink>
       </div>

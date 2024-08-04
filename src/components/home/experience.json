@@ -1,6 +1,7 @@
 [
   {
-    "company": "카테노이드 주식회사",
+    "type": "company",
+    "title": "카테노이드 주식회사",
     "role": "찰나팀/매니저(FE)",
     "period": "2022.06 ~ 현재",
     "details": [
@@ -28,7 +29,8 @@
     }
   },
   {
-    "company": "빗썸코리아",
+    "type": "company",
+    "title": "빗썸코리아",
     "role": "아키텍처팀",
     "period": "2020.03 ~ 2022.03",
     "details": [
@@ -76,7 +78,8 @@
     }
   },
   {
-    "company": "엔에이치엔커머스(주)",
+    "type": "company",
+    "title": "엔에이치엔커머스(주)",
     "role": "호스팅개발팀/사원",
     "period": "2017.10 ~ 2020.03",
     "details": [
@@ -100,12 +103,13 @@
       }
     ],
     "techStack": {
-      "languages": "HTML5, CSS, JavaScript(Vanilla.js, Jquery)",
+      "languages": "PHP, HTML5, CSS, JavaScript(Vanilla.js, Jquery)",
       "scm": "SVN, Git (Gitlab)"
     }
   },
   {
-    "company": "숙명여자대학교 화학과 연구실 BK21 사업팀",
+    "type": "personal",
+    "title": "숙명여자대학교 화학과 연구실 BK21 사업팀",
     "role": "연구원",
     "period": "2015.10 ~ 2017.08",
     "details": [
@@ -133,8 +137,8 @@
     ]
   },
   {
-    "type": "project",
-    "company": "RGB place",
+    "type": "personal",
+    "title": "RGB place",
     "url": "https://github.com/6lueparr0t/rgbplace",
     "role": "지역 기반 커뮤니티 서비스",
     "period": "2015.10 ~ 2020.02",
@@ -150,8 +154,8 @@
       {
         "project": "프론트엔드 (Vanilla JS, Scss, GulpJS)",
         "tasks": [
-          "Vanilla JS와 Scss 사용: 초기에는 React를 고려했으나, 프로젝트 규모 및 복잡성으로 인해 필요성이 낮다고 판단하여 Vanilla JS와 Scss로 설계",
-          "빌드 툴: GulpJS를 사용하여 빌드 및 배포 프로세스 자동화"
+          "초기에는 React를 고려했으나, 프로젝트 규모 및 복잡성으로 Vanilla JS와 Scss로 설계",
+          "GulpJS를 사용하여 빌드 및 배포 프로세스 자동화"
         ]
       },
       {
@@ -171,14 +175,14 @@
       {
         "project": "실시간 기능 (Golang, WebSocket)",
         "tasks": [
-          "실시간 접속: 사용자 간 실시간 접속 상태 구현",
-          "실시간 알림: 부분적으로 구현되어 있으며, 중요한 알림을 실시간으로 전송"
+          "사용자 간 실시간 접속 상태 구현",
+          "부분적으로 구현되어 있으며, 중요한 알림을 실시간으로 전송"
         ]
       },
       {
-        "project": "Markdown 에디터 (CodeMirror)",
+        "project": "Markdown 에디터",
         "tasks": [
-           "velog를 참고하여 Markdown 에디터를 직접 구현하여 사용자들이 포맷된 글을 작성할 수 있도록 구현"
+           "CodeMirror 라이브러리를 활용한 Markdown 에디터를 구현"
         ]
       },
       {

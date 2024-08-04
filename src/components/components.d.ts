@@ -1,3 +1,25 @@
+export type Job = {
+  title: string;
+  url?: string;
+  type: string;
+  role: string;
+  period: string;
+  details: {
+    project: string;
+    link?: string;
+    tasks: string[];
+  }[];
+  techStack?: {
+    languages?: string;
+    scm?: string;
+    cicd?: string;
+  };
+  link?: {
+    title: string;
+    url: string;
+  }[];
+}
+
 export type Issue = {
   number: number;
   title?: string;
