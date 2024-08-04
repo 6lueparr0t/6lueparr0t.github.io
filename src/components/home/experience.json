@@ -121,6 +121,9 @@
         ]
       }
     ],
+    "techStack": {
+      "languages": "PHP (CodeIgniter), HTML5, CSS, JavaScript(Vanilla.js, Jquery)"
+    },
     "link": [
       {
         "title": "ProWaVE 관련 사이트",

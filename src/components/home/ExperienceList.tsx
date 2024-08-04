@@ -43,7 +43,8 @@ const ExperienceList = ({ job }: { job: Job }) => {
             <div className="text-zinc-700 dark:text-zinc-400 text-left">{job.role}</div>
             <div className="text-zinc-700 dark:text-zinc-400 text-right">{job.period}</div>
           </div>
-          <ul className={`py-4 ${isOpen ? "" : "hidden"}`}>
+          <div className={isOpen ? "" : "hidden"}>
+          <ul className="py-4">
             {job.details.map((detail: { project: string; link?: string; tasks: string[] }) => (
               <li
                 key={detail.project}
@@ -90,6 +91,7 @@ const ExperienceList = ({ job }: { job: Job }) => {
               ))}
             </div>
           )}
+          </div>
         </div>
       </div>
     </>
