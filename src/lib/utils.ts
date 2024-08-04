@@ -58,3 +58,9 @@ export const deepClone = (data: string | number | boolean | object): string | nu
     }
   }
 }
+
+export const getColor = (name : string = "red"): string => {
+  const colorList = [ "red", "orange", "amber", "yellow", "lime", "green", "emerald", "teal", "cyan", "sky", "blue", "indigo", "violet", "purple", "fuchsia", "pink", "pink" ];
+
+  return colorList.includes(name) ? name : colorList[Math.floor(Math.random() * colorList.length)];
+}
