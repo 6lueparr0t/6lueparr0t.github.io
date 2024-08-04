@@ -103,7 +103,7 @@
       }
     ],
     "techStack": {
-      "languages": "HTML5, CSS, JavaScript(Vanilla.js, Jquery)",
+      "languages": "PHP, HTML5, CSS, JavaScript(Vanilla.js, Jquery)",
       "scm": "SVN, Git (Gitlab)"
     }
   },
