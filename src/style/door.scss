@@ -1,5 +1,6 @@
 // reference : https://lenadesign.org/2021/04/26/css-door-animation-open-close-on-hover/
 $on-small-screen: 768px !default;
+
 .door {
   position: relative;
   width: 100px;
@@ -25,6 +26,7 @@ $on-small-screen: 768px !default;
 
   .open {
     transform: rotateY(-160deg);
+
     .content {
       opacity: 0;
     }
@@ -37,6 +39,7 @@ $on-small-screen: 768px !default;
   @include media-query($on-small-screen) {
     width: 50px;
     height: 75px;
+
     .door-front {
       width: 50px;
       height: 75px;

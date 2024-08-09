@@ -114,7 +114,8 @@ function Page4() {
 
         <div className="mt-8">
           <div className="mb-4">
-          현재 성공 확률 : {(Math.floor(rewardCount/(reloadCount+1) * 100*100)/100).toFixed(2)}%
+            현재 성공 확률 :{" "}
+            {(Math.floor((rewardCount / (reloadCount + 1)) * 100 * 100) / 100).toFixed(2)}%
           </div>
           <Button className="mx-2" onClick={rerollHandler}>
             다시하기{reloadCount > 0 && `(${reloadCount})`} (r)
