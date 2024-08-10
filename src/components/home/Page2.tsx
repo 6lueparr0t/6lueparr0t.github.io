@@ -54,12 +54,12 @@ function Page2() {
           <p className="mb-8">{startDate.format("YYYY년 MM월 DD일")},</p>
           <p>
             PHP 웹 개발을 시작으로 BE(Java, Node.js), DevOps(Jenkins, Kubernetes), FE(Javascript,
-            React.js & Next.js) 등등
+            React.js & Next.js) 등,
           </p>
-          <p className="mb-8">다양한 영역에서 웹 개발 경험을 쌓아왔습니다.</p>
+          <p className="mb-8">웹 관련 개발 경험을 가지고 있습니다.</p>
 
           <p className="mb-8">
-            연구실, 호스팅 서비스, 가상화폐 거래소, 동영상 서비스 등의 도메인에서 업무를 해왔고, 현재는
+            연구실, 호스팅 서비스, 가상화폐 거래소, 동영상 숏폼 서비스 등의 도메인에서 업무를 해왔고, 현재는
             숏폼 서비스의 프론트엔드 개발에 주력하고 있습니다.
           </p>
 
