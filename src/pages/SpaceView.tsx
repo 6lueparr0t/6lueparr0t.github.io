@@ -9,6 +9,7 @@ import { getIssue } from "@/lib/space";
 import { IssueViewer } from "@/components/space/view/IssueViewer";
 import { IssueViewerButtonGroup } from "@/components/space/view/IssueViewerButtonGroup";
 import { IssueComments } from "@/components/space/view/IssueComments";
+import Copy from "@/components/_common/Copy";
 
 const SpaceViewPage: React.FC = () => {
   const { title, issue, comments } = useRouteLoaderData("space-view") as RouteLoaderData;
@@ -19,7 +20,10 @@ const SpaceViewPage: React.FC = () => {
 
   return (
     <div className="p-8 w-full md:w-3/4 lg:w-1/2 m-auto">
-      <div className="text-2xl text-left my-8">{title}</div>
+      <div className="flex text-2xl text-left my-8">
+        <span className="mr-4">{title}</span>
+        <Copy title="" icon={"🔗"}>{`https://6lueparr0t.github.io/space/${issue.number}`}</Copy>
+      </div>
       <div className="flex flex-col">
         <Suspense fallback={<div className="text-center">Loading...</div>}>
           <Await resolve={issue}>

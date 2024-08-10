@@ -5,10 +5,11 @@ import { SnackbarProvider, enqueueSnackbar } from "notistack";
 
 interface CopyProps extends PropsWithChildren {
   title?: string;
+  icon?: string;
   children: string;
 }
 
-const Copy: React.FC<CopyProps> = ({ title, children }) => {
+const Copy: React.FC<CopyProps> = ({ title, icon, children }) => {
   const [loaded, setLoaded] = useState(false);
   const copyToClipboard = (/*event: React.MouseEvent<HTMLDivElement>*/) => {
     navigator.clipboard
@@ -36,11 +37,11 @@ const Copy: React.FC<CopyProps> = ({ title, children }) => {
   }, []);
 
   return loaded ? (
-    <div className="flex items-center gap-2" onClick={copyToClipboard}>
+    <span className="flex flex-row items-center gap-2 cursor-pointer" onClick={copyToClipboard}>
       <SnackbarProvider />
-      {title ? title : children}
-      <ClipboardIcon className="w-[24px] h-[24px]" />
-    </div>
+      {title || title === "" ? title : children}
+      {icon ? icon : <ClipboardIcon className="w-[24px] h-[24px]" />}
+    </span>
   ) : (
     <>{children}</>
   );
