@@ -64,7 +64,7 @@ const Footer: React.FC = () => {
           </div>
           <div className="flex justify-center items-end">
             <div className="underline cursor-pointer px-2">
-              <Copy>{MAIL}</Copy>
+              <Copy title="E-MAIL">{MAIL}</Copy>
             </div>
           </div>
         </div>
@@ -77,12 +77,8 @@ const Footer: React.FC = () => {
           >
             <ArrowLongUpIcon className="animate-bounce w-[24px] h-[24px]" />
           </div>
-          <div className="text-base">
-            In Seoul, Republic of Korea
-          </div>
-          <div className="text-base">
-            {currentTime}
-          </div>
+          <div className="text-base">In Seoul, Republic of Korea</div>
+          <div className="text-base">{currentTime}</div>
           {/* <span className="font-['Tossface'] text-4xl">🇰🇷</span>
           <span className="text-base">Republic of Korea</span> */}
         </div>
