@@ -15,7 +15,7 @@ import { Button } from "@/components/ui/button";
 
 // import modalStore from "@/store/modal";
 
-export const SearchInput: React.FC<SpaceProps> = ({query}) => {
+export const SearchInput: React.FC<SpaceProps> = ({ query }) => {
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -49,9 +49,9 @@ export const SearchInput: React.FC<SpaceProps> = ({query}) => {
   }, [location.key]);
 
   useEffect(() => {
-      if(inputRef.current && query?.keyword) {
-        inputRef.current.value = query?.keyword ?? "";
-      }
+    if (inputRef.current && query?.keyword) {
+      inputRef.current.value = query?.keyword ?? "";
+    }
   }, [query?.keyword]);
 
   return (
@@ -89,7 +89,12 @@ export const SearchInput: React.FC<SpaceProps> = ({query}) => {
         </Form>
       </div>
       <Button className="w-full md:w-20 text-xs md:text-sm">
-        <a href={`https://github.com/6lueparr0t/6lueparr0t.github.io/issues/new`} target="_blank">
+        <a
+          href={`https://github.com/${import.meta.env.VITE_APP_GIT_OWNER}/${
+            import.meta.env.VITE_APP_GIT_REPO
+          }/issues/new`}
+          target="_blank"
+        >
           글쓰기
         </a>
       </Button>

@@ -38,7 +38,7 @@ const Copy: React.FC<CopyProps> = ({ title, icon, children }) => {
 
   return loaded ? (
     <span className="flex flex-row items-center gap-2 cursor-pointer" onClick={copyToClipboard}>
-      <SnackbarProvider />
+      <SnackbarProvider maxSnack={10} autoHideDuration={3000} disableWindowBlurListener={true} />
       {title || title === "" ? title : children}
       {icon ? icon : <ClipboardIcon className="w-[24px] h-[24px]" />}
     </span>

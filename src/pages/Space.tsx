@@ -21,7 +21,7 @@ const SpacePage: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    if(query.in && query.keyword) {
+    if (query.in && query.keyword) {
       document.title = `${query.in}:${query.keyword}`;
     }
   }, [query.in, query.keyword]);
@@ -33,7 +33,9 @@ const SpacePage: React.FC = () => {
       </div>
       <div className="text-base text-left">
         <a
-          href="https://github.com/6lueparr0t/6lueparr0t.github.io/issues"
+          href={`https://github.com/${import.meta.env.VITE_APP_GIT_OWNER}/${
+            import.meta.env.VITE_APP_GIT_REPO
+          }/issues`}
           target="_blank"
           rel="noreferrer"
         >

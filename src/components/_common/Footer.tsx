@@ -38,7 +38,9 @@ const Footer: React.FC = () => {
                 </svg>
               </a>
               <a
-                href="https://github.com/6lueparr0t/6lueparr0t.github.io"
+                href={`https://github.com/${import.meta.env.VITE_APP_GIT_OWNER}/${
+                  import.meta.env.VITE_APP_GIT_REPO
+                }`}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -63,8 +65,8 @@ const Footer: React.FC = () => {
             </a>
           </div>
           <div className="flex justify-center items-end">
-            <div className="underline cursor-pointer px-2">
-              <Copy title="E-MAIL">{MAIL}</Copy>
+            <div className="underline cursor-pointer px-2" title={MAIL}>
+              <Copy title="email">{MAIL}</Copy>
             </div>
           </div>
         </div>
