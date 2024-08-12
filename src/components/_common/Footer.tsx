@@ -56,7 +56,7 @@ const Footer: React.FC = () => {
               Youtube
             </a>
             <span className="px-2">/</span>
-            <a href="https://blog.rgbplace.com" target="_blank" rel="noopener noreferrer">
+            <a href="https://6lueparr0t.tistory.com" target="_blank" rel="noopener noreferrer">
               Tistory
             </a>
             <span className="px-2">/</span>
