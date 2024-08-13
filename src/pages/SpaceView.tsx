@@ -27,7 +27,7 @@ const SpaceViewPage: React.FC = () => {
   }, [title]);
 
   return (
-    <div className="p-8 w-full md:w-3/4 lg:w-1/2 m-auto">
+    <div className="p-8 w-full lg:w-3/4 m-auto">
       <Button variant="ghost" className="p-0" title="back">
         <Link to={`/space`}>
           <ChevronLeftIcon className="w-[24px] h-[24px]" />
