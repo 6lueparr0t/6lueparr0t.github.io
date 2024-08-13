@@ -1,4 +1,3 @@
-import ReactGA from "react-ga4";
 import { useEffect, useState, type PropsWithChildren } from "react";
 import { ClipboardIcon } from "@heroicons/react/24/outline";
 import { SnackbarProvider, enqueueSnackbar } from "notistack";
@@ -18,13 +17,6 @@ const Copy: React.FC<CopyProps> = ({ title, icon, children }) => {
         enqueueSnackbar("클립보드에 복사되었습니다!", {
           autoHideDuration: 2000,
           variant: "success",
-        });
-
-        ReactGA.event({
-          category: "copy",
-          action: `Copied to clipboard: ${children}`,
-          label: "Copy Text",
-          value: 1,
         });
       })
       .catch((error) => {

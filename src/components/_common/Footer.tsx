@@ -65,7 +65,7 @@ const Footer: React.FC = () => {
             </a>
           </div>
           <div className="flex justify-center items-end">
-            <div className="underline cursor-pointer px-2" title={MAIL}>
+            <div id="email" className="underline cursor-pointer px-2" title={MAIL}>
               <Copy title="email">{MAIL}</Copy>
             </div>
           </div>
