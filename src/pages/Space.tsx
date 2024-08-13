@@ -27,51 +27,57 @@ const SpacePage: React.FC = () => {
   }, [query.in, query.keyword]);
 
   return (
-    <div className="p-8 min-h-[calc(100vh-4.2rem)]">
-      <div className="text-2xl text-left">
-        <NavLink to={"/space"}>Space</NavLink>
+    <div className="p-8 min-h-[calc(100vh-4.2rem)] flex flex-col justify-between">
+      <div id='space-top'>
+        <div className="text-2xl text-left">
+          <NavLink to={"/space"}>Space</NavLink>
+        </div>
+        <div className="text-base text-left">
+          <a
+            href={`https://github.com/${import.meta.env.VITE_APP_GIT_OWNER}/${
+              import.meta.env.VITE_APP_GIT_REPO
+            }/issues`}
+            target="_blank"
+            rel="noreferrer"
+          >
+            Github Issues{" "}
+          </a>
+        </div>
+        <SearchInput query={query} />
+        <div className="flex flex-col justify-center items-center">
+          <Suspense fallback={<div className="text-center">Loading...</div>}>
+            <Await resolve={list}>
+              {(list) => (
+                <>
+                  <IssueTable list={list} />
+                </>
+              )}
+            </Await>
+          </Suspense>
+        </div>
       </div>
-      <div className="text-base text-left">
-        <a
-          href={`https://github.com/${import.meta.env.VITE_APP_GIT_OWNER}/${
-            import.meta.env.VITE_APP_GIT_REPO
-          }/issues`}
-          target="_blank"
-          rel="noreferrer"
-        >
-          Github Issues{" "}
-        </a>
-      </div>
-      <SearchInput query={query} />
-      <div className="flex flex-col justify-center items-center">
-        <Suspense fallback={<div className="text-center">Loading...</div>}>
-          <Await resolve={list}>
-            {(list) => (
-              <>
-                <IssueTable list={list} />
-              </>
-            )}
-          </Await>
-        </Suspense>
-        <Suspense fallback={<div className="text-center">Loading...</div>}>
-          <Await resolve={last}>
-            {(last) => (
-              <>
-                <div className="w-full flex flex-col justify-evenly items-center mt-20">
-                  {list && list?.length === 0 ? (
-                    <>등록된 게시글이 없습니다.</>
-                  ) : (
-                    <IssuePagination
-                      last={last}
-                      page={page ?? 1}
-                      query={query || { in: "title" }}
-                    />
-                  )}
-                </div>
-              </>
-            )}
-          </Await>
-        </Suspense>
+      <div id='space-bottom'>
+        <div className="flex flex-col justify-center items-center">
+          <Suspense fallback={<div className="text-center">Loading...</div>}>
+            <Await resolve={last}>
+              {(last) => (
+                <>
+                  <div className="w-full flex flex-col justify-evenly items-center mt-20">
+                    {list && list?.length === 0 ? (
+                      <>등록된 게시글이 없습니다.</>
+                    ) : (
+                      <IssuePagination
+                        last={last}
+                        page={page ?? 1}
+                        query={query || { in: "title" }}
+                      />
+                    )}
+                  </div>
+                </>
+              )}
+            </Await>
+          </Suspense>
+        </div>
       </div>
     </div>
   );
