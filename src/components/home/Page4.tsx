@@ -139,7 +139,7 @@ function Page4() {
 
           <p>네트워크(IoT, 5G), AI, 데이터마이닝, 추천시스템, 자연어 처리 등의 과목을 수강했고,</p>
           <p>가상화폐 거래소를 다녔던 배경 지식을 기반으로 &nbsp;</p>
-          <p className="mb-8">
+          <p>
             <span
               className="text-blue-600 dark:text-blue-400 cursor-pointer"
               onClick={() => {
