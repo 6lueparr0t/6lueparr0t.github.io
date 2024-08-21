@@ -16,7 +16,7 @@ const GuestbookList = () => {
   const [error] = useState<string | null>(null);
 
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-slate-200 dark:bg-gray-800 shadow-md rounded-lg my-16">
+    <div className="max-w-4xl mx-8 md:mx-auto p-6 bg-slate-200 dark:bg-gray-800 shadow-md rounded-lg my-16">
       {loading && <p className="text-gray-500 dark:text-gray-400">불러오는 중...</p>}
       {error && <p className="text-red-600 dark:text-red-400">{error}</p>}
       {entries.length === 0 && !loading && <p className="text-gray-500 dark:text-gray-400">방명록이 없습니다.</p>}

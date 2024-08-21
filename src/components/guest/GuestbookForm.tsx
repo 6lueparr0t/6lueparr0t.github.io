@@ -55,7 +55,7 @@ const GuestbookForm = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-slate-200 dark:bg-gray-800 shadow-md rounded-lg my-16">
+    <div className="max-w-4xl mx-8 md:mx-auto p-6 bg-slate-200 dark:bg-gray-800 shadow-md rounded-lg my-16">
       <h2 className="text-2xl font-bold mb-4 text-dark dark:text-white">방명록</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
