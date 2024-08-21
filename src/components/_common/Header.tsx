@@ -28,7 +28,7 @@ const Header: React.FC<PropsWithChildren> = ({ children }) => {
           {MENU.map((menu) => {
             return (
               <li key={menu.path}>
-                <NavLink to={menu.path} className={"text-gray-800 hover:text-gray-400  dark:text-gray-100 dark:hover:text-gray-500"}>
+                <NavLink id={menu.title} to={menu.path} className={"text-gray-800 hover:text-gray-400  dark:text-gray-100 dark:hover:text-gray-500"}>
                   {menu.title}
                 </NavLink>
               </li>

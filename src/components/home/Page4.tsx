@@ -139,7 +139,7 @@ function Page4() {
 
           <p>네트워크(IoT, 5G), AI, 데이터마이닝, 추천시스템, 자연어 처리 등의 과목을 수강했고,</p>
           <p>가상화폐 거래소를 다녔던 배경 지식을 기반으로 &nbsp;</p>
-          <p className="mb-8">
+          <p>
             <span
               className="text-blue-600 dark:text-blue-400 cursor-pointer"
               onClick={() => {
@@ -173,9 +173,6 @@ function Page4() {
             </span>
             에 참여하기도 했습니다.
           </p>
-
-          <p>아직 AI 를 이해하기엔 부족한 부분들이 많지만,</p>
-          <p>대학원에서 배운 것들을 활용하여 업무에 활용하려고 합니다.</p>
         </div>
       </div>
     </div>

@@ -56,7 +56,7 @@ const Footer: React.FC = () => {
               Youtube
             </a>
             <span className="px-2">/</span>
-            <a href="https://blog.rgbplace.com" target="_blank" rel="noopener noreferrer">
+            <a href="https://6lueparr0t.tistory.com" target="_blank" rel="noopener noreferrer">
               Tistory
             </a>
             <span className="px-2">/</span>
@@ -66,7 +66,7 @@ const Footer: React.FC = () => {
           </div>
           <div className="flex justify-center items-end">
             <div className="underline cursor-pointer px-2" title={MAIL}>
-              <Copy title="email">{MAIL}</Copy>
+              <Copy id="email" title="email">{MAIL}</Copy>
             </div>
           </div>
         </div>

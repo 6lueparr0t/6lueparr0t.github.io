@@ -64,3 +64,18 @@ export const getColor = (name : string = "red"): string => {
 
   return colorList.includes(name) ? name : colorList[Math.floor(Math.random() * colorList.length)];
 }
+
+declare global {
+  interface Window {
+    dataLayer: unknown[];
+  }
+}
+
+export const sendGtmEvent = (data: object): void => {
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({
+    ...(data as object),
+    eventTime : new Date(new Date().getTime() + 9 * 60 * 60 * 1000).toISOString().replace('Z', '+09:00')
+  });
+};
+
