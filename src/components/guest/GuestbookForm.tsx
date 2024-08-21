@@ -1,6 +1,6 @@
 // components/guestbook/GuestbookForm.tsx
 import { useState, FormEvent } from 'react';
-import { Button } from '../ui/button'; // UI 폴더에 Button 컴포넌트가 있다고 가정합니다.
+import { Button } from '@/components/ui/button'; // UI 폴더에 Button 컴포넌트가 있다고 가정합니다.
 
 interface FormData {
   name: string;

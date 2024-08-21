@@ -6,7 +6,7 @@ import ErrorPage from "@/pages/Error";
 import HomePage from "@/pages/Home";
 import AboutPage from "@/pages/About";
 import SpacePage, { loader as SpaceLoader } from "@/pages/Space";
-import GuestbookPage from "@/pages/Guestbook";
+import GuestPage from "@/pages/Guest";
 import SpaceViewPage, { loader as SpaceViewLoader } from "@/pages/SpaceView";
 
 
@@ -35,9 +35,9 @@ const router = createBrowserRouter([
         loader: SpaceViewLoader,
       },
       {
-        path: "guestbook",
-        id: "guestbook",
-        element: <GuestbookPage />,
+        path: "guest",
+        id: "guest",
+        element: <GuestPage />,
       },
     ],
   },

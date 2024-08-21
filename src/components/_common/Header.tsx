@@ -20,8 +20,8 @@ const Header: React.FC<PropsWithChildren> = ({ children }) => {
       title: "space",
     },
     {
-      path: "/guestbook",
-      title: "guestbook",
+      path: "/guest",
+      title: "guest",
     },
   ];
 
