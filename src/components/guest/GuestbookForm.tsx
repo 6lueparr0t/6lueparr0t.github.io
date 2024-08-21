@@ -33,7 +33,7 @@ const GuestbookForm = () => {
     setSuccess(null);
 
     try {
-      const response = await fetch(`/api/slack`, {
+      const response = await fetch(`https://6lueparr0t-guestbook.vercel.app`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
