@@ -6,11 +6,15 @@ import basicSsl from "@vitejs/plugin-basic-ssl";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [
-    react(),
-    tsconfigPaths(),
-    basicSsl(),
-  ],
+  plugins: [react(), tsconfigPaths(), basicSsl()],
+  server: {
+    proxy: {
+      "/api": {
+        target: "https://6lueparr0t-guestbook.vercel.app",
+        changeOrigin: true,
+      },
+    },
+  },
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
