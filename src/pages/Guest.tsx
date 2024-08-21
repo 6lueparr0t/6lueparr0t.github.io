@@ -10,7 +10,7 @@ function Guestbook() {
   }, []);
 
   return (
-    <div className="font-['DungGeunMo']">
+    <div className="font-['DungGeunMo'] flex flex-col items-center">
       <GuestbookForm />
       <GuestbookList />
     </div>
