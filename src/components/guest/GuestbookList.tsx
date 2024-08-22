@@ -24,7 +24,6 @@ const GuestbookList = () => {
         {entries.map((entry, index) => (
           <li key={index} className="border border-gray-200 dark:border-gray-700 p-4 rounded-md shadow-sm bg-white dark:bg-gray-900">
             <div className=" text-black dark:text-gray-100">{entry.name}</div>
-            <div className="text-base text-gray-600 dark:text-gray-400">({entry.mail})</div>
             <p className="mt-2 text-black dark:text-gray-300">{entry.message}</p>
             {entry.answer && (
               <div className="mt-2 text-base text-gray-800 dark:text-gray-200 italic">답장: {entry.answer}</div>
