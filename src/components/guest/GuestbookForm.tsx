@@ -51,6 +51,7 @@ const GuestbookForm = () => {
         setSuccess('검토 후 반영하겠습니다. 감사합니다.');
         setFormData({ name: '', message: '', mail: '' });
         turnstileRef.current?.reset();
+        setStatus('expired');
       } else {
         setError('메시지 전송에 실패했습니다. 아래 메일로 문의해주세요.');
       }
