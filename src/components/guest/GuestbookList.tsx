@@ -21,7 +21,7 @@ const GuestbookList = () => {
       {error && <p className="text-red-600 dark:text-red-400">{error}</p>}
       {entries.length === 0 && !loading && <p className="text-gray-500 dark:text-gray-400">방명록이 없습니다.</p>}
       <ul className="space-y-4">
-        {entries.map((entry, index) => (
+        {entries.map((entry) => (
           <li key={entry.message} className="border border-gray-200 dark:border-gray-700 p-4 rounded-md shadow-sm bg-white dark:bg-gray-900">
             <div className=" text-black dark:text-gray-100">{entry.name}</div>
             <p className="mt-2 text-black dark:text-gray-300">{entry.message}</p>
