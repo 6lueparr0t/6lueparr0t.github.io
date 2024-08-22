@@ -1,5 +1,8 @@
 // components/guestbook/GuestbookForm.tsx
-import { useState, FormEvent } from 'react';
+import { useRef, useState, FormEvent } from 'react';
+import { Turnstile } from '@marsidev/react-turnstile'
+import type { TurnstileInstance } from '@marsidev/react-turnstile'
+
 import { Button } from '@/components/ui/button'; // UI 폴더에 Button 컴포넌트가 있다고 가정합니다.
 
 interface FormData {
@@ -9,6 +12,9 @@ interface FormData {
 }
 
 const GuestbookForm = () => {
+  const [status, setStatus] = useState<string | null>(null);
+  const turnstileRef = useRef<TurnstileInstance | null>(null);
+
   const [formData, setFormData] = useState<FormData>({
     name: '',
     message: '',
@@ -44,6 +50,8 @@ const GuestbookForm = () => {
       if (response.ok) {
         setSuccess('검토 후 반영하겠습니다. 감사합니다.');
         setFormData({ name: '', message: '', mail: '' });
+        turnstileRef.current?.reset();
+        setStatus('expired');
       } else {
         setError('메시지 전송에 실패했습니다. 아래 메일로 문의해주세요.');
       }
@@ -55,7 +63,7 @@ const GuestbookForm = () => {
   };
 
   return (
-    <div className="w-[calc(100%-4rem)] sm:w-1/2 mx-8 p-6 bg-slate-200 dark:bg-gray-800 shadow-md rounded-lg my-16">
+    <div className="w-[calc(100%-4rem)] sm:w-1/2 mx-8 p-6 bg-slate-100 dark:bg-gray-800 shadow-md rounded-lg mt-16">
       <h2 className="text-2xl font-bold mb-4 text-dark dark:text-white">방명록</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
@@ -95,7 +103,7 @@ const GuestbookForm = () => {
         </div>
         <Button
           type="submit"
-          disabled={isSubmitting}
+          disabled={isSubmitting || status !== 'solved'}
           className={`flex mt-4 mx-auto px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white dark:text-black bg-slate-600 dark:bg-slate-100 hover:bg-slate-700 dark:hover:bg-slate-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-500 ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
         >
           {isSubmitting ? '보내는 중...' : '남기기'}
@@ -103,6 +111,13 @@ const GuestbookForm = () => {
         {error && <p className="mt-4 text-red-600 dark:text-red-400">{error}</p>}
         {success && <p className="mt-4 text-green-600 dark:text-green-400">{success}</p>}
       </form>
+      <Turnstile
+        ref={turnstileRef}
+        siteKey='0x4AAAAAAAh0AbQiSvRJjo-z'
+        onError={() => setStatus('error')}
+        onExpire={() => setStatus('expired')}
+        onSuccess={() => setStatus('solved')}
+      />
     </div>
   );
 };

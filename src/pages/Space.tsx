@@ -17,7 +17,6 @@ const SpacePage: React.FC = () => {
 
   useEffect(() => {
     document.title = "space";
-    window.scrollTo({ top: 0, behavior: "instant" });
   }, []);
 
   useEffect(() => {
