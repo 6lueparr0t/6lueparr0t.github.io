@@ -24,11 +24,12 @@ const GuestbookList = () => {
         {entries.map((entry) => (
           <li key={entry.message} className="border border-gray-200 dark:border-gray-700 p-4 rounded-md shadow-sm bg-white dark:bg-gray-900">
             <div className=" text-black dark:text-gray-100">{entry.name}</div>
-            <p className="mt-2 text-black dark:text-gray-300">{entry.message}</p>
+            <p className="mt-2 text-black dark:text-gray-300"></p>
+            <div className="mt-4 p-4 rounded-md text-base text-slate-800 dark:text-slate-200 bg-orange-50 dark:bg-slate-800">{entry.message}</div>
+            <div className="text-sm text-gray-500 dark:text-gray-500">{dayjs(entry.date).format("YYYY-MM-DD HH:mm:ss")}</div>
             {entry.answer && (
-              <div className="mt-2 text-base text-gray-800 dark:text-gray-200 italic">답장: {entry.answer}</div>
+              <div className="mt-4 p-4 rounded-md text-base text-right text-slate-200 dark:text-slate-800 bg-slate-800 dark:bg-orange-50">{entry.answer}</div>
             )}
-            <div className="mt-2 text-base text-gray-500 dark:text-gray-500">{dayjs(entry.date).format("YYYY-MM-DD HH:mm:ss")}</div>
           </li>
         ))}
       </ul>
