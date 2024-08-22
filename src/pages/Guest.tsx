@@ -7,6 +7,24 @@ import GuestbookList from "@/components/guest/GuestbookList"; // 예시 컴포�
 function Guestbook() {
   useEffect(() => {
     document.title = "Guest";
+
+    const scrollToHash = () => {
+      if (window.location.hash) {
+        const element = document.querySelector(window.location.hash);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      } else {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    };
+
+    scrollToHash();
+    window.addEventListener("hashchange", scrollToHash);
+
+    return () => {
+      window.removeEventListener("hashchange", scrollToHash);
+    };
   }, []);
 
   return (
