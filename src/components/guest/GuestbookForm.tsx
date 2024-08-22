@@ -101,6 +101,15 @@ const GuestbookForm = () => {
             className="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-black dark:text-gray-200 bg-white dark:bg-gray-900 focus:outline-none focus:ring-slate-500 focus:border-slate-500 sm:text-sm"
           />
         </div>
+        <div className='flex justify-center mt-4'>
+          <Turnstile
+            ref={turnstileRef}
+            siteKey='0x4AAAAAAAh0AbQiSvRJjo-z'
+            onError={() => setStatus('error')}
+            onExpire={() => setStatus('expired')}
+            onSuccess={() => setStatus('solved')}
+          />
+        </div>
         <Button
           type="submit"
           disabled={isSubmitting || status !== 'solved'}
@@ -111,13 +120,6 @@ const GuestbookForm = () => {
         {error && <p className="mt-4 text-red-600 dark:text-red-400">{error}</p>}
         {success && <p className="mt-4 text-green-600 dark:text-green-400">{success}</p>}
       </form>
-      <Turnstile
-        ref={turnstileRef}
-        siteKey='0x4AAAAAAAh0AbQiSvRJjo-z'
-        onError={() => setStatus('error')}
-        onExpire={() => setStatus('expired')}
-        onSuccess={() => setStatus('solved')}
-      />
     </div>
   );
 };
