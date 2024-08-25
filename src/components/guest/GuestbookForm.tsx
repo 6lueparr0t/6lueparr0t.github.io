@@ -39,7 +39,7 @@ const GuestbookForm = () => {
     setSuccess(null);
 
     try {
-      const response = await fetch(import.meta.env.VITE_APP_SLACK_ENDPOINT, {
+      const response = await fetch(`${import.meta.env.VITE_APP_SLACK_ENDPOINT}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
