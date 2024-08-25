@@ -68,7 +68,8 @@ jobs:
         VITE_APP_GIT_REPO: ${{ vars.VITE_APP_GIT_REPO }}
         VITE_APP_GIT_OWNER: ${{ vars.VITE_APP_GIT_OWNER }}
         VITE_APP_GIT_TOKEN: ${{ vars.VITE_APP_GIT_TOKEN }}
-        VITE_APP_SLACK_ENDPOINT: ${{ vars.VITE_APP_SLACK_ENDPOINT }}
+        VITE_APP_SLACK_ENDPOINT: ${{ secrets.VITE_APP_SLACK_ENDPOINT }}
+
 
     - name: Upload artifact
       uses: actions/upload-pages-artifact@v3
