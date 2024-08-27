@@ -2,6 +2,7 @@ import React, { type PropsWithChildren } from "react";
 import { NavLink } from "react-router-dom";
 
 import Menu from "@/components/_common/Menu";
+// import ServerSentEvent from "@/components/_common/ServerSentEvent";
 import { ModeToggle } from "@/components/custom/mode-toggle";
 
 import mainStore from "@/store/main";
@@ -51,6 +52,7 @@ const Header: React.FC<PropsWithChildren> = ({ children }) => {
         </div>
       </div>
       {children}
+      {/* <ServerSentEvent/> */}
     </header>
   );
 };

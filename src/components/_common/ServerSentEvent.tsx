@@ -3,10 +3,13 @@ import { useEffect, useState, useRef } from 'react';
 function ServerSentEvent() {
   const [message, setMessage] = useState('');
   const eventSourceRef = useRef<EventSource | null>(null);
+  const retryCountRef = useRef(0); // 재연결 시도 횟수 추적
 
   useEffect(() => {
+    const maxRetries = 5; // 최대 재연결 시도 횟수
+
     const connect = () => {
-      eventSourceRef.current = new EventSource(import.meta.env.VITE_APP_BACKEND + '/api/events');
+      eventSourceRef.current = new EventSource(import.meta.env.VITE_APP_BACKEND + '/api/events?enable=true');
 
       eventSourceRef.current.onmessage = (event) => {
         const data = JSON.parse(event.data);
@@ -19,10 +22,16 @@ function ServerSentEvent() {
           eventSourceRef.current.close();
         }
 
-        // 1초 후에 재연결 시도
-        setTimeout(() => {
-          connect();
-        }, 1000);
+        // 최대 재연결 시도 횟수를 초과하지 않은 경우
+        if (retryCountRef.current < maxRetries) {
+          retryCountRef.current += 1; // 재연결 시도 횟수 증가
+          console.info(`Connecting .. ${retryCountRef.current}`);
+          setTimeout(() => {
+            connect();
+          }, 5000);
+        } else {
+          console.error(`Failed to reconnect after ${maxRetries} attempts.`);
+        }
       };
     };
 
