@@ -68,7 +68,6 @@ jobs:
         VITE_APP_GIT_REPO: ${{ vars.VITE_APP_GIT_REPO }}
         VITE_APP_GIT_OWNER: ${{ vars.VITE_APP_GIT_OWNER }}
         VITE_APP_GIT_TOKEN: ${{ secrets.VITE_APP_GIT_TOKEN }}
-        VITE_APP_SLACK_ENDPOINT: ${{ secrets.VITE_APP_SLACK_ENDPOINT }}
         VITE_APP_BACKEND: ${{ secrets.VITE_APP_BACKEND }}
 
 
