@@ -83,7 +83,7 @@ function Page4() {
             #
           </a>
         </AlertTitle>
-        <AlertDescription className="mt-4 leading-relaxed">
+        <AlertDescription className="mt-4 leading-relaxed font-noto text-base">
           1. 문제를 풀기 전에 먼저 문을 선택합니다. <br />
           2. 문을 선택한 후, 진행자는 다른 문 중 하나를 열어서 상품이 없다는 것을 보여줍니다. <br />
           3. 선택을 바꾸는 것이 유리할까요?
