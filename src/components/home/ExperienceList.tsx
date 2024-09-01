@@ -17,8 +17,7 @@ const ExperienceList = ({ job }: { job: Job }) => {
     <>
       <div
         key={job.title}
-        className="mx-8 my-16 p-4 rounded-lg ring-zinc-300 dark:ring-zinc-800 ring-8 cursor-pointer"
-        onClick={toggleAccordion}
+        className="mx-8 my-16 p-4 rounded-lg ring-zinc-300 dark:ring-zinc-800 ring-8"
       >
         <div className="text-lg font-bold flex justify-between items-center">
           <div>
@@ -29,11 +28,11 @@ const ExperienceList = ({ job }: { job: Job }) => {
               </a>
             )}
           </div>
-          <div>
+          <div className="cursor-pointer" onClick={toggleAccordion}>
             {isOpen ? (
-              <ChevronUpIcon className="w-[16px] h-[16px]" />
+              <ChevronUpIcon className="w-[24px] h-[24px]" />
             ) : (
-              <ChevronDownIcon className="w-[16px] h-[16px]" />
+              <ChevronDownIcon className="w-[24px] h-[24px]" />
             )}
           </div>
         </div>

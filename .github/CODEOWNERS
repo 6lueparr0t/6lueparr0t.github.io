@@ -1,0 +1,7 @@
+# 해당 파일이나 디렉토리에 대한 Pull Request(PR) 리뷰를 자동으로 요청받음
+# ex
+# *       @username1 @username2  # 리포지토리 내 모든 파일의 소유자
+# /docs/  @doc-owner             # /docs/ 디렉토리 내 모든 파일의 소유자
+# *.js    @frontend-team         # 모든 JavaScript 파일의 소유자
+
+* @6lueparr0t
