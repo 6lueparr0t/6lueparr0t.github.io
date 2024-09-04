@@ -17,7 +17,7 @@ const ExperienceList = ({ job }: { job: Job }) => {
     <>
       <div
         key={job.title}
-        className="mx-8 my-16 p-4 rounded-lg ring-zinc-300 dark:ring-zinc-800 ring-8"
+        className="mx-8 my-16 p-4 rounded-lg ring-zinc-300 dark:ring-zinc-800 ring-4"
       >
         <div className="text-lg font-bold flex justify-between items-center">
           <div>
