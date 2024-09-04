@@ -1,0 +1,26 @@
+[
+  {
+    "type": "certification",
+    "title": "컴퓨터활용능력 1급",
+    "issuer": "대한상공회의소",
+    "date": "2009.08"
+  },
+  {
+    "type": "certification",
+    "title": "정보처리기사",
+    "issuer": "한국산업인력공단",
+    "date": "2019.08"
+  },
+  {
+    "type": "certification",
+    "title": "AWS Developer Associate",
+    "issuer": "Amazon Web Services",
+    "date": "2022.12"
+  },
+  {
+    "type": "certification",
+    "title": "CKAD",
+    "issuer": "The Linux Foundation",
+    "date": "2023.02"
+  }
+]
