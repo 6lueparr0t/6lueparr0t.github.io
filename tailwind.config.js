@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-/** @type {import('tailwindcss').Config} */
+/** @type {import("tailwindcss").Config} */
 module.exports = {
   darkMode: ["class"],
   content: [
@@ -71,43 +71,48 @@ module.exports = {
           to: { height: "0" },
         },
         ship: {
-          '0%': { opacity: '1', transform: 'translateY(5%) translateX(-150%) rotate(2deg)' },
-          '10%': { opacity: '1', transform: 'translateY(-5%) translateX(-120%) rotate(-2deg)' },
-          '20%': { opacity: '1', transform: 'translateY(5%) translateX(-90%) rotate(2deg)' },
-          '30%': { opacity: '1', transform: 'translateY(-5%) translateX(-60%) rotate(-2deg)' },
-          '40%': { opacity: '1', transform: 'translateY(5%) translateX(-30%) rotate(2deg)' },
-          '50%': { opacity: '1', transform: 'translateY(-5%) translateX(0%) rotate(-2deg)' },
-          '60%': { opacity: '1', transform: 'translateY(5%) translateX(30%) rotate(2deg)' },
-          '70%': { opacity: '1', transform: 'translateY(-5%) translateX(60%) rotate(-2deg)' },
-          '80%': { opacity: '1', transform: 'translateY(5%) translateX(90%) rotate(2deg)' },
-          '90%': { opacity: '1', transform: 'translateY(-5%) translateX(120%) rotate(-2deg)' },
-          '100%': { opacity: '1', transform: 'translateY(5%) translateX(150%) rotate(2deg)' },
+          "0%": { opacity: "1", transform: "translateY(5%) translateX(-150%) rotate(2deg)" },
+          "10%": { opacity: "1", transform: "translateY(-5%) translateX(-120%) rotate(-2deg)" },
+          "20%": { opacity: "1", transform: "translateY(5%) translateX(-90%) rotate(2deg)" },
+          "30%": { opacity: "1", transform: "translateY(-5%) translateX(-60%) rotate(-2deg)" },
+          "40%": { opacity: "1", transform: "translateY(5%) translateX(-30%) rotate(2deg)" },
+          "50%": { opacity: "1", transform: "translateY(-5%) translateX(0%) rotate(-2deg)" },
+          "60%": { opacity: "1", transform: "translateY(5%) translateX(30%) rotate(2deg)" },
+          "70%": { opacity: "1", transform: "translateY(-5%) translateX(60%) rotate(-2deg)" },
+          "80%": { opacity: "1", transform: "translateY(5%) translateX(90%) rotate(2deg)" },
+          "90%": { opacity: "1", transform: "translateY(-5%) translateX(120%) rotate(-2deg)" },
+          "100%": { opacity: "1", transform: "translateY(5%) translateX(150%) rotate(2deg)" },
+        },
+        scroll: {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(calc(-236px * 4))" }, // 자격증 개수 * 236px
         },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        ship: 'ship 4s linear infinite',
+        ship: "ship 4s linear infinite",
+        scroll: "scroll 15s linear infinite",
       },
       backgroundImage: {
-        'wave-pattern': 'repeating-linear-gradient(45deg, rgba(0, 0, 255, 0.5), rgba(0, 0, 255, 0.5) 20px, rgba(0, 0, 255, 0.3) 20px, rgba(0, 0, 255, 0.3) 40px)',
+        "wave-pattern": "repeating-linear-gradient(45deg, rgba(0, 0, 255, 0.5), rgba(0, 0, 255, 0.5) 20px, rgba(0, 0, 255, 0.3) 20px, rgba(0, 0, 255, 0.3) 40px)",
       },
       fontFamily: {
-        noto: ['Noto Sans KR', 'sans-serif'],
+        noto: ["Noto Sans KR", "sans-serif"],
       },
       boxShadow: {
-        'white-2xl': '0 25px 50px -12px rgb(255 255 255 / 0.25);'
+        "white-2xl": "0 25px 50px -12px rgb(255 255 255 / 0.25);"
       }
     },
   },
   variants: {
     extend: {
-      filter: ['responsive', 'hover', 'focus'],
+      filter: ["responsive", "hover", "focus"],
     },
   },
   plugins: [require("tailwindcss-animate")],
   // disable tailwind preflight: https://tailwindcss.com/docs/preflight
   // corePlugins: {
-    // preflight: false,
+  // preflight: false,
   // },
 };

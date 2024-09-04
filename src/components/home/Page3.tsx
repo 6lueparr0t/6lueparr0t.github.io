@@ -1,5 +1,6 @@
 import ExperienceList from "./ExperienceList";
 import experiences from "./Experiences.json";
+import CertificationCard from "./CertificationCard";
 import certifications from "./Certifications.json";
 import { Job } from "@/components/components.d";
 
@@ -20,16 +21,35 @@ function Page3() {
         </div>
       </div>
       <div className="mb-16 flex flex-col items-center space-y-2">
-        <h2 className="text-2xl">Certifications</h2>
-        <div className="flex flex-col items-center font-noto">
-          {certifications.map((certification) => (
-            <div key={certification.title} className="text-xl">
-              {certification.title}{" "}
-              <span className="text-sm">
-                ({certification.issuer}, {certification.date})
-              </span>
-            </div>
-          ))}
+        <h2 className="text-2xl mb-4">Certifications</h2>
+        {/* // ? INFO 자격증 개수 변경 시, tailwind.config.js -> scroll animation 조절 필요 (현재: 4) */}
+        <div className="relative w-[236px * 3 * 4]">
+          <div className="flex space-x-4 justify-center animate-scroll hover:[animation-play-state:paused]">
+            {certifications.map((certification) => (
+              <CertificationCard
+                key={certification.title}
+                title={certification.title}
+                issuer={certification.issuer}
+                date={certification.date}
+              />
+            ))}
+            {certifications.map((certification) => (
+              <CertificationCard
+                key={certification.title + "2"}
+                title={certification.title}
+                issuer={certification.issuer}
+                date={certification.date}
+              />
+            ))}
+            {certifications.map((certification) => (
+              <CertificationCard
+                key={certification.title + "3"}
+                title={certification.title}
+                issuer={certification.issuer}
+                date={certification.date}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </>
