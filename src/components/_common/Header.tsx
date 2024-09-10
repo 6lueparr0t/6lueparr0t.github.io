@@ -26,10 +26,6 @@ const Header: React.FC<PropsWithChildren> = ({ children }) => {
     },
   ];
 
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
   return (
     <header className="font-['DungGeunMo'] sticky top-0 backdrop-blur-[20px] z-10">
       <div className="flex justify-between items-center pt-4 w-full gap-4 p-4">
@@ -37,7 +33,7 @@ const Header: React.FC<PropsWithChildren> = ({ children }) => {
           {MENU.map((menu) => {
             return (
               <li key={menu.path}>
-                <NavLink id={menu.title} to={menu.path} className={"text-gray-800 hover:text-gray-400  dark:text-gray-100 dark:hover:text-gray-500"} onClick={scrollToTop}>
+                <NavLink id={menu.title} to={menu.path} className={"text-gray-800 hover:text-gray-400  dark:text-gray-100 dark:hover:text-gray-500"}>
                   {menu.title}
                 </NavLink>
               </li>
