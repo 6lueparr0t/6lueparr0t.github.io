@@ -25,9 +25,12 @@ function Page3() {
       {/* Certifications Section */}
       <div className="mb-16 flex flex-col items-center space-y-2">
         <h2 className="text-2xl mb-4">Certifications</h2>
-        {/* // ? INFO 자격증 개수 변경 시, tailwind.config.js -> scroll animation 조절 필요 (현재: 4) */}
-        <div className="relative w-[236px * 3 * 4]">
-          <div className="flex space-x-4 justify-center animate-scroll hover:[animation-play-state:paused]">
+        {/*
+        // ? INFO 자격증 개수 변경 시
+        // ? 1. tailwind.config.js 이동
+        // ? 2. scroll animation 조절 필요 (현재: 4) */}
+        <div className="relative w-full overflow-hidden">
+          <div className="flex space-x-4 justify-center animate-scroll hover:[animation-play-state:paused] w-max">
             {Array(5)
               .fill(certifications)
               .flat()

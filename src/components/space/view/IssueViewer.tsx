@@ -30,13 +30,15 @@ export const IssueViewer: React.FC<SpaceProps> = ({ issue }) => {
               rehypePlugins={[remarkGfm, rehypeRaw]}
               components={{
                 // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                p: ({ node, ...props }) => <p {...props} className="leading-8" />,
+                // eslint-disable-next-line @typescript-eslint/no-unused-vars
                 h1: ({ node, ...props }) => <h1 {...props} className="text-4xl font-bold" />,
                 // eslint-disable-next-line @typescript-eslint/no-unused-vars
                 h2: ({ node, ...props }) => <h2 {...props} className="text-2xl font-bold" />,
                 // eslint-disable-next-line @typescript-eslint/no-unused-vars
                 h3: ({ node, ...props }) => <h3 {...props} className="text-xl font-bold" />,
                 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-                a: ({ node, ...props }) => <a {...props} className="underline decoration-blue-600 dark:decoration-blue-400" />,
+                a: ({ node, ...props }) => <a {...props} className="underline underline-offset-4 decoration-2 decoration-wavy decoration-blue-600 dark:decoration-blue-400 hover:text-blue-600 dark:hover:text-blue-400" />,
                 // eslint-disable-next-line @typescript-eslint/no-unused-vars
                 blockquote: ({ node, ...props }) => <blockquote {...props} className="p-4 italic border-l-4 border-gray-500 quote" />,
                 // eslint-disable-next-line @typescript-eslint/no-unused-vars
