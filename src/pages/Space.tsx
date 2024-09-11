@@ -1,5 +1,5 @@
 import React, { useEffect, Suspense } from "react";
-import { Await, defer, useRouteLoaderData } from "react-router-dom";
+import { json, Await, defer, useRouteLoaderData } from "react-router-dom";
 import type { LoaderFunction } from "react-router";
 
 import { RouteLoaderData } from "@/pages/pages.d";
@@ -27,7 +27,7 @@ const SpacePage: React.FC = () => {
 
   return (
     <div className="p-8 min-h-[calc(100vh-4.2rem)] flex flex-col justify-between">
-      <div id='space-top'>
+      <div id="space-top">
         <div className="text-2xl text-left">
           <NavLink to={"/space"}>Space</NavLink>
         </div>
@@ -46,31 +46,23 @@ const SpacePage: React.FC = () => {
         <div className="flex flex-col justify-center items-center">
           <Suspense fallback={<div className="text-center">Loading...</div>}>
             <Await resolve={list}>
-              {(list) => (
-                <>
-                  <IssueTable list={list} />
-                </>
-              )}
+              <IssueTable list={list} page={page} />
             </Await>
           </Suspense>
         </div>
       </div>
-      <div id='space-bottom'>
+      <div id="space-bottom">
         <div className="flex flex-col justify-center items-center">
           <Suspense fallback={<div className="text-center">Loading...</div>}>
             <Await resolve={last}>
               {(last) => (
                 <>
                   <div className="w-full flex flex-col justify-evenly items-center mt-20">
-                    {list && list?.length === 0 ? (
-                      <>등록된 게시글이 없습니다.</>
-                    ) : (
-                      <IssuePagination
-                        last={last}
-                        page={page ?? 1}
-                        query={query || { in: "title" }}
-                      />
-                    )}
+                    <IssuePagination
+                      last={last}
+                      page={page ?? 1}
+                      query={query || { in: "title" }}
+                    />
                   </div>
                 </>
               )}
@@ -84,6 +76,7 @@ const SpacePage: React.FC = () => {
 
 export default SpacePage;
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const loader: LoaderFunction = async ({ request }) => {
   await sleep();
 
@@ -93,14 +86,19 @@ export const loader: LoaderFunction = async ({ request }) => {
     keyword: searchParams.get("keyword") ?? "",
     in: searchParams.get("in") ?? "title",
   };
-  const page: number = Number(searchParams.get("page") ?? 1);
 
-  const { list, last } = await getList(query, { page: page, per_page: PER_PAGE });
+  try {
+    const page: number = Number(searchParams.get("page") ?? 1);
 
-  return defer({
-    list: list,
-    query: query,
-    last: last ? last : page, // last 가 없는 경우, 현재 페이지가 last
-    page: page,
-  });
+    const { list, last } = await getList(query, { page: page, per_page: PER_PAGE });
+
+    return defer({
+      list: list,
+      query: query,
+      last: last ? last : page, // last 가 없는 경우, 현재 페이지가 last
+      page: page,
+    });
+  } catch (error) {
+    throw json({ message: error }, { status: 500 });
+  }
 };

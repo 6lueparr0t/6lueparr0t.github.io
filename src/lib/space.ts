@@ -23,7 +23,7 @@ export const makeQuery = (query: object, char:string = "&"): string => {
 
 // Github API 를 사용하여 목록을 가져옴
 export const getList = async (
-  query: { keyword: string; in: string } = { keyword: "", in: "title" },
+  query: { keyword?: string; in: string } = { keyword: "", in: "title" },
   option: { page?: number; per_page?: number } = {}
 ): Promise<{
   list: Issue[];
@@ -186,7 +186,7 @@ export const getGithubIssueComment = async (
 };
 
 export const search = async (
-  query: { keyword: string; in: string },
+  query: { keyword?: string; in: string },
   option: object = {}
 ): Promise<unknown> => {
   let qQuery: string = "q=";

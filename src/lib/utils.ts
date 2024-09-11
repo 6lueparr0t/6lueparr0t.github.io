@@ -5,7 +5,7 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-export function sleep(n: number = 500) {
+export function sleep(n: number = 0) {
   return new Promise((r) => setTimeout(r, n));
 }
 
