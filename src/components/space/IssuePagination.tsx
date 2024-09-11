@@ -72,7 +72,7 @@ export const IssuePagination: React.FC<PaginationProps> = ({
   );
 };
 
-export const IssuePagination2: React.FC<PaginationProps> = ({
+export const IssuePaginationWithState: React.FC<PaginationProps> = ({
   last,
   page,
   query,

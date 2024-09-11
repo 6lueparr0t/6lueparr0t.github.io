@@ -12,7 +12,7 @@ import { IssueViewer } from "@/components/space/view/IssueViewer";
 import { IssueViewerButtonGroup } from "@/components/space/view/IssueViewerButtonGroup";
 import { IssueComments } from "@/components/space/view/IssueComments";
 import { IssueTable } from "@/components/space/IssueTable";
-import { IssuePagination2 } from "@/components/space/IssuePagination";
+import { IssuePaginationWithState } from "@/components/space/IssuePagination";
 
 import Copy from "@/components/_common/Copy";
 import { LinkIcon, ChevronLeftIcon } from "@heroicons/react/24/outline";
@@ -81,7 +81,7 @@ const SpaceViewPage: React.FC = () => {
               {(last) => (
                 <>
                   <div className="w-full flex flex-col justify-evenly items-center mt-20">
-                    <IssuePagination2
+                    <IssuePaginationWithState
                       issueNumber={issue?.number}
                       last={last}
                       page={page || 1}
