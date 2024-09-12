@@ -88,7 +88,7 @@ export const loader: LoaderFunction = async ({ request }) => {
   };
 
   try {
-    const page: number = Number(searchParams.get("page") ?? 1);
+    const page: number = Number(searchParams.get("page") || 1);
 
     const { list, last } = await getList(query, { page: page, per_page: PER_PAGE });
 

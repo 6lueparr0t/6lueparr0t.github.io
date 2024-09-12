@@ -111,7 +111,7 @@ export const loader: LoaderFunction = async ({ params, request }) => {
     in: searchParams.get("in") ?? "title",
   };
 
-  const page = Number(searchParams.get("page")) ?? 1;
+  const page = Number(searchParams.get("page")) || 1;
 
   try {
     const { issue, comments } = await getIssue({}, issueNumber);
