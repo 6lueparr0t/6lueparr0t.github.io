@@ -95,7 +95,7 @@ export const loader: LoaderFunction = async ({ request }) => {
     return defer({
       list: list,
       query: query,
-      last: last ? last : page, // last 가 없는 경우, 현재 페이지가 last
+      last: Math.max(last, page), // last 가 없는 경우, 현재 페이지가 last
       page: page,
     });
   } catch (error) {

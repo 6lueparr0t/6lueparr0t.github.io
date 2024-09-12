@@ -96,7 +96,7 @@ export const IssuePaginationWithState: React.FC<PaginationProps> = ({
   // 페이지 클릭 시 데이터를 fetch하는 함수
   const handlePageClick = useCallback(async (pageNum: number) => {
     try {
-      const data = await getList(query, { page: pageNum, per_page: PER_PAGE / 2 });
+      const data = await getList(query, { page: pageNum, per_page: PER_PAGE });
       if (setPage) setPage(pageNum);
       if (setList) setList(data.list); // 받은 데이터를 state에 저장
       if (setLast) setLast(data?.last ? data?.last : pageNum);

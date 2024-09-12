@@ -77,7 +77,7 @@ const SpaceViewPage: React.FC = () => {
             <Await resolve={last}>
               {(last) => (
                 <>
-                  <div className="w-full flex flex-col justify-evenly items-center mt-4">
+                  <div className="w-full flex flex-col justify-evenly items-center pt-8">
                     <IssuePaginationWithState
                       issueNumber={issue?.number}
                       last={last}
@@ -117,7 +117,7 @@ export const loader: LoaderFunction = async ({ params, request }) => {
     const { issue, comments } = await getIssue({}, issueNumber);
     const title = get(issue, "title");
 
-    const { list, last } = await getList(query, { page: page, per_page: PER_PAGE/2 });
+    const { list, last } = await getList(query, { page: page, per_page: PER_PAGE });
 
     return defer({
       title: title,
@@ -126,7 +126,7 @@ export const loader: LoaderFunction = async ({ params, request }) => {
       list: list,
 
       query: query,
-      last: last ? last : page, // last 가 없는 경우, 현재 페이지가 last
+      last: Math.max(last, page), // last 가 없는 경우, 현재 페이지가 last
       page: page,
     });
   } catch (error) {
