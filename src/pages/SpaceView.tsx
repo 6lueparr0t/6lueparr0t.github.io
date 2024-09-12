@@ -70,7 +70,7 @@ const SpaceViewPage: React.FC = () => {
       <div id="space-bottom" className="flex flex-col justify-center items-center rounded-lg">
         <Suspense fallback={<div className="text-center">Loading...</div>}>
           <Await resolve={list}>
-            <IssueTable list={list} page={page} headless={true} />
+            <IssueTable list={list} page={page || 1} headless={true} />
           </Await>
         </Suspense>
         <Suspense fallback={<div className="text-center">Loading...</div>}>
