@@ -67,20 +67,17 @@ const SpaceViewPage: React.FC = () => {
           </Await>
         </Suspense>
       </div>
-      <div className="flex flex-col justify-center items-center mt-8 rounded-lg ">
+      <div id="space-bottom" className="flex flex-col justify-center items-center rounded-lg">
         <Suspense fallback={<div className="text-center">Loading...</div>}>
           <Await resolve={list}>
             <IssueTable list={list} page={page} headless={true} />
           </Await>
         </Suspense>
-      </div>
-      <div id="space-bottom">
-        <div className="flex flex-col justify-center items-center">
-          <Suspense fallback={<div className="text-center">Loading...</div>}>
+        <Suspense fallback={<div className="text-center">Loading...</div>}>
             <Await resolve={last}>
               {(last) => (
                 <>
-                  <div className="w-full flex flex-col justify-evenly items-center mt-20">
+                  <div className="w-full flex flex-col justify-evenly items-center mt-4">
                     <IssuePaginationWithState
                       issueNumber={issue?.number}
                       last={last}
@@ -95,7 +92,6 @@ const SpaceViewPage: React.FC = () => {
               )}
             </Await>
           </Suspense>
-        </div>
       </div>
     </div>
   );
