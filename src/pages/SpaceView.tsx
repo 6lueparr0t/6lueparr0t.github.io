@@ -67,20 +67,17 @@ const SpaceViewPage: React.FC = () => {
           </Await>
         </Suspense>
       </div>
-      <div className="flex flex-col justify-center items-center mt-8 rounded-lg ">
+      <div id="space-bottom" className="flex flex-col justify-center items-center rounded-lg">
         <Suspense fallback={<div className="text-center">Loading...</div>}>
           <Await resolve={list}>
-            <IssueTable list={list} page={page} headless={true} />
+            <IssueTable list={list} page={page || 1} headless={true} />
           </Await>
         </Suspense>
-      </div>
-      <div id="space-bottom">
-        <div className="flex flex-col justify-center items-center">
-          <Suspense fallback={<div className="text-center">Loading...</div>}>
+        <Suspense fallback={<div className="text-center">Loading...</div>}>
             <Await resolve={last}>
               {(last) => (
                 <>
-                  <div className="w-full flex flex-col justify-evenly items-center mt-20">
+                  <div className="w-full flex flex-col justify-evenly items-center pt-8">
                     <IssuePaginationWithState
                       issueNumber={issue?.number}
                       last={last}
@@ -95,7 +92,6 @@ const SpaceViewPage: React.FC = () => {
               )}
             </Await>
           </Suspense>
-        </div>
       </div>
     </div>
   );
@@ -115,13 +111,13 @@ export const loader: LoaderFunction = async ({ params, request }) => {
     in: searchParams.get("in") ?? "title",
   };
 
-  const page = Number(searchParams.get("page")) ?? 1;
+  const page = Number(searchParams.get("page")) || 1;
 
   try {
     const { issue, comments } = await getIssue({}, issueNumber);
     const title = get(issue, "title");
 
-    const { list, last } = await getList(query, { page: page, per_page: PER_PAGE/2 });
+    const { list, last } = await getList(query, { page: page, per_page: PER_PAGE });
 
     return defer({
       title: title,
@@ -130,7 +126,7 @@ export const loader: LoaderFunction = async ({ params, request }) => {
       list: list,
 
       query: query,
-      last: last ? last : page, // last 가 없는 경우, 현재 페이지가 last
+      last: Math.max(last, page), // last 가 없는 경우, 현재 페이지가 last
       page: page,
     });
   } catch (error) {

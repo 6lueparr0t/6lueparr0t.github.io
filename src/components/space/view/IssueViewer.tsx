@@ -12,9 +12,9 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export const IssueViewer: React.FC<SpaceProps> = ({ issue }) => {
   return (
-    <div rel="space">
-      <div className="flex gap-16 items-center justify-between">
-        <div className="flex items-center gap-4 ">
+    <div rel="space" className="border-t-4 border-gray-400">
+      <div className="flex gap-16 items-center justify-between py-4">
+        <div className="flex items-center gap-4">
           <Avatar>
             <AvatarImage src={issue?.user.avatar_url} alt={`@${issue?.user.login}`} />
             <AvatarFallback>{issue?.user.login}</AvatarFallback>
@@ -24,7 +24,7 @@ export const IssueViewer: React.FC<SpaceProps> = ({ issue }) => {
         <div className="text-right">{dayjs(issue?.created_at).format("YYYY-MM-DD HH:mm")}</div>
       </div>
       <div className="flex flex-col justify-between item-start">
-        <div className="min-h-[50vh] border-y-4 border-gray-400 my-4 py-4 ">
+        <div className="min-h-[50vh] my-4">
           <div className="whitespace-pre-line">
             <Markdown
               rehypePlugins={[remarkGfm, rehypeRaw]}
