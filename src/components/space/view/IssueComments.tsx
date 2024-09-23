@@ -11,7 +11,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export const IssueComments: React.FC<SpaceProps> = ({ comments }) => {
   return (
-    <div className="space-y-4 border-t-4 border-gray-400 mb-4">
+    <div className="space-y-4 border-t-4 border-gray-400 pt-4">
       {comments?.map((comment) => (
         <div key={comment.node_id} className="p-4 border rounded-lg bg-gray-100 dark:bg-gray-800">
           <div className="flex items-center justify-between">
