@@ -36,7 +36,7 @@ export const IssuePagination: React.FC<PaginationProps> = ({
   const next = Math.min(last, Math.ceil(page / PAGE_LENGTH) * PAGE_LENGTH + 1);
   const queryString = makeQuery(query);
 
-  const issueLink = issueNumber ? "/" + issueNumber : '';
+  const issueLink = issueNumber ? "/" + issueNumber : "";
 
   return (
     <Pagination>
@@ -83,27 +83,30 @@ export const IssuePaginationWithState: React.FC<PaginationProps> = ({
   const start = (Math.ceil(page / PAGE_LENGTH) - 1) * PAGE_LENGTH;
 
   /**
-   * ? INFO : pagination method 1 : 페이지네이션의 맨 끝으로
+   * ? INFO : pagination method 1
    * */
   // const prev = Math.max(1, (Math.floor(page / PAGE_LENGTH) - 1) * PAGE_LENGTH + 1);
   /**
-   * ? INFO : pagination method 2 : 페이지네이션의 맨 마지막으로
+   * ? INFO : pagination method 2
    * */
   const prev = Math.max(1, start);
 
   const next = Math.min(last, Math.ceil(page / PAGE_LENGTH) * PAGE_LENGTH + 1);
 
   // 페이지 클릭 시 데이터를 fetch하는 함수
-  const handlePageClick = useCallback(async (pageNum: number) => {
-    try {
-      const data = await getList(query, { page: pageNum, per_page: PER_PAGE });
-      if (setPage) setPage(pageNum);
-      if (setList) setList(data.list); // 받은 데이터를 state에 저장
-      if (setLast) setLast(data?.last ? data?.last : pageNum);
-    } catch (error) {
-      console.error("Error fetching list:", error);
-    }
-  }, [query, setPage, setList, setLast]);
+  const handlePageClick = useCallback(
+    async (pageNum: number) => {
+      try {
+        const data = await getList(query, { page: pageNum, per_page: PER_PAGE });
+        if (setPage) setPage(pageNum);
+        if (setList) setList(data.list); // 받은 데이터를 state에 저장
+        if (setLast) setLast(data?.last ? data?.last : pageNum);
+      } catch (error) {
+        console.error("Error fetching list:", error);
+      }
+    },
+    [query, setPage, setList, setLast]
+  );
 
   return (
     <Pagination>
