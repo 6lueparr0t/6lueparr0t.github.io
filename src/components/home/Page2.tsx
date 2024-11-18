@@ -29,16 +29,23 @@ function Page2() {
           <p>안녕하세요.</p>
           <div className="flex mb-8">
             저는
-            <Button className="px-2 h-6 mx-2">
-              <AnimatedNumbers
-                includeComma
-                transitions={(index) => ({
-                  type: "spring",
-                  duration: index + 0.2,
-                })}
-                animateToNumber={years}
-              />
-            </Button>
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button className="px-2 h-6 mx-2">
+                  <AnimatedNumbers
+                    includeComma
+                    transitions={(index) => ({
+                      type: "spring",
+                      duration: index + 0.2,
+                    })}
+                    animateToNumber={years}
+                  />
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent>
+                <p>NHN 2년 + 빗썸 2년 + @</p>
+              </PopoverContent>
+            </Popover>
             년차 웹 개발자
             <Popover>
               <PopoverTrigger asChild>
@@ -64,7 +71,7 @@ function Page2() {
           </p>
 
           <p>
-            커뮤니티에도 관심이 있어 <Button className="px-2 h-6 mx-2">한줄코딩</Button>이라는
+            커뮤니티에도 관심이 있어 <Button className="px-2 h-6 mx-2" onClick={()=>window.open("https://hanjulcoding.com", "_blank")}>한줄코딩</Button>이라는
             개발자 커뮤니티를 만들었고, 현재는 휴식기를 가지고 있지만 다시 활동할 예정입니다.
           </p>
         </div>
