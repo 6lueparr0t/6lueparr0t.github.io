@@ -18,7 +18,7 @@ export type Job = {
     title: string;
     url: string;
   }[];
-}
+};
 
 export type Issue = {
   number: number;
@@ -37,11 +37,11 @@ export type Issue = {
 
 export type Query = {
   keyword?: string;
-  in: string
+  in: string;
 };
 
 export type MenuProps = {
-  menuList: { path: string; title: string }[];
+  menuList: { path?: string; src?: string; title: string }[];
 };
 
 export type SpaceProps = {
@@ -60,9 +60,9 @@ export type PaginationProps = {
   last: number;
   page: number;
   query: Query;
-  setPage?: React.Dispatch<React.SetStateAction>
-  setList?: React.Dispatch<React.SetStateAction>
-  setLast?: React.Dispatch<React.SetStateAction>
+  setPage?: React.Dispatch<React.SetStateAction>;
+  setList?: React.Dispatch<React.SetStateAction>;
+  setLast?: React.Dispatch<React.SetStateAction>;
 };
 
 export type Modal = {

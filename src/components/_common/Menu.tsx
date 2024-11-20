@@ -32,13 +32,27 @@ const Menu: React.FC<MenuProps> = ({ menuList }) => {
         <Separator className="my-4" />
         <div className="text-xl grid gap-4">
           {menuList.map((menu) => {
-            return (
-              <SheetClose key={menu.path} asChild>
+            let link: JSX.Element | null = null;
+            if (menu.path) {
+              link = (
                 <NavLink to={menu.path} className={"text-gray-800 dark:text-gray-100"}>
                   <div className="grid items-center justify-center md:justify-start gap-4 p-2 dark:hover:bg-gray-900 hover:bg-gray-200">
                     {menu.title}
                   </div>
                 </NavLink>
+              );
+            } else if (menu.src) {
+              link = (
+                <a key={menu.src} href={menu.src} target="_blank">
+                  <div className="grid items-center justify-center md:justify-start gap-4 p-2 dark:hover:bg-gray-900 hover:bg-gray-200">
+                    {menu.title}
+                  </div>
+                </a>
+              );
+            }
+            return (
+              <SheetClose key={menu.path} asChild>
+                {link}
               </SheetClose>
             );
           })}
