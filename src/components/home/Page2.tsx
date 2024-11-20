@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import AnimatedNumbers from "react-animated-numbers";
 import dayjs from "dayjs";
 
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
+import Chip from "@/components/_common/Chip";
 import { Gallery } from "./Gallery";
 
 const startDate = dayjs("2017-10-30"); // 2017년 10월 1일을 기준으로 설정
@@ -29,25 +29,21 @@ function Page2() {
           <p>안녕하세요.</p>
           <div className="flex mb-8">
             저는
-            <Button className="px-2 h-6 mx-2">
-              <AnimatedNumbers
-                includeComma
-                transitions={(index) => ({
-                  type: "spring",
-                  duration: index + 0.2,
-                })}
-                animateToNumber={years}
-              />
-            </Button>
+            <Chip
+              title={
+                <AnimatedNumbers
+                  includeComma
+                  transitions={(index) => ({
+                    type: "spring",
+                    duration: index + 0.2,
+                  })}
+                  animateToNumber={years}
+                />
+              }
+              content={<p>NHN 2년 + 빗썸 2년 + @</p>}
+            />
             년차 웹 개발자
-            <Popover>
-              <PopoverTrigger asChild>
-                <Button className="px-2 h-6 mx-2">임대현</Button>
-              </PopoverTrigger>
-              <PopoverContent>
-                <p>Daehyun Lim</p>
-              </PopoverContent>
-            </Popover>
+            <Chip title={<>임대현</>} content={<p>Daehyun Lim</p>} />
             입니다.
           </div>
 
@@ -64,8 +60,14 @@ function Page2() {
           </p>
 
           <p>
-            커뮤니티에도 관심이 있어 <Button className="px-2 h-6 mx-2">한줄코딩</Button>이라는
-            개발자 커뮤니티를 만들었고, 현재는 휴식기를 가지고 있지만 다시 활동할 예정입니다.
+            커뮤니티에도 관심이 있어{" "}
+            <Button
+              className="px-2 h-6 mx-2"
+              onClick={() => window.open("https://hanjulcoding.com", "_blank")}
+            >
+              한줄코딩
+            </Button>
+            이라는 개발자 커뮤니티를 만들었고, 현재는 휴식기를 가지고 있지만 다시 활동할 예정입니다.
           </p>
         </div>
       </div>
