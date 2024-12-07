@@ -9,7 +9,7 @@ import sfx from "@/assets/sound/sfx_sounds_Blip7.wav";
 import bgm from "@/assets/sound/bgm_25_Route_30.mp3";
 
 import mainStore from "@/store/main";
-import "@/style/about.scss";
+import "@/styles/about.scss";
 
 const About = () => {
   const sfxRef = useRef<HTMLAudioElement>(null);
