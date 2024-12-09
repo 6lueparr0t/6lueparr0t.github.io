@@ -80,7 +80,7 @@ const SpaceViewPage: React.FC = () => {
                   <div className="w-full flex flex-col justify-evenly items-center pt-8">
                     <IssuePaginationWithState
                       issueNumber={issue?.number}
-                      last={last}
+                      last={last || 1}
                       page={page || 1}
                       query={query || { in: "title" }}
                       setPage={setPage}
