@@ -56,19 +56,22 @@
 
 @layer base {
   :root {
-    --main: 248, 250, 252;
+    --main: 210, 40.0%, 98.0%;
+    // --main: 248, 250, 252;
     /* #f8fafc, slate50 */
-    --main-light: 248, 250, 252;
+    --main-light: 210, 40.0%, 98.0%;
+    // --main-light: 248, 250, 252;
     /* #f8fafc, zinc50*/
-    --main-dark: 9, 9, 11;
+    --main-dark: 240, 10.0%, 3.9%;
+    // --main-dark: 9, 9, 11;
     /* #09090B, zinc950*/
 
-    --background: rgba(var(--main-light));
-    --foreground: rgba(var(--main-dark));
+    --background: hsl(var(--main-light));
+    --foreground: hsl(var(--main-dark));
 
     --main-gradient: linear-gradient(90deg,
-        rgba(var(--main-light)) 0%,
-        rgba(var(--main-dark)) 60%);
+        hsl(var(--main-light)) 0%,
+        hsl(var(--main-dark)) 60%);
 
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
@@ -122,7 +125,7 @@
     }
 
     .home .typed-cursor--blink {
-      background-color: rgba(var(--foreground));
+      background-color: hsl(var(--foreground));
       width: 7px;
       height: 83%;
       display: inline-block;
@@ -133,17 +136,17 @@
       }
     }
 
-    background-color: rgba(var(--main-light));
-    color: rgb(var(--main-dark));
+    background-color: hsl(var(--main-light));
+    color: hsl(var(--main-dark));
   }
 
   .dark {
-    --background: rgba(var(--main-light));
-    --foreground: rgba(var(--main-dark));
+    --background: hsl(var(--main-light));
+    --foreground: hsl(var(--main-dark));
 
     --main-gradient: linear-gradient(90deg,
-        rgba(var(--main-dark)) 0%,
-        rgba(var(--main-light)) 60%);
+        hsl(var(--main-dark)) 0%,
+        hsl(var(--main-light)) 60%);
 
     --card: 222.2 84% 4.9%;
     --card-foreground: 210 40% 98%;
@@ -170,8 +173,8 @@
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
 
-    background-color: rgba(var(--main-dark));
-    color: rgb(var(--main-light));
+    background-color: hsl(var(--main-dark));
+    color: hsl(var(--main-light));
   }
 }
 
