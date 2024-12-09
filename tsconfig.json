@@ -28,8 +28,8 @@
 
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./app/*"]
     }
   },
-  "include": ["src", "vite.config.ts"],
+  "include": ["app", "vite.config.ts"],
 }
