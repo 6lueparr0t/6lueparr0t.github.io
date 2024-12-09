@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import React from "react";
-import { useRouteError, isRouteErrorResponse } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useRouteError, isRouteErrorResponse } from "react-router";
+import { Link } from "react-router";
 
 function isErrorWithStatus(error: unknown): error is { status: number } {
   return typeof error === "object" && error !== null && "status" in error;

@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink } from "react-router";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 
 import ash2 from "@/assets/home/ash2.gif";

@@ -1,5 +1,5 @@
 import React, { useEffect, Suspense } from "react";
-import { json, Await, defer, useRouteLoaderData } from "react-router-dom";
+import { Await, useRouteLoaderData } from "react-router";
 import type { LoaderFunction } from "react-router";
 
 import { RouteLoaderData } from "@/pages/pages.d";
@@ -10,7 +10,7 @@ import { getList } from "@/lib/space";
 import { SearchInput } from "@/components/space/SearchInput";
 import { IssueTable } from "@/components/space/IssueTable";
 import { IssuePagination } from "@/components/space/IssuePagination";
-import { NavLink } from "react-router-dom";
+import { NavLink } from "react-router";
 
 const SpacePage: React.FC = () => {
   const { list, query, last, page } = useRouteLoaderData("space") as RouteLoaderData;
@@ -59,7 +59,7 @@ const SpacePage: React.FC = () => {
                 <>
                   <div className="w-full flex flex-col justify-evenly items-center mt-20">
                     <IssuePagination
-                      last={last}
+                      last={last ?? 1}
                       page={page ?? 1}
                       query={query || { in: "title" }}
                     />
@@ -92,13 +92,13 @@ export const loader: LoaderFunction = async ({ request }) => {
 
     const { list, last } = await getList(query, { page: page, per_page: PER_PAGE });
 
-    return defer({
+    return Response.json({
       list: list,
       query: query,
       last: Math.max(last, page), // last 가 없는 경우, 현재 페이지가 last
       page: page,
     });
   } catch (error) {
-    throw json({ message: error }, { status: 500 });
+    throw Response.json({ message: error }, { status: 500 });
   }
 };

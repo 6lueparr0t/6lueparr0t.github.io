@@ -1,4 +1,4 @@
-import type { ActionFunctionArgs } from "react-router-dom";
+import type { ActionFunctionArgs } from "react-router";
 import { sleep } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { CircleParticle, RectParticle } from "confetti.ts";

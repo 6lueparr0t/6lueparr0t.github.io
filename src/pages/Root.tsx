@@ -1,5 +1,5 @@
 import { PropsWithChildren, useEffect } from "react";
-import { useLocation, Outlet, useNavigate, useSearchParams } from "react-router-dom";
+import { useLocation, Outlet, useNavigate, useSearchParams } from "react-router";
 import Header from "@/components/_common/Header";
 import Footer from "@/components/_common/Footer";
 import Modal from "@/components/_common/Modal";

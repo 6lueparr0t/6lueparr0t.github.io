@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 
 import { Button } from "@/components/ui/button";
 import { SpaceProps } from "@/components/components.d";

@@ -1,5 +1,5 @@
 import React, { Suspense, useEffect, useState } from "react";
-import { Link, json, Await, defer, useRouteLoaderData, useLocation } from "react-router-dom";
+import { Link, Await, useRouteLoaderData, useLocation } from "react-router";
 import { type LoaderFunction } from "react-router";
 
 import { RouteLoaderData } from "@/pages/pages.d";
@@ -119,7 +119,7 @@ export const loader: LoaderFunction = async ({ params, request }) => {
 
     const { list, last } = await getList(query, { page: page, per_page: PER_PAGE });
 
-    return defer({
+    return Response.json({
       title: title,
       issue: issue,
       comments: comments,
@@ -130,6 +130,6 @@ export const loader: LoaderFunction = async ({ params, request }) => {
       page: page,
     });
   } catch (error) {
-    throw json({ message: error }, { status: 500 });
+    throw Response.json({ message: error }, { status: 500 });
   }
 };

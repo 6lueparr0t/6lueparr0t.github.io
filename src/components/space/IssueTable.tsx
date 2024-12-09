@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/table";
 
 import dayjs from "dayjs";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 
 export const IssueTable: React.FC<SpaceProps> = ({ list, page, headless = false }) => {
   return (
