@@ -84,7 +84,7 @@ module.exports = {
         },
         scroll: {
           "0%": { transform: "translateX(0)" },
-          "100%": { transform: "translateX(calc(-236px * 4))" }, // 자격증 개수 * 236px
+          "100%": { transform: "translateX(calc(-236px * 3))" }, // 자격증 개수 * 236px
         },
       },
       animation: {

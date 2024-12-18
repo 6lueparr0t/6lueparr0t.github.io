@@ -37,9 +37,11 @@ function Page3() {
               .map((certification, index) => (
                 <CertificationCard
                   key={`${certification.title}-${index}`}
+                  id={certification.id}
                   title={certification.title}
                   issuer={certification.issuer}
                   date={certification.date}
+                  expired={certification.expired ?? undefined}
                 />
               ))}
           </div>

@@ -1,22 +1,22 @@
 [
   {
-    "title": "컴퓨터활용능력 1급",
-    "issuer": "대한상공회의소",
-    "date": "2009.08"
-  },
-  {
+    "id": "19202071184A",
     "title": "정보처리기사",
     "issuer": "한국산업인력공단",
-    "date": "2019.08"
+    "date": "2019.08.16"
   },
   {
+    "id": "4HY2X371SNE41H9W",
     "title": "AWS Developer Associate",
     "issuer": "Amazon Web Services",
-    "date": "2022.12"
+    "date": "2022.12.04",
+    "expired": "2025.12.04"
   },
   {
+    "id": "LF-79e436cuwx",
     "title": "CKAD",
     "issuer": "The Linux Foundation",
-    "date": "2023.02"
+    "date": "2023.02.01",
+    "expired": "2026.02.02"
   }
 ]
