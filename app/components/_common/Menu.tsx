@@ -51,7 +51,7 @@ const Menu: React.FC<MenuProps> = ({ menuList }) => {
               );
             }
             return (
-              <SheetClose key={menu.path} asChild>
+              <SheetClose key={menu.title} asChild>
                 {link}
               </SheetClose>
             );
