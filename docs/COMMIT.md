@@ -4,12 +4,13 @@
 
 ```text
 [{이슈 번호}] {TYPE}: {Subject}
-- [CD-XXX] fix: 콘솔 버그 수정
-- [CD-XXX] feat: 콘솔 새로운 기능추가
+- [HJ-XXX] fix: 콘솔 버그 수정
+- [HJ-XXX] feat: 콘솔 새로운 기능추가
 ```
 
 ## TYPE
 
+- refactor: Restructure source code
 - feat: A new feature
 - fix: A bug fix
 - docs: Documentation only changes
