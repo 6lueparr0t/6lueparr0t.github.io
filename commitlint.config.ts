@@ -1,4 +1,4 @@
-// commitlint.config.js
+// commitlint.config.ts
 module.exports = {
   // 커밋 메시지 규칙 정의
   extends: ["@commitlint/config-conventional"],
