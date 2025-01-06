@@ -1,27 +1,6 @@
 # Commit message convention
 
-## Template
-
-```text
-[{이슈 번호}] {TYPE}: {Subject}
-- [HJ-XXX] fix: 콘솔 버그 수정
-- [HJ-XXX] feat: 콘솔 새로운 기능추가
-```
-
-## TYPE
-
-- refactor: Restructure source code
-- feat: A new feature
-- fix: A bug fix
-- docs: Documentation only changes
-- style: Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
-- clean: A code change that neither fixes a bug nor adds a feature
-- perf: A code change that improves performance
-- test: Adding missing tests
-- chore: Changes to the build process or auxiliary tools and libraries such as documentation generation
-- typo:
-- add : Code or Package add
-- remove : Code or Package remove
+[@commitlint/config-conventional](https://github.com/conventional-changelog/commitlint/blob/c28623733351f2920d32e27169a27e127f900985/%40commitlint/config-conventional/src/index.ts#L33)
 
 ## reference
 
