@@ -11,6 +11,15 @@
         "tasks": ["신규 고객사들의 사용방법 안내에 따른 업무 효율 증대"]
       },
       {
+        "project": "'찰나' 서비스 개발 및 운영 환경 구축",
+        "tasks": [
+          "Kubernetes(K8s)를 사용한 개발 환경 구성, Flannel(CNI), MetalLB 로드밸런서 사용",
+          "Amazon EKS 에서 Production 환경 구성",
+          "Jenkins Pipeline을 활용한 CI/CD 구축",
+          "Docker 이미지 빌드 후 Docker Registry 로 푸시, k8s 클러스터 이미지 배포"
+        ]
+      },
+      {
         "project": "'찰나' 서비스 개발",
         "link": "https://charlla.io/about",
         "tasks": [
@@ -149,11 +158,7 @@
     "details": [
       {
         "project": "백엔드 (PHP (CodeIgniter), MariaDB)",
-        "tasks": [
-          "사용자 인증 및 권한 관리",
-          "커뮤니티 게시물 CRUD",
-          "위치 기반 데이터 관리"
-        ]
+        "tasks": ["사용자 인증 및 권한 관리", "커뮤니티 게시물 CRUD", "위치 기반 데이터 관리"]
       },
       {
         "project": "프론트엔드 (Vanilla JS, Scss, GulpJS)",
@@ -171,10 +176,7 @@
       },
       {
         "project": "구글 맵 API",
-        "tasks": [
-          "사용자 위치 기반 서비스 제공",
-          "과금 이슈로 인해 제한적 사용"
-        ]
+        "tasks": ["사용자 위치 기반 서비스 제공", "과금 이슈로 인해 제한적 사용"]
       },
       {
         "project": "실시간 기능 (Golang, WebSocket)",
@@ -185,15 +187,11 @@
       },
       {
         "project": "Markdown 에디터",
-        "tasks": [
-           "CodeMirror 라이브러리를 활용한 Markdown 에디터를 구현"
-        ]
+        "tasks": ["CodeMirror 라이브러리를 활용한 Markdown 에디터를 구현"]
       },
       {
         "project": "Push State",
-        "tasks": [
-           "브라우저 히스토리 관리에 Push State를 부분적으로 적용하여 사용자 경험 개선"
-        ]
+        "tasks": ["브라우저 히스토리 관리에 Push State를 부분적으로 적용하여 사용자 경험 개선"]
       }
     ],
     "link": [
