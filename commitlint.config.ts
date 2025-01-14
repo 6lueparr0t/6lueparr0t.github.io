@@ -8,7 +8,7 @@ module.exports = {
     "footer-leading-blank": [1, "always"], // 푸터 앞에 빈 줄 추가 (경고)
     "footer-max-line-length": [2, "always", 100], // 푸터 줄 길이 제한 (100자, 오류)
     "header-max-length": [2, "always", 100], // 헤더 길이 제한 (100자, 오류)
-    "subject-case": [2, "never", ["sentence-case", "start-case", "pascal-case", "upper-case"]], // 서브젝트는 특정 대소문자 형식 금지 (오류)
+    "subject-case": [2, "never", ["start-case", "pascal-case", "upper-case"]], // sentence-case는 허용
     "subject-empty": [2, "never"], // 서브젝트 비어있으면 안 됨 (오류)
     "subject-full-stop": [2, "never", "."], // 서브젝트 끝에 마침표 금지 (오류)
     "type-case": [2, "always", "lower-case"], // 타입은 소문자만 허용 (오류)
