@@ -1,9 +1,11 @@
-import { useState, useEffect } from "react";
-import AnimatedNumbers from "react-animated-numbers";
 import dayjs from "dayjs";
 
-import { Button } from "@/components/ui/button";
+import { useEffect, useState } from "react";
+import AnimatedNumbers from "react-animated-numbers";
+
 import Chip from "@/components/_common/Chip";
+import { Button } from "@/components/ui/button";
+
 import { Gallery } from "./Gallery";
 
 const startDate = dayjs("2017-10-30"); // 2017년 10월 1일을 기준으로 설정

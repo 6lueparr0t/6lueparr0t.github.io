@@ -1,3 +1,5 @@
-# pnpm test
+# Pre-commit Hook
+
+pnpm vitest run
 
 pnpm dlx lint-staged

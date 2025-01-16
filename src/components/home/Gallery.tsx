@@ -1,18 +1,19 @@
-import React, { useRef, useState, useEffect } from "react";
+// import Autoplay from "embla-carousel-autoplay";
+import profile1 from "@/assets/home/profile1.webp";
+import profile2 from "@/assets/home/profile2.webp";
+import profile3 from "@/assets/home/profile3.webp";
+import profile4 from "@/assets/home/profile4.webp";
+
+import React, { useEffect, useRef, useState } from "react";
+
 import {
-  type CarouselApi,
   Carousel,
+  type CarouselApi,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-// import Autoplay from "embla-carousel-autoplay";
-
-import profile1 from "@/assets/home/profile1.webp";
-import profile2 from "@/assets/home/profile2.webp";
-import profile3 from "@/assets/home/profile3.webp";
-import profile4 from "@/assets/home/profile4.webp";
 
 const IMAGES: string[] = [profile1, profile2, profile3, profile4];
 
@@ -22,6 +23,11 @@ export const Gallery: React.FC = () => {
   const [current, setCurrent] = useState(0);
 
   useEffect(() => {
+    if (typeof IntersectionObserver === "undefined") {
+      console.warn("IntersectionObserver is not supported in this environment.");
+      return;
+    }
+
     const observer = new IntersectionObserver(([entry]) => {
       if (entry.isIntersecting && componentRef.current) {
         componentRef.current.focus({ preventScroll: true });
@@ -34,7 +40,6 @@ export const Gallery: React.FC = () => {
 
     return () => {
       if (componentRef.current) {
-        // eslint-disable-next-line react-hooks/exhaustive-deps
         observer.unobserve(componentRef.current);
       }
     };
