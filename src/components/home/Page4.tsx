@@ -1,10 +1,11 @@
+import modalStore from "@/store/modal";
+
 import { useEffect, useState } from "react";
 
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
-import Door from "./Door";
 
-import modalStore from "@/store/modal";
+import Door from "./Door";
 
 function Page4() {
   const { pushModals } = modalStore();
@@ -155,17 +156,10 @@ function Page4() {
                         referrerPolicy="strict-origin-when-cross-origin"
                         allowFullScreen
                       ></iframe>
-                      <a
-                        className="mt-4 text-blue-600 dark:text-blue-400"
-                        href="https://www.youtube.com/watch?v=LcShtTiDGsU"
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        링크 이동
-                      </a>
                     </>
                   ),
                   type: "alert",
+                  confirmMessage: "닫기",
                 });
               }}
             >
