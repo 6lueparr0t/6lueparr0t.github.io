@@ -1,15 +1,13 @@
-import { useState, useEffect, useRef } from "react";
-import { ReactTyped } from "react-typed";
-
-import modalStore from "@/store/modal";
-
 import ash1 from "@/assets/about/ash1.gif";
 import boy from "@/assets/about/boy.webp";
-import sfx from "@/assets/sound/sfx_sounds_Blip7.wav";
 import bgm from "@/assets/sound/bgm_25_Route_30.mp3";
-
+import sfx from "@/assets/sound/sfx_sounds_Blip7.wav";
 import mainStore from "@/store/main";
+import modalStore from "@/store/modal";
 import "@/styles/about.scss";
+
+import { useEffect, useRef, useState } from "react";
+import { ReactTyped } from "react-typed";
 
 const About = () => {
   const sfxRef = useRef<HTMLAudioElement>(null);
@@ -26,7 +24,7 @@ const About = () => {
 
   const handleBgmPlay = (onOff: boolean) => {
     if (audioRef.current && onOff === true) {
-      audioRef.current.volume = 0.8;
+      audioRef.current.volume = 0.2;
       try {
         audioRef.current.play();
       } catch (e) {
@@ -39,7 +37,7 @@ const About = () => {
 
   const handleSfxPlay = () => {
     if (sfxRef.current) {
-      sfxRef.current.volume = 0.8;
+      sfxRef.current.volume = 0.15;
       sfxRef.current.currentTime = 0;
       const playPromise = sfxRef.current.play();
       if (playPromise !== undefined) {
