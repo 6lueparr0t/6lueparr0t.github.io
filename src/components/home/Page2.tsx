@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
 
-import { useEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import AnimatedNumbers from "react-animated-numbers";
 
 import Chip from "@/components/_common/Chip";
@@ -14,10 +14,11 @@ const currentDate = dayjs();
 function Page2() {
   const [years, setYears] = useState(0);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const diffYears = currentDate.diff(startDate, "year", true); // 소수점 첫째 자리까지 계산
     setYears(parseFloat(diffYears.toFixed(2))); // 소수점 첫째 자리까지 표시
   }, []);
+
   return (
     <div id="about" className="mx-auto text-center bg-stone-100 dark:bg-zinc-900">
       <div className="text-xl md:text-2xl top-[0.4rem] md:top-[0.2rem] inline-block sticky justify-center py-4 z-10">
@@ -42,14 +43,13 @@ function Page2() {
                   animateToNumber={years}
                 />
               }
-              content={<p>NHN 2년 + 빗썸 2년 + @</p>}
+              content={<p>2017-10-30 ~ 현재까지</p>}
             />
             년차 웹 개발자
             <Chip title={<>임대현</>} content={<p>Daehyun Lim</p>} />
             입니다.
           </div>
 
-          <p className="mb-8">{startDate.format("YYYY년 MM월 DD일")},</p>
           <p>
             PHP 웹 개발을 시작으로 BE(Java, Node.js), DevOps(Jenkins, Kubernetes), FE(Javascript,
             React.js & Next.js) 등
@@ -58,18 +58,7 @@ function Page2() {
 
           <p className="mb-8">
             연구실, 호스팅 서비스, 가상화폐 거래소, 동영상 숏폼 서비스 등의 도메인에서 업무를
-            해왔고, 현재는 숏폼 서비스의 프론트엔드 개발에 주력하고 있습니다.
-          </p>
-
-          <p>
-            커뮤니티에도 관심이 있어{" "}
-            <Button
-              className="px-2 h-6 mx-2"
-              onClick={() => window.open("https://hanjulcoding.com", "_blank")}
-            >
-              한줄코딩
-            </Button>
-            이라는 개발자 커뮤니티를 만들었고, 현재는 휴식기를 가지고 있지만 다시 활동할 예정입니다.
+            해왔고, 현재는 React.js 를 활용한 프론트엔드 개발에 주력하고 있습니다.
           </p>
         </div>
       </div>
