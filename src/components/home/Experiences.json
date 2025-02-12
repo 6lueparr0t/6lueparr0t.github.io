@@ -74,11 +74,7 @@
       },
       {
         "project": "CI&CD Script 및 Pipeline 개선",
-        "tasks": [
-          "Bamboo Scripting 에서 Jenkins Pipeline 으로 변경",
-          "Git 을 통한 변경 history 관리",
-          "기존 대비 배포 프로세스 30 ~ 40% 배포 속도 향상"
-        ]
+        "tasks": ["Bamboo Scripting 에서 Jenkins Pipeline 으로 변경"]
       }
     ],
     "techStack": {
