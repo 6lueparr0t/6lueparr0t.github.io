@@ -4,7 +4,6 @@ import { useLayoutEffect, useState } from "react";
 import AnimatedNumbers from "react-animated-numbers";
 
 import Chip from "@/components/_common/Chip";
-import { Button } from "@/components/ui/button";
 
 import { Gallery } from "./Gallery";
 
