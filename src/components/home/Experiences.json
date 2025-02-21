@@ -35,7 +35,7 @@
     "techStack": {
       "languages": "JavaScript(React.js, Next.js), TypeScript, Node.js(Express)",
       "scm": "Git (Github)",
-      "cicd": "k8s, Jenkins"
+      "cicd": "Jenkins, Github Actions"
     }
   },
   {
