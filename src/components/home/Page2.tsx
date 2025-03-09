@@ -8,7 +8,7 @@ import Chip from "@/components/_common/Chip";
 import { Gallery } from "./Gallery";
 
 const startDate = dayjs("2017-10-30"); // 2017년 10월 1일을 기준으로 설정
-const currentDate = dayjs();
+const currentDate = dayjs("2025-02-28");
 
 function Page2() {
   const [years, setYears] = useState(0);
@@ -42,7 +42,7 @@ function Page2() {
                   animateToNumber={years}
                 />
               }
-              content={<p>2017-10-30 ~ 현재까지</p>}
+              content={<p>2017.10.30 ~ 2025.02.28</p>}
             />
             년차 웹 개발자
             <Chip title={<>임대현</>} content={<p>Daehyun Lim</p>} />

@@ -4,7 +4,7 @@ import bgm from "@/assets/sound/bgm_25_Route_30.mp3";
 import sfx from "@/assets/sound/sfx_sounds_Blip7.wav";
 import mainStore from "@/store/main";
 import modalStore from "@/store/modal";
-import "@/styles/about.scss";
+import "@/styles/about.css";
 
 import { useEffect, useRef, useState } from "react";
 import { ReactTyped } from "react-typed";
