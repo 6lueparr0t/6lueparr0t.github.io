@@ -213,9 +213,6 @@ importers:
       postcss:
         specifier: ^8.5.3
         version: 8.5.3
-      sass:
-        specifier: ^1.85.1
-        version: 1.85.1
       tailwindcss:
         specifier: ^4.0.12
         version: 4.0.12
@@ -6983,6 +6980,7 @@ snapshots:
   chokidar@4.0.3:
     dependencies:
       readdirp: 4.1.2
+    optional: true
 
   ci-info@3.9.0: {}
 
@@ -7702,7 +7700,8 @@ snapshots:
 
   ignore@5.3.2: {}
 
-  immutable@5.0.3: {}
+  immutable@5.0.3:
+    optional: true
 
   import-fresh@3.3.1:
     dependencies:
@@ -8714,7 +8713,8 @@ snapshots:
     dependencies:
       loose-envify: 1.4.0
 
-  readdirp@4.1.2: {}
+  readdirp@4.1.2:
+    optional: true
 
   redent@3.0.0:
     dependencies:
@@ -8836,6 +8836,7 @@ snapshots:
       source-map-js: 1.2.1
     optionalDependencies:
       '@parcel/watcher': 2.5.1
+    optional: true
 
   saxes@6.0.0:
     dependencies:
