@@ -1,11 +1,11 @@
-import { useEffect } from "react";
+import { lazy, Suspense, useEffect } from "react";
 
-import Ash from "@/components/home/Ash";
-import Now from "@/components/home/Now";
-import Page1 from "@/components/home/Page1";
-import Page2 from "@/components/home/Page2";
-import Page3 from "@/components/home/Page3";
-import Page4 from "@/components/home/Page4";
+const Ash = lazy(() => import("@/components/home/Ash"));
+const Now = lazy(() => import("@/components/home/Now"));
+const Page1 = lazy(() => import("@/components/home/Page1"));
+const Page2 = lazy(() => import("@/components/home/Page2"));
+const Page3 = lazy(() => import("@/components/home/Page3"));
+const Page4 = lazy(() => import("@/components/home/Page4"));
 
 function Home() {
   useEffect(() => {
@@ -32,12 +32,14 @@ function Home() {
 
   return (
     <div className="font-['DungGeunMo']">
-      <Ash />
-      <Page1 />
-      <Page2 />
-      <Page3 />
-      <Page4 />
-      <Now />
+      <Suspense fallback={<></>}>
+        <Ash />
+        <Page1 />
+        <Page2 />
+        <Page3 />
+        <Page4 />
+        <Now />
+      </Suspense>
     </div>
   );
 }

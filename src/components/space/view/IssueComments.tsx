@@ -1,13 +1,16 @@
-import React from "react";
 import dayjs from "dayjs";
-import Markdown from "react-markdown";
-import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import remarkGfm from "remark-gfm";
+
+import React from "react";
+import Markdown from "react-markdown";
+import { Prism, SyntaxHighlighterProps } from "react-syntax-highlighter";
 import { coldarkDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
 
 import { SpaceProps } from "@/components/components.d";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+
+const SyntaxHighlighter = Prism as any as React.FC<SyntaxHighlighterProps>;
 
 export const IssueComments: React.FC<SpaceProps> = ({ comments }) => {
   return (

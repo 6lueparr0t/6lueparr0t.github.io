@@ -1,20 +1,20 @@
-import { PaginationProps } from "@/components/components.d";
+import { PAGE_LENGTH, PER_PAGE } from "@/lib/constants";
+import { makeQuery } from "@/lib/space";
+import { getList } from "@/lib/space";
 
+import { useCallback } from "react";
+
+import { PaginationProps } from "@/components/components.d";
 import {
   Pagination,
   PaginationContent,
+  PaginationFirst,
   PaginationItem,
+  PaginationLast,
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-  PaginationFirst,
-  PaginationLast,
 } from "@/components/ui/pagination";
-
-import { makeQuery } from "@/lib/space";
-import { PER_PAGE, PAGE_LENGTH } from "@/lib/constants";
-import { getList } from "@/lib/space";
-import { useCallback } from "react";
 
 export const IssuePagination: React.FC<PaginationProps> = ({
   issueNumber = null,
@@ -42,10 +42,10 @@ export const IssuePagination: React.FC<PaginationProps> = ({
     <Pagination>
       <PaginationContent>
         <PaginationItem className="rounded-md border-solid border-2 border-gray-400">
-          <PaginationFirst to={`/space${issueLink}?page=1${queryString}`} />
+          <PaginationFirst href={`/space${issueLink}?page=1${queryString}`} />
         </PaginationItem>
         <PaginationItem className="rounded-md border-solid border-2 border-gray-400">
-          <PaginationPrevious to={`/space${issueLink}?page=${prev}${queryString}`} />
+          <PaginationPrevious href={`/space${issueLink}?page=${prev}${queryString}`} />
         </PaginationItem>
         {Array.from({ length: PAGE_LENGTH }).map((_, index) => {
           const num = index + start + 1;
@@ -53,7 +53,7 @@ export const IssuePagination: React.FC<PaginationProps> = ({
           return (
             <PaginationItem key={index}>
               <PaginationLink
-                to={`/space${issueLink}?page=${num}${queryString}`}
+                href={`/space${issueLink}?page=${num}${queryString}`}
                 {...(num === page ? { isActive: true } : {})}
               >
                 {num}
@@ -62,10 +62,10 @@ export const IssuePagination: React.FC<PaginationProps> = ({
           );
         })}
         <PaginationItem className="rounded-md border-solid border-2 border-gray-400">
-          <PaginationNext to={`/space${issueLink}?page=${next}${queryString}`} />
+          <PaginationNext href={`/space${issueLink}?page=${next}${queryString}`} />
         </PaginationItem>
         <PaginationItem className="rounded-md border-solid border-2 border-gray-400">
-          <PaginationLast to={`/space${issueLink}?page=${last}${queryString}`} />
+          <PaginationLast href={`/space${issueLink}?page=${last}${queryString}`} />
         </PaginationItem>
       </PaginationContent>
     </Pagination>
@@ -112,10 +112,10 @@ export const IssuePaginationWithState: React.FC<PaginationProps> = ({
     <Pagination>
       <PaginationContent>
         <PaginationItem className="rounded-md border-solid border-2 border-gray-400">
-          <PaginationFirst to={"#"} onClick={() => handlePageClick(1)} />
+          <PaginationFirst href={"#"} onClick={() => handlePageClick(1)} />
         </PaginationItem>
         <PaginationItem className="rounded-md border-solid border-2 border-gray-400">
-          <PaginationPrevious to={"#"} onClick={() => handlePageClick(prev)} />
+          <PaginationPrevious href={"#"} onClick={() => handlePageClick(prev)} />
         </PaginationItem>
         {Array.from({ length: PAGE_LENGTH }).map((_, index) => {
           const num = index + start + 1;
@@ -123,7 +123,7 @@ export const IssuePaginationWithState: React.FC<PaginationProps> = ({
           return (
             <PaginationItem key={index}>
               <PaginationLink
-                to={"#"}
+                href={"#"}
                 onClick={() => handlePageClick(num)}
                 {...(num === page ? { isActive: true } : {})}
               >
@@ -133,10 +133,10 @@ export const IssuePaginationWithState: React.FC<PaginationProps> = ({
           );
         })}
         <PaginationItem className="rounded-md border-solid border-2 border-gray-400">
-          <PaginationNext to={"#"} onClick={() => handlePageClick(next)} />
+          <PaginationNext href={"#"} onClick={() => handlePageClick(next)} />
         </PaginationItem>
         <PaginationItem className="rounded-md border-solid border-2 border-gray-400">
-          <PaginationLast to={"#"} onClick={() => handlePageClick(last)} />
+          <PaginationLast href={"#"} onClick={() => handlePageClick(last)} />
         </PaginationItem>
       </PaginationContent>
     </Pagination>

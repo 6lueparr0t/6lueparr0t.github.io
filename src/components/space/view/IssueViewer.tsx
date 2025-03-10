@@ -1,14 +1,16 @@
-import React from "react";
 import dayjs from "dayjs";
-import Markdown from "react-markdown";
-import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import remarkGfm from "remark-gfm";
+
+import React from "react";
+import Markdown from "react-markdown";
+import { Prism, SyntaxHighlighterProps } from "react-syntax-highlighter";
 import { coldarkDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
 
 import { SpaceProps } from "@/components/components.d";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
+const SyntaxHighlighter = Prism as any as React.FC<SyntaxHighlighterProps>;
 
 export const IssueViewer: React.FC<SpaceProps> = ({ issue }) => {
   return (
@@ -38,24 +40,31 @@ export const IssueViewer: React.FC<SpaceProps> = ({ issue }) => {
                 // eslint-disable-next-line @typescript-eslint/no-unused-vars
                 h3: ({ node, ...props }) => <h3 {...props} className="text-xl font-bold" />,
                 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-                a: ({ node, ...props }) => <a {...props} className="underline underline-offset-4 decoration-2 decoration-wavy decoration-blue-600 dark:decoration-blue-400 hover:text-blue-600 dark:hover:text-blue-400" />,
+                a: ({ node, ...props }) => (
+                  <a
+                    {...props}
+                    className="underline underline-offset-4 decoration-2 decoration-wavy decoration-blue-600 dark:decoration-blue-400 hover:text-blue-600 dark:hover:text-blue-400"
+                  />
+                ),
                 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-                blockquote: ({ node, ...props }) => <blockquote {...props} className="p-4 italic border-l-4 border-gray-500 quote" />,
+                blockquote: ({ node, ...props }) => (
+                  <blockquote {...props} className="p-4 italic border-l-4 border-gray-500 quote" />
+                ),
                 // eslint-disable-next-line @typescript-eslint/no-unused-vars
                 ol: ({ node, ...props }) => <ol {...props} className="list-decimal px-4" />,
                 code({ className, children }) {
                   const match = /language-(\w+)/.exec(className || "");
-                  const language = match ? match[1] : 'bash';
+                  const language = match ? match[1] : "bash";
                   return (
-                      <SyntaxHighlighter
-                        language={language}
-                        PreTag="div"
-                        style={coldarkDark}
-                        showLineNumbers
-                        // wrapLongLines
-                      >
-                        {String(children).replace(/\n$/, "")}
-                      </SyntaxHighlighter>
+                    <SyntaxHighlighter
+                      language={language}
+                      PreTag="div"
+                      style={coldarkDark}
+                      showLineNumbers
+                      // wrapLongLines
+                    >
+                      {String(children).replace(/\n$/, "")}
+                    </SyntaxHighlighter>
                   );
                 },
               }}
