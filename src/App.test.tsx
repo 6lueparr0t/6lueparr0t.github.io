@@ -8,11 +8,11 @@ import App from "./App";
 // 모듈을 전체 Mock 처리
 vi.mock("@/components/ui/carousel", () => ({
   // Carousel을 forwardRef로 Mock 처리
-  Carousel: React.forwardRef((props: any, ref: React.Ref<HTMLDivElement>) => (
+  Carousel: ({ ref, ...props }) => (
     <div ref={ref} data-testid="mock-carousel">
       {props.children}
     </div>
-  )),
+  ),
   CarouselApi: vi.fn(), // 타입을 빈 함수로 Mock 처리
   CarouselContent: ({ children }: { children: React.ReactNode }) => (
     <div data-testid="mock-carousel-content">{children}</div>
