@@ -1,10 +1,11 @@
-import { useState, useEffect, useRef } from "react";
-import { NavLink } from "react-router";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-
 import ash2 from "@/assets/home/ash2.gif";
 
-const message: (string | JSX.Element)[] = [
+import { useEffect, useRef, useState } from "react";
+import { NavLink } from "react-router";
+
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+
+const message = [
   "안녕하세요?",
   "아직 작업 해야될게 더 남았는데..",
   "[tip] 모바일에만 있는 메뉴가 있어요.",
@@ -57,11 +58,11 @@ function Ash() {
 
   useEffect(() => {
     let ashSize = 20;
-    if(window) {
+    if (window) {
       ashSize = window.innerWidth < RESPONSIVE_SIZE ? 20 : 32;
     }
     const timeout = setTimeout(() => {
-      const left = Math.min(((Math.floor(scrollPercentage * 10) / 10) * 1), 98);
+      const left = Math.min((Math.floor(scrollPercentage * 10) / 10) * 1, 98);
       ashRef.current?.style.setProperty("left", `calc(${left}% - ${ashSize}px)`);
     });
 

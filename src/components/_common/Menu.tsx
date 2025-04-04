@@ -1,7 +1,11 @@
+import { Bars3Icon } from "@heroicons/react/24/outline";
+
 import React from "react";
 import { NavLink } from "react-router";
-import { type MenuProps } from "@/components/components.d";
 
+import { type MenuProps } from "@/components/components.d";
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
 import {
   Sheet,
   SheetClose,
@@ -12,9 +16,6 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
-import { Bars3Icon } from "@heroicons/react/24/outline";
 
 const Menu: React.FC<MenuProps> = ({ menuList }) => {
   return (
@@ -32,7 +33,7 @@ const Menu: React.FC<MenuProps> = ({ menuList }) => {
         <Separator className="my-4" />
         <div className="text-xl grid gap-4">
           {menuList.map((menu) => {
-            let link: JSX.Element | null = null;
+            let link = null;
             if (menu.path) {
               link = (
                 <NavLink to={menu.path} className={"text-gray-800 dark:text-gray-100"}>
