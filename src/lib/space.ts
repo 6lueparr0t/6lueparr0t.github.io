@@ -1,17 +1,20 @@
-import { Octokit } from "octokit";
 import { PER_PAGE } from "@/lib/constants";
-import { get, isEmptyObject, pick} from "@/lib/utils";
+import { get, isEmptyObject, pick } from "@/lib/utils";
+import { Octokit } from "octokit";
+
 import { Issue } from "@/components/components";
 
 const repo = import.meta.env.VITE_APP_GIT_REPO;
 const owner = import.meta.env.VITE_APP_GIT_OWNER;
 const auth = import.meta.env.VITE_APP_GIT_TOKEN;
 
+console.log(import.meta.env);
+
 const octokit = new Octokit({
   auth: auth,
 });
 
-export const makeQuery = (query: object, char:string = "&"): string => {
+export const makeQuery = (query: object, char: string = "&"): string => {
   // 입력 : { name: 'John', age: 30 }; // 출력: [['name', 'John'], ['age', 30]]
   return (
     char +
@@ -37,7 +40,7 @@ export const getList = async (
 
   try {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    let response : any;
+    let response: any;
 
     if (get(query, "keyword") !== "") {
       response = await search(query, option);
@@ -87,14 +90,14 @@ export const getIssue = async (
     node_id: "",
     user: {
       avatar_url: "",
-      login: ""
-    }
+      login: "",
+    },
   };
   let comments: Issue[] = [];
 
   try {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    let response : any;
+    let response: any;
     // eslint-disable-next-line prefer-const
     response = await getGithubIssue(option, issueNumber);
 
@@ -114,7 +117,7 @@ export const getIssue = async (
 
   try {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    let response : any;
+    let response: any;
     // eslint-disable-next-line prefer-const
     response = await getGithubIssueComment(issueNumber);
 
@@ -153,7 +156,6 @@ export const getGithubIssue = async (
     {
       owner: owner,
       repo: repo,
-      per_page: option.per_page,
       headers: {
         "X-GitHub-Api-Version": "2022-11-28",
       },
@@ -163,11 +165,8 @@ export const getGithubIssue = async (
   return response;
 };
 
-
 // https://docs.github.com/en/rest/issues/comments?apiVersion=2022-11-28#list-issue-comments
-export const getGithubIssueComment = async (
-  issueNumber: number = 0
-): Promise<unknown> => {
+export const getGithubIssueComment = async (issueNumber: number = 0): Promise<unknown> => {
   const issuePath: string = issueNumber ? "/" + String(issueNumber) : "";
 
   const response = await octokit.request(
@@ -210,26 +209,35 @@ export const search = async (
 
 export const parseData = (item: object) => ({
   ...pick(["number", "title", "body", "created_at", "updated_at", "node_id"], item as Issue),
-  user: pick(["avatar_url", "login", "site_admin"], get(item, "user", {}) as { avatar_url: string; login: string, site_admin: boolean }),
+  user: pick(
+    ["avatar_url", "login", "site_admin"],
+    get(item, "user", {}) as { avatar_url: string; login: string; site_admin: boolean }
+  ),
 });
 
 export const parseDataForComments = (item: object[]) => {
   return item.map((comment) => {
     return {
       ...pick(["number", "title", "body", "created_at", "updated_at", "node_id"], comment as Issue),
-      user: pick(["avatar_url", "login", "site_admin"], get(comment, "user", {}) as { avatar_url: string; login: string, site_admin: boolean }),
+      user: pick(
+        ["avatar_url", "login", "site_admin"],
+        get(comment, "user", {}) as { avatar_url: string; login: string; site_admin: boolean }
+      ),
     };
   });
 };
 
-export const parseLastPage = (props: { data: { total_count?: number }; headers: { link?: string } }): number => {
+export const parseLastPage = (props: {
+  data: { total_count?: number };
+  headers: { link?: string };
+}): number => {
   if (!props.headers.link) {
     return 0;
   }
 
-  const links = props.headers.link.split(',');
+  const links = props.headers.link.split(",");
 
-  const lastLink = links.find(link => link.includes('rel="last"'));
+  const lastLink = links.find((link) => link.includes('rel="last"'));
   if (!lastLink) {
     return 0;
   }

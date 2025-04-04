@@ -1,21 +1,20 @@
 <!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>404</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>404</title>
-</head>
-
-<body>
-  <div id="root"></div>
-  <script>
-    if (location.pathname !== "/404.html") {
-      document.title = "redirecting...";
-      location.replace("/?redirect="+location.pathname);
-    }
-  </script>
-</body>
-
+  <body>
+    <div id="root"></div>
+    <script>
+      if (location.pathname !== "/404.html") {
+        document.title = "redirecting...";
+        const fullPath = location.pathname + location.search + location.hash;
+        location.replace("/?redirect=" + encodeURIComponent(fullPath));
+      }
+    </script>
+  </body>
 </html>

@@ -112,10 +112,10 @@ export const IssuePaginationWithState: React.FC<PaginationProps> = ({
     <Pagination>
       <PaginationContent>
         <PaginationItem className="rounded-md border-solid border-2 border-gray-400">
-          <PaginationFirst href={"#"} onClick={() => handlePageClick(1)} />
+          <PaginationFirst type="button" onClick={() => handlePageClick(1)} />
         </PaginationItem>
         <PaginationItem className="rounded-md border-solid border-2 border-gray-400">
-          <PaginationPrevious href={"#"} onClick={() => handlePageClick(prev)} />
+          <PaginationPrevious type="button" onClick={() => handlePageClick(prev)} />
         </PaginationItem>
         {Array.from({ length: PAGE_LENGTH }).map((_, index) => {
           const num = index + start + 1;
@@ -123,7 +123,7 @@ export const IssuePaginationWithState: React.FC<PaginationProps> = ({
           return (
             <PaginationItem key={index}>
               <PaginationLink
-                href={"#"}
+                type="button"
                 onClick={() => handlePageClick(num)}
                 {...(num === page ? { isActive: true } : {})}
               >
@@ -133,10 +133,10 @@ export const IssuePaginationWithState: React.FC<PaginationProps> = ({
           );
         })}
         <PaginationItem className="rounded-md border-solid border-2 border-gray-400">
-          <PaginationNext href={"#"} onClick={() => handlePageClick(next)} />
+          <PaginationNext type="button" onClick={() => handlePageClick(next)} />
         </PaginationItem>
         <PaginationItem className="rounded-md border-solid border-2 border-gray-400">
-          <PaginationLast href={"#"} onClick={() => handlePageClick(last)} />
+          <PaginationLast type="button" onClick={() => handlePageClick(last)} />
         </PaginationItem>
       </PaginationContent>
     </Pagination>
