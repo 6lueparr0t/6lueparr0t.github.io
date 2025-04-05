@@ -15,7 +15,6 @@ import { IssueTable } from "@/components/space/IssueTable";
 import { IssueComments } from "@/components/space/view/IssueComments";
 import { IssueViewer } from "@/components/space/view/IssueViewer";
 import { IssueViewerButtonGroup } from "@/components/space/view/IssueViewerButtonGroup";
-import { Button } from "@/components/ui/button";
 
 const SpaceViewPage: React.FC = () => {
   const location = useLocation();
