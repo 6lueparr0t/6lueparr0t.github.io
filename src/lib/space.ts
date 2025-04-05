@@ -8,8 +8,6 @@ const repo = import.meta.env.VITE_APP_GIT_REPO;
 const owner = import.meta.env.VITE_APP_GIT_OWNER;
 const auth = import.meta.env.VITE_APP_GIT_TOKEN;
 
-console.log(import.meta.env);
-
 const octokit = new Octokit({
   auth: auth,
 });
@@ -198,11 +196,14 @@ export const search = async (
     optionQuery = makeQuery(option);
   }
 
-  const response = await octokit.request(`GET /search/issues?${qQuery ?? ""}${optionQuery ?? ""}`, {
-    headers: {
-      "X-GitHub-Api-Version": "2022-11-28",
-    },
-  });
+  const response = await octokit.request(
+    `GET /search/issues?${qQuery ?? ""}${optionQuery ?? ""}&advanced_search=true`,
+    {
+      headers: {
+        "X-GitHub-Api-Version": "2022-11-28",
+      },
+    }
+  );
 
   return response;
 };

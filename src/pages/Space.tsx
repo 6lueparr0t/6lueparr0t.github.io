@@ -1,16 +1,17 @@
-import React, { useEffect, Suspense } from "react";
+import { PER_PAGE } from "@/lib/constants";
+import { getList } from "@/lib/space";
+import { sleep } from "@/lib/utils";
+
+import React, { Suspense, useEffect } from "react";
 import { Await, useRouteLoaderData } from "react-router";
 import type { LoaderFunction } from "react-router";
+import { NavLink } from "react-router";
 
 import { RouteLoaderData } from "@/pages/pages.d";
-import { PER_PAGE } from "@/lib/constants";
-import { sleep } from "@/lib/utils";
-import { getList } from "@/lib/space";
 
-import { SearchInput } from "@/components/space/SearchInput";
-import { IssueTable } from "@/components/space/IssueTable";
 import { IssuePagination } from "@/components/space/IssuePagination";
-import { NavLink } from "react-router";
+import { IssueTable } from "@/components/space/IssueTable";
+import { SearchInput } from "@/components/space/SearchInput";
 
 const SpacePage: React.FC = () => {
   const { list, query, last, page } = useRouteLoaderData("space") as RouteLoaderData;
