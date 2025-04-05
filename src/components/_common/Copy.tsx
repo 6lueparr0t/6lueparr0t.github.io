@@ -1,12 +1,13 @@
-import { useEffect, useState, type PropsWithChildren } from "react";
-import { ClipboardIcon } from "@heroicons/react/24/outline";
-import { SnackbarProvider, enqueueSnackbar } from "notistack";
 import { sendGtmEvent } from "@/lib/utils";
+import { ClipboardIcon } from "@heroicons/react/24/outline";
+import { enqueueSnackbar, SnackbarProvider } from "notistack";
+
+import { type PropsWithChildren, useEffect, useState } from "react";
 
 interface CopyProps extends PropsWithChildren {
   id?: string;
   title?: string;
-  icon?: string;
+  icon?: string | React.ReactElement;
   children: string;
 }
 
@@ -30,7 +31,7 @@ const Copy: React.FC<CopyProps> = ({ id, title, icon, children }) => {
 
         sendGtmEvent({
           id: id || "link",
-          event: 'copy',
+          event: "copy",
           action: `Copied to clipboard: ${children}`,
         });
       })
