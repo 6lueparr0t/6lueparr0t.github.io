@@ -1,16 +1,12 @@
 "use client";
 
-import * as React from "react";
+import { Command as CommandPrimitive } from "cmdk";
 import { X } from "lucide-react";
 
+import * as React from "react";
+
 import { Badge } from "@/components/ui/badge";
-import {
-  Command,
-  CommandGroup,
-  CommandItem,
-  CommandList,
-} from "@/components/ui/command";
-import { Command as CommandPrimitive } from "cmdk";
+import { Command, CommandGroup, CommandItem, CommandList } from "@/components/ui/command";
 
 type Framework = Record<"value" | "label", string>;
 
@@ -59,39 +55,31 @@ export function FancyMultiSelect() {
     setSelected((prev) => prev.filter((s) => s.value !== framework.value));
   }, []);
 
-  const handleKeyDown = React.useCallback(
-    (e: React.KeyboardEvent<HTMLDivElement>) => {
-      const input = inputRef.current;
-      if (input) {
-        if (e.key === "Delete" || e.key === "Backspace") {
-          if (input.value === "") {
-            setSelected((prev) => {
-              const newSelected = [...prev];
-              newSelected.pop();
-              return newSelected;
-            });
-          }
-        }
-        // This is not a default behaviour of the <input /> field
-        if (e.key === "Escape") {
-          input.blur();
+  const handleKeyDown = React.useCallback((e: React.KeyboardEvent<HTMLDivElement>) => {
+    const input = inputRef.current;
+    if (input) {
+      if (e.key === "Delete" || e.key === "Backspace") {
+        if (input.value === "") {
+          setSelected((prev) => {
+            const newSelected = [...prev];
+            newSelected.pop();
+            return newSelected;
+          });
         }
       }
-    },
-    []
-  );
+      // This is not a default behaviour of the <input /> field
+      if (e.key === "Escape") {
+        input.blur();
+      }
+    }
+  }, []);
 
-  const selectables = FRAMEWORKS.filter(
-    (framework) => !selected.includes(framework)
-  );
+  const selectables = FRAMEWORKS.filter((framework) => !selected.includes(framework));
 
-  console.log(selectables, selected, inputValue);
+  // console.log(selectables, selected, inputValue);
 
   return (
-    <Command
-      onKeyDown={handleKeyDown}
-      className="overflow-visible bg-transparent"
-    >
+    <Command onKeyDown={handleKeyDown} className="overflow-visible bg-transparent">
       <div className="group rounded-md border border-input px-3 py-2 text-sm ring-offset-background focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2">
         <div className="flex flex-wrap gap-1">
           {selected.map((framework) => {
@@ -137,7 +125,10 @@ export function FancyMultiSelect() {
                   return (
                     <CommandItem
                       key={framework.value}
-                      onMouseDown={(e: { preventDefault: () => void; stopPropagation: () => void; }) => {
+                      onMouseDown={(e: {
+                        preventDefault: () => void;
+                        stopPropagation: () => void;
+                      }) => {
                         e.preventDefault();
                         e.stopPropagation();
                       }}

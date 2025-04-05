@@ -2,19 +2,28 @@ import { PER_PAGE } from "@/lib/constants";
 import { getList } from "@/lib/space";
 import { sleep } from "@/lib/utils";
 
-import React, { Suspense, useEffect } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { Await, useRouteLoaderData } from "react-router";
 import type { LoaderFunction } from "react-router";
 import { NavLink } from "react-router";
 
 import { RouteLoaderData } from "@/pages/pages.d";
 
-import { IssuePagination } from "@/components/space/IssuePagination";
+import { IssuePaginationWithState } from "@/components/space/IssuePagination";
 import { IssueTable } from "@/components/space/IssueTable";
 import { SearchInput } from "@/components/space/SearchInput";
 
 const SpacePage: React.FC = () => {
-  const { list, query, last, page } = useRouteLoaderData("space") as RouteLoaderData;
+  const {
+    list: defaultList,
+    query,
+    last: defaultLast,
+    page: defaultPage,
+  } = useRouteLoaderData("space") as RouteLoaderData;
+
+  const [page, setPage] = useState(defaultPage);
+  const [list, setList] = useState(defaultList);
+  const [last, setLast] = useState(defaultLast);
 
   useEffect(() => {
     document.title = "space";
@@ -24,7 +33,11 @@ const SpacePage: React.FC = () => {
     if (query.in && query.keyword) {
       document.title = `${query.in}:${query.keyword}`;
     }
-  }, [query.in, query.keyword]);
+
+    setPage(defaultPage);
+    setList(defaultList);
+    setLast(defaultLast);
+  }, [query.in, query.keyword, defaultPage, defaultList, defaultLast]);
 
   return (
     <div className="p-8 min-h-[calc(100vh-4.2rem)] flex flex-col justify-between">
@@ -59,10 +72,18 @@ const SpacePage: React.FC = () => {
               {(last) => (
                 <>
                   <div className="w-full flex flex-col justify-evenly items-center mt-20">
-                    <IssuePagination
+                    {/* <IssuePagination
                       last={last ?? 1}
                       page={page ?? 1}
                       query={query || { in: "title" }}
+                    /> */}
+                    <IssuePaginationWithState
+                      last={last || 1}
+                      page={page || 1}
+                      query={query || { in: "title" }}
+                      setPage={setPage}
+                      setList={setList}
+                      setLast={setLast}
                     />
                   </div>
                 </>
