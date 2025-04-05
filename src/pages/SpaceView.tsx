@@ -44,11 +44,9 @@ const SpaceViewPage: React.FC = () => {
 
   return (
     <div className="p-8 w-full lg:w-3/4 m-auto">
-      <Button variant="ghost" className="p-2" title="back">
-        <Link to={`/space`}>
-          <ChevronLeftIcon className="w-[24px] h-[24px]" />
-        </Link>
-      </Button>
+      <Link to={`/space`} className="inline-block">
+        <ChevronLeftIcon className="w-[24px] h-[24px]" />
+      </Link>
       <div className="flex justify-between items-center text-2xl text-left my-8">
         <span className="mr-4">{title}</span>
         <div className="flex">
