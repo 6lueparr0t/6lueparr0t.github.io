@@ -1,5 +1,6 @@
 import { PER_PAGE } from "@/lib/constants";
-import { get, isEmptyObject, pick } from "@/lib/utils";
+import { get } from "@/lib/utils";
+import { graphql } from "@octokit/graphql";
 import { Octokit } from "octokit";
 
 import { Issue } from "@/components/components";
@@ -8,55 +9,58 @@ const repo = import.meta.env.VITE_APP_GIT_REPO;
 const owner = import.meta.env.VITE_APP_GIT_OWNER;
 const auth = import.meta.env.VITE_APP_GIT_TOKEN;
 
-const octokit = new Octokit({
-  auth: auth,
+const octokit = new Octokit({ auth });
+const graphqlWithAuth = graphql.defaults({
+  headers: {
+    authorization: `token ${auth}`,
+  },
 });
 
-export const makeQuery = (query: object, char: string = "&"): string => {
-  // 입력 : { name: 'John', age: 30 }; // 출력: [['name', 'John'], ['age', 30]]
-  return (
-    char +
-    Object.entries(query)
-      .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
-      .join("&")
-  );
+type SearchIssuesResponse = {
+  search: {
+    issueCount: number;
+    nodes: {
+      number: number;
+      title: string;
+      body: string;
+      createdAt: string;
+      updatedAt: string;
+      id: string;
+      author: {
+        login: string;
+        avatarUrl: string;
+      } | null;
+    }[];
+  };
 };
 
-// Github API 를 사용하여 목록을 가져옴
 export const getList = async (
   query: { keyword?: string; in: string } = { keyword: "", in: "title" },
-  option: { page?: number; per_page?: number } = {}
+  option: { first?: number; page?: number; per_page?: number } = {}
 ): Promise<{
   list: Issue[];
   last: number;
   status?: number;
   message?: object;
 }> => {
-  let list;
-
-  let last: number = 0;
-
   try {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    let response: any;
-
     if (get(query, "keyword") !== "") {
-      response = await search(query, option);
-
-      if (response.status === 200) {
-        last = parseLastPage(response);
-        list = response.data.items.map((item: object) => parseData(item));
-      }
+      const response = await searchWithGraphQL(query, option);
+      return {
+        list: response.list,
+        last: Math.ceil(response.total / (option.per_page ?? PER_PAGE)),
+      };
     } else {
-      response = await getGithubIssue(option);
-
+      const response = await getIssue(option);
       if (response.status === 200) {
-        last = parseLastPage(response);
-        list = response.data.map((item: object) => parseData(item));
+        return {
+          list: response.data.map(parseData),
+          last: parseLastPage(response),
+        };
+      } else {
+        throw new Error("Could not fetch issue list");
       }
     }
-
-    if (response.status !== 200) throw new Error("Could not fetch details for selected event.");
   } catch (error) {
     return {
       list: [],
@@ -65,184 +69,101 @@ export const getList = async (
       message: error ?? "",
     };
   }
-
-  return { list: list, last: last };
 };
 
-// Github API 를 사용하여 이슈를 가져옴
-export const getIssue = async (
-  option: { page?: number; per_page?: number } = {},
-  issueNumber: number
-): Promise<{
-  issue: Issue;
-  comments?: Issue[];
-  status?: number;
-  message?: object;
-}> => {
-  let issue: Issue = {
-    number: 0,
-    title: "",
-    body: "",
-    created_at: "",
-    updated_at: "",
-    node_id: "",
+export const searchWithGraphQL = async (
+  query: { keyword?: string; in: string },
+  option: { first?: number } = { first: PER_PAGE }
+): Promise<{ list: Issue[]; total: number }> => {
+  const { keyword = "", in: searchIn = "title" } = query;
+  const { first = PER_PAGE } = option;
+
+  const q = `${keyword} in:${searchIn} repo:${owner}/${repo} is:issue`;
+
+  const response = await graphqlWithAuth<SearchIssuesResponse>(
+    `query($q: String!, $first: Int!) {
+      search(query: $q, type: ISSUE, first: $first) {
+        issueCount
+        nodes {
+          ... on Issue {
+            number
+            title
+            body
+            createdAt
+            updatedAt
+            id
+            author {
+              login
+              avatarUrl
+            }
+          }
+        }
+      }
+    }`,
+    {
+      q,
+      first,
+    }
+  );
+
+  const list: Issue[] = response.search.nodes.map((node: any) => ({
+    number: node.number,
+    title: node.title,
+    body: node.body,
+    created_at: node.createdAt,
+    updated_at: node.updatedAt,
+    node_id: node.id,
     user: {
-      avatar_url: "",
-      login: "",
+      login: node.author?.login ?? "",
+      avatar_url: node.author?.avatarUrl ?? "",
     },
+  }));
+
+  return {
+    list,
+    total: response.search.issueCount,
   };
-  let comments: Issue[] = [];
-
-  try {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    let response: any;
-    // eslint-disable-next-line prefer-const
-    response = await getGithubIssue(option, issueNumber);
-
-    if (response.status === 200) {
-      issue = parseData(response.data);
-    } else {
-      throw new Error("Could not fetch details for selected event.");
-    }
-  } catch (error) {
-    return {
-      issue: issue,
-      comments: [],
-      status: 500,
-      message: error ?? "",
-    };
-  }
-
-  try {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    let response: any;
-    // eslint-disable-next-line prefer-const
-    response = await getGithubIssueComment(issueNumber);
-
-    if (response.status === 200) {
-      comments = parseDataForComments(response.data);
-    } else {
-      throw new Error("Could not fetch details for selected event.");
-    }
-  } catch (error) {
-    return {
-      issue: issue,
-      comments: comments,
-      status: 500,
-      message: error ?? "",
-    };
-  }
-
-  return { issue: issue, comments: comments };
 };
 
-// Octokit.js
-// https://github.com/octokit/core.js#readme
-export const getGithubIssue = async (
+export const getIssue = async (
   option: { per_page?: number } = { per_page: PER_PAGE },
   issueNumber: number = 0
-): Promise<unknown> => {
+): Promise<any> => {
   const issuePath: string = issueNumber ? "/" + String(issueNumber) : "";
-
-  let optionQuery: string = "";
-  if (!isEmptyObject(option)) {
-    optionQuery = makeQuery(option, "?");
-  }
-
+  const query = new URLSearchParams(option as Record<string, string>).toString();
   const response = await octokit.request(
-    `GET /repos/${owner}/${repo}/issues${issuePath}${optionQuery ?? ""}`,
+    `GET /repos/${owner}/${repo}/issues${issuePath}?${query}`,
     {
-      owner: owner,
-      repo: repo,
+      owner,
+      repo,
       headers: {
         "X-GitHub-Api-Version": "2022-11-28",
       },
     }
   );
 
-  return response;
+  return response.data;
 };
 
-// https://docs.github.com/en/rest/issues/comments?apiVersion=2022-11-28#list-issue-comments
-export const getGithubIssueComment = async (issueNumber: number = 0): Promise<unknown> => {
-  const issuePath: string = issueNumber ? "/" + String(issueNumber) : "";
-
-  const response = await octokit.request(
-    `GET /repos/${owner}/${repo}/issues${issuePath}/comments`,
-    {
-      owner: owner,
-      repo: repo,
-      issue_number: issueNumber,
-      headers: {
-        "X-GitHub-Api-Version": "2022-11-28",
-      },
-    }
-  );
-
-  return response;
-};
-
-export const search = async (
-  query: { keyword?: string; in: string },
-  option: object = {}
-): Promise<unknown> => {
-  let qQuery: string = "q=";
-  if (!isEmptyObject(query)) {
-    qQuery += encodeURIComponent(`${query.keyword} in:${query.in} repo:${owner}/${repo}`);
-  }
-
-  let optionQuery: string = "";
-  if (!isEmptyObject(option)) {
-    optionQuery = makeQuery(option);
-  }
-
-  const response = await octokit.request(
-    `GET /search/issues?${qQuery ?? ""}${optionQuery ?? ""}&advanced_search=true`,
-    {
-      headers: {
-        "X-GitHub-Api-Version": "2022-11-28",
-      },
-    }
-  );
-
-  return response;
-};
-
-export const parseData = (item: object) => ({
-  ...pick(["number", "title", "body", "created_at", "updated_at", "node_id"], item as Issue),
-  user: pick(
-    ["avatar_url", "login", "site_admin"],
-    get(item, "user", {}) as { avatar_url: string; login: string; site_admin: boolean }
-  ),
+export const parseData = (item: any): Issue => ({
+  number: item.number,
+  title: item.title,
+  body: item.body,
+  created_at: item.created_at,
+  updated_at: item.updated_at,
+  node_id: item.node_id,
+  user: {
+    login: item.user?.login ?? "",
+    avatar_url: item.user?.avatar_url ?? "",
+  },
 });
-
-export const parseDataForComments = (item: object[]) => {
-  return item.map((comment) => {
-    return {
-      ...pick(["number", "title", "body", "created_at", "updated_at", "node_id"], comment as Issue),
-      user: pick(
-        ["avatar_url", "login", "site_admin"],
-        get(comment, "user", {}) as { avatar_url: string; login: string; site_admin: boolean }
-      ),
-    };
-  });
-};
 
 export const parseLastPage = (props: {
   data: { total_count?: number };
   headers: { link?: string };
 }): number => {
-  if (!props.headers.link) {
-    return 0;
-  }
-
-  const links = props.headers.link.split(",");
-
-  const lastLink = links.find((link) => link.includes('rel="last"'));
-  if (!lastLink) {
-    return 0;
-  }
-
-  const match = lastLink.match(/.*[?&]page=(\d+).*/);
+  if (!props.headers.link) return 0;
+  const lastLink = props.headers.link.split(",").find((link) => link.includes('rel="last"'));
+  const match = lastLink?.match(/.*[?&]page=(\d+).*/);
   return match ? Number(match[1]) : 0;
 };

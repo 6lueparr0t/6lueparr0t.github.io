@@ -68,7 +68,7 @@ const SpaceViewPage: React.FC = () => {
               <>
                 <IssueViewer issue={issue} />
                 <IssueViewerButtonGroup issue={issue} />
-                <IssueComments comments={comments} />
+                {/*<IssueComments comments={comments} />*/}
               </>
             )}
           </Await>
@@ -121,8 +121,9 @@ export const loader: LoaderFunction = async ({ params, request }) => {
   const page = Number(searchParams.get("page")) || 1;
 
   try {
-    const { issue, comments } = await getIssue({}, issueNumber);
+    const issue = await getIssue({}, issueNumber);
     const title = get(issue, "title");
+    const comments = get(issue, "comments");
 
     const { list, last } = await getList(query, { page: page, per_page: PER_PAGE });
 

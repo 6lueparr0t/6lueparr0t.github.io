@@ -1,5 +1,4 @@
 import { PAGE_LENGTH, PER_PAGE } from "@/lib/constants";
-import { makeQuery } from "@/lib/space";
 import { getList } from "@/lib/space";
 
 import { useCallback } from "react";
@@ -140,5 +139,21 @@ export const IssuePaginationWithState: React.FC<PaginationProps> = ({
         </PaginationItem>
       </PaginationContent>
     </Pagination>
+  );
+};
+
+const makeQuery = (
+  query: Record<string, string | number | undefined>,
+  char: string = "&"
+): string => {
+  const entries = Object.entries(query).filter(
+    ([_, v]) => typeof v === "string" || typeof v === "number"
+  );
+  if (entries.length === 0) return "";
+  return (
+    char +
+    entries
+      .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(String(value))}`)
+      .join("&")
   );
 };
