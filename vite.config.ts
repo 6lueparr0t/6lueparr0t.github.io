@@ -2,14 +2,23 @@ import basicSsl from "@vitejs/plugin-basic-ssl";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { defineConfig } from "vite";
+import { plugin as markdown, type Mode } from "vite-plugin-markdown";
 import tsconfigPaths from "vite-tsconfig-paths";
 
-// https://vitejs.dev/config/
+// @ts-ignore
 export default defineConfig({
-  plugins: [react(), tsconfigPaths(), basicSsl()],
+  plugins: [
+    react(),
+    tsconfigPaths(),
+    basicSsl(),
+    markdown({
+      mode: ["html", "meta", "toc"] as Mode[],
+    }),
+  ],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
+      "@posts": path.resolve(__dirname, "./posts"),
     },
   },
   build: {

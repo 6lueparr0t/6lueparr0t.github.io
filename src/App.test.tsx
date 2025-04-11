@@ -27,3 +27,11 @@ test("renders the heading correctly", async () => {
   });
   expect(headingElement).toBeInTheDocument();
 });
+
+vi.mock("@posts/1-hello-world.md", () => ({
+  html: "<p>Test content</p>",
+  attributes: {
+    title: "Test Post",
+    date: "2025-04-11",
+  },
+}));

@@ -1,14 +1,16 @@
-import { RouterProvider, createBrowserRouter } from "react-router";
+import { createBrowserRouter, RouterProvider } from "react-router";
 
-import Root from "@/pages/Root";
-import ErrorPage from "@/pages/Error";
-
-import HomePage from "@/pages/Home";
 import AboutPage from "@/pages/About";
-import SpacePage, { loader as SpaceLoader } from "@/pages/Space";
+import BlogPage from "@/pages/Blog";
+import BlogPost from "@/pages/BlogPost";
+import ErrorPage from "@/pages/Error";
 import GuestPage from "@/pages/Guest";
+import HomePage from "@/pages/Home";
+import Root from "@/pages/Root";
+import SpacePage, { loader as SpaceLoader } from "@/pages/Space";
 import SpaceViewPage, { loader as SpaceViewLoader } from "@/pages/SpaceView";
 
+// BlogPage import 추가
 
 const router = createBrowserRouter([
   {
@@ -38,6 +40,17 @@ const router = createBrowserRouter([
         path: "guest",
         id: "guest",
         element: <GuestPage />,
+      },
+      {
+        // Blog 라우트 추가
+        path: "blog",
+        id: "blog",
+        element: <BlogPage />,
+      },
+      {
+        path: "blog/:slug",
+        id: "blog-post",
+        element: <BlogPost />,
       },
     ],
   },

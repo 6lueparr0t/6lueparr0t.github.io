@@ -21,7 +21,7 @@ const Header: React.FC<PropsWithChildren> = ({ children }) => {
       title: "space",
     },
     {
-      src: "https://6lueparr0t.bearblog.dev/blog/",
+      path: "/blog",
       title: "blog",
     },
     {

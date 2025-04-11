@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from "react";
-import Copy from "./Copy";
 import { ArrowLongUpIcon } from "@heroicons/react/24/outline";
-
 import dayjs from "dayjs";
-import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
+import utc from "dayjs/plugin/utc";
+
+import React, { useEffect, useState } from "react";
+
+import Copy from "./Copy";
+
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
@@ -66,7 +68,9 @@ const Footer: React.FC = () => {
           </div>
           <div className="flex justify-center items-end">
             <div className="underline cursor-pointer px-2" title={MAIL}>
-              <Copy id="email" title="email">{MAIL}</Copy>
+              <Copy id="email" title="email">
+                {MAIL}
+              </Copy>
             </div>
           </div>
         </div>

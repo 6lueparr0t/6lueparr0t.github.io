@@ -4,6 +4,7 @@ import { defineConfig } from "vitest/config";
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  assetsInclude: ["./**/*.md"], // md 파일을 asset으로 간주 (image처럼)
   test: {
     environment: "happy-dom",
     globals: true, // global 변수 활성화 (e.g., describe, test 등)

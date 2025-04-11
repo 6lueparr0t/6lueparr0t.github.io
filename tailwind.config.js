@@ -100,7 +100,7 @@ module.exports = {
       filter: ["responsive", "hover", "focus"],
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")], // @tailwindcss/typography 플러그인 추가
   // disable tailwind preflight: https://tailwindcss.com/docs/preflight
   // corePlugins: {
   // preflight: false,
