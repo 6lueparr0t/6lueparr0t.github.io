@@ -1,11 +1,11 @@
 import { lazy, Suspense, useEffect } from "react";
 
 const Ash = lazy(() => import("@/components/home/Ash"));
-const Now = lazy(() => import("@/components/home/Now"));
 const Page1 = lazy(() => import("@/components/home/Page1"));
 const Page2 = lazy(() => import("@/components/home/Page2"));
 const Page3 = lazy(() => import("@/components/home/Page3"));
 const Page4 = lazy(() => import("@/components/home/Page4"));
+const Contact = lazy(() => import("@/components/home/Contact"));
 
 function Home() {
   useEffect(() => {
@@ -38,7 +38,7 @@ function Home() {
         <Page2 />
         <Page3 />
         <Page4 />
-        <Now />
+        <Contact />
       </Suspense>
     </div>
   );

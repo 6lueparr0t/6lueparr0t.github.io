@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 // 항상 마지막 페이지로
-function Now() {
+function Contact() {
   const [isWobbling, setIsWobbling] = useState(true);
 
   const handleClick = () => {
@@ -9,9 +9,9 @@ function Now() {
   };
 
   return (
-    <div id="now" className="mx-auto text-center">
+    <div id="contact" className="mx-auto text-center">
       <div className="text-xl md:text-2xl top-[0.4rem] md:top-[0.2rem] inline-block sticky justify-center py-4 z-10">
-        now
+        contact
       </div>
 
       <div className="flex flex-col justify-center items-center mx-8">
@@ -47,4 +47,4 @@ function Now() {
   );
 }
 
-export default Now;
+export default Contact;

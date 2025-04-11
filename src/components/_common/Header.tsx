@@ -17,6 +17,10 @@ const Header: React.FC<PropsWithChildren> = ({ children }) => {
     },
     ...(aboutLink ? [{ path: "/about", title: "about" }] : []),
     {
+      src: "https://6lueparr0t.bearblog.dev/now",
+      title: "now",
+    },
+    {
       path: "/space",
       title: "space",
     },

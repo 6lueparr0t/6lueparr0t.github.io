@@ -26,7 +26,7 @@ const Footer: React.FC = () => {
   }, []);
 
   return (
-    <footer className="font-['DungGeunMo'] sm:text-xl md:text-2xl	h-lvh bg-stone-100 dark:bg-zinc-900">
+    <footer className="font-['DungGeunMo'] h-lvh bg-stone-100 dark:bg-zinc-900">
       <div className={`flex w-full justify-center sticky pt-4 top-calc-half`}>
         <div className="flex flex-col center gap-2">
           <div className="flex justify-center">
@@ -58,12 +58,16 @@ const Footer: React.FC = () => {
               Youtube
             </a>
             <span className="px-2">/</span>
+            <a href="https://hanjulcoding.com" target="_blank" rel="noopener noreferrer">
+              한줄코딩
+            </a>
+            <span className="px-2">/</span>
             <a href="https://6lueparr0t.tistory.com" target="_blank" rel="noopener noreferrer">
               Tistory
             </a>
             <span className="px-2">/</span>
-            <a href="https://hanjulcoding.com" target="_blank" rel="noopener noreferrer">
-              한줄코딩
+            <a href="https://6lueparr0t.bearblog.dev" target="_blank" rel="noopener noreferrer">
+              BearBlog
             </a>
           </div>
           <div className="flex justify-center items-end">
