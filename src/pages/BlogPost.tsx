@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import { useParams } from "react-router";
 
 // Markdown 모듈 타입 정의
@@ -18,7 +18,7 @@ const BlogPost = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const fetchPost = async () => {
       try {
         setIsLoading(true);

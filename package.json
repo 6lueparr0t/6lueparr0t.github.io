@@ -10,7 +10,8 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "prepare": "husky || true",
-    "test": "vitest --environment happy-dom"
+    "test": "vitest --environment happy-dom",
+    "gen:post": "node scripts/generate-post-template.js"
   },
   "lint-staged": {
     "*.{ts,tsx,scss,html,css}": [
@@ -40,7 +41,6 @@
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
     "confetti.ts": "^1.0.2",
-    "dayjs": "^1.11.13",
     "embla-carousel-autoplay": "^8.6.0",
     "embla-carousel-react": "^8.6.0",
     "lucide-react": "^0.479.0",
@@ -80,6 +80,7 @@
     "@vitejs/plugin-basic-ssl": "^1.2.0",
     "@vitejs/plugin-react": "^4.3.4",
     "@vitejs/plugin-react-swc": "^3.8.1",
+    "dayjs": "^1.11.13",
     "eslint": "^9.24.0",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.19",
@@ -90,6 +91,7 @@
     "postcss": "^8.5.3",
     "react-animated-numbers": "^1.0.1",
     "tailwindcss": "^4.1.3",
+    "ts-node": "^10.9.2",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.29.1",
     "vite": "^6.2.6",
