@@ -65,10 +65,6 @@ const Footer: React.FC = () => {
             <a href="https://6lueparr0t.tistory.com" target="_blank" rel="noopener noreferrer">
               Tistory
             </a>
-            <span className="px-2">/</span>
-            <a href="https://6lueparr0t.bearblog.dev" target="_blank" rel="noopener noreferrer">
-              BearBlog
-            </a>
           </div>
           <div className="flex justify-center items-end">
             <div className="underline cursor-pointer px-2" title={MAIL}>
