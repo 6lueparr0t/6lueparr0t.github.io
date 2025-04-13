@@ -6,7 +6,7 @@ import { Issue } from "@/components/components";
 
 const repo = import.meta.env.VITE_APP_GIT_REPO;
 const owner = import.meta.env.VITE_APP_GIT_OWNER;
-const auth = import.meta.env.VITE_APP_GIT_TOKEN;
+const auth = import.meta.env.VITE_APP_GIT_TOKEN_CLASSIC;
 
 const octokit = new Octokit({
   auth: auth,
