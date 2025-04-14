@@ -1,5 +1,8 @@
 import { useLayoutEffect, useState } from "react";
+
 import { useParams } from "react-router";
+
+import { formatDate } from "@/lib/date";
 
 // Markdown 모듈 타입 정의
 interface MarkdownModule {
@@ -49,7 +52,9 @@ const BlogPost = () => {
         <h1 className="text-3xl font-bold mb-2">{post.attributes.title}</h1>
         {post.attributes.date && (
           <p className="text-sm mb-6">
-            {new Date(post.attributes.date).toISOString().split("T")[0]}
+            {post?.attributes?.date
+              ? formatDate(new Date(post.attributes.date), "yyyy-MM-dd HH:mm:ss")
+              : ""}
           </p>
         )}
         <div dangerouslySetInnerHTML={{ __html: post.html }} />

@@ -12,10 +12,9 @@ export function formatDate(date: Date, format = "yyyy-MM-dd HH:mm:ss", timeZone?
   }
 
   const tokens: Record<string, string> = {
-    YYYY: localDate.getFullYear().toString(),
     yyyy: localDate.getFullYear().toString(),
     MM: pad(localDate.getMonth() + 1),
-    DD: pad(localDate.getDate()),
+    dd: pad(localDate.getDate()),
     HH: pad(localDate.getHours()),
     mm: pad(localDate.getMinutes()),
     ss: pad(localDate.getSeconds()),

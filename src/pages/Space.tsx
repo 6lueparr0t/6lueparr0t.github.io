@@ -1,43 +1,45 @@
-import { PER_PAGE } from "@/lib/constants";
-import { getList } from "@/lib/space";
-import { sleep } from "@/lib/utils";
+import React, { Suspense, useEffect, useLayoutEffect, useState } from "react";
 
-import React, { Suspense, useEffect, useState } from "react";
 import { Await, useRouteLoaderData } from "react-router";
 import type { LoaderFunction } from "react-router";
 import { NavLink } from "react-router";
 
-import { RouteLoaderData } from "@/pages/pages.d";
+import { PER_PAGE } from "@/lib/constants";
+import { getList } from "@/lib/space";
+import { sleep } from "@/lib/utils";
 
-import { IssuePaginationWithState } from "@/components/space/IssuePagination";
+import { IssuePagination } from "@/components/space/IssuePagination";
 import { IssueTable } from "@/components/space/IssueTable";
 import { SearchInput } from "@/components/space/SearchInput";
+
+import { RouteLoaderData } from "@/pages/pages.d";
 
 const SpacePage: React.FC = () => {
   const {
     list: defaultList,
     query,
-    last: defaultLast,
     page: defaultPage,
+    next: defaultNext,
+    prev: defaultPrev,
   } = useRouteLoaderData("space") as RouteLoaderData;
 
   const [page, setPage] = useState(defaultPage);
   const [list, setList] = useState(defaultList);
-  const [last, setLast] = useState(defaultLast);
+  const [next, setNext] = useState(defaultNext);
+  const [prev, setPrev] = useState(defaultPrev);
 
   useEffect(() => {
     document.title = "space";
   }, []);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (query.in && query.keyword) {
       document.title = `${query.in}:${query.keyword}`;
     }
 
     setPage(defaultPage);
     setList(defaultList);
-    setLast(defaultLast);
-  }, [query.in, query.keyword, defaultPage, defaultList, defaultLast]);
+  }, [query.in, query.keyword, defaultPage, defaultList]);
 
   return (
     <div className="p-8 min-h-[calc(100vh-4.2rem)] flex flex-col justify-between">
@@ -68,22 +70,19 @@ const SpacePage: React.FC = () => {
       <div id="space-bottom">
         <div className="flex flex-col justify-center items-center">
           <Suspense fallback={<div className="text-center">Loading...</div>}>
-            <Await resolve={last}>
-              {(last) => (
+            <Await resolve={list}>
+              {() => (
                 <>
                   <div className="w-full flex flex-col justify-evenly items-center mt-20">
-                    {/* <IssuePagination
-                      last={last ?? 1}
-                      page={page ?? 1}
-                      query={query || { in: "title" }}
-                    /> */}
-                    <IssuePaginationWithState
-                      last={last || 1}
+                    <IssuePagination
                       page={page || 1}
+                      next={next || 0}
+                      prev={prev || 0}
                       query={query || { in: "title" }}
                       setPage={setPage}
                       setList={setList}
-                      setLast={setLast}
+                      setNext={setNext}
+                      setPrev={setPrev}
                     />
                   </div>
                 </>
@@ -112,13 +111,14 @@ export const loader: LoaderFunction = async ({ request }) => {
   try {
     const page: number = Number(searchParams.get("page") || 1);
 
-    const { list, last } = await getList(query, { page: page, per_page: PER_PAGE });
+    const { list, next, prev } = await getList(query, { page: page, per_page: PER_PAGE });
 
     return Response.json({
-      list: list,
-      query: query,
-      last: Math.max(last, page), // last 가 없는 경우, 현재 페이지가 last
-      page: page,
+      list,
+      query,
+      next,
+      prev,
+      page,
     });
   } catch (error) {
     throw Response.json({ message: error }, { status: 500 });

@@ -13,7 +13,7 @@ async function generatePostTemplate(title, dateInput) {
   }
 
   if (!isValid(now)) {
-    console.error("❌ Invalid date format. Use 'YYYY-MM-DD HH:mm'");
+    console.error("❌ Invalid date format. Use 'yyyy-MM-dd HH:mm'");
     process.exit(1);
   }
 

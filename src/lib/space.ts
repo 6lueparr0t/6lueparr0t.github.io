@@ -1,6 +1,7 @@
+import { Octokit } from "octokit";
+
 import { PER_PAGE } from "@/lib/constants";
 import { get, isEmptyObject, pick } from "@/lib/utils";
-import { Octokit } from "octokit";
 
 import { Issue } from "@/components/components";
 
@@ -28,13 +29,14 @@ export const getList = async (
   option: { page?: number; per_page?: number } = {}
 ): Promise<{
   list: Issue[];
-  last: number;
+  next: number;
+  prev: number;
   status?: number;
   message?: object;
 }> => {
-  let list;
-
-  let last: number = 0;
+  let list: Issue[] = [];
+  let next = 0;
+  let prev = 0;
 
   try {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -44,14 +46,18 @@ export const getList = async (
       response = await search(query, option);
 
       if (response.status === 200) {
-        last = parseLastPage(response);
+        const pagination = parsePagination(response.headers.link);
+        next = pagination.next;
+        prev = pagination.prev;
         list = response.data.items.map((item: object) => parseData(item));
       }
     } else {
       response = await getGithubIssue(option);
 
       if (response.status === 200) {
-        last = parseLastPage(response);
+        const pagination = parsePagination(response.headers.link);
+        next = pagination.next;
+        prev = pagination.prev;
         list = response.data.map((item: object) => parseData(item));
       }
     }
@@ -60,13 +66,14 @@ export const getList = async (
   } catch (error) {
     return {
       list: [],
-      last: 0,
+      next: 0,
+      prev: 0,
       status: 500,
       message: error ?? "",
     };
   }
 
-  return { list: list, last: last };
+  return { list, next, prev };
 };
 
 // Github API 를 사용하여 이슈를 가져옴
@@ -154,6 +161,7 @@ export const getGithubIssue = async (
     {
       owner: owner,
       repo: repo,
+      per_page: 10,
       headers: {
         "X-GitHub-Api-Version": "2022-11-28",
       },
@@ -228,21 +236,25 @@ export const parseDataForComments = (item: object[]) => {
   });
 };
 
-export const parseLastPage = (props: {
-  data: { total_count?: number };
-  headers: { link?: string };
-}): number => {
-  if (!props.headers.link) {
-    return 0;
+export const parsePagination = (linkHeader?: string): { next: number; prev: number } => {
+  if (!linkHeader) return { next: 0, prev: 0 };
+
+  const links = linkHeader.split(",");
+
+  const nextLink = links.find((l) => l.includes('rel="next"'));
+  const prevLink = links.find((l) => l.includes('rel="prev"'));
+
+  let next = 0;
+  if (nextLink) {
+    const match = nextLink.match(/[?&]page=(\d+)/);
+    next = match ? Number(match[1]) : 1;
   }
 
-  const links = props.headers.link.split(",");
-
-  const lastLink = links.find((link) => link.includes('rel="last"'));
-  if (!lastLink) {
-    return 0;
+  let prev = 0;
+  if (prevLink) {
+    const match = prevLink.match(/[?&]page=(\d+)/);
+    prev = match ? Number(match[1]) : 1;
   }
 
-  const match = lastLink.match(/.*[?&]page=(\d+).*/);
-  return match ? Number(match[1]) : 0;
+  return { next, prev };
 };

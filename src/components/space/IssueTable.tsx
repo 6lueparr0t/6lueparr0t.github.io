@@ -48,7 +48,7 @@ export const IssueTable: React.FC<SpaceProps> = ({ list, page, headless = false 
                 </TableCell>
                 <TableCell className="text-right lg:text-center">
                   {row.created_at
-                    ? formatDate(new Date(row.created_at), "YYYY-MM-DD HH:mm:ss")
+                    ? formatDate(new Date(row.created_at), "yyyy-MM-dd HH:mm:ss")
                     : ""}
                 </TableCell>
               </TableRow>

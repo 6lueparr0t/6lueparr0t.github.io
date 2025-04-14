@@ -9,6 +9,7 @@ export type RouteLoaderData = {
   comments: Issue[];
   list: Issue[];
   query?: Query;
-  last?: number; // 마지막 페이지 번호
   page?: number; // 현재 페이지 번호
+  next?: number; // 다음 페이지 여부
+  prev?: number; // 이전 페이지 여부
 };

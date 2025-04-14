@@ -57,12 +57,14 @@ export type SpaceProps = {
 
 export type PaginationProps = {
   issueNumber?: number;
-  last: number;
   page: number;
+  next: number;
+  prev: number;
   query: Query;
   setPage?: React.Dispatch<React.SetStateAction>;
   setList?: React.Dispatch<React.SetStateAction>;
-  setLast?: React.Dispatch<React.SetStateAction>;
+  setNext?: React.Dispatch<React.SetStateAction>;
+  setPrev?: React.Dispatch<React.SetStateAction>;
 };
 
 export type Modal = {

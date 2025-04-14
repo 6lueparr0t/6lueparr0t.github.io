@@ -1,20 +1,21 @@
-import { PER_PAGE } from "@/lib/constants";
-import { getIssue, getList } from "@/lib/space";
-import { get, sleep } from "@/lib/utils";
-import { ArrowTopRightOnSquareIcon, ChevronLeftIcon, LinkIcon } from "@heroicons/react/24/outline";
-
 import React, { Suspense, useEffect, useState } from "react";
+
+import { ArrowTopRightOnSquareIcon, ChevronLeftIcon, LinkIcon } from "@heroicons/react/24/outline";
 import { Await, Link, useLocation, useRouteLoaderData } from "react-router";
 import { type LoaderFunction } from "react-router";
 
-import { RouteLoaderData } from "@/pages/pages.d";
+import { PER_PAGE } from "@/lib/constants";
+import { getIssue, getList } from "@/lib/space";
+import { get, sleep } from "@/lib/utils";
 
 import Copy from "@/components/_common/Copy";
-import { IssuePaginationWithState } from "@/components/space/IssuePagination";
+import { IssuePagination } from "@/components/space/IssuePagination";
 import { IssueTable } from "@/components/space/IssueTable";
 import { IssueComments } from "@/components/space/view/IssueComments";
 import { IssueViewer } from "@/components/space/view/IssueViewer";
 import { IssueViewerButtonGroup } from "@/components/space/view/IssueViewerButtonGroup";
+
+import { RouteLoaderData } from "@/pages/pages.d";
 
 const SpaceViewPage: React.FC = () => {
   const location = useLocation();
@@ -24,8 +25,9 @@ const SpaceViewPage: React.FC = () => {
     comments,
     list: defaultList,
     query,
-    last: defaultLast,
     page: defaultPage,
+    next: defaultNext,
+    prev: defaultPrev,
   } = useRouteLoaderData("space-view") as RouteLoaderData;
 
   const siteUrl = `https://${import.meta.env.VITE_APP_GIT_REPO}${location.pathname}`;
@@ -35,7 +37,8 @@ const SpaceViewPage: React.FC = () => {
 
   const [page, setPage] = useState(defaultPage);
   const [list, setList] = useState(defaultList);
-  const [last, setLast] = useState(defaultLast);
+  const [next, setNext] = useState(defaultNext);
+  const [prev, setPrev] = useState(defaultPrev);
 
   useEffect(() => {
     document.title = title || "6lueparr0t's Home";
@@ -81,21 +84,21 @@ const SpaceViewPage: React.FC = () => {
           </Await>
         </Suspense>
         <Suspense fallback={<div className="text-center">Loading...</div>}>
-          <Await resolve={last}>
-            {(last) => (
-              <>
-                <div className="w-full flex flex-col justify-evenly items-center pt-8">
-                  <IssuePaginationWithState
-                    issueNumber={issue?.number}
-                    last={last || 1}
-                    page={page || 1}
-                    query={query || { in: "title" }}
-                    setPage={setPage}
-                    setList={setList}
-                    setLast={setLast}
-                  />
-                </div>
-              </>
+          <Await resolve={list}>
+            {() => (
+              <div className="w-full flex flex-col justify-evenly items-center pt-8">
+                <IssuePagination
+                  issueNumber={issue?.number}
+                  page={page || 1}
+                  next={next || 0}
+                  prev={prev || 0}
+                  query={query || { in: "title" }}
+                  setPage={setPage}
+                  setList={setList}
+                  setNext={setNext}
+                  setPrev={setPrev}
+                />
+              </div>
             )}
           </Await>
         </Suspense>
@@ -124,17 +127,17 @@ export const loader: LoaderFunction = async ({ params, request }) => {
     const { issue, comments } = await getIssue({}, issueNumber);
     const title = get(issue, "title");
 
-    const { list, last } = await getList(query, { page: page, per_page: PER_PAGE });
+    const { list, next, prev } = await getList(query, { page, per_page: PER_PAGE });
 
     return Response.json({
-      title: title,
-      issue: issue,
-      comments: comments,
-      list: list,
-
-      query: query,
-      last: Math.max(last, page), // last 가 없는 경우, 현재 페이지가 last
-      page: page,
+      title,
+      issue,
+      comments,
+      list,
+      query,
+      next,
+      prev,
+      page,
     });
   } catch (error) {
     throw Response.json({ message: error }, { status: 500 });
