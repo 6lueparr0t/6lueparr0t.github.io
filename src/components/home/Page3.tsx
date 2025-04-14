@@ -28,7 +28,7 @@ function Page3() {
       {/* Experiences Section */}
       <div id="experiences" className="mx-auto text-center bg-zinc-50 dark:bg-zinc-950">
         <div className="text-xl md:text-2xl top-[0.4rem] md:top-[0.2rem] inline-block sticky justify-center py-4 z-10">
-          Experiences
+          experiences
         </div>
 
         <div className="flex flex-col justify-center items-center w-full">
@@ -42,7 +42,9 @@ function Page3() {
 
       {/* Certifications Section */}
       <div className="mb-16 flex flex-col items-center space-y-2">
-        <h2 className="text-2xl mb-4">Certifications</h2>
+        <div className="text-xl md:text-2xl top-[0.4rem] md:top-[0.2rem] inline-block sticky justify-center py-4 z-10">
+          certifications
+        </div>
         {/*
         // ? INFO
         // ? tailwind.config.js 에 정의된 scroll 애니메이션 제거 후 컴포넌트에 애니메이션 추가
