@@ -52,7 +52,7 @@ export const IssueViewer: React.FC<SpaceProps> = ({ issue }) => {
                   <blockquote {...props} className="p-4 italic border-l-4 border-gray-500 quote" />
                 ),
                 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-                ol: ({ node, ...props }) => <ol {...props} className="list-decimal pl-4" />,
+                ol: ({ node, ...props }) => <ol {...props} className="list-decimal pl-6" />,
                 // eslint-disable-next-line @typescript-eslint/no-unused-vars
                 li: ({ node, ...props }) => (
                   <li {...props} className="relative mb-4">
