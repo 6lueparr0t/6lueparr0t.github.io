@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 
+import { CopyToClipboard } from "react-copy-to-clipboard";
 import Markdown from "react-markdown";
 import { Prism, SyntaxHighlighterProps } from "react-syntax-highlighter";
 import { coldarkDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
@@ -60,18 +61,34 @@ export const IssueViewer: React.FC<SpaceProps> = ({ issue }) => {
                   </li>
                 ),
                 code({ className, children }) {
+                  const [copied, setCopied] = useState(false);
                   const match = /language-(\w+)/.exec(className || "");
                   const language = match ? match[1] : "bash";
+
+                  const handleCopy = () => {
+                    setCopied(true);
+                    setTimeout(() => setCopied(false), 1000);
+                  };
                   return (
-                    <SyntaxHighlighter
-                      language={language}
-                      PreTag="div"
-                      style={coldarkDark}
-                      showLineNumbers
-                      // wrapLongLines
-                    >
-                      {String(children).replace(/\n$/, "")}
-                    </SyntaxHighlighter>
+                    <div className="relative">
+                      <CopyToClipboard text={String(children)} onCopy={handleCopy}>
+                        <button
+                          className="absolute top-2 right-2 p-2 bg-gray-800 text-white rounded hover:bg-gray-600 opacity-80 transition duration-200"
+                          aria-label="Copy code"
+                        >
+                          {copied ? "Copied!" : "Copy"}
+                        </button>
+                      </CopyToClipboard>
+                      <SyntaxHighlighter
+                        language={language}
+                        PreTag="div"
+                        style={coldarkDark}
+                        showLineNumbers
+                        wrapLongLines={false}
+                      >
+                        {String(children).replace(/\n$/, "")}
+                      </SyntaxHighlighter>
+                    </div>
                   );
                 },
               }}
