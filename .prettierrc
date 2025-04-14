@@ -16,7 +16,26 @@
   "proseWrap": "preserve",
   "vueIndentScriptAndStyle": false,
   "plugins": ["@trivago/prettier-plugin-sort-imports"],
-  "importOrder": ["^react", "^@/pages/(.*)$", "^@/components/(.*)$", "^[./]"],
+  "importOrder": [
+    "^react$",
+    "<THIRD_PARTY_MODULES>",
+
+    "^@/auth/(.*)$",
+    "^@/store/(.*)$",
+    "^@/react-query/(.*)$",
+    "^@/axiosInstance/(.*)$",
+
+    "^@/hooks/(.*)$",
+    "^@/lib/(.*)$",
+    "^@/shared/(.*)$",
+
+    "^@/components/(.*)$",
+    "^@/pages/(.*)$",
+    "^@/styles/(.*)$",
+    "^@/assets/(.*)$",
+
+    "^[./]"
+  ],
   "importOrderSeparation": true,
   "importOrderSortSpecifiers": true,
   "importOrderCaseInsensitive": true

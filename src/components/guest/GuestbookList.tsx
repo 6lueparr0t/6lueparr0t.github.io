@@ -1,6 +1,10 @@
 import { useState } from "react";
-import dayjs from "dayjs";
-import guestbookData from "./guestbook.json"; // JSON 파일을 직접 import
+
+import { format } from "date-fns";
+
+import guestbookData from "./guestbook.json";
+
+// JSON 파일을 직접 import
 
 interface GuestbookEntry {
   name: string;
@@ -34,7 +38,7 @@ const GuestbookList = () => {
               {entry.message}
             </div>
             <div className="font-noto my-2 text-sm text-gray-500 dark:text-gray-500">
-              {dayjs(entry.date).format("YYYY-MM-DD HH:mm:ss")}
+              {entry.date ? format(new Date(entry.date), "yyyy-MM-dd HH:mm:ss") : ""}
             </div>
             {entry.answer && (
               <div className="mt-4 p-4 rounded-md text-base text-right text-slate-200 dark:text-slate-800 bg-slate-800 dark:bg-stone-100">

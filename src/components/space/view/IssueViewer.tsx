@@ -1,11 +1,11 @@
-import dayjs from "dayjs";
-import rehypeRaw from "rehype-raw";
-import remarkGfm from "remark-gfm";
-
 import React from "react";
+
+import { format } from "date-fns";
 import Markdown from "react-markdown";
 import { Prism, SyntaxHighlighterProps } from "react-syntax-highlighter";
 import { coldarkDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
+import rehypeRaw from "rehype-raw";
+import remarkGfm from "remark-gfm";
 
 import { SpaceProps } from "@/components/components.d";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -23,7 +23,9 @@ export const IssueViewer: React.FC<SpaceProps> = ({ issue }) => {
           </Avatar>
           <div>{issue?.user.login}</div>
         </div>
-        <div className="text-right">{dayjs(issue?.created_at).format("YYYY-MM-DD HH:mm")}</div>
+        <div className="text-right">
+          {issue?.created_at ? format(new Date(issue.created_at), "yyyy-MM-dd HH:mm:ss") : ""}
+        </div>
       </div>
       <div className="flex flex-col justify-between item-start">
         <div className="min-h-[50vh] my-4">

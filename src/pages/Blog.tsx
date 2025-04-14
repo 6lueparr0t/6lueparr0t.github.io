@@ -1,10 +1,7 @@
-import dayjs from "dayjs";
-import "dayjs/locale/ko";
-
 import { useEffect, useState } from "react";
-import { Link } from "react-router";
 
-dayjs.locale("ko");
+import { format } from "date-fns";
+import { Link } from "react-router";
 
 interface MarkdownModule {
   html: string;
@@ -57,7 +54,7 @@ function BlogPage() {
                 <span className="text-sm w-[130px] shrink-0">
                   <time
                     dateTime={post.date}
-                    title={post.date ? dayjs(post.date).format("YYYY-MM-DD HH:mm:ss") : ""}
+                    title={post.date ? format(new Date(post.date), "yyyy-MM-dd HH:mm:ss") : ""}
                   >
                     {post.date ? post.date.split("T")[0] : "No date"}
                   </time>

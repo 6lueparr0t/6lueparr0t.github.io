@@ -1,20 +1,24 @@
-import dayjs from "dayjs";
-import "dayjs/locale/ko.js";
 import { promises as fs } from "fs";
 import path from "path";
-
-dayjs.locale("ko");
+import { format, formatISO, parse, isValid } from "date-fns";
+import { ko } from "date-fns/locale";
 
 async function generatePostTemplate(title, dateInput) {
-  const now = dateInput ? dayjs(dateInput) : dayjs();
+  // 날짜 파싱
+  let now;
+  if (dateInput) {
+    now = parse(dateInput, "yyyy-MM-dd HH:mm", new Date(), { locale: ko });
+  } else {
+    now = new Date();
+  }
 
-  if (!now.isValid()) {
+  if (!isValid(now)) {
     console.error("❌ Invalid date format. Use 'YYYY-MM-DD HH:mm'");
     process.exit(1);
   }
 
-  const dateString = now.format("YYYYMMDD-HHmmss");
-  const isoString = now.format("YYYY-MM-DDTHH:mm:ssZ");
+  const dateString = format(now, "yyyyMMdd-HHmmss");
+  const isoString = formatISO(now);
   const safeTitle = title.replace(/\s+/g, "-").toLowerCase();
   const filename = `${dateString}-${safeTitle}.md`;
   const filepath = path.join(process.cwd(), "posts", filename);

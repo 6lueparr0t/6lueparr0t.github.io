@@ -1,21 +1,24 @@
-import dayjs from "dayjs";
-
 import { useLayoutEffect, useState } from "react";
+
+import { differenceInMilliseconds, parseISO } from "date-fns";
 import AnimatedNumbers from "react-animated-numbers";
 
 import Chip from "@/components/_common/Chip";
 
 import { Gallery } from "./Gallery";
 
-const startDate = dayjs("2017-10-30"); // 2017년 10월 1일을 기준으로 설정
-const currentDate = dayjs("2025-02-28");
+const startDate = parseISO("2017-10-30");
+const currentDate = parseISO("2025-02-28");
 
 function Page2() {
   const [years, setYears] = useState(0);
 
   useLayoutEffect(() => {
-    const diffYears = currentDate.diff(startDate, "year", true); // 소수점 첫째 자리까지 계산
-    setYears(parseFloat(diffYears.toFixed(2))); // 소수점 첫째 자리까지 표시
+    const msInYear = 1000 * 60 * 60 * 24 * 365.25; // 윤년 고려해서 평균 연간 밀리초
+    const diffMs = differenceInMilliseconds(currentDate, startDate);
+    const diffYears = diffMs / msInYear;
+
+    setYears(parseFloat(diffYears.toFixed(2)));
   }, []);
 
   return (
@@ -42,7 +45,7 @@ function Page2() {
                   animateToNumber={years}
                 />
               }
-              content={<p>2017.10.30 ~ 2025.02.28</p>}
+              content={<span>2017.10.30 ~ 2025.02.28</span>}
             />
             년차 웹 개발자
             <Chip title={<>임대현</>} content={<p>Daehyun Lim</p>} />

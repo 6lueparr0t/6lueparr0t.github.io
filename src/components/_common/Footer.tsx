@@ -1,25 +1,22 @@
-import { ArrowLongUpIcon } from "@heroicons/react/24/outline";
-import dayjs from "dayjs";
-import timezone from "dayjs/plugin/timezone";
-import utc from "dayjs/plugin/utc";
-
 import React, { useEffect, useState } from "react";
+
+import { ArrowLongUpIcon } from "@heroicons/react/24/outline";
+import { formatInTimeZone } from "date-fns-tz";
 
 import Copy from "./Copy";
 
-dayjs.extend(utc);
-dayjs.extend(timezone);
-
 const MAIL = "6lueparr0t@gmail.com";
+const TIME_ZONE = "Asia/Seoul";
+const FORMAT_STRING = "yyyy-MM-dd EEE HH:mm:ss";
 
 const Footer: React.FC = () => {
   const [currentTime, setCurrentTime] = useState(
-    dayjs().tz("Asia/Seoul").format("YYYY-MM-DD ddd HH:mm:ss")
+    formatInTimeZone(new Date(), TIME_ZONE, FORMAT_STRING)
   );
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentTime(dayjs().tz("Asia/Seoul").format("YYYY-MM-DD ddd HH:mm:ss"));
+      setCurrentTime(formatInTimeZone(new Date(), TIME_ZONE, FORMAT_STRING));
     }, 1000);
 
     return () => clearInterval(interval);
@@ -40,9 +37,7 @@ const Footer: React.FC = () => {
                 </svg>
               </a>
               <a
-                href={`https://github.com/${import.meta.env.VITE_APP_GIT_OWNER}/${
-                  import.meta.env.VITE_APP_GIT_REPO
-                }`}
+                href={`https://github.com/${import.meta.env.VITE_APP_GIT_OWNER}/${import.meta.env.VITE_APP_GIT_REPO}`}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -83,10 +78,9 @@ const Footer: React.FC = () => {
           >
             <ArrowLongUpIcon className="animate-bounce w-[24px] h-[24px]" />
           </div>
+          {/* <span className="font-['Tossface'] text-4xl">🇰🇷</span> */}
           <div className="text-base">In Seoul, Republic of Korea</div>
           <div className="text-base">{currentTime}</div>
-          {/* <span className="font-['Tossface'] text-4xl">🇰🇷</span>
-          <span className="text-base">Republic of Korea</span> */}
         </div>
       </div>
     </footer>
