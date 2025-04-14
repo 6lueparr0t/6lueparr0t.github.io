@@ -35,7 +35,7 @@ export const IssueViewer: React.FC<SpaceProps> = ({ issue }) => {
             rehypePlugins={[remarkGfm, rehypeRaw]}
             components={{
               // eslint-disable-next-line @typescript-eslint/no-unused-vars
-              p: ({ node, ...props }) => <p {...props} className="leading-6" />,
+              p: ({ node, ...props }) => <p {...props} className="leading-6 mb-4" />,
               // eslint-disable-next-line @typescript-eslint/no-unused-vars
               h1: ({ node, ...props }) => <h1 {...props} className="text-4xl font-bold" />,
               // eslint-disable-next-line @typescript-eslint/no-unused-vars
