@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 
-import { format } from "date-fns";
 import { Link } from "react-router";
+
+import { formatDate } from "@/lib/date";
 
 interface MarkdownModule {
   html: string;
@@ -54,7 +55,7 @@ function BlogPage() {
                 <span className="text-sm w-[130px] shrink-0">
                   <time
                     dateTime={post.date}
-                    title={post.date ? format(new Date(post.date), "yyyy-MM-dd HH:mm:ss") : ""}
+                    title={post.date ? formatDate(new Date(post.date), "yyyy-MM-dd HH:mm:ss") : ""}
                   >
                     {post.date ? post.date.split("T")[0] : "No date"}
                   </time>

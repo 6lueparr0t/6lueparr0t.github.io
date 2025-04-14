@@ -1,7 +1,8 @@
 import React from "react";
 
-import { format } from "date-fns";
 import { Link } from "react-router";
+
+import { formatDate } from "@/lib/date";
 
 import { Issue, SpaceProps } from "@/components/components.d";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -46,7 +47,9 @@ export const IssueTable: React.FC<SpaceProps> = ({ list, page, headless = false 
                   </div>
                 </TableCell>
                 <TableCell className="text-right lg:text-center">
-                  {row.created_at ? format(new Date(row.created_at), "yyyy-MM-dd HH:mm:ss") : ""}
+                  {row.created_at
+                    ? formatDate(new Date(row.created_at), "YYYY-MM-DD HH:mm:ss")
+                    : ""}
                 </TableCell>
               </TableRow>
             );

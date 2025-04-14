@@ -1,24 +1,21 @@
 import { useLayoutEffect, useState } from "react";
 
-import { differenceInMilliseconds, parseISO } from "date-fns";
 import AnimatedNumbers from "react-animated-numbers";
+
+import { diffInYears } from "@/lib/date";
 
 import Chip from "@/components/_common/Chip";
 
 import { Gallery } from "./Gallery";
 
-const startDate = parseISO("2017-10-30");
-const currentDate = parseISO("2025-02-28");
+const startDate = new Date("2017-10-30");
+const currentDate = new Date("2025-02-28");
 
 function Page2() {
   const [years, setYears] = useState(0);
 
   useLayoutEffect(() => {
-    const msInYear = 1000 * 60 * 60 * 24 * 365.25; // 윤년 고려해서 평균 연간 밀리초
-    const diffMs = differenceInMilliseconds(currentDate, startDate);
-    const diffYears = diffMs / msInYear;
-
-    setYears(parseFloat(diffYears.toFixed(2)));
+    setYears(diffInYears(startDate, currentDate));
   }, []);
 
   return (

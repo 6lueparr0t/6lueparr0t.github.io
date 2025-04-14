@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { format } from "date-fns";
+import { formatDate } from "@/lib/date";
 
 import guestbookData from "./guestbook.json";
 
@@ -38,7 +38,7 @@ const GuestbookList = () => {
               {entry.message}
             </div>
             <div className="font-noto my-2 text-sm text-gray-500 dark:text-gray-500">
-              {entry.date ? format(new Date(entry.date), "yyyy-MM-dd HH:mm:ss") : ""}
+              {entry.date ? formatDate(new Date(entry.date), "YYYY-MM-DD HH:mm:ss") : ""}
             </div>
             {entry.answer && (
               <div className="mt-4 p-4 rounded-md text-base text-right text-slate-200 dark:text-slate-800 bg-slate-800 dark:bg-stone-100">

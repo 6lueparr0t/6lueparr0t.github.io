@@ -1,11 +1,12 @@
 import React from "react";
 
-import { format } from "date-fns";
 import Markdown from "react-markdown";
 import { Prism, SyntaxHighlighterProps } from "react-syntax-highlighter";
 import { coldarkDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import rehypeRaw from "rehype-raw";
 import remarkGfm from "remark-gfm";
+
+import { formatDate } from "@/lib/date";
 
 import { SpaceProps } from "@/components/components.d";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -27,7 +28,7 @@ export const IssueComments: React.FC<SpaceProps> = ({ comments }) => {
             </div>
             <div className="text-sm text-gray-500 dark:text-gray-400">
               {comment?.created_at
-                ? format(new Date(comment.created_at), "yyyy-MM-dd HH:mm:ss")
+                ? formatDate(new Date(comment.created_at), "yyyy-MM-dd HH:mm:ss")
                 : ""}
             </div>
           </div>
