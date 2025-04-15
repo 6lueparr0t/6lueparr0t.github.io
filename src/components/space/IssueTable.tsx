@@ -15,7 +15,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-export const IssueTable: React.FC<SpaceProps> = ({ list, page, headless = false }) => {
+export const IssueTable: React.FC<SpaceProps> = ({ list, issue, page, headless = false }) => {
   return (
     <Table>
       {!headless && (
@@ -31,8 +31,14 @@ export const IssueTable: React.FC<SpaceProps> = ({ list, page, headless = false 
       <TableBody>
         {list &&
           list.map((row: Issue) => {
+            const isSelected = issue?.number === row.number;
             return (
-              <TableRow key={`space-${row.number}`} className="rounded-lg">
+              <TableRow
+                key={`space-${row.number}`}
+                className={`rounded-lg transition-colors ${
+                  isSelected ? "bg-muted/60 hover:bg-muted/80" : "hover:bg-accent"
+                }`}
+              >
                 <TableCell className="font-medium min-w-16 sm:min-w-4">{row.number}</TableCell>
                 <TableCell className="block truncate mt-2 w-60 sm:w-80 md:w-[500px] lg:w-8/12">
                   <Link to={`/space/${row.number}?page=${page}`}>{row.title}</Link>
