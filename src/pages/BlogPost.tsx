@@ -1,5 +1,6 @@
 import { useLayoutEffect, useState } from "react";
 
+import Giscus from "@giscus/react";
 import { useParams } from "react-router";
 
 import { formatDate } from "@/lib/date";
@@ -59,6 +60,23 @@ const BlogPost = () => {
         )}
         <div dangerouslySetInnerHTML={{ __html: post.html }} />
       </main>
+
+      <div className="max-w-2xl mx-auto mt-16">
+        <Giscus
+          id="comments"
+          repo={import.meta.env.VITE_APP_GISCUS_REPO}
+          repoId={import.meta.env.VITE_APP_GISCUS_REPO_ID}
+          category={import.meta.env.VITE_APP_GISCUS_CATEGORY}
+          categoryId={import.meta.env.VITE_APP_GISCUS_CATEGORY_ID}
+          mapping="title" // 포스트 제목으로 연결
+          reactionsEnabled="1"
+          emitMetadata="0"
+          inputPosition="bottom"
+          theme="preferred_color_scheme"
+          lang="ko"
+          loading="lazy"
+        />
+      </div>
     </div>
   );
 };

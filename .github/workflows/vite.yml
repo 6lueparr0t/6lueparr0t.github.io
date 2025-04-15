@@ -70,6 +70,10 @@ jobs:
           VITE_APP_GIT_TOKEN_CLASSIC: ${{ secrets.VITE_APP_GIT_TOKEN_CLASSIC }}
           VITE_APP_GIT_TOKEN: ${{ secrets.VITE_APP_GIT_TOKEN }}
           VITE_APP_BACKEND: ${{ secrets.VITE_APP_BACKEND }}
+          VITE_APP_GISCUS_REPO: ${{ vars.VITE_APP_GISCUS_REPO }}
+          VITE_APP_GISCUS_REPO_ID: ${{ secrets.VITE_APP_GISCUS_REPO_ID }}
+          VITE_APP_GISCUS_CATEGORY: ${{ vars.VITE_APP_GISCUS_CATEGORY }}
+          VITE_APP_GISCUS_CATEGORY_ID: ${{ secrets.VITE_APP_GISCUS_CATEGORY_ID }}
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
