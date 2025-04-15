@@ -56,6 +56,8 @@ export const IssueViewer: React.FC<SpaceProps> = ({ issue }) => {
               // eslint-disable-next-line @typescript-eslint/no-unused-vars
               ol: ({ node, ...props }) => <ol {...props} className="list-decimal pl-6" />,
               // eslint-disable-next-line @typescript-eslint/no-unused-vars
+              ul: ({ node, ...props }) => <ul {...props} className="list-disc pl-6" />,
+              // eslint-disable-next-line @typescript-eslint/no-unused-vars
               li: ({ node, ...props }) => <li {...props} className="my-4" />,
               code({ className, children }) {
                 const [copied, setCopied] = useState(false);
