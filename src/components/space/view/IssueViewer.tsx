@@ -43,12 +43,47 @@ export const IssueViewer: React.FC<SpaceProps> = ({ issue }) => {
               // eslint-disable-next-line @typescript-eslint/no-unused-vars
               h3: ({ node, ...props }) => <h3 {...props} className="text-xl font-bold" />,
               // eslint-disable-next-line @typescript-eslint/no-unused-vars
-              a: ({ node, ...props }) => (
-                <a
-                  {...props}
-                  className="underline underline-offset-4 decoration-1 dark:hover:text-blue-400"
-                />
-              ),
+              a: ({ node, href, children, ...props }) => {
+                const isGitHubAsset = href?.includes("github.com/user-attachments/assets");
+
+                if (isGitHubAsset) {
+                  return (
+                    <div className="my-4">
+                      <video
+                        controls
+                        className="w-full rounded-md mb-2"
+                        style={{ maxHeight: "480px" }}
+                        onError={(e) => {
+                          // 비디오 로드 실패 시, 대체 링크 보여줌
+                          const fallback = document.createElement("a");
+                          fallback.href = href!;
+                          fallback.innerText = "링크 보기";
+                          fallback.target = "_blank";
+                          fallback.className = "underline text-blue-500";
+                          e.currentTarget.replaceWith(fallback);
+                        }}
+                      >
+                        <source src={href} type="video/mp4" />
+                        Your browser does not support the video tag.
+                      </video>
+                    </div>
+                  );
+                }
+
+                // 일반 링크는 기본 렌더링
+                return (
+                  <a
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline underline-offset-4 decoration-1 dark:hover:text-blue-400"
+                    {...props}
+                  >
+                    {children}
+                  </a>
+                );
+              },
+
               // eslint-disable-next-line @typescript-eslint/no-unused-vars
               blockquote: ({ node, ...props }) => (
                 <blockquote {...props} className="p-4 italic border-l-4 border-gray-500 quote" />
