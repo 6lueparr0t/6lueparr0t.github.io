@@ -42,6 +42,12 @@ export const IssueViewer: React.FC<SpaceProps> = ({ issue }) => {
               h2: ({ node, ...props }) => <h2 {...props} className="text-2xl font-bold" />,
               // eslint-disable-next-line @typescript-eslint/no-unused-vars
               h3: ({ node, ...props }) => <h3 {...props} className="text-xl font-bold" />,
+              hr: ({ ...props }) => (
+                <hr
+                  {...props}
+                  className="my-8 border-t border-2 border-gray-300 dark:border-gray-600"
+                />
+              ),
               // eslint-disable-next-line @typescript-eslint/no-unused-vars
               a: ({ node, href, children, ...props }) => {
                 const isGitHubAsset = href?.includes("github.com/user-attachments/assets");
