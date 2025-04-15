@@ -43,6 +43,20 @@ const BlogPost = () => {
     fetchPost();
   }, [slug]);
 
+  useLayoutEffect(() => {
+    if (post?.html) {
+      const container = document.querySelector(".blog-content"); // div에 className 추가해서 잡을 수 있게!
+      const links = container?.querySelectorAll("a");
+
+      links?.forEach((link) => {
+        link.setAttribute("target", "_blank");
+        link.setAttribute("rel", "noopener noreferrer");
+      });
+
+      document.title = post.attributes.title || "Blog";
+    }
+  }, [post?.html]);
+
   if (isLoading) return <div className="text-center py-10">Loading...</div>;
   if (error) return <div className="text-center text-red-600 py-10">{error}</div>;
   if (!post) return <div className="text-center py-10">Post not found.</div>;
@@ -58,7 +72,7 @@ const BlogPost = () => {
               : ""}
           </p>
         )}
-        <div dangerouslySetInnerHTML={{ __html: post.html }} />
+        <div className="blog-content" dangerouslySetInnerHTML={{ __html: post.html }} />
       </main>
 
       <div className="max-w-2xl mx-auto mt-16">
