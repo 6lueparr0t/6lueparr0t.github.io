@@ -56,6 +56,9 @@ importers:
       '@tsparticles/engine':
         specifier: ^3.8.1
         version: 3.8.1
+      '@tsparticles/preset-fireworks':
+        specifier: ^3.2.0
+        version: 3.2.0
       '@tsparticles/react':
         specifier: ^3.0.0
         version: 3.0.0(@tsparticles/engine@3.8.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -86,6 +89,9 @@ importers:
       embla-carousel-react:
         specifier: ^8.6.0
         version: 8.6.0(react@19.1.0)
+      framer-motion:
+        specifier: ^12.7.2
+        version: 12.7.2(@emotion/is-prop-valid@0.8.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       lucide-react:
         specifier: ^0.479.0
         version: 0.479.0(react@19.1.0)
@@ -1915,6 +1921,9 @@ packages:
   '@tsparticles/plugin-sounds@3.8.1':
     resolution: {integrity: sha512-cBcT0vPvq1uR3pJolj/tm+/VgCnvCoXvTZCRRazCKdXL6GqzmbINil5M/kdmQfPyzh+X8OT5Qi3JEOdlUF4KCQ==}
 
+  '@tsparticles/preset-fireworks@3.2.0':
+    resolution: {integrity: sha512-weLfPAxhL5CC1SkOeE0UXyWzsQyO8ggLe0LFTJ/J0+m6U9DB6PX0lvvdDf3Jh31pwGzj4QwkGIQ2FcgoUrWc2w==}
+
   '@tsparticles/react@3.0.0':
     resolution: {integrity: sha512-hjGEtTT1cwv6BcjL+GcVgH++KYs52bIuQGW3PWv7z3tMa8g0bd6RI/vWSLj7p//NZ3uTjEIeilYIUPBh7Jfq/Q==}
     peerDependencies:
@@ -2845,6 +2854,20 @@ packages:
       react-dom:
         optional: true
 
+  framer-motion@12.7.2:
+    resolution: {integrity: sha512-0vLY/JqYqieojTriuIR+UTCBVbj89eNUxXTkb01Xg8gSiTXDeuscOvoYm8vvgRGLMYGsCuJ31kDsTy081kPKFw==}
+    peerDependencies:
+      '@emotion/is-prop-valid': '*'
+      react: ^18.0.0 || ^19.0.0
+      react-dom: ^18.0.0 || ^19.0.0
+    peerDependenciesMeta:
+      '@emotion/is-prop-valid':
+        optional: true
+      react:
+        optional: true
+      react-dom:
+        optional: true
+
   front-matter@4.0.2:
     resolution: {integrity: sha512-I8ZuJ/qG92NWX8i5x1Y8qyj3vizhXS31OxjKDu3LKP+7/qBgfIKValiZIEwoVoJKUHlhWtYrktkxV1XsX+pPlg==}
 
@@ -3552,8 +3575,14 @@ packages:
   motion-dom@11.18.1:
     resolution: {integrity: sha512-g76KvA001z+atjfxczdRtw/RXOM3OMSdd1f4DL77qCTF/+avrRJiawSG4yDibEQ215sr9kpinSlX2pCTJ9zbhw==}
 
+  motion-dom@12.7.2:
+    resolution: {integrity: sha512-7+sytBQyb9XRRH6lyLRQf+R6y2BE79J2EgTijTSxYgGt+ufpnoRDPgru9KHvA125tTHnbAXDzeTUb9OvscSitA==}
+
   motion-utils@11.18.1:
     resolution: {integrity: sha512-49Kt+HKjtbJKLtgO/LKj9Ld+6vw9BjH5d9sc40R/kVyH8GLAXgT42M2NnuPcJNuA3s9ZfZBUcwIgpmZWGEE+hA==}
+
+  motion-utils@12.7.2:
+    resolution: {integrity: sha512-XhZwqctxyJs89oX00zn3OGCuIIpVevbTa+u82usWBC6pSHUd2AoNWiYa7Du8tJxJy9TFbZ82pcn5t7NOm1PHAw==}
 
   motion@11.18.2:
     resolution: {integrity: sha512-JLjvFDuFr42NFtcVoMAyC2sEjnpA8xpy6qWPyzQvCloznAyQ8FIXioxWfHiLtgYhoVpfUqSWpn1h9++skj9+Wg==}
@@ -6168,6 +6197,19 @@ snapshots:
     dependencies:
       '@tsparticles/engine': 3.8.1
 
+  '@tsparticles/preset-fireworks@3.2.0':
+    dependencies:
+      '@tsparticles/basic': 3.8.1
+      '@tsparticles/engine': 3.8.1
+      '@tsparticles/plugin-emitters': 3.8.1
+      '@tsparticles/plugin-emitters-shape-square': 3.8.1
+      '@tsparticles/plugin-sounds': 3.8.1
+      '@tsparticles/shape-line': 3.8.1
+      '@tsparticles/updater-destroy': 3.8.1
+      '@tsparticles/updater-life': 3.8.1
+      '@tsparticles/updater-rotate': 3.8.1
+      '@tsparticles/updater-stroke-color': 3.8.1
+
   '@tsparticles/react@3.0.0(@tsparticles/engine@3.8.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
     dependencies:
       '@tsparticles/engine': 3.8.1
@@ -7221,6 +7263,16 @@ snapshots:
       react: 19.1.0
       react-dom: 19.1.0(react@19.1.0)
 
+  framer-motion@12.7.2(@emotion/is-prop-valid@0.8.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
+    dependencies:
+      motion-dom: 12.7.2
+      motion-utils: 12.7.2
+      tslib: 2.8.1
+    optionalDependencies:
+      '@emotion/is-prop-valid': 0.8.8
+      react: 19.1.0
+      react-dom: 19.1.0(react@19.1.0)
+
   front-matter@4.0.2:
     dependencies:
       js-yaml: 3.14.1
@@ -8152,7 +8204,13 @@ snapshots:
     dependencies:
       motion-utils: 11.18.1
 
+  motion-dom@12.7.2:
+    dependencies:
+      motion-utils: 12.7.2
+
   motion-utils@11.18.1: {}
+
+  motion-utils@12.7.2: {}
 
   motion@11.18.2(@emotion/is-prop-valid@0.8.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
     dependencies:

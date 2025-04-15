@@ -1,7 +1,8 @@
-import modalStore from "@/store/modal";
-
 import { useEffect, useState } from "react";
 
+import modalStore from "@/store/modal";
+
+import CoinConfetti from "@/components/confetti/coin";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 
@@ -11,6 +12,7 @@ function Page4() {
   const { pushModals } = modalStore();
 
   const [count, setCount] = useState(0);
+  const [party, setParty] = useState(false);
   const [rewardCount, setRewarddCount] = useState(0);
   const [reloadCount, setReloadCount] = useState(0);
   const [doorOpenCheck, setDoorOpenCheck] = useState<string[]>([]);
@@ -21,6 +23,7 @@ function Page4() {
   ]);
 
   const rerollHandler = () => {
+    setParty(false);
     setDoorOpenCheck([]);
     setCount(0);
     setReloadCount((prev) => prev + 1);
@@ -40,6 +43,7 @@ function Page4() {
   };
 
   const initializeHandler = () => {
+    setParty(false);
     setDoorOpenCheck([]);
     setCount(0);
     setRewarddCount(0);
@@ -66,12 +70,21 @@ function Page4() {
     };
   }, []);
 
+  useEffect(() => {
+    if (rewardCount >= 1) {
+      setParty(true);
+      setTimeout(() => {
+        setParty(false);
+      }, 2000);
+    }
+  }, [rewardCount]);
+
   return (
     <div id="graduate-school" className="mx-auto text-center bg-stone-100 dark:bg-zinc-900">
-      <div className="text-xl md:text-2xl top-[0.4rem] md:top-[0.2rem] inline-block sticky justify-center py-4 z-10">
+      <div className="text-xl md:text-2xl top-[0.4rem] md:top-[0.2rem] inline-block sticky justify-center py-4">
         graduate school
       </div>
-
+      <>{party && <CoinConfetti />}</>
       <Alert variant={"default"}>
         <AlertTitle className="text-xl">
           몬티 홀 문제&nbsp;
