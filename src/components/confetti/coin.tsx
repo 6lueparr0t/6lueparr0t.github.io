@@ -27,7 +27,8 @@ const Confetti = () => {
     });
   }, []);
 
-  const particlesLoaded = async (container?: Container): Promise<void> => {
+  // this will be called every time the particles are loaded
+  const particlesLoaded = async (_container?: Container): Promise<void> => {
     // console.log(container);
   };
 
