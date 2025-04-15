@@ -24,6 +24,7 @@ export default defineConfig({
   build: {
     chunkSizeWarningLimit: 1200, // 기본 500KB → 1200KB로 증가 (불필요한 경고 방지)
     rollupOptions: {
+      treeshake: true, // 트리 쉐이킹 활성화 (기본값)
       output: {
         manualChunks(id) {
           if (id.includes("node_modules")) {
