@@ -70,7 +70,7 @@
       }
     ],
     "techStack": {
-      "languages": "JavaScript(Vanilla.js, ES5), CSS",
+      "languages": "JavaScript(ES5), Java, PHP",
       "scm": "Git (Bitbucket, Gitlab)",
       "cicd": "Bamboo, Jenkins"
     }
