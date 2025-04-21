@@ -1,6 +1,9 @@
-import { useState, useEffect, useRef } from "react";
-import { Slider } from "@/components/ui/slider";
+import { useEffect, useRef, useState } from "react";
+
 import { ReactTyped } from "react-typed";
+
+import { Slider } from "@/components/ui/slider";
+
 import bird1 from "/bird1.webp";
 import bird2 from "/bird2.webp";
 
@@ -59,7 +62,9 @@ function Page1() {
       <h1 className="text-6xl break-keep m-4 text-gradient">
         <ReactTyped className="home" strings={["Hello, World!"]} startDelay={500} typeSpeed={100} />
       </h1>
-      <h2 className="text-4xl break-keep text-gradient">One for a line, a line for all.</h2>
+      <h2 className="text-4xl break-keep text-gradient" title="한 줄의 코딩, 모두를 위해서.">
+        One for a line, a line for all.
+      </h2>
     </div>
   );
 }
