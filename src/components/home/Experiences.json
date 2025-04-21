@@ -6,11 +6,6 @@
     "period": "2022.06.09 ~ 2025.02.28",
     "details": [
       {
-        "project": "Kollus 플레이어 SDK 를 사용한 샘플페이지 구성",
-        "link": "https://github.com/6lueparr0t/kollus-player-generator",
-        "tasks": ["신규 고객사들의 사용방법 안내에 따른 업무 효율 증대"]
-      },
-      {
         "project": "'찰나' 서비스 개발 및 운영 환경 구축",
         "tasks": [
           "Kubernetes(K8s)를 사용한 개발 환경 구성, Flannel(CNI), MetalLB 로드밸런서 사용",

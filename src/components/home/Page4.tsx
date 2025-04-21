@@ -151,8 +151,13 @@ function Page4() {
             컴퓨터소프트웨어과 석사과정에 입학하여 2024년 2월에 졸업했습니다.
           </div>
 
-          <p>네트워크(IoT, 5G), AI, 데이터마이닝, 추천시스템, 자연어 처리 등의 과목을 수강했고,</p>
-          <p>가상화폐 거래소를 다녔던 배경 지식을 기반으로 &nbsp;</p>
+          <div className="mb-8">
+            AI 기술의 핵심 분야인 데이터마이닝(Selenium + BS4, Clustering, Classification), 자연어
+            처리(Transformer 기반의 LLM, BERT, GPT 계열 모델), 추천시스템(Collaborative Filtering,
+            Content-Based Filtering, Matrix Factorization, Deep Learning 기반 모델)을 중심으로
+            학습했고,
+          </div>
+          <p>이후 가상화폐 거래소를 다녔던 배경 지식을 기반으로 &nbsp;</p>
           <p>
             <span
               className="text-blue-600 dark:text-blue-400 cursor-pointer"
