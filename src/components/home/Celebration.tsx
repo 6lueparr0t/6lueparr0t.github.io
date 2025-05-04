@@ -5,8 +5,6 @@ import { Heart } from "lucide-react";
 
 import Confetti from "@/components/confetti/heart";
 
-// shadcn 사용 시
-
 export default function ConfettiToggle() {
   const [party, setParty] = useState(false);
 
