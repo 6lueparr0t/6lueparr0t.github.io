@@ -2,9 +2,8 @@ import { useState } from "react";
 
 import { formatDate } from "@/lib/date";
 
-import guestbookData from "./guestbook.json";
-
 // JSON 파일을 직접 import
+import guestbookData from "./guestbook.json";
 
 interface GuestbookEntry {
   name: string;

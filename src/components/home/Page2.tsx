@@ -9,7 +9,7 @@ import Chip from "@/components/_common/Chip";
 import { Gallery } from "./Gallery";
 
 const startDate = new Date("2017-10-30");
-const currentDate = new Date("2025-02-28");
+const currentDate = new Date();
 
 function Page2() {
   const [years, setYears] = useState(0);
@@ -42,7 +42,7 @@ function Page2() {
                   animateToNumber={years}
                 />
               }
-              content={<span>2017.10.30 ~ 2025.02.28</span>}
+              content={<span>2017.10.30 ~ </span>}
             />
             년차 웹 개발자
             <Chip title={<>임대현</>} content={<p>Daehyun Lim</p>} />
