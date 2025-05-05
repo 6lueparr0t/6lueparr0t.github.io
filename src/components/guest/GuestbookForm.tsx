@@ -1,9 +1,12 @@
 // components/guestbook/GuestbookForm.tsx
-import { useRef, useState, FormEvent } from 'react';
-import { Turnstile } from '@marsidev/react-turnstile'
-import type { TurnstileInstance } from '@marsidev/react-turnstile'
+import { FormEvent, useRef, useState } from "react";
 
-import { Button } from '@/components/ui/button'; // UI 폴더에 Button 컴포넌트가 있다고 가정합니다.
+import { Turnstile } from "@marsidev/react-turnstile";
+import type { TurnstileInstance } from "@marsidev/react-turnstile";
+
+import { Button } from "@/components/ui/button";
+
+// UI 폴더에 Button 컴포넌트가 있다고 가정합니다.
 
 interface FormData {
   name: string;
@@ -16,9 +19,9 @@ const GuestbookForm = () => {
   const turnstileRef = useRef<TurnstileInstance | null>(null);
 
   const [formData, setFormData] = useState<FormData>({
-    name: '',
-    message: '',
-    mail: '',
+    name: "",
+    message: "",
+    mail: "",
   });
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
@@ -39,24 +42,24 @@ const GuestbookForm = () => {
     setSuccess(null);
 
     try {
-      const response = await fetch(import.meta.env.VITE_APP_BACKEND+"/api/slack", {
-        method: 'POST',
+      const response = await fetch(import.meta.env.VITE_APP_SLACK_ENDPOINT + "/api/slack", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
       });
 
       if (response.ok) {
-        setSuccess('검토 후 반영하겠습니다. 감사합니다.');
-        setFormData({ name: '', message: '', mail: '' });
+        setSuccess("검토 후 반영하겠습니다. 감사합니다.");
+        setFormData({ name: "", message: "", mail: "" });
         turnstileRef.current?.reset();
-        setStatus('expired');
+        setStatus("expired");
       } else {
-        setError('메시지 전송에 실패했습니다. 아래 메일로 문의해주세요.');
+        setError("메시지 전송에 실패했습니다. 아래 메일로 문의해주세요.");
       }
     } catch (error) {
-      setError('메시지 전송에 실패했습니다. 아래 메일로 문의해주세요.');
+      setError("메시지 전송에 실패했습니다. 아래 메일로 문의해주세요.");
     } finally {
       setIsSubmitting(false);
     }
@@ -67,7 +70,9 @@ const GuestbookForm = () => {
       <h2 className="text-2xl font-bold mb-4 text-dark dark:text-white">방명록</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label htmlFor="name" className="block text-sm font-medium text-dark dark:text-gray-300">Name:</label>
+          <label htmlFor="name" className="block text-sm font-medium text-dark dark:text-gray-300">
+            Name:
+          </label>
           <input
             type="text"
             id="name"
@@ -79,7 +84,12 @@ const GuestbookForm = () => {
           />
         </div>
         <div>
-          <label htmlFor="message" className="block text-sm font-medium text-dark dark:text-gray-300">Message:</label>
+          <label
+            htmlFor="message"
+            className="block text-sm font-medium text-dark dark:text-gray-300"
+          >
+            Message:
+          </label>
           <textarea
             id="message"
             name="message"
@@ -90,7 +100,9 @@ const GuestbookForm = () => {
           />
         </div>
         <div>
-          <label htmlFor="mail" className="block text-sm font-medium text-dark dark:text-gray-300">Email:</label>
+          <label htmlFor="mail" className="block text-sm font-medium text-dark dark:text-gray-300">
+            Email:
+          </label>
           <input
             type="email"
             id="mail"
@@ -101,21 +113,21 @@ const GuestbookForm = () => {
             className="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-black dark:text-gray-200 bg-white dark:bg-gray-900 focus:outline-none focus:ring-slate-500 focus:border-slate-500 sm:text-sm"
           />
         </div>
-        <div className='flex justify-center mt-6'>
+        <div className="flex justify-center mt-6">
           <Turnstile
             ref={turnstileRef}
-            siteKey='0x4AAAAAAAh0AbQiSvRJjo-z'
-            onError={() => setStatus('error')}
-            onExpire={() => setStatus('expired')}
-            onSuccess={() => setStatus('solved')}
+            siteKey="0x4AAAAAAAh0AbQiSvRJjo-z"
+            onError={() => setStatus("error")}
+            onExpire={() => setStatus("expired")}
+            onSuccess={() => setStatus("solved")}
           />
         </div>
         <Button
           type="submit"
-          disabled={isSubmitting || status !== 'solved'}
-          className={`flex mt-4 mx-auto px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white dark:text-black bg-slate-600 dark:bg-slate-100 hover:bg-slate-700 dark:hover:bg-slate-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-500 ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
+          disabled={isSubmitting || status !== "solved"}
+          className={`flex mt-4 mx-auto px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white dark:text-black bg-slate-600 dark:bg-slate-100 hover:bg-slate-700 dark:hover:bg-slate-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-500 ${isSubmitting ? "opacity-50 cursor-not-allowed" : ""}`}
         >
-          {isSubmitting ? '보내는 중...' : '남기기'}
+          {isSubmitting ? "보내는 중..." : "남기기"}
         </Button>
         {error && <p className="mt-4 text-red-600 dark:text-red-400">{error}</p>}
         {success && <p className="mt-4 text-green-600 dark:text-green-400">{success}</p>}

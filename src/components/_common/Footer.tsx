@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { ArrowLongUpIcon } from "@heroicons/react/24/outline";
 import { formatInTimeZone } from "date-fns-tz";
 
-import Copy from "./Copy";
+import Copy from "@/components/_common/Copy";
 
 const MAIL = "6lueparr0t@gmail.com";
 const TIME_ZONE = "Asia/Seoul";

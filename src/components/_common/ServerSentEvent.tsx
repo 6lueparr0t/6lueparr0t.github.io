@@ -1,7 +1,7 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useRef, useState } from "react";
 
 function ServerSentEvent() {
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState("");
   const eventSourceRef = useRef<EventSource | null>(null);
   const retryCountRef = useRef(0); // 재연결 시도 횟수 추적
 
@@ -9,7 +9,9 @@ function ServerSentEvent() {
     const maxRetries = 5; // 최대 재연결 시도 횟수
 
     const connect = () => {
-      eventSourceRef.current = new EventSource(import.meta.env.VITE_APP_BACKEND + '/api/events?enable=true');
+      eventSourceRef.current = new EventSource(
+        import.meta.env.VITE_APP_SLACK_ENDPOINT + "/api/events?enable=true"
+      );
 
       eventSourceRef.current.onmessage = (event) => {
         const data = JSON.parse(event.data);
@@ -45,7 +47,7 @@ function ServerSentEvent() {
     };
   }, []); // 의존성 배열을 빈 배열로 두어 최초 렌더링 시에만 실행
 
-  return (<div>Message from server: {message}</div>);
+  return <div>Message from server: {message}</div>;
 }
 
 export default ServerSentEvent;
