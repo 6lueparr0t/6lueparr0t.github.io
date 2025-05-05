@@ -1,9 +1,10 @@
-import ash2 from "@/assets/home/ash2.gif";
-
 import { useEffect, useRef, useState } from "react";
+
 import { NavLink } from "react-router";
 
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+
+import ash2 from "@/assets/home/ash2.gif";
 
 const message = [
   "안녕하세요?",

@@ -1,4 +1,4 @@
-import React, { type PropsWithChildren, useEffect, useState, useCallback } from "react";
+import React, { type PropsWithChildren, useCallback, useEffect, useState } from "react";
 
 interface Gift {
   id: number;
@@ -12,9 +12,7 @@ interface DoorProps extends PropsWithChildren {
   status: string;
   gifts: Gift[];
   gift: Gift;
-  setGifts: React.Dispatch<
-    React.SetStateAction<Gift[]>
-  >;
+  setGifts: React.Dispatch<React.SetStateAction<Gift[]>>;
   count: number;
   setCount: React.Dispatch<React.SetStateAction<number>>;
   setRewarddCount: React.Dispatch<React.SetStateAction<number>>;
@@ -22,16 +20,30 @@ interface DoorProps extends PropsWithChildren {
   setDoorOpenCheck: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
-const Door: React.FC<DoorProps> = ({ id, gifts, gift, setGifts, count, setCount, setRewarddCount, doorOpenCheck, setDoorOpenCheck, children }) => {
+const Door: React.FC<DoorProps> = ({
+  id,
+  gifts,
+  gift,
+  setGifts,
+  count,
+  setCount,
+  setRewarddCount,
+  doorOpenCheck,
+  setDoorOpenCheck,
+  children,
+}) => {
   const [open, setOpen] = useState(false);
 
-  const updateOpenDoor = useCallback((status: string) => {
-    gifts.map((item) => {
-      if (item.status === status) {
-        setDoorOpenCheck((prev) => Array.from(new Set([...(prev), item.status])));
-      }
-    });
-  }, [gifts, setDoorOpenCheck]);
+  const updateOpenDoor = useCallback(
+    (status: string) => {
+      gifts.map((item) => {
+        if (item.status === status) {
+          setDoorOpenCheck((prev) => Array.from(new Set([...prev, item.status])));
+        }
+      });
+    },
+    [gifts, setDoorOpenCheck]
+  );
 
   const openHandler = useCallback(() => {
     if (open === false && !doorOpenCheck.includes(gift.status)) setCount((prev) => prev + 1);
@@ -63,7 +75,17 @@ const Door: React.FC<DoorProps> = ({ id, gifts, gift, setGifts, count, setCount,
       prev[id].open = !open;
       return [...prev];
     });
-  }, [count, gift.status, id, open, doorOpenCheck, setCount, setGifts, setRewarddCount, updateOpenDoor]);
+  }, [
+    count,
+    gift.status,
+    id,
+    open,
+    doorOpenCheck,
+    setCount,
+    setGifts,
+    setRewarddCount,
+    updateOpenDoor,
+  ]);
 
   useEffect(() => {
     setOpen(gift.open);
@@ -85,11 +107,17 @@ const Door: React.FC<DoorProps> = ({ id, gifts, gift, setGifts, count, setCount,
 
   return (
     <div className="door">
-      <div className={`door-front text-xl md:text-4xl lg:text-7xl ${gift.open ? "open" : "close"}`} onClick={openHandler}>
-        <div className="content">{id+1}</div>
+      <div
+        className={`door-front text-xl md:text-4xl lg:text-7xl ${gift.open ? "open" : "close"}`}
+        onClick={openHandler}
+      >
+        <div className="content">{id + 1}</div>
         <div className="knob"></div>
       </div>
-      <div className="door-back font-['Tossface'] text-xl md:text-4xl lg:text-7xl" onClick={openHandler}>
+      <div
+        className="door-back font-['Tossface'] text-xl md:text-4xl lg:text-7xl"
+        onClick={openHandler}
+      >
         {children}
       </div>
     </div>

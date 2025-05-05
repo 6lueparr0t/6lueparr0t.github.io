@@ -1,7 +1,7 @@
+import React from "react";
+
 import { render, screen } from "@testing-library/react";
 import { vi } from "vitest";
-
-import React from "react";
 
 import App from "./App";
 
@@ -17,6 +17,7 @@ vi.mock("@/components/ui/carousel", () => ({
   ),
   CarouselNext: () => <button data-testid="mock-carousel-next">Next</button>,
   CarouselPrevious: () => <button data-testid="mock-carousel-previous">Previous</button>,
+  CarouselThumbs: ({ ...props }) => <div data-testid="mock-carousel">{props.children}</div>,
 }));
 
 test("renders the heading correctly", async () => {

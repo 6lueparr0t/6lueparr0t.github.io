@@ -1,10 +1,22 @@
-import * as React from "react";
+import {
+  ComponentProps,
+  createContext,
+  KeyboardEvent,
+  MouseEvent,
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 
+import Fade from "embla-carousel-fade";
 import useEmblaCarousel, { type UseEmblaCarouselType } from "embla-carousel-react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
+import { Thumb } from "@/components/_common/Thumb";
 import { Button } from "@/components/ui/button";
 
 type CarouselApi = UseEmblaCarouselType[1];
@@ -26,12 +38,13 @@ type CarouselContextProps = {
   scrollNext: () => void;
   canScrollPrev: boolean;
   canScrollNext: boolean;
+  selectedIndex: number;
 } & CarouselProps;
 
-const CarouselContext = React.createContext<CarouselContextProps | null>(null);
+const CarouselContext = createContext<CarouselContextProps | null>(null);
 
 function useCarousel() {
-  const context = React.useContext(CarouselContext);
+  const context = useContext(CarouselContext);
 
   if (!context) {
     throw new Error("useCarousel must be used within a <Carousel />");
@@ -48,33 +61,33 @@ function Carousel({
   className,
   children,
   ...props
-}: React.ComponentProps<"div"> & CarouselProps) {
+}: ComponentProps<"div"> & CarouselProps) {
   const [carouselRef, api] = useEmblaCarousel(
     {
       ...opts,
       axis: orientation === "horizontal" ? "x" : "y",
     },
-    plugins
+    [...(plugins || []), Fade()]
   );
-  const [canScrollPrev, setCanScrollPrev] = React.useState(false);
-  const [canScrollNext, setCanScrollNext] = React.useState(false);
+  const [canScrollPrev, setCanScrollPrev] = useState(false);
+  const [canScrollNext, setCanScrollNext] = useState(false);
 
-  const onSelect = React.useCallback((api: CarouselApi) => {
+  const onSelect = useCallback((api: CarouselApi) => {
     if (!api) return;
     setCanScrollPrev(api.canScrollPrev());
     setCanScrollNext(api.canScrollNext());
   }, []);
 
-  const scrollPrev = React.useCallback(() => {
+  const scrollPrev = useCallback(() => {
     api?.scrollPrev();
   }, [api]);
 
-  const scrollNext = React.useCallback(() => {
+  const scrollNext = useCallback(() => {
     api?.scrollNext();
   }, [api]);
 
-  const handleKeyDown = React.useCallback(
-    (event: React.KeyboardEvent<HTMLDivElement>) => {
+  const handleKeyDown = useCallback(
+    (event: KeyboardEvent<HTMLDivElement>) => {
       if (event.key === "ArrowLeft") {
         event.preventDefault();
         scrollPrev();
@@ -86,12 +99,12 @@ function Carousel({
     [scrollPrev, scrollNext]
   );
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!api || !setApi) return;
     setApi(api);
   }, [api, setApi]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!api) return;
     onSelect(api);
     api.on("reInit", onSelect);
@@ -113,6 +126,7 @@ function Carousel({
         scrollNext,
         canScrollPrev,
         canScrollNext,
+        selectedIndex: api?.selectedScrollSnap() ?? 0,
       }}
     >
       <div
@@ -129,7 +143,7 @@ function Carousel({
   );
 }
 
-function CarouselContent({ className, ...props }: React.ComponentProps<"div">) {
+function CarouselContent({ className, ...props }: ComponentProps<"div">) {
   const { carouselRef, orientation } = useCarousel();
 
   return (
@@ -142,7 +156,7 @@ function CarouselContent({ className, ...props }: React.ComponentProps<"div">) {
   );
 }
 
-function CarouselItem({ className, ...props }: React.ComponentProps<"div">) {
+function CarouselItem({ className, ...props }: ComponentProps<"div">) {
   const { orientation } = useCarousel();
 
   return (
@@ -165,7 +179,7 @@ function CarouselPrevious({
   variant = "outline",
   size = "icon",
   ...props
-}: React.ComponentProps<typeof Button>) {
+}: ComponentProps<typeof Button>) {
   const { orientation, scrollPrev, canScrollPrev } = useCarousel();
 
   return (
@@ -195,7 +209,7 @@ function CarouselNext({
   variant = "outline",
   size = "icon",
   ...props
-}: React.ComponentProps<typeof Button>) {
+}: ComponentProps<typeof Button>) {
   const { orientation, scrollNext, canScrollNext } = useCarousel();
 
   return (
@@ -220,6 +234,102 @@ function CarouselNext({
   );
 }
 
+type CarouselThumbsProps = {
+  slides: number[];
+  images: string[];
+  className?: string;
+};
+
+function CarouselThumbs({
+  slides,
+  images,
+  className,
+}: ComponentProps<"div"> & CarouselThumbsProps) {
+  const { api, selectedIndex } = useCarousel();
+  const containerRef = useRef<HTMLDivElement>(null);
+  const thumbRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const isDragging = useRef(false);
+  const startX = useRef(0);
+  const scrollLeft = useRef(0);
+
+  const onThumbClick = useCallback(
+    (index: number) => {
+      api?.scrollTo(index);
+      const thumbEl = thumbRefs.current[index];
+      thumbEl?.scrollIntoView({
+        behavior: "smooth",
+        inline: "center",
+        block: "nearest",
+      });
+    },
+    [api]
+  );
+
+  // ✅ selectedIndex가 바뀔 때마다 썸네일 스크롤 이동
+  useEffect(() => {
+    const thumbEl = thumbRefs.current[selectedIndex];
+    thumbEl?.scrollIntoView({
+      behavior: "smooth",
+      inline: "center",
+      block: "nearest",
+    });
+  }, [selectedIndex]);
+
+  // 드래그 스크롤 핸들러
+  const onMouseDown = (e: MouseEvent) => {
+    if (!containerRef.current) return;
+    isDragging.current = true;
+    startX.current = e.pageX - containerRef.current.offsetLeft;
+    scrollLeft.current = containerRef.current.scrollLeft;
+  };
+
+  const onMouseMove = (e: MouseEvent) => {
+    if (!isDragging.current || !containerRef.current) return;
+    e.preventDefault();
+    const x = e.pageX - containerRef.current.offsetLeft;
+    const walk = (x - startX.current) * 1.5;
+    containerRef.current.scrollLeft = scrollLeft.current - walk;
+  };
+
+  const onMouseUp = () => {
+    isDragging.current = false;
+  };
+
+  const onMouseLeave = () => {
+    isDragging.current = false;
+  };
+
+  return (
+    <div
+      className={`${className} overflow-x-auto scrollbar-hide cursor-grab active:cursor-grabbing w-96 select-none`}
+      ref={containerRef}
+      onMouseDown={onMouseDown}
+      onMouseMove={onMouseMove}
+      onMouseUp={onMouseUp}
+      onMouseLeave={onMouseLeave}
+    >
+      <div className="flex flex-nowrap gap-2 px-2">
+        {slides.map((index) => (
+          <div
+            key={index}
+            ref={(el) => {
+              thumbRefs.current[index] = el;
+            }}
+            className="flex-none w-20"
+          >
+            <Thumb
+              index={index}
+              image={images[index]}
+              selected={selectedIndex === index}
+              onClick={() => onThumbClick(index)}
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export {
   type CarouselApi,
   Carousel,
@@ -227,4 +337,5 @@ export {
   CarouselItem,
   CarouselPrevious,
   CarouselNext,
+  CarouselThumbs,
 };

@@ -6,9 +6,9 @@ import CoinConfetti from "@/components/confetti/coin";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 
-import Door from "./Door";
+import Door from "../elements/Door";
 
-function Page4() {
+function MontyHall() {
   const { pushModals } = modalStore();
 
   const [count, setCount] = useState(0);
@@ -191,4 +191,4 @@ function Page4() {
   );
 }
 
-export default Page4;
+export default MontyHall;

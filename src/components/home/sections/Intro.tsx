@@ -7,7 +7,7 @@ import { Slider } from "@/components/ui/slider";
 import bird1 from "/bird1.webp";
 import bird2 from "/bird2.webp";
 
-function Page1() {
+function Intro() {
   const bird2Ref = useRef<HTMLImageElement>(null);
   const [clipPath, setClipPath] = useState("inset(0 100% 0 0)");
 
@@ -69,4 +69,4 @@ function Page1() {
   );
 }
 
-export default Page1;
+export default Intro;

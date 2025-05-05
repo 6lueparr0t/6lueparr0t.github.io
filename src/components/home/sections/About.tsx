@@ -5,13 +5,12 @@ import AnimatedNumbers from "react-animated-numbers";
 import { diffInYears } from "@/lib/date";
 
 import Chip from "@/components/_common/Chip";
-
-import { Gallery } from "./Gallery";
+import { Gallery } from "@/components/_common/Gallery";
 
 const startDate = new Date("2017-10-30");
 const currentDate = new Date();
 
-function Page2() {
+function About() {
   const [years, setYears] = useState(0);
 
   useLayoutEffect(() => {
@@ -24,9 +23,7 @@ function Page2() {
         about me
       </div>
       <div className="flex flex-col justify-center items-center w-full">
-        <div className="flex justify-center items-center p-4 my-16 bg-white shadow-2xl dark:shadow-white-2xl w-72 md:w-[400px] h-[400px] md:h-[550px]">
-          <Gallery />
-        </div>
+        <Gallery />
         <div className="font-noto mb-16 w-3/4 sm:w-1/2 text-left break-keep">
           <p>안녕하세요.</p>
           <div className="flex mb-8">
@@ -65,4 +62,4 @@ function Page2() {
   );
 }
 
-export default Page2;
+export default About;

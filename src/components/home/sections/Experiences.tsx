@@ -1,11 +1,10 @@
 import { Job } from "@/components/components.d";
+import certifications from "@/components/home/data/Certifications.json";
+import experiences from "@/components/home/data/Experiences.json";
+import CertificationCard from "@/components/home/elements/CertificationCard";
+import ExperienceList from "@/components/home/elements/ExperienceList";
 
-import CertificationCard from "./CertificationCard";
-import certifications from "./Certifications.json";
-import ExperienceList from "./ExperienceList";
-import experiences from "./Experiences.json";
-
-function Page3() {
+function Experiences() {
   return (
     <>
       {/* Define keyframes and animation styles locally */}
@@ -72,4 +71,4 @@ function Page3() {
   );
 }
 
-export default Page3;
+export default Experiences;
