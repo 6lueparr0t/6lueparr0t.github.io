@@ -62,36 +62,39 @@ const BlogPost = () => {
   if (!post) return <div className="text-center py-10">Post not found.</div>;
 
   return (
-    <div className="min-h-screen px-4 py-10">
-      <main className="max-w-2xl mx-auto prose dark:prose-invert">
-        <h1 className="text-3xl font-bold mb-2">{post.attributes.title}</h1>
-        {post.attributes.date && (
-          <p className="text-sm mb-6">
-            {post?.attributes?.date
-              ? formatDate(new Date(post.attributes.date), "yyyy-MM-dd HH:mm:ss")
-              : ""}
-          </p>
-        )}
-        <div className="blog-content" dangerouslySetInnerHTML={{ __html: post.html }} />
-      </main>
+    <>
+      <title>{post.attributes.title}</title>
+      <div className="min-h-screen px-4 py-10">
+        <main className="max-w-2xl mx-auto prose dark:prose-invert">
+          <h1 className="text-3xl font-bold mb-2">{post.attributes.title}</h1>
+          {post.attributes.date && (
+            <p className="text-sm mb-6">
+              {post?.attributes?.date
+                ? formatDate(new Date(post.attributes.date), "yyyy-MM-dd HH:mm:ss")
+                : ""}
+            </p>
+          )}
+          <div className="blog-content" dangerouslySetInnerHTML={{ __html: post.html }} />
+        </main>
 
-      <div className="max-w-2xl mx-auto mt-16">
-        <Giscus
-          id="comments"
-          repo={import.meta.env.VITE_APP_GISCUS_REPO}
-          repoId={import.meta.env.VITE_APP_GISCUS_REPO_ID}
-          category={import.meta.env.VITE_APP_GISCUS_CATEGORY}
-          categoryId={import.meta.env.VITE_APP_GISCUS_CATEGORY_ID}
-          mapping="title" // 포스트 제목으로 연결
-          reactionsEnabled="1"
-          emitMetadata="0"
-          inputPosition="bottom"
-          theme="preferred_color_scheme"
-          lang="ko"
-          loading="lazy"
-        />
+        <div className="max-w-2xl mx-auto mt-16">
+          <Giscus
+            id="comments"
+            repo={import.meta.env.VITE_APP_GISCUS_REPO}
+            repoId={import.meta.env.VITE_APP_GISCUS_REPO_ID}
+            category={import.meta.env.VITE_APP_GISCUS_CATEGORY}
+            categoryId={import.meta.env.VITE_APP_GISCUS_CATEGORY_ID}
+            mapping="title" // 포스트 제목으로 연결
+            reactionsEnabled="1"
+            emitMetadata="0"
+            inputPosition="bottom"
+            theme="preferred_color_scheme"
+            lang="ko"
+            loading="lazy"
+          />
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

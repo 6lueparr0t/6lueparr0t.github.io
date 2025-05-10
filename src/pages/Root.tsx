@@ -1,12 +1,14 @@
 import { PropsWithChildren, useEffect } from "react";
-import { useLocation, Outlet, useNavigate, useSearchParams } from "react-router";
-import Header from "@/components/_common/Header";
-import Footer from "@/components/_common/Footer";
-import Modal from "@/components/_common/Modal";
-import { ThemeProvider } from "@/components/custom/theme-provider";
+
+import { Outlet, useLocation, useNavigate, useSearchParams } from "react-router";
 
 import modalStore from "@/store/modal";
+
 import Cookie from "@/components/_common/Cookie";
+import Footer from "@/components/_common/Footer";
+import Header from "@/components/_common/Header";
+import Modal from "@/components/_common/Modal";
+import { ThemeProvider } from "@/components/custom/theme-provider";
 
 const Root: React.FC<PropsWithChildren> = () => {
   const [searchParams] = useSearchParams();
