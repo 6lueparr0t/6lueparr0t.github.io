@@ -40,7 +40,7 @@ export const IssueTable: React.FC<SpaceProps> = ({ list, issue, page, headless =
                 }`}
               >
                 <TableCell className="font-medium min-w-16 sm:min-w-4">{row.number}</TableCell>
-                <TableCell className="block truncate mt-2 w-60 sm:w-80 md:w-[500px] lg:w-8/12">
+                <TableCell className="block truncate mt-2 w-2xs sm:w-xs md:w-sm lg:w-md xl:w-lg">
                   <Link to={`/space/${row.number}?page=${page}`}>{row.title}</Link>
                 </TableCell>
                 <TableCell>
