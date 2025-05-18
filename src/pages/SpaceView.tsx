@@ -8,7 +8,7 @@ import { PER_PAGE } from "@/lib/constants";
 import { getIssue, getList } from "@/lib/space";
 import { get, sleep } from "@/lib/utils";
 
-import Copy from "@/components/_common/Copy";
+import Copy from "@/components/common/Copy";
 import { IssuePagination } from "@/components/space/IssuePagination";
 import { IssueTable } from "@/components/space/IssueTable";
 import { IssueComments } from "@/components/space/view/IssueComments";

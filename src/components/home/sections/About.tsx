@@ -4,8 +4,8 @@ import AnimatedNumbers from "react-animated-numbers";
 
 import { diffInYears } from "@/lib/date";
 
-import Chip from "@/components/_common/Chip";
-import { Gallery } from "@/components/_common/Gallery";
+import Chip from "@/components/common/Chip";
+import { Gallery } from "@/components/common/Gallery";
 
 const startDate = new Date("2017-10-30");
 const currentDate = new Date();

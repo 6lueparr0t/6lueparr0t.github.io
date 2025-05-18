@@ -1,10 +1,11 @@
-import mainStore from "@/store/main";
-
 import React, { type PropsWithChildren } from "react";
+
 import { NavLink } from "react-router";
 
-import Menu from "@/components/_common/Menu";
-// import ServerSentEvent from "@/components/_common/ServerSentEvent";
+import mainStore from "@/store/main";
+
+import Menu from "@/components/common/Menu";
+// import ServerSentEvent from "@/components/common/ServerSentEvent";
 import { ModeToggle } from "@/components/custom/mode-toggle";
 
 const Header: React.FC<PropsWithChildren> = ({ children }) => {

@@ -16,7 +16,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
-import { Thumb } from "@/components/_common/Thumb";
+import { Thumb } from "@/components/common/Thumb";
 import { Button } from "@/components/ui/button";
 
 type CarouselApi = UseEmblaCarouselType[1];
@@ -190,7 +190,7 @@ function CarouselPrevious({
       className={cn(
         "absolute size-8 rounded-full",
         orientation === "horizontal"
-          ? "top-1/2 -left-16 -translate-y-1/2"
+          ? "top-1/2 -left-12 -translate-y-1/2"
           : "-top-12 left-1/2 -translate-x-1/2 rotate-90",
         className
       )}
@@ -220,7 +220,7 @@ function CarouselNext({
       className={cn(
         "absolute size-8 rounded-full",
         orientation === "horizontal"
-          ? "top-1/2 -right-16 -translate-y-1/2"
+          ? "top-1/2 -right-12 -translate-y-1/2"
           : "-bottom-12 left-1/2 -translate-x-1/2 rotate-90",
         className
       )}
@@ -301,7 +301,7 @@ function CarouselThumbs({
 
   return (
     <div
-      className={`${className} overflow-x-auto scrollbar-hide cursor-grab active:cursor-grabbing w-96 select-none`}
+      className={`${className} overflow-x-auto scrollbar-hide cursor-grab active:cursor-grabbing select-none`}
       ref={containerRef}
       onMouseDown={onMouseDown}
       onMouseMove={onMouseMove}

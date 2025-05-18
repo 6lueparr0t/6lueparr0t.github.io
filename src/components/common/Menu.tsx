@@ -1,6 +1,6 @@
-import { Bars3Icon } from "@heroicons/react/24/outline";
-
 import React from "react";
+
+import { Bars3Icon } from "@heroicons/react/24/outline";
 import { NavLink } from "react-router";
 
 import { type MenuProps } from "@/components/components.d";

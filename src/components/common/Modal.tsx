@@ -1,8 +1,10 @@
 import React, { useEffect, useRef } from "react";
-import modalStore from "@/store/modal";
-import type { Modal } from "@/components/components.d";
 
+import modalStore from "@/store/modal";
+
+import type { Modal } from "@/components/components.d";
 import { Button } from "@/components/ui/button";
+
 import cat1 from "@/assets/loading/cat1.webp";
 import cat2 from "@/assets/loading/cat2.webp";
 import dog from "@/assets/loading/dog.webp";

@@ -4,10 +4,10 @@ import { Outlet, useLocation, useNavigate, useSearchParams } from "react-router"
 
 import modalStore from "@/store/modal";
 
-import Cookie from "@/components/_common/Cookie";
-import Footer from "@/components/_common/Footer";
-import Header from "@/components/_common/Header";
-import Modal from "@/components/_common/Modal";
+import Cookie from "@/components/common/Cookie";
+import Footer from "@/components/common/Footer";
+import Header from "@/components/common/Header";
+import Modal from "@/components/common/Modal";
 import { ThemeProvider } from "@/components/custom/theme-provider";
 
 const Root: React.FC<PropsWithChildren> = () => {

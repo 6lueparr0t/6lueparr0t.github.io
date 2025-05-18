@@ -1,8 +1,9 @@
-import { sendGtmEvent } from "@/lib/utils";
+import { type PropsWithChildren, useEffect, useState } from "react";
+
 import { ClipboardIcon } from "@heroicons/react/24/outline";
 import { enqueueSnackbar, SnackbarProvider } from "notistack";
 
-import { type PropsWithChildren, useEffect, useState } from "react";
+import { sendGtmEvent } from "@/lib/utils";
 
 interface CopyProps extends PropsWithChildren {
   id?: string;

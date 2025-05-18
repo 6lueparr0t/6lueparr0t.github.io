@@ -58,7 +58,7 @@ export const Gallery: React.FC = () => {
   return (
     <div className="flex justify-center items-center p-4 dark:shadow-white-2xl w-72 md:w-[400px] h-[650px]">
       <Carousel
-        className="outline-none"
+        className="outline-none w-72"
         ref={componentRef}
         setApi={setApi}
         opts={{
