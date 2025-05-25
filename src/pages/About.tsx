@@ -1,13 +1,16 @@
+import { useEffect, useRef, useState } from "react";
+
+import { ReactTyped } from "react-typed";
+
+import mainStore from "@/store/main";
+import modalStore from "@/store/modal";
+
+import "@/styles/about.css";
+
 import ash1 from "@/assets/about/ash1.gif";
 import boy from "@/assets/about/boy.webp";
 import bgm from "@/assets/sound/bgm_25_Route_30.mp3";
 import sfx from "@/assets/sound/sfx_sounds_Blip7.wav";
-import mainStore from "@/store/main";
-import modalStore from "@/store/modal";
-import "@/styles/about.css";
-
-import { useEffect, useRef, useState } from "react";
-import { ReactTyped } from "react-typed";
 
 const About = () => {
   const sfxRef = useRef<HTMLAudioElement>(null);
@@ -80,7 +83,6 @@ const About = () => {
 
   useEffect(() => {
     enableAboutLink();
-    window.scrollTo({ top: 0, behavior: "instant" });
     setTimeout(() => {
       setLoaded(true);
     }, 1000);

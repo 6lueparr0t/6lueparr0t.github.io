@@ -42,8 +42,6 @@ const Root: React.FC<PropsWithChildren> = () => {
 
   useEffect(() => {
     clearModals();
-    window.scrollTo({ top: 0, behavior: "instant" });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location.pathname]);
 
   // github pages 404 redirect

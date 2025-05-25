@@ -265,16 +265,6 @@ function CarouselThumbs({
     [api]
   );
 
-  // ✅ selectedIndex가 바뀔 때마다 썸네일 스크롤 이동
-  useEffect(() => {
-    const thumbEl = thumbRefs.current[selectedIndex];
-    thumbEl?.scrollIntoView({
-      behavior: "smooth",
-      inline: "center",
-      block: "nearest",
-    });
-  }, [selectedIndex]);
-
   // 드래그 스크롤 핸들러
   const onMouseDown = (e: MouseEvent) => {
     if (!containerRef.current) return;
