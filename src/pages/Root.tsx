@@ -1,5 +1,4 @@
 import { PropsWithChildren, useEffect } from "react";
-
 import { Outlet, useLocation, useNavigate, useSearchParams } from "react-router";
 
 import modalStore from "@/store/modal";
@@ -11,40 +10,32 @@ import Modal from "@/components/common/Modal";
 import { ThemeProvider } from "@/components/custom/theme-provider";
 
 const Root: React.FC<PropsWithChildren> = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const [searchParams] = useSearchParams();
   const redirect = searchParams.get("redirect");
 
-  const navigate = useNavigate();
-  const location = useLocation();
   const { pushModals, modals, clearModals } = modalStore();
 
   useEffect(() => {
-    const handleKeyDown = (event: { key: string }) => {
+    const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "/") {
         navigate("/");
       }
     };
-
     window.addEventListener("keydown", handleKeyDown);
-
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-    };
+    return () => window.removeEventListener("keydown", handleKeyDown);
   }, [navigate]);
 
   useEffect(() => {
-    if (modals.length > 0) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
-  }, [modals]);
+    clearModals();
+    window.scrollTo({ top: 0 });
+  }, [location.pathname, clearModals]);
 
   useEffect(() => {
-    clearModals();
-  }, [location.pathname]);
+    document.body.style.overflow = modals.length > 0 ? "hidden" : "auto";
+  }, [modals.length]);
 
-  // github pages 404 redirect
   useEffect(() => {
     if (redirect) {
       pushModals({ message: "now loading ...", type: "loading" });
