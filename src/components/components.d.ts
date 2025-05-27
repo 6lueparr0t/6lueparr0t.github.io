@@ -2,6 +2,7 @@ export type Job = {
   title: string;
   url?: string;
   type: string;
+  show?: boolean;
   role: string;
   period: string;
   details: {

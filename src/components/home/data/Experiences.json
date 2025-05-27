@@ -31,7 +31,8 @@
       "languages": "JavaScript(React.js, Next.js), TypeScript, Node.js(Express)",
       "scm": "Git (Github)",
       "cicd": "Jenkins, Github Actions"
-    }
+    },
+    "show": false
   },
   {
     "type": "company",
@@ -68,7 +69,8 @@
       "languages": "JavaScript(ES5), Java, PHP",
       "scm": "Git (Bitbucket, Gitlab)",
       "cicd": "Bamboo, Jenkins"
-    }
+    },
+    "show": false
   },
   {
     "type": "company",
@@ -92,13 +94,16 @@
       },
       {
         "project": "관리자(Admin) 서비스 개발 및 수정",
-        "tasks": ["UI/UX 개선 및 사내 요청 사항에 대한 시스템 그룹웨어 성능 개선"]
+        "tasks": [
+          "UI/UX 개선 및 사내 요청 사항에 대한 시스템 그룹웨어 성능 개선"
+        ]
       }
     ],
     "techStack": {
       "languages": "PHP, JavaScript(Jquery)",
       "scm": "SVN, Git (Gitlab)"
-    }
+    },
+    "show": false
   },
   {
     "type": "personal",
@@ -130,7 +135,8 @@
         "title": "링크2 (Youtube)",
         "url": "https://youtu.be/ekrUg1E20Y8?si=G3S7tWC5u8igdZ-X&t=346"
       }
-    ]
+    ],
+    "show": false
   },
   {
     "type": "personal",
@@ -141,7 +147,11 @@
     "details": [
       {
         "project": "백엔드 (PHP (CodeIgniter), MariaDB)",
-        "tasks": ["사용자 인증 및 권한 관리", "커뮤니티 게시물 CRUD", "위치 기반 데이터 관리"]
+        "tasks": [
+          "사용자 인증 및 권한 관리",
+          "커뮤니티 게시물 CRUD",
+          "위치 기반 데이터 관리"
+        ]
       },
       {
         "project": "프론트엔드 (Vanilla JS, Scss, GulpJS)",
@@ -159,7 +169,10 @@
       },
       {
         "project": "구글 맵 API",
-        "tasks": ["사용자 위치 기반 서비스 제공", "과금 이슈로 인해 제한적 사용"]
+        "tasks": [
+          "사용자 위치 기반 서비스 제공",
+          "과금 이슈로 인해 제한적 사용"
+        ]
       },
       {
         "project": "실시간 기능 (Golang, WebSocket)",
@@ -174,7 +187,9 @@
       },
       {
         "project": "Push State",
-        "tasks": ["브라우저 히스토리 관리에 Push State를 부분적으로 적용하여 사용자 경험 개선"]
+        "tasks": [
+          "브라우저 히스토리 관리에 Push State를 부분적으로 적용하여 사용자 경험 개선"
+        ]
       }
     ],
     "link": [
@@ -182,6 +197,7 @@
         "title": "Codigniter 한국 사용자 포럼",
         "url": "https://www.cikorea.net/bbs/view/ci_make?idx=20775&page=1&view_category=&lists_style="
       }
-    ]
+    ],
+    "show": false
   }
 ]
