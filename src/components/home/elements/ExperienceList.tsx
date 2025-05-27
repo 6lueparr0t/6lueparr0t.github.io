@@ -12,7 +12,7 @@ const ExperienceList = ({ job }: { job: Job }) => {
   };
 
   useEffect(() => {
-    setIsOpen(job.type === "company");
+    setIsOpen(job.show === true);
   }, [job.type]);
 
   return (
@@ -25,7 +25,11 @@ const ExperienceList = ({ job }: { job: Job }) => {
           <div>
             {job.title}&nbsp;
             {job?.url && (
-              <a className="text-blue-600 dark:text-blue-400" href={job.url} target="_blank">
+              <a
+                className="text-blue-600 dark:text-blue-400"
+                href={job.url}
+                target="_blank"
+              >
                 #
               </a>
             )}
@@ -41,40 +45,54 @@ const ExperienceList = ({ job }: { job: Job }) => {
         {/* type 이 personal 인 경우에만 숨기기 */}
         <div>
           <div className="flex justify-between">
-            <div className="text-zinc-700 dark:text-zinc-400 text-left">{job.role}</div>
-            <div className="text-zinc-700 dark:text-zinc-400 text-right">{job.period}</div>
+            <div className="text-zinc-700 dark:text-zinc-400 text-left">
+              {job.role}
+            </div>
+            <div className="text-zinc-700 dark:text-zinc-400 text-right">
+              {job.period}
+            </div>
           </div>
           <div className={isOpen ? "" : "hidden"}>
             <ul className="py-4">
-              {job.details.map((detail: { project: string; link?: string; tasks: string[] }) => (
-                <li
-                  key={detail.project}
-                  className="mt-4 font-semibold text-gray-950 dark:text-gray-50"
-                >
-                  {detail.project}{" "}
-                  {detail?.link && (
-                    <a
-                      className="text-blue-600 dark:text-blue-400"
-                      href={detail.link}
-                      target="_blank"
-                    >
-                      #
-                    </a>
-                  )}
-                  <ul className="list-decimal list-inside text-sm text-gray-600 dark:text-gray-300">
-                    {detail.tasks.map((task, taskIdx) => (
-                      <li key={taskIdx}>{task}</li>
-                    ))}
-                  </ul>
-                </li>
-              ))}
+              {job.details.map(
+                (detail: {
+                  project: string;
+                  link?: string;
+                  tasks: string[];
+                }) => (
+                  <li
+                    key={detail.project}
+                    className="mt-4 font-semibold text-gray-950 dark:text-gray-50"
+                  >
+                    {detail.project}{" "}
+                    {detail?.link && (
+                      <a
+                        className="text-blue-600 dark:text-blue-400"
+                        href={detail.link}
+                        target="_blank"
+                      >
+                        #
+                      </a>
+                    )}
+                    <ul className="list-decimal list-inside text-sm text-gray-600 dark:text-gray-300">
+                      {detail.tasks.map((task, taskIdx) => (
+                        <li key={taskIdx}>{task}</li>
+                      ))}
+                    </ul>
+                  </li>
+                )
+              )}
             </ul>
             <div className="mt-4">
               {job?.techStack?.languages ? (
                 <div>Tech Stack: {job?.techStack?.languages}</div>
               ) : null}
-              {job?.techStack?.scm ? <div>SCM: {job?.techStack?.scm}</div> : null}
-              {job?.techStack?.cicd ? <div>CI/CD : {job?.techStack?.cicd}</div> : null}
+              {job?.techStack?.scm ? (
+                <div>SCM: {job?.techStack?.scm}</div>
+              ) : null}
+              {job?.techStack?.cicd ? (
+                <div>CI/CD : {job?.techStack?.cicd}</div>
+              ) : null}
             </div>
             {job?.link?.length && (
               <div className={`mt-4 ${isOpen ? "" : "hidden"}`}>
