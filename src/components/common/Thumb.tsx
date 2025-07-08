@@ -19,6 +19,7 @@ export const Thumb: React.FC<ThumbProps> = ({ selected, index, onClick, image })
           src={image}
           alt={`Thumbnail ${index + 1}`}
           className="object-cover w-full h-full rounded"
+          draggable={false}
         />
       </button>
     </div>
