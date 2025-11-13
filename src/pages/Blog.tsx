@@ -49,21 +49,20 @@ function BlogPage() {
       <main className="max-w-2xl mx-auto text-left">
         <h1 className="text-3xl font-bold mb-8">Blog</h1>
         {posts.length > 0 ? (
-          <ul className="list-none space-y-4">
+          <ul className="list-none flex flex-col gap-y-4">
             {posts.map((post) => (
-              <li key={post.slug} className="flex items-baseline space-x-4">
-                <span className="text-sm w-[130px] shrink-0">
-                  <time
-                    dateTime={post.date}
-                    title={post.date ? formatDate(new Date(post.date), "yyyy-MM-dd HH:mm:ss") : ""}
-                  >
-                    {post.date ? post.date.split("T")[0] : "No date"}
-                  </time>
-                </span>
-                <Link
-                  to={`/blog/${post.slug}`}
-                  className="text-sky-300 hover:underline visited:text-purple-400"
-                >
+              <li key={post.slug}>
+                <Link to={`/blog/${post.slug}`} className="flex items-baseline hover:underline">
+                  <span className="text-sm w-[130px] shrink-0">
+                    <time
+                      dateTime={post.date}
+                      title={
+                        post.date ? formatDate(new Date(post.date), "yyyy-MM-dd HH:mm:ss") : ""
+                      }
+                    >
+                      {post.date ? post.date.split("T")[0] : "No date"}
+                    </time>
+                  </span>
                   {post.title}
                 </Link>
               </li>
