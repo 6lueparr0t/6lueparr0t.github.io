@@ -28,14 +28,17 @@ const Modal: React.FC<ModalProps> = ({ modal }) => {
   };
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      modalRef.current?.focus();
-    }, 10);
+    // loading 타입일 때만 포커스 강제
+    if (modal.type === "loading") {
+      const interval = setInterval(() => {
+        modalRef.current?.focus();
+      }, 10);
 
-    return () => {
-      clearInterval(interval);
-    };
-  }, []);
+      return () => {
+        clearInterval(interval);
+      };
+    }
+  }, [modal.type]);
 
   const closeModal = () => {
     popModals();
@@ -66,13 +69,15 @@ const Modal: React.FC<ModalProps> = ({ modal }) => {
           <span className="hidden align-middle h-screen" aria-hidden="true"></span>
 
           <div
-            className={`flex flex-col justify-center items-center bg-white dark:bg-zinc-950 rounded-lg text-left overflow-hidden shadow-xl transform transition-all my-8 max-w-4xl w-full z-50`}
+            className={`flex flex-col justify-center items-center bg-white dark:bg-zinc-950 rounded-lg text-left overflow-hidden shadow-xl transform transition-all my-8 ${
+              modal.type === "confirm" ? "max-w-2xl" : "max-w-4xl"
+            } w-full z-50`}
           >
-            <div className="bg-white dark:bg-zinc-950 mt-8">
+            <div className="bg-white dark:bg-zinc-950 mt-6 px-6">
               <div
                 className={`flex ${
                   modal.type !== "loading" ? "flex-col" : "flex-row"
-                } text-xl font-bold text-center`}
+                } ${modal.type === "confirm" ? "text-lg" : "text-xl"} font-bold text-center`}
               >
                 {modal.message}{" "}
                 {modal.type === "loading" && (
@@ -80,7 +85,7 @@ const Modal: React.FC<ModalProps> = ({ modal }) => {
                 )}
               </div>
             </div>
-            <div className="bg-white dark:bg-zinc-950 py-4 justify-around px-6 flex">
+            <div className="bg-white dark:bg-zinc-950 py-4 justify-around px-6 flex w-full">
               {modal.type === "loading" && (
                 <div className="flex justify-center items-center">
                   <img src={loadingImg()} />

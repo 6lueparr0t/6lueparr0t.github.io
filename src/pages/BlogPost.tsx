@@ -21,6 +21,17 @@ const BlogPost = () => {
   const [post, setPost] = useState<MarkdownModule | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [theme, setTheme] = useState<string>("preferred_color_scheme");
+
+  useLayoutEffect(() => {
+    // localStorage에서 테마 값 가져오기
+    const storedTheme = localStorage.getItem("vite-ui-theme");
+    if (storedTheme === "light" || storedTheme === "dark") {
+      setTheme(storedTheme);
+    } else {
+      setTheme("preferred_color_scheme");
+    }
+  }, []);
 
   useLayoutEffect(() => {
     const fetchPost = async () => {
@@ -88,7 +99,7 @@ const BlogPost = () => {
             reactionsEnabled="1"
             emitMetadata="0"
             inputPosition="bottom"
-            theme="preferred_color_scheme"
+            theme={theme}
             lang="ko"
             loading="lazy"
           />
