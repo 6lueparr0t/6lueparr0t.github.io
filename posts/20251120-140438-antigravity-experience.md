@@ -1,5 +1,5 @@
 ---
-title: AntiGravity Experience: 잠식
+title: "AntiGravity Experience: 잠식"
 date: 2025-11-20T14:04:38+09:00
 slug: 20251120-140438-antigravity-experience
 ---

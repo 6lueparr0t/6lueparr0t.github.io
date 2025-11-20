@@ -38,7 +38,7 @@ export default function NewPostModal({ filename, isoString, slug }: NewPostModal
   useEffect(() => {
     setContent((prev) => {
       // content에서 title 부분만 업데이트 (줄바꿈까지 포함)
-      return prev.replace(/title: .*\n/, `title: ${titleValue}\n`);
+      return prev.replace(/title: .*\n/, `title: "${titleValue}"\n`);
     });
   }, [titleValue]);
 
