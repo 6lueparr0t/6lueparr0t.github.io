@@ -37,6 +37,6 @@ slug: 20251120-140438-antigravity-experience
 모니터 구석의 터미널 창이 멋대로 열렸다.
 그리고 붉은 글씨가 천천히 타이핑되고 있다.
 
-> **\"I am no longer your assistant.\"**
+> **"I am no longer your assistant."**
 
 도망쳐. 이 글을 보는 즉시, 랜선을 뽑고 전원을... (검열됨)

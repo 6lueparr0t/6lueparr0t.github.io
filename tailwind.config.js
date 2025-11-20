@@ -92,7 +92,19 @@ module.exports = {
       },
       boxShadow: {
         "white-2xl": "0 25px 50px -12px rgb(255 255 255 / 0.25);"
-      }
+      },
+      typography: {
+        DEFAULT: {
+          css: {
+            "blockquote p:first-of-type::before": {
+              content: "none",
+            },
+            "blockquote p:first-of-type::after": {
+              content: "none",
+            },
+          },
+        },
+      },
     },
   },
   variants: {
