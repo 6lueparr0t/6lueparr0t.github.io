@@ -24,13 +24,29 @@ const BlogPost = () => {
   const [theme, setTheme] = useState<string>("preferred_color_scheme");
 
   useLayoutEffect(() => {
-    // localStorage에서 테마 값 가져오기
-    const storedTheme = localStorage.getItem("vite-ui-theme");
-    if (storedTheme === "light" || storedTheme === "dark") {
-      setTheme(storedTheme);
-    } else {
-      setTheme("preferred_color_scheme");
-    }
+    // 초기 테마 설정
+    const updateTheme = () => {
+      const isDark = document.documentElement.classList.contains("dark");
+      setTheme(isDark ? "dark" : "light");
+    };
+
+    updateTheme();
+
+    // class 변경 감지 (다크 모드 토글 시)
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.type === "attributes" && mutation.attributeName === "class") {
+          updateTheme();
+        }
+      });
+    });
+
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+
+    return () => observer.disconnect();
   }, []);
 
   useLayoutEffect(() => {
