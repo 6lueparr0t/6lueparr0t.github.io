@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import modalStore from "@/store/modal";
 
@@ -70,21 +70,29 @@ function MontyHall() {
     };
   }, []);
 
+  const prevRewardCountRef = useRef(0);
+
   useEffect(() => {
-    if (rewardCount >= 1) {
+    // rewardCount가 증가했을 때만 confetti 발생
+    if (rewardCount > prevRewardCountRef.current) {
       setParty(true);
       setTimeout(() => {
         setParty(false);
       }, 2000);
     }
+    prevRewardCountRef.current = rewardCount;
   }, [rewardCount]);
+
+  useEffect(() => {
+    console.log(party);
+  }, [party]);
 
   return (
     <div id="graduate-school" className="mx-auto text-center bg-stone-100 dark:bg-zinc-900">
       <div className="text-xl md:text-2xl top-[0.4rem] md:top-[0.2rem] inline-block sticky justify-center py-4">
         graduate school
       </div>
-      <>{party && <CoinConfetti />}</>
+      <CoinConfetti active={party} />
       <Alert variant={"default"}>
         <AlertTitle className="text-xl">
           몬티 홀 문제&nbsp;
