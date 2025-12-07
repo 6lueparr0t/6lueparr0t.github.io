@@ -21,6 +21,33 @@ const BlogPost = () => {
   const [post, setPost] = useState<MarkdownModule | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [theme, setTheme] = useState<string>("preferred_color_scheme");
+
+  useLayoutEffect(() => {
+    // 초기 테마 설정
+    const updateTheme = () => {
+      const isDark = document.documentElement.classList.contains("dark");
+      setTheme(isDark ? "dark" : "light");
+    };
+
+    updateTheme();
+
+    // class 변경 감지 (다크 모드 토글 시)
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.type === "attributes" && mutation.attributeName === "class") {
+          updateTheme();
+        }
+      });
+    });
+
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   useLayoutEffect(() => {
     const fetchPost = async () => {
@@ -88,7 +115,7 @@ const BlogPost = () => {
             reactionsEnabled="1"
             emitMetadata="0"
             inputPosition="bottom"
-            theme="preferred_color_scheme"
+            theme={theme}
             lang="ko"
             loading="lazy"
           />

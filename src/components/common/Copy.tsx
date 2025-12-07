@@ -9,10 +9,11 @@ interface CopyProps extends PropsWithChildren {
   id?: string;
   title?: string;
   icon?: string | React.ReactElement;
+  iconOnly?: boolean;
   children: string;
 }
 
-const Copy: React.FC<CopyProps> = ({ id, title, icon, children }) => {
+const Copy: React.FC<CopyProps> = ({ id, title, icon, iconOnly, children }) => {
   const [loaded, setLoaded] = useState(false);
   const copyToClipboard = (/*event: React.MouseEvent<HTMLDivElement>*/) => {
     navigator.clipboard
@@ -48,7 +49,7 @@ const Copy: React.FC<CopyProps> = ({ id, title, icon, children }) => {
   return loaded ? (
     <span className="flex flex-row items-center gap-2 cursor-pointer" onClick={copyToClipboard}>
       <SnackbarProvider maxSnack={10} autoHideDuration={3000} disableWindowBlurListener={true} />
-      {title || title === "" ? title : children}
+      {!iconOnly && (title || title === "" ? title : children)}
       {icon ? icon : <ClipboardIcon className="w-[24px] h-[24px]" />}
     </span>
   ) : (

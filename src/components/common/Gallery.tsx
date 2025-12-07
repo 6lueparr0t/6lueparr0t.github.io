@@ -85,7 +85,7 @@ export const Gallery: React.FC = () => {
         <CarouselContent>
           {IMAGES.map((image) => (
             <CarouselItem key={image} className="flex items-center justify-center">
-              <img className="flex items-center" src={image} alt={`Placeholder Image ${image}`} />
+              <img className="flex items-center" src={image} alt={`Placeholder Image ${image}`} draggable={false} />
             </CarouselItem>
           ))}
         </CarouselContent>
