@@ -146,6 +146,12 @@
     scrollbar-width: none;
     /* Firefox */
   }
+
+  /* tsparticles canvas가 클릭 이벤트를 가로채지 않도록 */
+  #tsparticles,
+  #tsparticles canvas {
+    pointer-events: none !important;
+  }
 }
 
 @config "../../tailwind.config.js";

@@ -11,9 +11,10 @@ import Particles, { initParticlesEngine } from "@tsparticles/react";
 
 interface ConfettiProps {
   active?: boolean;
+  position?: { x: number; y: number };
 }
 
-const Confetti = ({ active = false }: ConfettiProps) => {
+const Confetti = ({ active = false, position }: ConfettiProps) => {
   const [init, setInit] = useState(false);
 
   // this should be run only once per application lifetime
@@ -41,6 +42,13 @@ const Confetti = ({ active = false }: ConfettiProps) => {
       fullScreen: {
         zIndex: 1,
       },
+      interactivity: {
+        detectsOn: "window",
+        events: {
+          onClick: { enable: false },
+          onHover: { enable: false },
+        },
+      },
       particles: {
         number: {
           value: 0,
@@ -59,7 +67,7 @@ const Confetti = ({ active = false }: ConfettiProps) => {
           },
           animation: {
             enable: true,
-            speed: 5,
+            speed: 1,
             startValue: "max",
             destroy: "min",
           },
@@ -145,30 +153,41 @@ const Confetti = ({ active = false }: ConfettiProps) => {
           },
         },
       },
-      emitters: {
-        life: {
-          count: 1,
-          duration: 0.1,
-          delay: 0.5,
-        },
-        rate: {
-          delay: 0.01,
-          quantity: 50,
-        },
-        size: {
-          width: 0,
-          height: 0,
-        },
-      },
+      emitters: active
+        ? {
+            life: {
+              count: 1,
+              duration: 0.2,
+              delay: 0,
+            },
+            rate: {
+              delay: 0,
+              quantity: 20,
+            },
+            size: {
+              width: 0,
+              height: 0,
+            },
+            position: position ?? { x: 50, y: 50 },
+          }
+        : [],
     }),
-    []
+    [active, position]
   );
 
-  if (!init || !active) {
+  if (!init) {
     return null;
   }
 
-  return <Particles id="tsparticles" particlesLoaded={particlesLoaded} options={options} />;
+  return (
+    <Particles
+      key={active ? `active-${position?.x}-${position?.y}` : "inactive"}
+      id="tsparticles"
+      particlesLoaded={particlesLoaded}
+      options={options}
+      style={{ pointerEvents: "none" }}
+    />
+  );
 };
 
 export default Confetti;

@@ -1,4 +1,4 @@
-import React, { type PropsWithChildren, useCallback, useEffect, useState } from "react";
+import React, { type PropsWithChildren, useCallback, useEffect, useRef, useState } from "react";
 
 interface Gift {
   id: number;
@@ -18,6 +18,7 @@ interface DoorProps extends PropsWithChildren {
   setRewarddCount: React.Dispatch<React.SetStateAction<number>>;
   doorOpenCheck: string[];
   setDoorOpenCheck: React.Dispatch<React.SetStateAction<string[]>>;
+  onWinPosition?: (position: { x: number; y: number }) => void;
 }
 
 const Door: React.FC<DoorProps> = ({
@@ -30,9 +31,12 @@ const Door: React.FC<DoorProps> = ({
   setRewarddCount,
   doorOpenCheck,
   setDoorOpenCheck,
+  onWinPosition,
   children,
 }) => {
   const [open, setOpen] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const doorRef = useRef<HTMLDivElement>(null);
 
   const updateOpenDoor = useCallback(
     (status: string) => {
@@ -67,6 +71,13 @@ const Door: React.FC<DoorProps> = ({
     }
 
     if (count === 1 && gift.status === "win") {
+      // win 문의 위치를 계산하여 전달
+      if (doorRef.current && onWinPosition) {
+        const rect = doorRef.current.getBoundingClientRect();
+        const x = ((rect.left + rect.width / 2) / window.innerWidth) * 100;
+        const y = ((rect.top + rect.height / 2) / window.innerHeight) * 100;
+        onWinPosition({ x, y });
+      }
       setRewarddCount((prev) => prev + 1);
     }
 
@@ -91,9 +102,28 @@ const Door: React.FC<DoorProps> = ({
     setOpen(gift.open);
   }, [gift.open]);
 
+  // Intersection Observer로 Door가 화면에 보이는지 감지
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      { threshold: 0 } // 조금이라도 보이면 true
+    );
+
+    if (doorRef.current) {
+      observer.observe(doorRef.current);
+    }
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
   useEffect(() => {
     const handleKeyDown = (event: { key: string }) => {
-      if (id === parseInt(event.key) - 1) {
+      // Door가 화면에 보일 때만 키보드 이벤트 처리
+      if (isVisible && id === parseInt(event.key) - 1) {
         openHandler();
       }
     };
@@ -103,10 +133,10 @@ const Door: React.FC<DoorProps> = ({
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [id, openHandler, setGifts]);
+  }, [id, openHandler, setGifts, isVisible]);
 
   return (
-    <div className="door">
+    <div className="door" ref={doorRef}>
       <div
         className={`door-front text-xl md:text-4xl lg:text-7xl ${gift.open ? "open" : "close"}`}
         onClick={openHandler}
