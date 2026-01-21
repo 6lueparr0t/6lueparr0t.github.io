@@ -152,6 +152,11 @@
   #tsparticles canvas {
     pointer-events: none !important;
   }
+
+  /* ReactTyped 커서 fadeIn/fadeOut 효과 제거 */
+  .typed-cursor {
+    animation-timing-function: step-end !important;
+  }
 }
 
 @config "../../tailwind.config.js";

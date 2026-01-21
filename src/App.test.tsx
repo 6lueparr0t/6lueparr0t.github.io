@@ -41,7 +41,7 @@ test("renders the heading correctly", async () => {
     "heading",
     {
       name: /One for a line, a line for all./i,
-      level: 2,
+      level: 1,
     },
     { timeout: 5000 } // lazy loading을 위해 timeout 증가
   );
