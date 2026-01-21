@@ -13,6 +13,9 @@ function MontyHall() {
 
   const [count, setCount] = useState(0);
   const [party, setParty] = useState(false);
+  const [confettiPosition, setConfettiPosition] = useState<{ x: number; y: number } | undefined>(
+    undefined
+  );
   const [rewardCount, setRewarddCount] = useState(0);
   const [reloadCount, setReloadCount] = useState(0);
   const [doorOpenCheck, setDoorOpenCheck] = useState<string[]>([]);
@@ -92,7 +95,7 @@ function MontyHall() {
       <div className="text-xl md:text-2xl top-[0.4rem] md:top-[0.2rem] inline-block sticky justify-center py-4">
         graduate school
       </div>
-      <CoinConfetti active={party} />
+      <CoinConfetti active={party} position={confettiPosition} />
       <Alert variant={"default"}>
         <AlertTitle className="text-xl">
           몬티 홀 문제&nbsp;
@@ -127,6 +130,7 @@ function MontyHall() {
                 setRewarddCount={setRewarddCount}
                 doorOpenCheck={doorOpenCheck}
                 setDoorOpenCheck={setDoorOpenCheck}
+                onWinPosition={setConfettiPosition}
               >
                 {gift.reward}
               </Door>
