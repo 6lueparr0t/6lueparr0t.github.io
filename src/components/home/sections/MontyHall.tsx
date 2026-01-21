@@ -30,12 +30,19 @@ function MontyHall() {
     setDoorOpenCheck([]);
     setCount(0);
     setReloadCount((prev) => prev + 1);
+
+    // rerollHandler 내부 수정 제안
     setGifts((prev) => {
       let newGifts;
       do {
-        newGifts = [...prev]
-          .sort(() => Math.random() - 0.5)
-          .map((gift) => ({ ...gift, open: false }));
+        newGifts = [...prev];
+        // Fisher-Yates Shuffle 알고리즘
+        for (let i = newGifts.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [newGifts[i], newGifts[j]] = [newGifts[j], newGifts[i]];
+        }
+        // 문 닫힌 상태로 초기화
+        newGifts = newGifts.map((gift) => ({ ...gift, open: false }));
       } while (
         JSON.stringify(newGifts.map((item) => item.reward)) ===
         JSON.stringify(prev.map((item) => item.reward))
@@ -86,10 +93,6 @@ function MontyHall() {
     prevRewardCountRef.current = rewardCount;
   }, [rewardCount]);
 
-  useEffect(() => {
-    console.log(party);
-  }, [party]);
-
   return (
     <div id="graduate-school" className="mx-auto text-center bg-stone-100 dark:bg-zinc-900">
       <div className="text-xl md:text-2xl top-[0.4rem] md:top-[0.2rem] inline-block sticky justify-center py-4">
@@ -119,7 +122,7 @@ function MontyHall() {
           <div className="flex flex-row m-auto gap-10 md:gap-20 lg:gap-44 ">
             {gifts.map((gift, i) => (
               <Door
-                key={gift.id}
+                key={i}
                 id={i}
                 status={gift.status}
                 gift={gift}

@@ -12,7 +12,7 @@ const Chip: React.FC<ChipProps> = ({ title = <></>, content = <></> }) => {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button className="px-2 h-6 mx-2">{title}</Button>
+        <Button className="px-2 h-6">{title}</Button>
       </PopoverTrigger>
       <PopoverContent>{content}</PopoverContent>
     </Popover>

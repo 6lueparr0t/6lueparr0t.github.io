@@ -26,8 +26,7 @@ function About() {
         <Gallery />
         <div className="font-noto mb-16 w-3/4 sm:w-1/2 text-left break-keep">
           <p>안녕하세요.</p>
-          <div className="flex mb-8">
-            저는
+          <p className="mb-8">
             <Chip
               title={
                 <AnimatedNumbers
@@ -41,10 +40,10 @@ function About() {
               }
               content={<span>2017.10.30 ~ </span>}
             />
-            년차 웹 개발자
+            년차 개발자, &nbsp;
             <Chip title={<>임대현</>} content={<p>Daehyun Lim</p>} />
             입니다.
-          </div>
+          </p>
 
           <p>
             PHP 웹 개발을 시작으로 BE(Java, Node.js), DevOps(Jenkins, Kubernetes), FE(Javascript,

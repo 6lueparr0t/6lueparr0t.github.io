@@ -19,12 +19,31 @@ const IntroTitle = ({
   const [isEditing, setIsEditing] = useState(false);
   const [editingText, setEditingText] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
+  const lastTapRef = useRef<number>(0);
 
-  // 더블클릭으로 편집 모드 진입
-  const handleDoubleClick = useCallback(() => {
+  // 편집 모드 진입
+  const enterEditMode = useCallback(() => {
     setEditingText(text);
     setIsEditing(true);
   }, [text]);
+
+  // 더블클릭으로 편집 모드 진입 (데스크톱)
+  const handleDoubleClick = useCallback(() => {
+    enterEditMode();
+  }, [enterEditMode]);
+
+  // 더블 탭으로 편집 모드 진입 (모바일)
+  const handleTouchEnd = useCallback(() => {
+    const now = Date.now();
+    const DOUBLE_TAP_DELAY = 300;
+
+    if (now - lastTapRef.current < DOUBLE_TAP_DELAY) {
+      enterEditMode();
+      lastTapRef.current = 0;
+    } else {
+      lastTapRef.current = now;
+    }
+  }, [enterEditMode]);
 
   // 편집 완료
   const handleSave = useCallback(() => {
@@ -80,7 +99,19 @@ const IntroTitle = ({
   }
 
   return (
-    <h1 className={`${className} cursor-text`} title={tooltip} onDoubleClick={handleDoubleClick}>
+    <h1
+      className={`${className} cursor-text outline-none focus:ring-2 focus:ring-current focus:ring-opacity-50 rounded`}
+      title={tooltip}
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.key === "Backspace" || e.key === "Enter") {
+          e.preventDefault();
+          enterEditMode();
+        }
+      }}
+      onDoubleClick={handleDoubleClick}
+      onTouchEnd={handleTouchEnd}
+    >
       <ReactTyped strings={[text]} startDelay={500} typeSpeed={50} showCursor cursorChar="|" />
     </h1>
   );

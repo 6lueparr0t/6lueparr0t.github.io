@@ -141,7 +141,7 @@ const Door: React.FC<DoorProps> = ({
         className={`door-front text-xl md:text-4xl lg:text-7xl ${gift.open ? "open" : "close"}`}
         onClick={openHandler}
       >
-        <div className="content">{id + 1}</div>
+        <div className="content text-white">{id + 1}</div>
         <div className="knob"></div>
       </div>
       <div
