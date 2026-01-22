@@ -9,7 +9,8 @@ import { Button } from "@/components/ui/button";
 import Door from "../elements/Door";
 
 function MontyHall() {
-  const { pushModals } = modalStore();
+  // pushModals만 선택적으로 구독 (modals 변경 시 리렌더링 방지)
+  const pushModals = modalStore((state) => state.pushModals);
 
   const [count, setCount] = useState(0);
   const [party, setParty] = useState(false);
@@ -174,9 +175,13 @@ function MontyHall() {
           </div>
           <p>이후 가상화폐 거래소를 다녔던 배경 지식을 기반으로 &nbsp;</p>
           <p>
-            <span
-              className="text-blue-600 dark:text-blue-400 cursor-pointer"
-              onClick={() => {
+            <button
+              type="button"
+              className="text-blue-600 dark:text-blue-400 cursor-pointer bg-transparent border-none p-0 font-inherit text-left"
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                (e.target as HTMLElement).blur();
                 pushModals({
                   message: (
                     <>
@@ -197,7 +202,7 @@ function MontyHall() {
               }}
             >
               클라우드 컴퓨팅 기반의 CBDC 구축 및 최적화 연구 프로젝트
-            </span>
+            </button>
             에 참여하기도 했습니다.
           </p>
         </div>
