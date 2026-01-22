@@ -1,5 +1,9 @@
 import { useState } from "react";
 
+import Copy from "@/components/common/Copy";
+
+const MAIL = "6lueparr0t@gmail.com";
+
 // 항상 마지막 페이지로
 function Contact() {
   const [isWobbling, setIsWobbling] = useState(true);
@@ -17,7 +21,7 @@ function Contact() {
       <div className="flex flex-col justify-center items-center mx-8">
         <div className="mb-16 text-center break-keep">
           <div
-            className="relative translate-y-28 sm:translate-y-36 opacity-80 cursor-pointer"
+            className="relative w-96 translate-y-28 sm:translate-y-36 opacity-80 cursor-pointer"
             onClick={handleClick}
           >
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
@@ -36,10 +40,14 @@ function Contact() {
           >
             🏄‍♂️
           </div>
-          <div className="relative text-xl">
-            <p className="my-2">제 역량과 잠재력을 마음껏 펼칠 수 있는 곳을 찾고 있습니다.</p>
-            <p className="my-2">메일로 연락 부탁드립니다.</p>
-            감사합니다.<p className="font-['Tossface'] text-4xl">🙇‍♂️</p>
+          <div className="relative">
+            <div className="flex justify-center items-end">
+              <div className="cursor-pointer px-2" title={MAIL}>
+                <Copy id="email" title="Email Address">
+                  {MAIL}
+                </Copy>
+              </div>
+            </div>
           </div>
         </div>
       </div>

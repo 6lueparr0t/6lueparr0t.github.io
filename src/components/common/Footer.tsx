@@ -3,9 +3,6 @@ import React, { useEffect, useState } from "react";
 import { ArrowLongUpIcon } from "@heroicons/react/24/outline";
 import { formatInTimeZone } from "date-fns-tz";
 
-import Copy from "@/components/common/Copy";
-
-const MAIL = "6lueparr0t@gmail.com";
 const TIME_ZONE = "Asia/Seoul";
 const FORMAT_STRING = "yyyy-MM-dd EEE HH:mm:ss";
 
@@ -60,13 +57,6 @@ const Footer: React.FC = () => {
             <a href="https://6lueparr0t.tistory.com" target="_blank" rel="noopener noreferrer">
               Tistory
             </a>
-          </div>
-          <div className="flex justify-center items-end">
-            <div className="underline cursor-pointer px-2" title={MAIL}>
-              <Copy id="email" title="email">
-                {MAIL}
-              </Copy>
-            </div>
           </div>
         </div>
       </div>

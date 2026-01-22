@@ -41,9 +41,13 @@ const Modal: React.FC<ModalProps> = ({ modal }) => {
   }, [modal.type]);
 
   const closeModal = () => {
+    const scrollY = window.scrollY;
     popModals();
     setTimeout(() => {
-      if (modal?.prevRef?.current) modal?.prevRef?.current?.focus();
+      if (modal?.prevRef?.current) {
+        modal.prevRef.current.focus({ preventScroll: true });
+      }
+      window.scrollTo(0, scrollY);
     }, 10);
   };
 

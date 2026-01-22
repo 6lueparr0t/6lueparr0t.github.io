@@ -158,7 +158,7 @@ function MontyHall() {
           <div className="border-t border-slate-500 my-8" />
           <div className="mb-8">
             대학원 시절을 떠올리면 몬티 홀 문제가 가장 먼저 떠오릅니다.
-            <br />그 밖에도 정지 문제, 인공지능 윤리학, Skip List 등등..
+            <br />그 밖에도 인공지능과 윤리학, 추천시스템 등등 다양한 과목들을 공부했습니다.
           </div>
 
           <div className="mb-8">
