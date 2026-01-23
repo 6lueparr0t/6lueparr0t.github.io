@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+
 import { Form, useLocation, useNavigate } from "react-router";
 
 import { SpaceProps } from "@/components/components.d";
@@ -77,7 +78,7 @@ export const SearchInput: React.FC<SpaceProps> = ({ query }) => {
             name="keyword"
             ref={inputRef}
             onChange={changeEventHandler}
-            placeholder="단어로만 검색 가능"
+            placeholder="단어를 입력하세요."
           />
           <Button className="w-20 text-xs md:text-sm" type="submit" onClick={keywordEventHandler}>
             {isSearching ? (
