@@ -112,7 +112,13 @@ const IntroTitle = ({
       onDoubleClick={handleDoubleClick}
       onTouchEnd={handleTouchEnd}
     >
-      <ReactTyped strings={[text]} startDelay={500} typeSpeed={50} showCursor cursorChar="|" />
+      <ReactTyped
+        strings={[text]}
+        startDelay={500}
+        typeSpeed={50}
+        cursorChar="|"
+        showCursor={false}
+      />
     </h1>
   );
 };
