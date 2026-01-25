@@ -282,3 +282,18 @@
     }
   }
 }
+
+/* 모바일 가상 요소 숨김 - nesting 내부 미디어쿼리 fallback */
+@media screen and (max-width: 768px) {
+  .gameboy::before,
+  .gameboy::after {
+    content: none !important;
+    display: none !important;
+  }
+
+  .gameboy .gameboy-screen-cont .gameboy-screen .header::before,
+  .gameboy .gameboy-screen-cont .gameboy-screen .header::after {
+    content: none !important;
+    display: none !important;
+  }
+}

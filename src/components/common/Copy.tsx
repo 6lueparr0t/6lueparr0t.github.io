@@ -19,7 +19,7 @@ const Copy: React.FC<CopyProps> = ({ id, title, icon, iconOnly, children }) => {
     navigator.clipboard
       .writeText(children)
       .then(() => {
-        enqueueSnackbar("클립보드에 복사되었습니다!", {
+        enqueueSnackbar("Copied to clipboard", {
           autoHideDuration: 2000,
           variant: "success",
         });

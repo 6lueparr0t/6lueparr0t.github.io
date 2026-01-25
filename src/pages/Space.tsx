@@ -1,8 +1,7 @@
 import React, { Suspense, useEffect, useLayoutEffect, useState } from "react";
 
-import { Await, useRouteLoaderData } from "react-router";
 import type { LoaderFunction } from "react-router";
-import { NavLink } from "react-router";
+import { Await, NavLink, useRouteLoaderData } from "react-router";
 
 import { PER_PAGE } from "@/lib/constants";
 import { getList } from "@/lib/space";
@@ -39,7 +38,9 @@ const SpacePage: React.FC = () => {
 
     setPage(defaultPage);
     setList(defaultList);
-  }, [query.in, query.keyword, defaultPage, defaultList]);
+    setNext(defaultNext);
+    setPrev(defaultPrev);
+  }, [query.in, query.keyword, defaultPage, defaultList, defaultNext, defaultPrev]);
 
   return (
     <div className="p-8 min-h-[calc(100vh-4.2rem)] flex flex-col justify-between">
