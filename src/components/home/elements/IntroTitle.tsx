@@ -5,14 +5,12 @@ import { ReactTyped } from "react-typed";
 interface IntroTitleProps {
   initialText?: string;
   className?: string;
-  tooltip?: string;
   onTextChange?: (text: string) => void;
 }
 
 const IntroTitle = ({
   initialText = "One for a line, a line for all.",
   className = "text-4xl break-keep m-16 text-gradient",
-  tooltip = "더블클릭하여 수정",
   onTextChange,
 }: IntroTitleProps) => {
   const [text, setText] = useState(initialText);
@@ -28,7 +26,7 @@ const IntroTitle = ({
   }, [text]);
 
   // 더블클릭으로 편집 모드 진입 (데스크톱)
-  const handleDoubleClick = useCallback(() => {
+  const handleClick = useCallback(() => {
     enterEditMode();
   }, [enterEditMode]);
 
@@ -89,10 +87,8 @@ const IntroTitle = ({
         type="text"
         value={editingText}
         onChange={(e) => setEditingText(e.target.value)}
-        onBlur={handleSave}
         onKeyDown={handleKeyDown}
-        placeholder="텍스트를 입력하세요"
-        className={`${className} bg-transparent border-b-2 border-current outline-none text-center w-full`}
+        className={`${className} bg-transparent outline-none text-center w-full`}
         style={{ caretColor: "currentColor" }}
       />
     );
@@ -101,7 +97,6 @@ const IntroTitle = ({
   return (
     <h1
       className={`${className} cursor-text outline-none focus:ring-2 focus:ring-current focus:ring-opacity-50 rounded`}
-      title={tooltip}
       tabIndex={0}
       onKeyDown={(e) => {
         if (e.key === "Backspace" || e.key === "Enter") {
@@ -109,7 +104,7 @@ const IntroTitle = ({
           enterEditMode();
         }
       }}
-      onDoubleClick={handleDoubleClick}
+      onClick={handleClick}
       onTouchEnd={handleTouchEnd}
     >
       <ReactTyped
