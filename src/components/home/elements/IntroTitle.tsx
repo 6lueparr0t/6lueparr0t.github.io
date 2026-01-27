@@ -4,12 +4,14 @@ import { ReactTyped } from "react-typed";
 
 interface IntroTitleProps {
   initialText?: string;
+  tooltip?: string;
   className?: string;
   onTextChange?: (text: string) => void;
 }
 
 const IntroTitle = ({
   initialText = "One for a line, a line for all.",
+  tooltip = "한 줄의 코딩, 모두를 위해서.",
   className = "text-4xl break-keep m-16 text-gradient",
   onTextChange,
 }: IntroTitleProps) => {
@@ -104,6 +106,7 @@ const IntroTitle = ({
           enterEditMode();
         }
       }}
+      title={tooltip}
       onClick={handleClick}
       onTouchEnd={handleTouchEnd}
     >
