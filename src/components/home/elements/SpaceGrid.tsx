@@ -28,6 +28,8 @@ interface Star {
 interface SpaceGridProps {
   className?: string;
   config?: SpaceGridConfig;
+  onTitleVisibilityChange?: (visible: boolean) => void;
+  onLogoVisibilityChange?: (visible: boolean) => void;
 }
 
 const DEFAULT_CONFIG: SpaceGridConfig = {
@@ -40,7 +42,12 @@ const DEFAULT_CONFIG: SpaceGridConfig = {
   starSpeed: 0.1, // 기본값: 아주 느린 속도
 };
 
-const SpaceGrid = ({ className = "", config = {} }: SpaceGridProps) => {
+const SpaceGrid = ({
+  className = "",
+  config = {},
+  onTitleVisibilityChange,
+  onLogoVisibilityChange,
+}: SpaceGridProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationRef = useRef<number>(0);
   const offsetRef = useRef(0);
@@ -49,7 +56,10 @@ const SpaceGrid = ({ className = "", config = {} }: SpaceGridProps) => {
 
   const [isDarkMode, setIsDarkMode] = useState(document.documentElement.classList.contains("dark"));
   const [isPaused, setIsPaused] = useState(false);
+  const [showControls, setShowControls] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
+  const [showTitle, setShowTitle] = useState(true);
+  const [showLogo, setShowLogo] = useState(true);
 
   // 현재 적용된 설정 (실시간 미리보기용)
   const [currentConfig, setCurrentConfig] = useState<SpaceGridConfig>({
@@ -121,6 +131,34 @@ const SpaceGrid = ({ className = "", config = {} }: SpaceGridProps) => {
     setCurrentConfig({ ...DEFAULT_CONFIG });
     starsRef.current = [];
   }, []);
+
+  // SpaceGrid 클릭 시 컨트롤 토글
+  const handleCanvasClick = useCallback(() => {
+    setShowControls((prev) => {
+      if (prev) {
+        setShowSettings(false); // 컨트롤 숨길 때 설정 패널도 닫기
+      }
+      return !prev;
+    });
+  }, []);
+
+  // 타이틀 표시/숨기기 토글
+  const toggleTitle = useCallback(
+    (visible: boolean) => {
+      setShowTitle(visible);
+      onTitleVisibilityChange?.(visible);
+    },
+    [onTitleVisibilityChange]
+  );
+
+  // 로고 표시/숨기기 토글
+  const toggleLogo = useCallback(
+    (visible: boolean) => {
+      setShowLogo(visible);
+      onLogoVisibilityChange?.(visible);
+    },
+    [onLogoVisibilityChange]
+  );
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -369,11 +407,17 @@ const SpaceGrid = ({ className = "", config = {} }: SpaceGridProps) => {
       <canvas
         ref={canvasRef}
         className={`absolute inset-0 w-full h-full ${className}`}
-        style={{ pointerEvents: "none" }}
+        onClick={handleCanvasClick}
       />
 
       {/* 컨트롤 버튼 (오른쪽 상단) */}
-      <div className="absolute top-4 right-4 flex gap-2 z-20">
+      <div
+        className={`absolute top-4 right-4 flex gap-2 z-20 transition-all duration-300 ${
+          showControls
+            ? "opacity-100 translate-y-0 pointer-events-auto"
+            : "opacity-0 -translate-y-2 pointer-events-none"
+        }`}
+      >
         <button
           onClick={togglePause}
           className="p-2 rounded-full bg-black/20 dark:bg-white/20 opacity-30 hover:opacity-100 transition-opacity duration-300"
@@ -400,7 +444,7 @@ const SpaceGrid = ({ className = "", config = {} }: SpaceGridProps) => {
       {/* 설정 패널 (사이드 팝업) */}
       <div
         className={`absolute top-16 right-4 z-20 w-72 transition-all duration-300 ${
-          showSettings
+          showSettings && showControls
             ? "opacity-100 translate-x-0 pointer-events-auto"
             : "opacity-0 translate-x-4 pointer-events-none"
         }`}
@@ -520,6 +564,37 @@ const SpaceGrid = ({ className = "", config = {} }: SpaceGridProps) => {
                 max={300}
                 step={10}
                 onValueChange={([v]) => updateConfig("fov", v)}
+              />
+            </div>
+
+            {/* 구분선 */}
+            <div className="border-t border-gray-200 dark:border-zinc-700" />
+
+            {/* 타이틀 표시 */}
+            <div className="flex items-center justify-between">
+              <Label htmlFor="showTitle" className="text-xs cursor-pointer">
+                타이틀 표시
+              </Label>
+              <input
+                id="showTitle"
+                type="checkbox"
+                checked={showTitle}
+                onChange={(e) => toggleTitle(e.target.checked)}
+                className="w-4 h-4 rounded accent-pink-500 dark:accent-pink-400 cursor-pointer"
+              />
+            </div>
+
+            {/* 로고 표시 */}
+            <div className="flex items-center justify-between">
+              <Label htmlFor="showLogo" className="text-xs cursor-pointer">
+                로고 표시
+              </Label>
+              <input
+                id="showLogo"
+                type="checkbox"
+                checked={showLogo}
+                onChange={(e) => toggleLogo(e.target.checked)}
+                className="w-4 h-4 rounded accent-pink-500 dark:accent-pink-400 cursor-pointer"
               />
             </div>
           </div>

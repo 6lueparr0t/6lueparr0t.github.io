@@ -24,6 +24,9 @@ function Intro() {
     }
   }, [clipPath]);
 
+  const [titleVisible, setTitleVisible] = useState(true);
+  const [logoVisible, setLogoVisible] = useState(true);
+
   const [bird1loaded, setBird1Loaded] = useState(false);
   const [bird2loaded, setBird2Loaded] = useState(false);
 
@@ -43,34 +46,48 @@ function Intro() {
       className="relative mx-auto p-4 text-center max-w-[calc(100%)] h-[calc(100lvh-4.4rem)] flex flex-col justify-center overflow-hidden"
     >
       {/* Space Grid 배경 */}
-      <SpaceGrid className="z-0" />
+      <SpaceGrid
+        className="z-0"
+        onTitleVisibilityChange={setTitleVisible}
+        onLogoVisibilityChange={setLogoVisible}
+      />
 
       {/* 콘텐츠 레이어 */}
-      <div className="relative z-10 flex flex-col items-center justify-center">
+      <div className="relative z-20 flex flex-col items-center justify-center pointer-events-none">
         {/* 이미지 + 타이틀 컨테이너 */}
         <div className="relative w-64 min-h-64 mx-auto my-8">
           {/* IntroTitle - absolute로 이미지 위에 배치, 레이아웃에 영향 없음 */}
-          <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-[calc(100vw-2rem)] max-w-lg">
+          <div
+            className={`absolute -top-24 left-1/2 -translate-x-1/2 w-[calc(100vw-2rem)] max-w-lg transition-opacity duration-300 ${
+              titleVisible ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+            }`}
+          >
             <IntroTitle
               initialText="One for a line, a line for all."
               tooltip="한 줄의 코딩, 모두를 위해서."
               className="text-4xl break-keep text-black dark:text-white text-center"
             />
           </div>
-          <img
-            className={`absolute w-64 h-64 duration-100 ${bird1loaded ? "filter-none" : "blur-xl"}`}
-            src={bird2}
-            alt="logo"
-          />
-          <img
-            className={`absolute w-64 h-64 duration-100 ${bird2loaded ? "filter-none" : "blur-xl"}`}
-            src={bird1}
-            alt="logo"
-            ref={bird2Ref}
-          />
+          <div
+            className={`transition-opacity duration-300 ${logoVisible ? "opacity-100" : "opacity-0"}`}
+          >
+            <img
+              className={`absolute w-64 h-64 duration-100 ${bird1loaded ? "filter-none" : "blur-xl"}`}
+              src={bird2}
+              alt="logo"
+            />
+            <img
+              className={`absolute w-64 h-64 duration-100 ${bird2loaded ? "filter-none" : "blur-xl"}`}
+              src={bird1}
+              alt="logo"
+              ref={bird2Ref}
+            />
+          </div>
         </div>
 
-        <div className="w-64 mx-auto">
+        <div
+          className={`w-64 mx-auto pointer-events-auto ${logoVisible ? "opacity-100" : "opacity-0"}`}
+        >
           <Slider
             className="w-full opacity-50"
             value={value}
