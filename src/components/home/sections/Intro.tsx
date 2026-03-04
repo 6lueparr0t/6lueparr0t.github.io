@@ -47,7 +47,7 @@ function Intro() {
     >
       {/* Space Grid 배경 */}
       <SpaceGrid
-        className="z-0"
+        className=""
         onTitleVisibilityChange={setTitleVisible}
         onLogoVisibilityChange={setLogoVisible}
       />

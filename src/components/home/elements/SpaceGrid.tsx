@@ -412,7 +412,7 @@ const SpaceGrid = ({
 
       {/* 컨트롤 버튼 (오른쪽 상단) */}
       <div
-        className={`absolute top-4 right-4 flex gap-2 z-20 transition-all duration-300 ${
+        className={`absolute top-4 right-4 flex gap-2 z-50 transition-all duration-300 ${
           showControls
             ? "opacity-100 translate-y-0 pointer-events-auto"
             : "opacity-0 -translate-y-2 pointer-events-none"
@@ -443,7 +443,7 @@ const SpaceGrid = ({
 
       {/* 설정 패널 (사이드 팝업) */}
       <div
-        className={`absolute top-16 right-4 z-20 w-72 transition-all duration-300 ${
+        className={`absolute top-16 right-4 z-50 w-72 transition-all duration-300 ${
           showSettings && showControls
             ? "opacity-100 translate-x-0 pointer-events-auto"
             : "opacity-0 translate-x-4 pointer-events-none"
