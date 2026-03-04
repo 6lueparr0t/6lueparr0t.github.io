@@ -95,12 +95,15 @@ function MontyHall() {
   }, [rewardCount]);
 
   return (
-    <div id="graduate-school" className="mx-auto text-center bg-stone-100 dark:bg-zinc-900">
-      <div className="text-xl md:text-2xl top-[0.4rem] md:top-[0.2rem] inline-block sticky justify-center py-4">
+    <div
+      id="graduate-school"
+      className="mx-auto w-full text-center bg-stone-100 dark:bg-zinc-900 min-h-screen flex flex-col items-center"
+    >
+      <div className="text-xl md:text-2xl sticky top-0 inline-block justify-center py-4 z-10">
         graduate school
       </div>
       <CoinConfetti active={party} position={confettiPosition} />
-      <Alert variant={"default"}>
+      <Alert variant={"default"} className="w-fit max-w-[calc(100vw-2rem)] mx-auto">
         <AlertTitle className="text-xl">
           몬티 홀 문제&nbsp;
           <a
@@ -112,13 +115,13 @@ function MontyHall() {
             #
           </a>
         </AlertTitle>
-        <AlertDescription className="mt-4 leading-relaxed font-noto text-base justify-center">
+        <AlertDescription className="mt-4 leading-relaxed font-noto text-base text-justify p-4">
           1. 문제를 풀기 전에 먼저 문을 선택합니다. <br />
           2. 문을 선택한 후, 진행자는 다른 문 중 하나를 열어서 상품이 없다는 것을 보여줍니다. <br />
           3. 선택을 바꾸는 것이 유리할까요?
         </AlertDescription>
       </Alert>
-      <div className="p-16">
+      <div className="p-16 flex flex-col items-center w-full">
         <div className="flex flex-col justify-center overflow-x-auto">
           <div className="flex flex-row m-auto gap-10 md:gap-20 lg:gap-44 ">
             {gifts.map((gift, i) => (
