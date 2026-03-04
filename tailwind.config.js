@@ -89,6 +89,7 @@ module.exports = {
       },
       fontFamily: {
         noto: ["Noto Sans KR", "sans-serif"],
+        dunggeunmo: ["DungGeunMo", "sans-serif"],
       },
       boxShadow: {
         "white-2xl": "0 25px 50px -12px rgb(255 255 255 / 0.25);"

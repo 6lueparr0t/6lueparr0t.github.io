@@ -12,7 +12,7 @@ interface IntroTitleProps {
 const IntroTitle = ({
   initialText = "One for a line, a line for all.",
   tooltip = "한 줄의 코딩, 모두를 위해서.",
-  className = "text-4xl break-keep m-16 text-gradient",
+  className = "text-2xl md:text-4xl break-keep m-16 text-gradient",
   onTextChange,
 }: IntroTitleProps) => {
   const [text, setText] = useState(initialText);
