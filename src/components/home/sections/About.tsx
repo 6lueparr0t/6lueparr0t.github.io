@@ -6,6 +6,8 @@ import { diffInYears } from "@/lib/date";
 
 import Chip from "@/components/common/Chip";
 import { Gallery } from "@/components/common/Gallery";
+import certifications from "@/components/home/data/Certifications.json";
+import CertificationCard from "@/components/home/elements/CertificationCard";
 
 const startDate = new Date("2017-10-30");
 const currentDate = new Date();
@@ -55,6 +57,39 @@ function About() {
             연구실, 호스팅 서비스, 가상화폐 거래소, 동영상 숏폼 서비스 등의 도메인에서 업무를
             해왔고, 현재는 React.js 를 활용한 프론트엔드 개발에 주력하고 있습니다.
           </p>
+        </div>
+        {/* Certifications (About 하단) */}
+        <style>{`
+          @keyframes scroll {
+            0% {
+              transform: translateX(0);
+            }
+            100% {
+              transform: translateX(calc(-236px * ${certifications.length}));
+            }
+          }
+          .animate-scroll {
+            animation: scroll 15s linear infinite;
+          }
+        `}</style>
+        <div className="mb-16 w-full">
+          <div className="relative w-full overflow-hidden">
+            <div className="flex space-x-4 justify-center w-max animate-scroll hover:[animation-play-state:paused]">
+              {Array(5)
+                .fill(certifications)
+                .flat()
+                .map((certification, index) => (
+                  <CertificationCard
+                    key={`${certification.title}-${index}`}
+                    id={certification.id}
+                    title={certification.title}
+                    issuer={certification.issuer}
+                    date={certification.date}
+                    expired={certification.expired ?? undefined}
+                  />
+                ))}
+            </div>
+          </div>
         </div>
       </div>
     </div>
