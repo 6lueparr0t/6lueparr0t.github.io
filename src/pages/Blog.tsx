@@ -36,16 +36,16 @@ function BlogPage() {
   };
 
   return (
-    <div className="min-h-screen px-4 py-10">
-      <main className="max-w-2xl mx-auto text-left">
-        <div className="flex justify-between items-center mb-8">
+    <div className="p-8 h-[calc(100vh-4.2rem)] flex flex-col">
+      <main className="max-w-2xl mx-auto text-left w-full h-full flex flex-col">
+        <div className="flex justify-between items-center mb-8 shrink-0">
           <h1 className="text-3xl font-bold">Blog</h1>
           <Button ref={buttonRef} onClick={handleNewPost} variant="outline" size="icon">
             <PencilSquareIcon className="h-4 w-4" />
           </Button>
         </div>
         {posts.length > 0 ? (
-          <ul className="list-none flex flex-col gap-y-4">
+          <ul className="list-none flex flex-col gap-y-4 overflow-y-auto flex-1 pr-2">
             {posts.map((post) => (
               <li key={post.slug}>
                 <Link to={`/blog/${post.slug}`} className="flex items-baseline hover:underline">

@@ -9,6 +9,9 @@ import HomePage from "@/pages/Home";
 import Root from "@/pages/Root";
 import SpacePage, { loader as SpaceLoader } from "@/pages/Space";
 import SpaceViewPage, { loader as SpaceViewLoader } from "@/pages/SpaceView";
+import ToolsPage from "@/pages/Tools";
+import PlainTextPage from "@/pages/tools/PlainText";
+import RoulettePage from "@/pages/tools/Roulette";
 
 // BlogPage import 추가
 
@@ -51,6 +54,21 @@ const router = createBrowserRouter([
         path: "blog/:slug",
         id: "blog-post",
         element: <BlogPost />,
+      },
+      {
+        path: "tools",
+        id: "tools",
+        element: <ToolsPage />,
+      },
+      {
+        path: "tools/plain-text",
+        id: "tools-plain-text",
+        element: <PlainTextPage />,
+      },
+      {
+        path: "tools/roulette",
+        id: "tools-roulette",
+        element: <RoulettePage />,
       },
     ],
   },

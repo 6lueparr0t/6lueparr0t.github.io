@@ -30,6 +30,10 @@ const Header: React.FC<PropsWithChildren> = ({ children }) => {
       title: "blog",
     },
     {
+      path: "/tools",
+      title: "tools",
+    },
+    {
       path: "/guest",
       title: "guest",
     },
