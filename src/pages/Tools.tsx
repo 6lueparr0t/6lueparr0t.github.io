@@ -10,7 +10,7 @@ const ToolsPage: React.FC = () => {
       <div className="container mx-auto">
         <h1 className="text-3xl font-bold mb-8">Tools</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <Link to="/tools/plain-text">
+          <Link to="/tools/md-to-plain-text">
             <Card className="hover:bg-accent hover:text-accent-foreground transition-colors cursor-pointer h-full">
               <CardHeader>
                 <CardTitle>MD to Text</CardTitle>

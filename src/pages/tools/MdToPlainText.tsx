@@ -8,7 +8,7 @@ import { FancyMultiSelect, Option } from "@/components/ui/fancy-multi-select";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 
-const PlainTextPage: React.FC = () => {
+const MdToPlainTextPage: React.FC = () => {
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
 
@@ -91,19 +91,23 @@ const PlainTextPage: React.FC = () => {
 
     // Single Newline - reduce multiple newlines to single
     if (singleNewline) {
-      result = result.replace(/\n+/g, "\n");
+      result = result.replace(/\n+/g, "\n\n");
     }
 
     // Remove Emoji
     if (removeEmoji) {
-      // Regex for emoji range
-      const emojiRegex =
-        /[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{1F700}-\u{1F77F}\u{1F780}-\u{1F7FF}\u{1F800}-\u{1F8FF}\u{1F900}-\u{1F9FF}\u{1FA00}-\u{1FA6F}\u{1FA70}-\u{1FAFF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}\u{2300}-\u{23FF}\u{2B50}\u{2B06}\u{2934}\u{2935}\u{2B05}\u{2194}\u{2195}\u{25AA}\u{25AB}\u{25FE}\u{25FD}\u{25FB}\u{25FC}\u{25B6}\u{25C0}]/gu;
+      // \p{Extended_Pictographic}: 모든 이모지 캐릭터를 찾음
+      // \u{FE0F}?: 변형 선택자가 있다면 그것까지 포함
+      // \s*: 뒤에 오는 모든 공백(스페이스, 탭, 줄바꿈 등)을 포함
+      const emojiRegex = /\p{Extended_Pictographic}\u{FE0F}?\s*/gu;
       result = result.replace(emojiRegex, "");
     }
 
     // Replace multiple spaces with a single space
     result = result.replace(/[ ]{2,}/g, " ");
+
+    // Trim
+    result = result.trim();
 
     setOutput(result);
   }, [input, removeBold, singleNewline, removeEmoji, filterWords]);
@@ -221,4 +225,4 @@ const PlainTextPage: React.FC = () => {
   );
 };
 
-export default PlainTextPage;
+export default MdToPlainTextPage;

@@ -10,7 +10,7 @@ import Root from "@/pages/Root";
 import SpacePage, { loader as SpaceLoader } from "@/pages/Space";
 import SpaceViewPage, { loader as SpaceViewLoader } from "@/pages/SpaceView";
 import ToolsPage from "@/pages/Tools";
-import PlainTextPage from "@/pages/tools/PlainText";
+import MdToPlainTextPage from "@/pages/tools/MdToPlainText";
 import RoulettePage from "@/pages/tools/Roulette";
 
 // BlogPage import 추가
@@ -61,9 +61,9 @@ const router = createBrowserRouter([
         element: <ToolsPage />,
       },
       {
-        path: "tools/plain-text",
-        id: "tools-plain-text",
-        element: <PlainTextPage />,
+        path: "tools/md-to-plain-text",
+        id: "tools-md-to-plain-text",
+        element: <MdToPlainTextPage />,
       },
       {
         path: "tools/roulette",
