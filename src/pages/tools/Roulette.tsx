@@ -78,7 +78,7 @@ const RoulettePage: React.FC = () => {
     const totalWeight = items.reduce((sum, item) => sum + item.weight, 0);
     let angleSum = 0;
 
-    return items.map((item, index) => {
+    return items.map((item) => {
       const chance = totalWeight === 0 ? 0 : item.weight / totalWeight;
       const angle = 360 * chance;
       angleSum += angle;
