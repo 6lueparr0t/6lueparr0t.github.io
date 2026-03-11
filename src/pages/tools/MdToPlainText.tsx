@@ -148,7 +148,7 @@ const MdToPlainTextPage: React.FC = () => {
             <CardContent className="flex-1 min-h-0 p-3 pt-0">
               <Textarea
                 className="h-full min-h-[200px] font-mono resize-none text-sm md:text-base"
-                placeholder="여기에 마크다운 내용을 붙여넣으세요."
+                placeholder="내용을 입력하세요."
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
               />
@@ -239,7 +239,7 @@ const MdToPlainTextPage: React.FC = () => {
                 readOnly
                 value={output}
                 onClick={handleOutputClick}
-                placeholder={`변환된 텍스트가 여기에 표시됩니다 ${copyOnClick ? "(클릭하여 복사)" : ""}`}
+                placeholder={`변환된 텍스트가 여기에 표시됩니다. ${copyOnClick ? "(클릭 시 복사)" : ""}`}
               />
             </CardContent>
           </Card>
