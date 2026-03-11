@@ -19,6 +19,7 @@ const MdToPlainTextPage: React.FC = () => {
   const [copyOnClick, setCopyOnClick] = useState(false);
   const [filterWords, setFilterWords] = useState<Option[]>([]);
   const [isOptionsOpen, setIsOptionsOpen] = useState(true);
+  const [isInitialized, setIsInitialized] = useState(false);
 
   // Load options from localStorage
   useEffect(() => {
@@ -36,10 +37,12 @@ const MdToPlainTextPage: React.FC = () => {
         console.error("Failed to parse saved options", e);
       }
     }
+    setIsInitialized(true);
   }, []);
 
   // Save options to localStorage
   useEffect(() => {
+    if (!isInitialized) return;
     const optionsToSave = {
       removeBold,
       singleNewline,
@@ -49,7 +52,15 @@ const MdToPlainTextPage: React.FC = () => {
       isOptionsOpen,
     };
     localStorage.setItem("plainTextOptions", JSON.stringify(optionsToSave));
-  }, [removeBold, singleNewline, removeEmoji, copyOnClick, filterWords, isOptionsOpen]);
+  }, [
+    removeBold,
+    singleNewline,
+    removeEmoji,
+    copyOnClick,
+    filterWords,
+    isOptionsOpen,
+    isInitialized,
+  ]);
 
   useEffect(() => {
     let result = input;
@@ -125,18 +136,18 @@ const MdToPlainTextPage: React.FC = () => {
   };
 
   return (
-    <div className="container mx-auto p-8 min-h-[620px] h-[calc(100vh-4rem)]">
-      <h1 className="text-3xl font-bold mb-6">MD to Text</h1>
+    <div className="container mx-auto p-4 md:p-8 min-h-[calc(100vh-4rem)] flex flex-col">
+      <h1 className="text-2xl md:text-3xl font-bold mb-6 flex-none">MD to Text</h1>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 h-full pb-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 flex-1 pb-8">
         <div className="flex flex-col gap-4 h-full">
-          <Card className="h-full flex flex-col">
-            <CardHeader>
-              <CardTitle>마크다운 입력</CardTitle>
+          <Card className="flex-1 flex flex-col min-h-[300px] lg:min-h-[400px]">
+            <CardHeader className="flex-none p-3">
+              <CardTitle className="text-lg md:text-xl">마크다운 입력</CardTitle>
             </CardHeader>
-            <CardContent className="flex-1">
+            <CardContent className="flex-1 min-h-0 p-3 pt-0">
               <Textarea
-                className="h-full font-mono resize-none"
+                className="h-full min-h-[200px] font-mono resize-none text-sm md:text-base"
                 placeholder="여기에 마크다운 내용을 붙여넣으세요."
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
@@ -144,10 +155,13 @@ const MdToPlainTextPage: React.FC = () => {
             </CardContent>
           </Card>
 
-          <Card className="mb-4">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0">
-              <CardTitle className="text-xl font-bold">옵션</CardTitle>
-              <div className="cursor-pointer" onClick={() => setIsOptionsOpen(!isOptionsOpen)}>
+          <Card className="flex-none">
+            <CardHeader
+              className="flex flex-row items-center justify-between space-y-0 cursor-pointer select-none p-3"
+              onClick={() => setIsOptionsOpen(!isOptionsOpen)}
+            >
+              <CardTitle className="text-lg md:text-xl font-bold">옵션</CardTitle>
+              <div>
                 {isOptionsOpen ? (
                   <ChevronUpIcon className="w-[24px] h-[24px]" />
                 ) : (
@@ -156,14 +170,16 @@ const MdToPlainTextPage: React.FC = () => {
               </div>
             </CardHeader>
             <div className={isOptionsOpen ? "" : "hidden"}>
-              <CardContent className="space-y-4 pt-4">
+              <CardContent className="space-y-3 p-3 pt-0">
                 <div className="flex items-center space-x-2">
                   <Checkbox
                     id="remove-bold"
                     checked={removeBold}
                     onCheckedChange={(checked) => setRemoveBold(checked as boolean)}
                   />
-                  <Label htmlFor="remove-bold">굵은 글씨(Bold) 문법 제거</Label>
+                  <Label htmlFor="remove-bold" className="text-sm md:text-base cursor-pointer">
+                    굵은 글씨(Bold) 문법 제거
+                  </Label>
                 </div>
                 <div className="flex items-center space-x-2">
                   <Checkbox
@@ -171,7 +187,9 @@ const MdToPlainTextPage: React.FC = () => {
                     checked={singleNewline}
                     onCheckedChange={(checked) => setSingleNewline(checked as boolean)}
                   />
-                  <Label htmlFor="single-newline">여러 줄 바꿈을 한 줄로 변경</Label>
+                  <Label htmlFor="single-newline" className="text-sm md:text-base cursor-pointer">
+                    여러 줄 바꿈을 한 줄로 변경
+                  </Label>
                 </div>
                 <div className="flex items-center space-x-2">
                   <Checkbox
@@ -179,7 +197,9 @@ const MdToPlainTextPage: React.FC = () => {
                     checked={removeEmoji}
                     onCheckedChange={(checked) => setRemoveEmoji(checked as boolean)}
                   />
-                  <Label htmlFor="remove-emoji">이모지 제거</Label>
+                  <Label htmlFor="remove-emoji" className="text-sm md:text-base cursor-pointer">
+                    이모지 제거
+                  </Label>
                 </div>
                 <div className="flex items-center space-x-2">
                   <Checkbox
@@ -187,10 +207,12 @@ const MdToPlainTextPage: React.FC = () => {
                     checked={copyOnClick}
                     onCheckedChange={(checked) => setCopyOnClick(checked as boolean)}
                   />
-                  <Label htmlFor="copy-on-click">결과 클릭 시 자동 복사</Label>
+                  <Label htmlFor="copy-on-click" className="text-sm md:text-base cursor-pointer">
+                    결과 클릭 시 자동 복사
+                  </Label>
                 </div>
                 <div className="space-y-2">
-                  <Label>필터링할 단어 (입력 후 Enter)</Label>
+                  <Label className="text-sm md:text-base">필터링할 단어 (입력 후 Enter)</Label>
                   <FancyMultiSelect
                     placeholder="필터링할 단어를 입력하세요."
                     creatable={true}
@@ -205,13 +227,15 @@ const MdToPlainTextPage: React.FC = () => {
         </div>
 
         <div className="flex flex-col gap-4 h-full">
-          <Card className="h-full flex flex-col mb-4">
-            <CardHeader>
-              <CardTitle>결과</CardTitle>
+          <Card className="flex-1 flex flex-col min-h-[300px] lg:min-h-[400px]">
+            <CardHeader className="flex-none p-3">
+              <CardTitle className="text-lg md:text-xl">결과</CardTitle>
             </CardHeader>
-            <CardContent className="flex-1">
+            <CardContent className="flex-1 min-h-0 p-3 pt-0">
               <Textarea
-                className={`h-full font-mono resize-none ${copyOnClick ? "cursor-pointer hover:bg-muted/50" : ""}`}
+                className={`h-full min-h-[200px] font-mono resize-none text-sm md:text-base ${
+                  copyOnClick ? "cursor-pointer hover:bg-muted/50" : ""
+                }`}
                 readOnly
                 value={output}
                 onClick={handleOutputClick}
