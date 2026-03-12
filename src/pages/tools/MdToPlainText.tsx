@@ -1,12 +1,18 @@
 import React, { useEffect, useState } from "react";
 
 import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/16/solid";
+import { X } from "lucide-react";
 
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { FancyMultiSelect, Option } from "@/components/ui/fancy-multi-select";
+import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 import { Textarea } from "@/components/ui/textarea";
+
+type ReplaceRule = { from: string; to: string };
 
 const MdToPlainTextPage: React.FC = () => {
   const [input, setInput] = useState("");
@@ -17,9 +23,16 @@ const MdToPlainTextPage: React.FC = () => {
   const [singleNewline, setSingleNewline] = useState(false);
   const [removeEmoji, setRemoveEmoji] = useState(false);
   const [copyOnClick, setCopyOnClick] = useState(false);
+  const [filterWordsEnabled, setFilterWordsEnabled] = useState(true);
   const [filterWords, setFilterWords] = useState<Option[]>([]);
+  const [replaceRulesEnabled, setReplaceRulesEnabled] = useState(false);
+  const [replaceRules, setReplaceRules] = useState<ReplaceRule[]>([]);
   const [isOptionsOpen, setIsOptionsOpen] = useState(true);
   const [isInitialized, setIsInitialized] = useState(false);
+
+  const addReplaceRuleRow = () => {
+    setReplaceRules((prev) => [...prev, { from: "", to: "" }]);
+  };
 
   // Load options from localStorage
   useEffect(() => {
@@ -31,7 +44,10 @@ const MdToPlainTextPage: React.FC = () => {
         setSingleNewline(parsed.singleNewline ?? false);
         setRemoveEmoji(parsed.removeEmoji ?? false);
         setCopyOnClick(parsed.copyOnClick ?? false);
+        setFilterWordsEnabled(parsed.filterWordsEnabled ?? true);
         setFilterWords(parsed.filterWords ?? []);
+        setReplaceRulesEnabled(parsed.replaceRulesEnabled ?? false);
+        setReplaceRules(parsed.replaceRules ?? []);
         setIsOptionsOpen(parsed.isOptionsOpen ?? true);
       } catch (e) {
         console.error("Failed to parse saved options", e);
@@ -48,7 +64,10 @@ const MdToPlainTextPage: React.FC = () => {
       singleNewline,
       removeEmoji,
       copyOnClick,
+      filterWordsEnabled,
       filterWords,
+      replaceRulesEnabled,
+      replaceRules,
       isOptionsOpen,
     };
     localStorage.setItem("plainTextOptions", JSON.stringify(optionsToSave));
@@ -57,7 +76,10 @@ const MdToPlainTextPage: React.FC = () => {
     singleNewline,
     removeEmoji,
     copyOnClick,
+    filterWordsEnabled,
     filterWords,
+    replaceRulesEnabled,
+    replaceRules,
     isOptionsOpen,
     isInitialized,
   ]);
@@ -66,14 +88,15 @@ const MdToPlainTextPage: React.FC = () => {
     let result = input;
 
     // 1. Filter words
-    filterWords.forEach((wordOption) => {
-      if (wordOption.value) {
-        // Escape regex special characters
-        const escapedWord = wordOption.value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-        const regex = new RegExp(escapedWord, "gi");
-        result = result.replace(regex, "");
-      }
-    });
+    if (filterWordsEnabled) {
+      filterWords.forEach((wordOption) => {
+        if (wordOption.value) {
+          const escapedWord = wordOption.value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+          const regex = new RegExp(escapedWord, "gi");
+          result = result.replace(regex, "");
+        }
+      });
+    }
 
     // 2. Strip Markdown
     // Headers
@@ -81,11 +104,11 @@ const MdToPlainTextPage: React.FC = () => {
     // Blockquotes
     result = result.replace(/^>\s+/gm, "");
     // Lists
-    result = result.replace(/^[\*\-\+]\s+/gm, "");
+    result = result.replace(/^[*+-]\s+/gm, "");
     // Links
-    result = result.replace(/\[([^\]]+)\]\([^\)]+\)/g, "$1");
+    result = result.replace(/\[([^\]]+)\]\([^)]+\)/g, "$1");
     // Images
-    result = result.replace(/!\[([^\]]+)\]\([^\)]+\)/g, "$1");
+    result = result.replace(/!\[([^\]]+)\]\([^)]+\)/g, "$1");
 
     // // Code blocks
     // result = result.replace(/```[\s\S]*?```/g, "");
@@ -114,6 +137,13 @@ const MdToPlainTextPage: React.FC = () => {
       result = result.replace(emojiRegex, "");
     }
 
+    if (replaceRulesEnabled) {
+      replaceRules.forEach((rule) => {
+        if (!rule.from) return;
+        result = result.split(rule.from).join(rule.to ?? "");
+      });
+    }
+
     // Replace multiple spaces with a single space
     result = result.replace(/[ ]{2,}/g, " ");
 
@@ -121,7 +151,16 @@ const MdToPlainTextPage: React.FC = () => {
     result = result.trim();
 
     setOutput(result);
-  }, [input, removeBold, singleNewline, removeEmoji, filterWords]);
+  }, [
+    input,
+    removeBold,
+    singleNewline,
+    removeEmoji,
+    filterWords,
+    filterWordsEnabled,
+    replaceRulesEnabled,
+    replaceRules,
+  ]);
 
   const handleOutputClick = () => {
     if (copyOnClick && output) {
@@ -170,7 +209,7 @@ const MdToPlainTextPage: React.FC = () => {
               </div>
             </CardHeader>
             <div className={isOptionsOpen ? "" : "hidden"}>
-              <CardContent className="space-y-3 p-3 pt-0">
+              <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-3 p-3 pt-0">
                 <div className="flex items-center space-x-2">
                   <Checkbox
                     id="remove-bold"
@@ -211,15 +250,113 @@ const MdToPlainTextPage: React.FC = () => {
                     결과 클릭 시 자동 복사
                   </Label>
                 </div>
-                <div className="space-y-2">
-                  <Label className="text-sm md:text-base">필터링할 단어 (입력 후 Enter)</Label>
-                  <FancyMultiSelect
-                    placeholder="필터링할 단어를 입력하세요."
-                    creatable={true}
-                    options={[]} // No default options, purely user created
-                    value={filterWords}
-                    onChange={setFilterWords}
-                  />
+                <div className="space-y-2 md:col-span-2">
+                  <div className="flex items-center space-x-2">
+                    <Checkbox
+                      id="filter-words-enabled"
+                      checked={filterWordsEnabled}
+                      onCheckedChange={(checked) => setFilterWordsEnabled(checked as boolean)}
+                    />
+                    <Label
+                      htmlFor="filter-words-enabled"
+                      className="text-sm md:text-base cursor-pointer"
+                    >
+                      단어 필터링 적용 (입력 후 Enter)
+                    </Label>
+                  </div>
+                  <div className={filterWordsEnabled ? "" : "pointer-events-none opacity-50"}>
+                    <FancyMultiSelect
+                      placeholder="필터링할 단어를 입력하세요."
+                      creatable={true}
+                      options={[]} // No default options, purely user created
+                      value={filterWords}
+                      onChange={setFilterWords}
+                    />
+                  </div>
+                </div>
+                <div className="space-y-2 md:col-span-2">
+                  <div className="flex items-center space-x-2">
+                    <Checkbox
+                      id="replace-rules-enabled"
+                      checked={replaceRulesEnabled}
+                      onCheckedChange={(checked) => setReplaceRulesEnabled(checked as boolean)}
+                    />
+                    <Label
+                      htmlFor="replace-rules-enabled"
+                      className="text-sm md:text-base cursor-pointer"
+                    >
+                      치환 적용
+                    </Label>
+                  </div>
+                  <div className={replaceRulesEnabled ? "" : "pointer-events-none opacity-50"}>
+                    <div className="max-h-56 overflow-auto rounded-md border">
+                      <Table className="border-0">
+                        <TableBody>
+                          {replaceRules.map((rule, index) => (
+                            <TableRow key={index}>
+                              <TableCell>
+                                <Input
+                                  type="text"
+                                  placeholder={`source ${index + 1}`}
+                                  value={rule.from}
+                                  onChange={(e) =>
+                                    setReplaceRules((prev) =>
+                                      prev.map((r, i) =>
+                                        i === index ? { ...r, from: e.target.value } : r
+                                      )
+                                    )
+                                  }
+                                  className="h-8 text-sm"
+                                />
+                              </TableCell>
+                              <TableCell>
+                                <Input
+                                  type="text"
+                                  placeholder={`target ${index + 1}`}
+                                  value={rule.to}
+                                  onChange={(e) =>
+                                    setReplaceRules((prev) =>
+                                      prev.map((r, i) =>
+                                        i === index ? { ...r, to: e.target.value } : r
+                                      )
+                                    )
+                                  }
+                                  className="h-8 text-sm"
+                                />
+                              </TableCell>
+                              <TableCell className="text-right">
+                                <Button
+                                  type="button"
+                                  variant="ghost"
+                                  size="icon"
+                                  className="h-8 w-8"
+                                  aria-label="행 삭제"
+                                  onClick={() =>
+                                    setReplaceRules((prev) => prev.filter((_, i) => i !== index))
+                                  }
+                                >
+                                  <X className="h-4 w-4" />
+                                </Button>
+                              </TableCell>
+                            </TableRow>
+                          ))}
+                          <TableRow>
+                            <TableCell colSpan={3}>
+                              <Button
+                                type="button"
+                                variant="outline"
+                                size="sm"
+                                className="w-full"
+                                onClick={addReplaceRuleRow}
+                              >
+                                추가하기
+                              </Button>
+                            </TableCell>
+                          </TableRow>
+                        </TableBody>
+                      </Table>
+                    </div>
+                  </div>
                 </div>
               </CardContent>
             </div>
