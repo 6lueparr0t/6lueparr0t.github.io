@@ -1,6 +1,36 @@
 [
   {
     "type": "company",
+    "title": "잉카인터넷",
+    "role": "DevGroup팀 프로(FE)",
+    "period": "2025.04.30 ~",
+    "details": [
+      {
+        "project": "Tachyon Total Security v2 - Micro Frontend 아키텍처 설계 및 개발",
+        "tasks": [
+          "pnpm workspace 기반 모노레포 구성",
+          "Host와 도메인별 Plugin을 독립 라이브러리로 분리하여 병렬 개발 환경 구축",
+          "Plugin 신규 프레임워크 정의로 온보딩 비용 최소화"
+        ]
+      },
+      {
+        "project": "공유 패키지 설계",
+        "tasks": [
+          "tachyon-core: Axios 인터셉터 및 React Query 공통화",
+          "tachyon-common: 30+ 공통 컴포넌트/훅 제공 (Table, Chart, Layout 등)",
+          "tachyon-locale: i18next 기반 다국어 지원"
+        ]
+      },
+    ],
+    "techStack": {
+      "languages": "TypeScript, React 19, Vite, pnpm, Ant Design, Tailwind CSS, Zustand, React Query",
+      "scm": "Gitlab",
+      "cicd": "Jenkins"
+    },
+    "show": false
+  },
+  {
+    "type": "company",
     "title": "카테노이드 주식회사",
     "role": "찰나팀/매니저(FE)",
     "period": "2022.06.09 ~ 2025.02.28",
@@ -30,7 +60,7 @@
     "techStack": {
       "languages": "JavaScript(React.js, Next.js), TypeScript, Node.js(Express)",
       "scm": "Git (Github)",
-      "cicd": "Jenkins, Github Actions"
+      "cicd": "Jenkins, Github Actions, ArgoCD"
     },
     "show": false
   },
