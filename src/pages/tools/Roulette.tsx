@@ -4,6 +4,7 @@ import { Plus, X } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 
 interface RouletteItem {
@@ -65,6 +66,7 @@ const RoulettePage: React.FC = () => {
   const [isSpinning, setIsSpinning] = useState(false);
   const [isStopping, setIsStopping] = useState(false);
   const [winner, setWinner] = useState<string | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Animation state refs
   const requestRef = useRef<number>(0);
@@ -200,6 +202,7 @@ const RoulettePage: React.FC = () => {
 
         if (winnerItem) {
           setWinner(winnerItem.name);
+          setIsModalOpen(true);
         }
       }
 
@@ -275,7 +278,23 @@ const RoulettePage: React.FC = () => {
         >
           {isStopping ? "멈추는 중..." : isSpinning ? "멈춰!" : "돌려돌려 돌림판~"}
         </Button>
-        {winner && <div className="mt-8 text-3xl font-bold text-primary">{winner} 당첨!</div>}
+
+        <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+          <DialogContent className="sm:max-w-md">
+            <DialogHeader>
+              <DialogTitle className="text-center text-2xl font-bold">
+                🥳 축하합니다! 🎉
+              </DialogTitle>
+            </DialogHeader>
+            <div className="flex flex-col items-center justify-center py-8">
+              <div className="text-4xl font-extrabold text-primary mb-4">{winner}</div>
+              <div className="text-xl text-muted-foreground">당첨되었습니다! 🎊</div>
+            </div>
+            <Button onClick={() => setIsModalOpen(false)} className="w-full">
+              확인
+            </Button>
+          </DialogContent>
+        </Dialog>
       </div>
 
       <div className="w-full lg:w-1/3 h-full overflow-y-auto">
