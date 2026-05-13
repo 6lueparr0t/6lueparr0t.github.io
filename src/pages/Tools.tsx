@@ -24,7 +24,7 @@ const ToolsPage: React.FC = () => {
           <Link to="/tools/roulette">
             <Card className="hover:bg-accent hover:text-accent-foreground transition-colors cursor-pointer h-full">
               <CardHeader>
-                <CardTitle>룰렛</CardTitle>
+                <CardTitle>Roulette</CardTitle>
                 <CardDescription>돌려돌려 돌림판~</CardDescription>
               </CardHeader>
               <CardContent>
