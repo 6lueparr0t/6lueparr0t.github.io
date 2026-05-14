@@ -22,7 +22,7 @@ const MdToPlainTextPage: React.FC = () => {
   const [removeBold, setRemoveBold] = useState(true);
   const [singleNewline, setSingleNewline] = useState(false);
   const [removeEmoji, setRemoveEmoji] = useState(false);
-  const [copyOnClick, setCopyOnClick] = useState(false);
+  const [isCopied, setIsCopied] = useState(false);
   const [filterWordsEnabled, setFilterWordsEnabled] = useState(true);
   const [filterWords, setFilterWords] = useState<Option[]>([]);
   const [replaceRulesEnabled, setReplaceRulesEnabled] = useState(false);
@@ -43,7 +43,6 @@ const MdToPlainTextPage: React.FC = () => {
         setRemoveBold(parsed.removeBold ?? true);
         setSingleNewline(parsed.singleNewline ?? false);
         setRemoveEmoji(parsed.removeEmoji ?? false);
-        setCopyOnClick(parsed.copyOnClick ?? false);
         setFilterWordsEnabled(parsed.filterWordsEnabled ?? true);
         setFilterWords(parsed.filterWords ?? []);
         setReplaceRulesEnabled(parsed.replaceRulesEnabled ?? false);
@@ -63,7 +62,6 @@ const MdToPlainTextPage: React.FC = () => {
       removeBold,
       singleNewline,
       removeEmoji,
-      copyOnClick,
       filterWordsEnabled,
       filterWords,
       replaceRulesEnabled,
@@ -75,7 +73,6 @@ const MdToPlainTextPage: React.FC = () => {
     removeBold,
     singleNewline,
     removeEmoji,
-    copyOnClick,
     filterWordsEnabled,
     filterWords,
     replaceRulesEnabled,
@@ -162,15 +159,12 @@ const MdToPlainTextPage: React.FC = () => {
     replaceRules,
   ]);
 
-  const handleOutputClick = () => {
-    if (copyOnClick && output) {
-      navigator.clipboard.writeText(output);
-      // Using alert for now if toast is not available, but ideally use toast
-      // alert("Copied to clipboard!");
-      // Assuming user might want some feedback.
-      // If you have a toast library installed, use it here.
-      // I will add a simple visual feedback or just use the clipboard API silently if no toast is ready.
-      // Let's check package.json for toast library. 'notistack' is there.
+  const handleCopy = () => {
+    if (output) {
+      navigator.clipboard.writeText(output).then(() => {
+        setIsCopied(true);
+        setTimeout(() => setIsCopied(false), 2000);
+      });
     }
   };
 
@@ -238,16 +232,6 @@ const MdToPlainTextPage: React.FC = () => {
                   />
                   <Label htmlFor="remove-emoji" className="text-sm md:text-base cursor-pointer">
                     이모지 제거
-                  </Label>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <Checkbox
-                    id="copy-on-click"
-                    checked={copyOnClick}
-                    onCheckedChange={(checked) => setCopyOnClick(checked as boolean)}
-                  />
-                  <Label htmlFor="copy-on-click" className="text-sm md:text-base cursor-pointer">
-                    결과 클릭 시 자동 복사
                   </Label>
                 </div>
                 <div className="space-y-2 md:col-span-2">
@@ -365,18 +349,23 @@ const MdToPlainTextPage: React.FC = () => {
 
         <div className="flex flex-col gap-4 h-full">
           <Card className="flex-1 flex flex-col min-h-[300px] lg:min-h-[400px]">
-            <CardHeader className="flex-none p-3">
+            <CardHeader className="flex-none p-3 flex flex-row items-center justify-between">
               <CardTitle className="text-lg md:text-xl">결과</CardTitle>
+              <div className="flex items-center gap-2">
+                {isCopied && (
+                  <span className="text-xs text-green-500 animate-in fade-in">복사 완료!</span>
+                )}
+                <Button size="sm" onClick={handleCopy} disabled={!output}>
+                  Copy
+                </Button>
+              </div>
             </CardHeader>
             <CardContent className="flex-1 min-h-0 p-3 pt-0">
               <Textarea
-                className={`h-full min-h-[200px] font-mono resize-none text-sm md:text-base ${
-                  copyOnClick ? "cursor-pointer hover:bg-muted/50" : ""
-                }`}
-                readOnly
+                className="h-full min-h-[150px] font-mono resize-none text-sm md:text-base"
                 value={output}
-                onClick={handleOutputClick}
-                placeholder={`변환된 텍스트가 여기에 표시됩니다. ${copyOnClick ? "(클릭 시 복사)" : ""}`}
+                onChange={(e) => setOutput(e.target.value)}
+                placeholder="변환된 텍스트가 여기에 표시됩니다."
               />
             </CardContent>
           </Card>
