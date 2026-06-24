@@ -20,12 +20,14 @@ const SpacePage: React.FC = () => {
     page: defaultPage,
     next: defaultNext,
     prev: defaultPrev,
+    total: defaultTotal,
   } = useRouteLoaderData("space") as RouteLoaderData;
 
   const [page, setPage] = useState(defaultPage);
   const [list, setList] = useState(defaultList);
   const [next, setNext] = useState(defaultNext);
   const [prev, setPrev] = useState(defaultPrev);
+  const [total, setTotal] = useState(defaultTotal);
 
   useEffect(() => {
     document.title = "space";
@@ -40,7 +42,8 @@ const SpacePage: React.FC = () => {
     setList(defaultList);
     setNext(defaultNext);
     setPrev(defaultPrev);
-  }, [query.in, query.keyword, defaultPage, defaultList, defaultNext, defaultPrev]);
+    setTotal(defaultTotal);
+  }, [query.in, query.keyword, defaultPage, defaultList, defaultNext, defaultPrev, defaultTotal]);
 
   return (
     <div className="p-8 min-h-[calc(100vh-4.2rem)] flex flex-col justify-between">
@@ -79,11 +82,13 @@ const SpacePage: React.FC = () => {
                       page={page || 1}
                       next={next || 0}
                       prev={prev || 0}
+                      total={total || 1}
                       query={query || { in: "title" }}
                       setPage={setPage}
                       setList={setList}
                       setNext={setNext}
                       setPrev={setPrev}
+                      setTotal={setTotal}
                     />
                   </div>
                 </>
@@ -112,13 +117,14 @@ export const loader: LoaderFunction = async ({ request }) => {
   try {
     const page: number = Number(searchParams.get("page") || 1);
 
-    const { list, next, prev } = await getList(query, { page: page, per_page: PER_PAGE });
+    const { list, next, prev, total } = await getList(query, { page: page, per_page: PER_PAGE });
 
     return Response.json({
       list,
       query,
       next,
       prev,
+      total,
       page,
     });
   } catch (error) {

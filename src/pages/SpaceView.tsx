@@ -28,6 +28,7 @@ const SpaceViewPage: React.FC = () => {
     page: defaultPage,
     next: defaultNext,
     prev: defaultPrev,
+    total: defaultTotal,
   } = useRouteLoaderData("space-view") as RouteLoaderData;
 
   const siteUrl = `https://${import.meta.env.VITE_APP_GIT_REPO}${location.pathname}`;
@@ -39,6 +40,7 @@ const SpaceViewPage: React.FC = () => {
   const [list, setList] = useState(defaultList);
   const [next, setNext] = useState(defaultNext);
   const [prev, setPrev] = useState(defaultPrev);
+  const [total, setTotal] = useState(defaultTotal);
 
   useEffect(() => {
     document.title = title || "6lueparr0t's Home";
@@ -92,11 +94,13 @@ const SpaceViewPage: React.FC = () => {
                   page={page || 1}
                   next={next || 0}
                   prev={prev || 0}
+                  total={total || 1}
                   query={query || { in: "title" }}
                   setPage={setPage}
                   setList={setList}
                   setNext={setNext}
                   setPrev={setPrev}
+                  setTotal={setTotal}
                 />
               </div>
             )}
@@ -127,7 +131,7 @@ export const loader: LoaderFunction = async ({ params, request }) => {
     const { issue, comments } = await getIssue({}, issueNumber);
     const title = get(issue, "title");
 
-    const { list, next, prev } = await getList(query, { page, per_page: PER_PAGE });
+    const { list, next, prev, total } = await getList(query, { page, per_page: PER_PAGE });
 
     return Response.json({
       title,
@@ -137,6 +141,7 @@ export const loader: LoaderFunction = async ({ params, request }) => {
       query,
       next,
       prev,
+      total,
       page,
     });
   } catch (error) {

@@ -66,3 +66,12 @@ next-env.d.ts
 
 .cursor.*
 .prompt/**
+
+# omc
+.omc/
+.omc.*
+
+# Claude Code
+.claude/
+CLAUDE.local.md
+.mcp.json

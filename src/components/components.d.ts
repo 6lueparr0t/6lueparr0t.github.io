@@ -61,11 +61,13 @@ export type PaginationProps = {
   page: number;
   next: number;
   prev: number;
+  total?: number;
   query: Query;
   setPage?: React.Dispatch<React.SetStateAction>;
   setList?: React.Dispatch<React.SetStateAction>;
   setNext?: React.Dispatch<React.SetStateAction>;
   setPrev?: React.Dispatch<React.SetStateAction>;
+  setTotal?: React.Dispatch<React.SetStateAction>;
 };
 
 export type Modal = {

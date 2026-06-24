@@ -12,4 +12,5 @@ export type RouteLoaderData = {
   page?: number; // 현재 페이지 번호
   next?: number; // 다음 페이지 여부
   prev?: number; // 이전 페이지 여부
+  total?: number; // 전체 페이지 수
 };
